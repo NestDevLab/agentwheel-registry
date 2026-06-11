@@ -31,6 +31,12 @@ Each entry has these fields:
 - `description`: short human-readable summary.
 - `tags`: optional search tags.
 
+## Catalogue
+
+Registry entries automatically appear in the generated resource catalogue.
+The catalogue data pipeline is documented in [`catalogue/README.md`](catalogue/README.md).
+Browse the published site page at <https://nestdevlab.github.io/agentwheel/catalogue.html>.
+
 ## Contributing
 
 Open a pull request that updates `index.json`.

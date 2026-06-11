@@ -1,0 +1,42 @@
+name: Update catalogue data
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "index.json"
+      - "catalogue/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-catalogue-data
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - name: Build catalogue data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node catalogue/build.mjs
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- catalogue-data.json; then
+            echo "Catalogue data unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add catalogue-data.json
+          git commit -m "chore: update catalogue data"
+          git push
