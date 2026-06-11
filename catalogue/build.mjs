@@ -10,7 +10,7 @@ const ecosystemOrder = new Map([
   ["skillkit", 1],
   ["vercel", 2],
 ]);
-const entryTypeSet = new Set(["package", "skill"]);
+const entryTypeSet = new Set(["package", "skill", "plugin", "mcp", "adapter"]);
 const ecosystemSet = new Set(ecosystemOrder.keys());
 
 async function readJson(filePath) {
@@ -48,9 +48,26 @@ async function fetchJson(url) {
 }
 
 function repoFromSource(source) {
-  const match = /^github:([^/]+)\/([^/#]+)(?:[#/].*)?$/.exec(source);
-  if (!match) return null;
-  return { owner: match[1], repo: match[2] };
+  if (typeof source !== "string") return null;
+
+  const patterns = [
+    /^github:([^/\s#]+)\/([^/\s#]+)(?:#.*)?$/,
+    /^git:https:\/\/github\.com\/([^/\s#]+)\/([^/\s#]+)(?:#.*)?$/,
+    /^https:\/\/github\.com\/([^/\s#]+)\/([^/\s#]+)(?:#.*)?$/,
+    /^skillkit:github:([^/\s#]+)\/([^/\s#]+)(?:#.*)?$/,
+    /^vercel:skills\.sh\/([^/\s#]+)\/([^/\s#]+)(?:\/[^/\s#]+)?(?:#.*)?$/,
+    /^vercel:github:([^/\s#]+)\/([^/\s#]+)(?:#.*)?$/,
+    /^vercel:([^/\s#]+)\/([^/\s#]+)(?:#.*)?$/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = pattern.exec(source);
+    if (match) {
+      return { owner: match[1], repo: match[2].replace(/\.git$/, "") };
+    }
+  }
+
+  return null;
 }
 
 function repoUrl(owner, repo) {
@@ -110,7 +127,7 @@ function officialEntry(entry) {
     tags: Array.isArray(entry.tags) ? entry.tags : [],
     source: entry.source,
     installCommand: `agentwheel install ${entry.name}`,
-    repoUrl: repo ? repoUrl(repo.owner, repo.repo) : "",
+    repoUrl: repo ? repoUrl(repo.owner, repo.repo) : null,
     homepageUrl: null,
     stars: null,
     lastPush: null,
@@ -176,7 +193,7 @@ function sortEntries(entries) {
 function validate(entries) {
   const errors = [];
   const ids = new Set();
-  const requiredStrings = ["id", "name", "ecosystem", "type", "description", "source", "installCommand", "repoUrl"];
+  const requiredStrings = ["id", "name", "ecosystem", "type", "description", "source", "installCommand"];
 
   for (const entry of entries) {
     for (const field of requiredStrings) {
@@ -192,6 +209,9 @@ function validate(entries) {
     }
     if (!Array.isArray(entry.tags) || entry.tags.some((tag) => typeof tag !== "string")) {
       errors.push(`${entry.id}: tags must be an array of strings`);
+    }
+    if (entry.repoUrl !== null && (typeof entry.repoUrl !== "string" || !entry.repoUrl.trim())) {
+      errors.push(`${entry.id}: repoUrl must be a non-empty string or null`);
     }
     if (ids.has(entry.id)) {
       errors.push(`${entry.id}: duplicate id`);

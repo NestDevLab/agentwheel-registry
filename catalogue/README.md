@@ -13,12 +13,12 @@ The catalogue is a generated, browsable data set for agentwheel-installable reso
       "id": "official:nestdev-core-toolkit",    // "<ecosystem>:<unique-key>"
       "name": "nestdev-core-toolkit",
       "ecosystem": "official",                  // "official" | "vercel" | "skillkit"
-      "type": "package",                        // "package" | "skill"
+      "type": "package",                        // "package" | "skill" | "plugin" | "mcp" | "adapter"
       "description": "...",
       "tags": ["agents", "skills"],
       "source": "github:NestDevLab/agent-core-toolkit-public",   // agentwheel source string
       "installCommand": "agentwheel install nestdev-core-toolkit",
-      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public", // null for non-GitHub sources
       "homepageUrl": null,                      // skills.sh page for vercel entries, else null
       "stars": 12,                              // null when enrichment failed
       "lastPush": "2026-06-01T10:00:00Z",       // null when enrichment failed
@@ -32,7 +32,7 @@ The catalogue is a generated, browsable data set for agentwheel-installable reso
 
 ## Adding Entries
 
-Official packages appear automatically from the root `index.json`. Curated third-party entries are added by pull request to:
+All registry entries appear automatically from the root `index.json`. Curated third-party entries are added by pull request to:
 
 - `catalogue/seeds/vercel.json`
 - `catalogue/seeds/skillkit.json`
