@@ -47,6 +47,18 @@ async function fetchJson(url) {
   return response.json();
 }
 
+async function fetchText(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status} ${response.statusText}`);
+  }
+  return response.text();
+}
+
+function extractLocs(xml) {
+  return [...xml.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/g)].map((match) => match[1]);
+}
+
 function repoFromSource(source) {
   if (typeof source !== "string") return null;
 
@@ -126,7 +138,7 @@ function officialEntry(entry) {
     description: entry.description,
     tags: Array.isArray(entry.tags) ? entry.tags : [],
     source: entry.source,
-    installCommand: `agentwheel install ${entry.name}`,
+    installCommand: `npx agentwheel install ${entry.name}`,
     repoUrl: repo ? repoUrl(repo.owner, repo.repo) : null,
     homepageUrl: null,
     stars: null,
@@ -147,7 +159,7 @@ function vercelEntry(seed) {
     description: seed.description,
     tags: Array.isArray(seed.tags) ? seed.tags : [],
     source: `vercel:skills.sh/${seed.owner}/${seed.repo}/${seed.skill}`,
-    installCommand: `agentwheel install "vercel:skills.sh/${seed.owner}/${seed.repo}/${seed.skill}"`,
+    installCommand: `npx agentwheel install "vercel:skills.sh/${seed.owner}/${seed.repo}/${seed.skill}"`,
     repoUrl: repoUrl(seed.owner, seed.repo),
     homepageUrl: `https://skills.sh/${seed.owner}/${seed.repo}/${seed.skill}`,
     stars: null,
@@ -155,6 +167,7 @@ function vercelEntry(seed) {
     archived: false,
     provides: null,
     version: null,
+    featured: true,
     _repo: { owner: seed.owner, repo: seed.repo },
   };
 }
@@ -168,7 +181,7 @@ function skillkitEntry(seed) {
     description: seed.description,
     tags: Array.isArray(seed.tags) ? seed.tags : [],
     source: `skillkit:github:${seed.owner}/${seed.repo}`,
-    installCommand: `agentwheel install "skillkit:github:${seed.owner}/${seed.repo}"`,
+    installCommand: `npx agentwheel install "skillkit:github:${seed.owner}/${seed.repo}"`,
     repoUrl: repoUrl(seed.owner, seed.repo),
     homepageUrl: null,
     stars: null,
@@ -217,6 +230,31 @@ function validate(entries) {
       errors.push(`${entry.id}: duplicate id`);
     }
     ids.add(entry.id);
+  }
+
+  if (errors.length) {
+    for (const error of errors) console.error(error);
+    process.exitCode = 1;
+    return false;
+  }
+  return true;
+}
+
+function validateVercelIndex(entries) {
+  const errors = [];
+  const ids = new Set();
+
+  for (const entry of entries) {
+    for (const field of ["o", "r", "s"]) {
+      if (typeof entry[field] !== "string" || !entry[field].trim()) {
+        errors.push(`${entry.o || "(unknown)"}/${entry.r || "(unknown)"}/${entry.s || "(unknown)"}: ${field} must be a non-empty string`);
+      }
+    }
+    const id = `${entry.o}/${entry.r}/${entry.s}`;
+    if (ids.has(id)) {
+      errors.push(`${id}: duplicate Vercel index entry`);
+    }
+    ids.add(id);
   }
 
   if (errors.length) {
@@ -284,23 +322,93 @@ async function build() {
   return publicEntries;
 }
 
+async function buildVercelIndex() {
+  try {
+    const rootXml = await fetchText("https://www.skills.sh/sitemap.xml");
+    const sitemapUrls = extractLocs(rootXml).filter((url) => /\/sitemap-skills-\d+\.xml$/.test(url));
+    const records = new Map();
+    let urlCount = 0;
+
+    for (const sitemapUrl of sitemapUrls) {
+      const sitemapXml = await fetchText(sitemapUrl);
+      const skillUrls = extractLocs(sitemapXml);
+      urlCount += skillUrls.length;
+
+      for (const skillUrl of skillUrls) {
+        const match = /^https:\/\/www\.skills\.sh\/([^/\s?#]+)\/([^/\s?#]+)\/([^/\s?#]+)$/.exec(skillUrl);
+        if (!match) continue;
+        const record = { o: match[1], r: match[2], s: match[3] };
+        records.set(`${record.o}/${record.r}/${record.s}`, record);
+      }
+    }
+
+    const entries = [...records.values()].sort((a, b) => {
+      if (a.o < b.o) return -1;
+      if (a.o > b.o) return 1;
+      if (a.r < b.r) return -1;
+      if (a.r > b.r) return 1;
+      if (a.s < b.s) return -1;
+      if (a.s > b.s) return 1;
+      return 0;
+    });
+
+    console.log(`Vercel skills index: found ${sitemapUrls.length} sitemap files and ${urlCount} URLs`);
+    if (!validateVercelIndex(entries)) {
+      return null;
+    }
+    return entries;
+  } catch (error) {
+    console.warn(`Vercel skills index refresh failed: ${error.message}`);
+    return null;
+  }
+}
+
 const builtEntries = await build();
 if (!builtEntries) {
   process.exit();
 }
+const builtVercelIndexEntries = await buildVercelIndex();
 
 const outputPath = path.join(root, "catalogue-data.json");
+const vercelIndexPath = path.join(root, "catalogue-vercel-index.json");
 const existing = await readJsonIfExists(outputPath);
+const existingVercelIndex = await readJsonIfExists(vercelIndexPath);
 
 if (check) {
+  let failed = false;
   if (!existing) {
     console.error("catalogue-data.json is missing");
-    process.exitCode = 1;
+    failed = true;
   } else if (!entriesEqual(existing.entries, builtEntries)) {
     console.error(`catalogue-data.json drift detected (${diffSummary(existing.entries, builtEntries)})`);
-    process.exitCode = 1;
+    failed = true;
   } else {
     console.log("catalogue-data.json is up to date");
+  }
+
+  if (builtVercelIndexEntries) {
+    if (!existingVercelIndex) {
+      console.error("catalogue-vercel-index.json is missing");
+      failed = true;
+    } else if (existingVercelIndex.count !== existingVercelIndex.entries?.length) {
+      console.error("catalogue-vercel-index.json count does not match entries length");
+      failed = true;
+    } else if (!validateVercelIndex(existingVercelIndex.entries)) {
+      failed = true;
+    } else if (!entriesEqual(existingVercelIndex.entries, builtVercelIndexEntries)) {
+      console.error(`catalogue-vercel-index.json drift detected (${diffSummary(existingVercelIndex.entries, builtVercelIndexEntries)})`);
+      failed = true;
+    } else {
+      console.log("catalogue-vercel-index.json is up to date");
+    }
+  } else if (existingVercelIndex) {
+    console.warn("catalogue-vercel-index.json check skipped because skills.sh sitemap refresh failed");
+  } else {
+    console.warn("catalogue-vercel-index.json is missing and skills.sh sitemap refresh failed");
+  }
+
+  if (failed) {
+    process.exitCode = 1;
   }
   process.exit();
 }
@@ -315,3 +423,16 @@ const output = {
 };
 
 await fs.writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`);
+
+if (builtVercelIndexEntries) {
+  const vercelIndexGeneratedAt = existingVercelIndex && entriesEqual(existingVercelIndex.entries, builtVercelIndexEntries)
+    ? existingVercelIndex.generatedAt
+    : new Date().toISOString();
+  const vercelIndexOutput = {
+    schemaVersion: 1,
+    generatedAt: vercelIndexGeneratedAt,
+    count: builtVercelIndexEntries.length,
+    entries: builtVercelIndexEntries,
+  };
+  await fs.writeFile(vercelIndexPath, `${JSON.stringify(vercelIndexOutput, null, 2)}\n`);
+}

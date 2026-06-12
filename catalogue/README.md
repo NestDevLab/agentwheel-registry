@@ -17,7 +17,7 @@ The catalogue is a generated, browsable data set for agentwheel-installable reso
       "description": "...",
       "tags": ["agents", "skills"],
       "source": "github:NestDevLab/agent-core-toolkit-public",   // agentwheel source string
-      "installCommand": "agentwheel install nestdev-core-toolkit",
+      "installCommand": "npx agentwheel install nestdev-core-toolkit",
       "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public", // null for non-GitHub sources
       "homepageUrl": null,                      // skills.sh page for vercel entries, else null
       "stars": 12,                              // null when enrichment failed
@@ -30,6 +30,23 @@ The catalogue is a generated, browsable data set for agentwheel-installable reso
 }
 ```
 
+Curated Vercel seed entries in `catalogue-data.json` include `"featured": true`; official registry and SkillKit entries omit the flag.
+
+The builder also writes `catalogue-vercel-index.json`, a compact index of every skill listed in the skills.sh sitemaps:
+
+```jsonc
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-11T00:00:00.000Z",
+  "count": 20000,
+  "entries": [
+    { "o": "owner", "r": "repo", "s": "skill" }
+  ]
+}
+```
+
+This second file is refreshed weekly with the main catalogue, contains roughly 20k Vercel skills, and intentionally does not include GitHub enrichment. The site expands these compact records at runtime and uses skills.sh as the verification source.
+
 ## Adding Entries
 
 All registry entries appear automatically from the root `index.json`. Curated third-party entries are added by pull request to:
@@ -41,7 +58,7 @@ Keep descriptions concise and tags useful for search.
 
 ## Refreshing Data
 
-The `Update catalogue data` GitHub Actions workflow refreshes `catalogue-data.json` weekly, on manual dispatch, and after changes to `index.json` or `catalogue/**` on `main`.
+The `Update catalogue data` GitHub Actions workflow refreshes `catalogue-data.json` and `catalogue-vercel-index.json` weekly, on manual dispatch, and after changes to `index.json` or `catalogue/**` on `main`.
 
 Run the builder locally with:
 
