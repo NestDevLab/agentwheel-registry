@@ -40,16 +40,16 @@ The builder also writes `catalogue-vercel-index.json`, a compact index of every 
   "generatedAt": "2026-06-11T00:00:00.000Z",
   "count": 20000,
   "entries": [
-    { "o": "owner", "r": "repo", "s": "skill" }
+    { "o": "owner", "r": "repo", "s": "skill", "d": "Optional meta description from skills.sh." }
   ]
 }
 ```
 
-This second file is refreshed weekly with the main catalogue, contains roughly 20k Vercel skills, and intentionally does not include GitHub enrichment. The site expands these compact records at runtime and uses skills.sh as the verification source.
+This second file is refreshed weekly with the main catalogue, contains roughly 20k Vercel skills, and intentionally does not include GitHub enrichment. Descriptions are crawled incrementally from skills.sh meta descriptions into the optional compact `d` field and are carried forward across runs. The site expands these compact records at runtime and uses skills.sh as the verification source.
 
 ## Adding Entries
 
-All registry entries appear automatically from the root `index.json`. Curated third-party entries are added by pull request to:
+All registry entries appear automatically from the root `index.json`. SkillKit entries are collected from SkillKit's marketplace `sources.json`, with `catalogue/seeds/skillkit.json` used as an override layer for curated descriptions and any extra seed-only repositories. Curated Vercel entries are added by pull request to:
 
 - `catalogue/seeds/vercel.json`
 - `catalogue/seeds/skillkit.json`

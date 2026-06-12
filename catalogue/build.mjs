@@ -12,6 +12,8 @@ const ecosystemOrder = new Map([
 ]);
 const entryTypeSet = new Set(["package", "skill", "plugin", "mcp", "adapter"]);
 const ecosystemSet = new Set(ecosystemOrder.keys());
+const crawlCap = Number.parseInt(process.env.CRAWL_CAP ?? "5000", 10);
+const skillkitSourcesUrl = "https://raw.githubusercontent.com/rohitg00/skillkit/main/marketplace/sources.json";
 
 async function readJson(filePath) {
   return JSON.parse(await fs.readFile(filePath, "utf8"));
@@ -55,8 +57,38 @@ async function fetchText(url) {
   return response.text();
 }
 
+async function fetchSkillPage(url) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
+  const response = await fetch(url, {
+    signal: controller.signal,
+    headers: {
+      "User-Agent": "agentwheel-catalogue (github.com/NestDevLab/agentwheel-registry)",
+    },
+  }).finally(() => clearTimeout(timeout));
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status} ${response.statusText}`);
+  }
+  return response.text();
+}
+
 function extractLocs(xml) {
   return [...xml.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/g)].map((match) => match[1]);
+}
+
+function decodeHtml(value) {
+  return value
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, "\"")
+    .replace(/&#39;/g, "'");
+}
+
+function extractMetaDescription(html) {
+  const match = /<meta\b(?=[^>]*\bname=["']description["'])(?=[^>]*\bcontent=["']([^"']*)["'])[^>]*>/i.exec(html);
+  const description = match ? decodeHtml(match[1]).trim() : "";
+  return description || null;
 }
 
 function repoFromSource(source) {
@@ -193,6 +225,37 @@ function skillkitEntry(seed) {
   };
 }
 
+function skillkitMarketplaceEntry(source, seed) {
+  const [owner, repo] = String(source.source || "").split("/");
+  const official = Boolean(source.official);
+  const tags = ["skillkit"];
+  if (official) tags.push("official-source");
+  if (seed?.tags) {
+    for (const tag of seed.tags) {
+      if (!tags.includes(tag)) tags.push(tag);
+    }
+  }
+
+  return {
+    id: `skillkit:${owner}/${repo}`,
+    name: repo,
+    ecosystem: "skillkit",
+    type: "package",
+    description: seed?.description ?? "",
+    tags,
+    source: `skillkit:github:${owner}/${repo}`,
+    installCommand: `npx agentwheel install "skillkit:github:${owner}/${repo}"`,
+    repoUrl: repoUrl(owner, repo),
+    homepageUrl: null,
+    stars: null,
+    lastPush: null,
+    archived: false,
+    provides: null,
+    version: null,
+    _repo: { owner, repo },
+  };
+}
+
 function sortEntries(entries) {
   entries.sort((a, b) => {
     const ecosystemDiff = ecosystemOrder.get(a.ecosystem) - ecosystemOrder.get(b.ecosystem);
@@ -254,6 +317,9 @@ function validateVercelIndex(entries) {
     if (ids.has(id)) {
       errors.push(`${id}: duplicate Vercel index entry`);
     }
+    if (entry.d !== undefined && (typeof entry.d !== "string" || !entry.d.trim())) {
+      errors.push(`${id}: d must be a non-empty string when present`);
+    }
     ids.add(id);
   }
 
@@ -287,10 +353,31 @@ async function build() {
   const registry = await readJson(path.join(root, "index.json"));
   const vercelSeeds = await readJson(path.join(root, "catalogue", "seeds", "vercel.json"));
   const skillkitSeeds = await readJson(path.join(root, "catalogue", "seeds", "skillkit.json"));
+  const skillkitSeedMap = new Map((skillkitSeeds.entries ?? []).map((seed) => [`${seed.owner}/${seed.repo}`, seed]));
+  const skillkitEntries = new Map();
+
+  try {
+    const skillkitSources = await fetchJson(skillkitSourcesUrl);
+    for (const source of Array.isArray(skillkitSources) ? skillkitSources : []) {
+      if (!source?.source || !/^[^/\s]+\/[^/\s]+$/.test(source.source)) continue;
+      const seed = skillkitSeedMap.get(source.source);
+      const entry = skillkitMarketplaceEntry(source, seed);
+      skillkitEntries.set(entry.id, entry);
+    }
+  } catch (error) {
+    console.warn(`SkillKit marketplace sources refresh failed: ${error.message}`);
+  }
+
+  for (const seed of skillkitSeeds.entries ?? []) {
+    const id = `skillkit:${seed.owner}/${seed.repo}`;
+    if (!skillkitEntries.has(id)) {
+      skillkitEntries.set(id, skillkitEntry(seed));
+    }
+  }
 
   const entries = [
     ...(Array.isArray(registry.entries) ? registry.entries.map(officialEntry) : []),
-    ...(Array.isArray(skillkitSeeds.entries) ? skillkitSeeds.entries.map(skillkitEntry) : []),
+    ...skillkitEntries.values(),
     ...(Array.isArray(vercelSeeds.entries) ? vercelSeeds.entries.map(vercelEntry) : []),
   ];
 
@@ -322,11 +409,43 @@ async function build() {
   return publicEntries;
 }
 
-async function buildVercelIndex() {
+async function crawlVercelDescriptions(entries) {
+  const missing = entries.filter((entry) => !entry.d);
+  const capped = missing.slice(0, Number.isFinite(crawlCap) && crawlCap > 0 ? crawlCap : 5000);
+  let cursor = 0;
+  let crawled = 0;
+  let failed = 0;
+
+  async function worker() {
+    while (cursor < capped.length) {
+      const entry = capped[cursor];
+      cursor += 1;
+      await sleep(40);
+      try {
+        const html = await fetchSkillPage(`https://www.skills.sh/${entry.o}/${entry.r}/${entry.s}`);
+        const description = extractMetaDescription(html);
+        if (description) entry.d = description;
+      } catch (error) {
+        failed += 1;
+        console.warn(`Vercel description crawl failed for ${entry.o}/${entry.r}/${entry.s}: ${error.message}`);
+      }
+      crawled += 1;
+    }
+  }
+
+  await Promise.all(Array.from({ length: Math.min(4, capped.length) }, () => worker()));
+  const stillMissing = entries.filter((entry) => !entry.d).length;
+  console.warn(`Vercel description crawl: crawled ${crawled}, failed ${failed}, still missing ${stillMissing}`);
+}
+
+async function buildVercelIndex(existingIndex) {
   try {
     const rootXml = await fetchText("https://www.skills.sh/sitemap.xml");
     const sitemapUrls = extractLocs(rootXml).filter((url) => /\/sitemap-skills-\d+\.xml$/.test(url));
     const records = new Map();
+    const existingDescriptions = new Map((existingIndex?.entries ?? [])
+      .filter((entry) => entry?.d)
+      .map((entry) => [`${entry.o}/${entry.r}/${entry.s}`, entry.d]));
     let urlCount = 0;
 
     for (const sitemapUrl of sitemapUrls) {
@@ -338,6 +457,8 @@ async function buildVercelIndex() {
         const match = /^https:\/\/www\.skills\.sh\/([^/\s?#]+)\/([^/\s?#]+)\/([^/\s?#]+)$/.exec(skillUrl);
         if (!match) continue;
         const record = { o: match[1], r: match[2], s: match[3] };
+        const description = existingDescriptions.get(`${record.o}/${record.r}/${record.s}`);
+        if (description) record.d = description;
         records.set(`${record.o}/${record.r}/${record.s}`, record);
       }
     }
@@ -356,6 +477,9 @@ async function buildVercelIndex() {
     if (!validateVercelIndex(entries)) {
       return null;
     }
+    if (!check) {
+      await crawlVercelDescriptions(entries);
+    }
     return entries;
   } catch (error) {
     console.warn(`Vercel skills index refresh failed: ${error.message}`);
@@ -363,16 +487,15 @@ async function buildVercelIndex() {
   }
 }
 
-const builtEntries = await build();
-if (!builtEntries) {
-  process.exit();
-}
-const builtVercelIndexEntries = await buildVercelIndex();
-
 const outputPath = path.join(root, "catalogue-data.json");
 const vercelIndexPath = path.join(root, "catalogue-vercel-index.json");
 const existing = await readJsonIfExists(outputPath);
 const existingVercelIndex = await readJsonIfExists(vercelIndexPath);
+const builtEntries = await build();
+if (!builtEntries) {
+  process.exit();
+}
+const builtVercelIndexEntries = await buildVercelIndex(existingVercelIndex);
 
 if (check) {
   let failed = false;
