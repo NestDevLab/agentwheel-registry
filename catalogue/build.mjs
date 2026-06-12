@@ -14,6 +14,8 @@ const entryTypeSet = new Set(["package", "skill", "plugin", "mcp", "adapter"]);
 const ecosystemSet = new Set(ecosystemOrder.keys());
 const crawlCap = Number.parseInt(process.env.CRAWL_CAP ?? "5000", 10);
 const skillkitSourcesUrl = "https://raw.githubusercontent.com/rohitg00/skillkit/main/marketplace/sources.json";
+const crawlConcurrency = 4;
+const crawlGapMs = 40;
 
 async function readJson(filePath) {
   return JSON.parse(await fs.readFile(filePath, "utf8"));
@@ -30,6 +32,10 @@ async function readJsonIfExists(filePath) {
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function normalizedCrawlCap() {
+  return Number.isFinite(crawlCap) && crawlCap >= 0 ? crawlCap : 5000;
 }
 
 async function fetchJson(url) {
@@ -252,6 +258,7 @@ function skillkitMarketplaceEntry(source, seed) {
     archived: false,
     provides: null,
     version: null,
+    _fallbackDescription: typeof source.name === "string" && source.name.trim() ? source.name.trim() : null,
     _repo: { owner, repo },
   };
 }
@@ -332,12 +339,17 @@ function validateVercelIndex(entries) {
 }
 
 function publicEntry(entry) {
-  const { _repo, ...rest } = entry;
+  const { _fallbackDescription, _repo, ...rest } = entry;
   return rest;
 }
 
 function entriesEqual(a, b) {
   return JSON.stringify(a) === JSON.stringify(b);
+}
+
+function stableCatalogueEntry(entry) {
+  const { lastPush, stars, ...stable } = entry;
+  return stable;
 }
 
 function diffSummary(currentEntries, nextEntries) {
@@ -358,7 +370,12 @@ async function build() {
 
   try {
     const skillkitSources = await fetchJson(skillkitSourcesUrl);
-    for (const source of Array.isArray(skillkitSources) ? skillkitSources : []) {
+    const skillkitSourceEntries = Array.isArray(skillkitSources)
+      ? skillkitSources
+      : Array.isArray(skillkitSources?.sources)
+        ? skillkitSources.sources
+        : [];
+    for (const source of skillkitSourceEntries) {
       if (!source?.source || !/^[^/\s]+\/[^/\s]+$/.test(source.source)) continue;
       const seed = skillkitSeedMap.get(source.source);
       const entry = skillkitMarketplaceEntry(source, seed);
@@ -384,6 +401,9 @@ async function build() {
   for (const entry of entries) {
     if (entry._repo) {
       await enrichGitHub(entry, entry._repo.owner, entry._repo.repo);
+      if (!entry.description && entry._fallbackDescription) {
+        entry.description = entry._fallbackDescription;
+      }
       if (entry.ecosystem === "official") {
         await enrichOfficialManifest(entry, entry._repo.owner, entry._repo.repo);
       }
@@ -410,32 +430,74 @@ async function build() {
 }
 
 async function crawlVercelDescriptions(entries) {
+  const crawlLimit = normalizedCrawlCap();
   const missing = entries.filter((entry) => !entry.d);
-  const capped = missing.slice(0, Number.isFinite(crawlCap) && crawlCap > 0 ? crawlCap : 5000);
-  let cursor = 0;
-  let crawled = 0;
-  let failed = 0;
+  const cappedMissing = missing.slice(0, crawlLimit);
 
-  async function worker() {
-    while (cursor < capped.length) {
-      const entry = capped[cursor];
-      cursor += 1;
-      await sleep(40);
-      try {
-        const html = await fetchSkillPage(`https://www.skills.sh/${entry.o}/${entry.r}/${entry.s}`);
-        const description = extractMetaDescription(html);
-        if (description) entry.d = description;
-      } catch (error) {
-        failed += 1;
-        console.warn(`Vercel description crawl failed for ${entry.o}/${entry.r}/${entry.s}: ${error.message}`);
+  async function crawlSlice(slice, onDescription) {
+    let cursor = 0;
+    let crawled = 0;
+    let failed = 0;
+
+    async function worker() {
+      while (cursor < slice.length) {
+        const entry = slice[cursor];
+        cursor += 1;
+        await sleep(crawlGapMs);
+        try {
+          const html = await fetchSkillPage(`https://www.skills.sh/${entry.o}/${entry.r}/${entry.s}`);
+          const description = extractMetaDescription(html);
+          if (description) onDescription(entry, description);
+        } catch (error) {
+          failed += 1;
+          console.warn(`Vercel description crawl failed for ${entry.o}/${entry.r}/${entry.s}: ${error.message}`);
+        }
+        crawled += 1;
       }
-      crawled += 1;
+    }
+
+    await Promise.all(Array.from({ length: Math.min(crawlConcurrency, slice.length) }, () => worker()));
+    return { crawled, failed };
+  }
+
+  const missingResult = await crawlSlice(cappedMissing, (entry, description) => {
+    entry.d = description;
+  });
+  const stillMissing = entries.filter((entry) => !entry.d).length;
+  console.warn(`Vercel description crawl: crawled ${missingResult.crawled}, failed ${missingResult.failed}, still missing ${stillMissing}`);
+
+  const refreshBudget = Math.max(0, crawlLimit - missingResult.crawled);
+  let refreshed = 0;
+  let refreshFailed = 0;
+  let changed = 0;
+
+  if (refreshBudget > 0) {
+    const entriesWithD = entries.filter((entry) => entry.d);
+    if (entriesWithD.length > 0) {
+      const week = Math.floor(Date.now() / (7 * 86400000));
+      const start = (week * refreshBudget) % entriesWithD.length;
+      const refreshSlice = [];
+      const refreshCount = Math.min(refreshBudget, entriesWithD.length);
+
+      for (let index = 0; index < refreshCount; index += 1) {
+        refreshSlice.push(entriesWithD[(start + index) % entriesWithD.length]);
+      }
+
+      const refreshResult = await crawlSlice(refreshSlice, (entry, description) => {
+        if (description !== entry.d) {
+          entry.d = description;
+          changed += 1;
+        }
+      });
+      refreshed = refreshResult.crawled;
+      refreshFailed = refreshResult.failed;
     }
   }
 
-  await Promise.all(Array.from({ length: Math.min(4, capped.length) }, () => worker()));
-  const stillMissing = entries.filter((entry) => !entry.d).length;
-  console.warn(`Vercel description crawl: crawled ${crawled}, failed ${failed}, still missing ${stillMissing}`);
+  if (refreshFailed > 0) {
+    console.warn(`Vercel description refresh failures: ${refreshFailed}`);
+  }
+  console.warn(`Vercel description refresh: refreshed ${refreshed}, changed ${changed}`);
 }
 
 async function buildVercelIndex(existingIndex) {
@@ -502,8 +564,8 @@ if (check) {
   if (!existing) {
     console.error("catalogue-data.json is missing");
     failed = true;
-  } else if (!entriesEqual(existing.entries, builtEntries)) {
-    console.error(`catalogue-data.json drift detected (${diffSummary(existing.entries, builtEntries)})`);
+  } else if (!entriesEqual(existing.entries.map(stableCatalogueEntry), builtEntries.map(stableCatalogueEntry))) {
+    console.error(`catalogue-data.json drift detected (${diffSummary(existing.entries.map(stableCatalogueEntry), builtEntries.map(stableCatalogueEntry))})`);
     failed = true;
   } else {
     console.log("catalogue-data.json is up to date");

@@ -45,7 +45,7 @@ The builder also writes `catalogue-vercel-index.json`, a compact index of every 
 }
 ```
 
-This second file is refreshed weekly with the main catalogue, contains roughly 20k Vercel skills, and intentionally does not include GitHub enrichment. Descriptions are crawled incrementally from skills.sh meta descriptions into the optional compact `d` field and are carried forward across runs. The site expands these compact records at runtime and uses skills.sh as the verification source.
+This second file is refreshed weekly with the main catalogue, contains roughly 20k Vercel skills, and intentionally does not include GitHub enrichment. Descriptions are crawled incrementally from skills.sh meta descriptions into the optional compact `d` field and are carried forward across runs. After missing descriptions are crawled, any remaining `CRAWL_CAP` budget refreshes a deterministic weekly slice of existing descriptions so cached text rolls forward over time. The site expands these compact records at runtime and uses skills.sh as the verification source.
 
 ## Adding Entries
 
@@ -66,4 +66,4 @@ Run the builder locally with:
 GITHUB_TOKEN="$(gh auth token)" node catalogue/build.mjs
 ```
 
-Use `node catalogue/build.mjs --check` to verify that committed catalogue data is current.
+Use `CRAWL_CAP` to bound skills.sh description page crawls; the default is 5000 and `CRAWL_CAP=0` refreshes catalogue metadata without page crawls. Use `node catalogue/build.mjs --check` to verify that committed catalogue data is current without crawling description pages; check mode ignores volatile GitHub star counts and last-push timestamps.
