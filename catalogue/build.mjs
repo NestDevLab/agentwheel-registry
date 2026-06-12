@@ -14,8 +14,9 @@ const entryTypeSet = new Set(["package", "skill", "plugin", "mcp", "adapter"]);
 const ecosystemSet = new Set(ecosystemOrder.keys());
 const crawlCap = Number.parseInt(process.env.CRAWL_CAP ?? "5000", 10);
 const skillkitSourcesUrl = "https://raw.githubusercontent.com/rohitg00/skillkit/main/marketplace/sources.json";
-const crawlConcurrency = 4;
+const crawlConcurrency = 8;
 const crawlGapMs = 40;
+const skillPageReadLimit = 64 * 1024;
 
 async function readJson(filePath) {
   return JSON.parse(await fs.readFile(filePath, "utf8"));
@@ -63,19 +64,60 @@ async function fetchText(url) {
   return response.text();
 }
 
-async function fetchSkillPage(url) {
+async function fetchSkillDescription(url) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10000);
-  const response = await fetch(url, {
-    signal: controller.signal,
-    headers: {
-      "User-Agent": "agentwheel-catalogue (github.com/NestDevLab/agentwheel-registry)",
-    },
-  }).finally(() => clearTimeout(timeout));
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
+  let reader = null;
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        "User-Agent": "agentwheel-catalogue (github.com/NestDevLab/agentwheel-registry)",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} ${response.statusText}`);
+    }
+    if (!response.body) {
+      throw new Error("Response body is not streamable");
+    }
+
+    reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let html = "";
+    let bytesRead = 0;
+
+    while (bytesRead < skillPageReadLimit) {
+      const { done, value } = await reader.read();
+      if (done) {
+        html += decoder.decode();
+        return extractPageDescription(html);
+      }
+
+      bytesRead += value.byteLength;
+      html += decoder.decode(value, { stream: true });
+      const description = extractPageDescription(html);
+      if (description || bytesRead >= skillPageReadLimit) {
+        try {
+          await reader.cancel();
+        } catch {
+          // The request is being aborted deliberately; cancellation may race with the stream.
+        }
+        controller.abort();
+        return description;
+      }
+    }
+
+    try {
+      await reader.cancel();
+    } catch {
+      // The request is being aborted deliberately; cancellation may race with the stream.
+    }
+    controller.abort();
+    return extractPageDescription(html);
+  } finally {
+    clearTimeout(timeout);
   }
-  return response.text();
 }
 
 function extractLocs(xml) {
@@ -95,6 +137,42 @@ function extractMetaDescription(html) {
   const match = /<meta\b(?=[^>]*\bname=["']description["'])(?=[^>]*\bcontent=["']([^"']*)["'])[^>]*>/i.exec(html);
   const description = match ? decodeHtml(match[1]).trim() : "";
   return description || null;
+}
+
+function findJsonDescription(value) {
+  if (!value || typeof value !== "object") return null;
+  if (typeof value.description === "string" && value.description.trim()) {
+    return value.description.trim();
+  }
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      const description = findJsonDescription(item);
+      if (description) return description;
+    }
+    return null;
+  }
+  for (const item of Object.values(value)) {
+    const description = findJsonDescription(item);
+    if (description) return description;
+  }
+  return null;
+}
+
+function extractJsonLdDescription(html) {
+  const scripts = html.matchAll(/<script\b(?=[^>]*\btype=["']application\/ld\+json["'])[^>]*>([\s\S]*?)<\/script>/gi);
+  for (const script of scripts) {
+    try {
+      const description = findJsonDescription(JSON.parse(decodeHtml(script[1])));
+      if (description) return description;
+    } catch {
+      // The streamed chunk may contain an incomplete JSON-LD script; keep reading.
+    }
+  }
+  return null;
+}
+
+function extractPageDescription(html) {
+  return extractMetaDescription(html) || extractJsonLdDescription(html);
 }
 
 function repoFromSource(source) {
@@ -445,8 +523,7 @@ async function crawlVercelDescriptions(entries) {
         cursor += 1;
         await sleep(crawlGapMs);
         try {
-          const html = await fetchSkillPage(`https://www.skills.sh/${entry.o}/${entry.r}/${entry.s}`);
-          const description = extractMetaDescription(html);
+          const description = await fetchSkillDescription(`https://www.skills.sh/${entry.o}/${entry.r}/${entry.s}`);
           if (description) onDescription(entry, description);
         } catch (error) {
           failed += 1;
