@@ -7,13 +7,20 @@ const root = path.resolve(__dirname, "..");
 const check = process.argv.includes("--check");
 const ecosystemOrder = new Map([
   ["official", 0],
-  ["skillkit", 1],
-  ["vercel", 2],
+  ["openpack", 1],
+  ["mcp-registry", 2],
+  ["skillkit", 3],
+  ["vercel", 4],
 ]);
 const entryTypeSet = new Set(["package", "skill", "plugin", "mcp", "adapter"]);
 const ecosystemSet = new Set(ecosystemOrder.keys());
 const crawlCap = Number.parseInt(process.env.CRAWL_CAP ?? "5000", 10);
+const openpackCrawlCap = Number.parseInt(process.env.OPENPACK_CRAWL_CAP ?? "100", 10);
+const mcpRegistryCrawlCap = Number.parseInt(process.env.MCP_REGISTRY_CRAWL_CAP ?? "500", 10);
+const refreshVercelIndex = process.env.VERCEL_INDEX_REFRESH !== "0";
 const skillkitSourcesUrl = "https://raw.githubusercontent.com/rohitg00/skillkit/main/marketplace/sources.json";
+const githubCodeSearchUrl = "https://api.github.com/search/code";
+const mcpRegistryBaseUrl = "https://registry.modelcontextprotocol.io/v0.1";
 const crawlConcurrency = 8;
 const crawlGapMs = 40;
 const skillPageReadLimit = 64 * 1024;
@@ -39,6 +46,10 @@ function normalizedCrawlCap() {
   return Number.isFinite(crawlCap) && crawlCap >= 0 ? crawlCap : 5000;
 }
 
+function normalizedCap(value, fallback) {
+  return Number.isFinite(value) && value >= 0 ? value : fallback;
+}
+
 async function fetchJson(url) {
   await sleep(100);
   const headers = {
@@ -50,6 +61,20 @@ async function fetchJson(url) {
   }
 
   const response = await fetch(url, { headers });
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status} ${response.statusText}`);
+  }
+  return response.json();
+}
+
+async function fetchRegistryJson(url) {
+  await sleep(100);
+  const response = await fetch(url, {
+    headers: {
+      Accept: "application/json",
+      "User-Agent": "agentwheel-catalogue (github.com/NestDevLab/agentwheel-registry)",
+    },
+  });
   if (!response.ok) {
     throw new Error(`HTTP ${response.status} ${response.statusText}`);
   }
@@ -202,6 +227,14 @@ function repoUrl(owner, repo) {
   return `https://github.com/${owner}/${repo}`;
 }
 
+function githubSource(owner, repo) {
+  return `github:${owner}/${repo}`;
+}
+
+function sourceKey(source) {
+  return String(source || "").replace(/#.*$/, "").replace(/^git:https:\/\/github\.com\//, "github:").replace(/\.git$/, "").toLowerCase();
+}
+
 async function enrichGitHub(entry, owner, repo) {
   try {
     const repoData = await fetchJson(`https://api.github.com/repos/${owner}/${repo}`);
@@ -341,6 +374,158 @@ function skillkitMarketplaceEntry(source, seed) {
   };
 }
 
+async function openpackEntry(owner, repo, knownSources) {
+  const source = githubSource(owner, repo);
+  if (knownSources.has(sourceKey(source))) return null;
+  const manifest = await fetchJson(`https://raw.githubusercontent.com/${owner}/${repo}/HEAD/openpack.json`);
+  if (!manifest || typeof manifest !== "object") return null;
+  const provides = Array.isArray(manifest.provides)
+    ? [...new Set(manifest.provides.map((item) => item?.type).filter((type) => typeof type === "string" && type))].sort()
+    : [];
+  if (provides.length === 0) return null;
+
+  const entry = {
+    id: `openpack:${owner}/${repo}`,
+    name: typeof manifest.name === "string" && manifest.name.trim() ? manifest.name.trim() : `${owner}/${repo}`,
+    ecosystem: "openpack",
+    type: "package",
+    description: typeof manifest.description === "string" ? manifest.description : "",
+    tags: ["openpack", ...provides],
+    source,
+    installCommand: `npx agentwheel install "${source}"`,
+    repoUrl: repoUrl(owner, repo),
+    homepageUrl: null,
+    stars: null,
+    lastPush: null,
+    archived: false,
+    provides,
+    version: typeof manifest.version === "string" && manifest.version ? manifest.version : null,
+    _repo: { owner, repo },
+  };
+  await enrichGitHub(entry, owner, repo);
+  return entry.description ? entry : { ...entry, description: `OpenPack package from ${owner}/${repo}.` };
+}
+
+function existingEntriesFor(existing, ecosystem) {
+  return (existing?.entries ?? []).filter((entry) => entry?.ecosystem === ecosystem);
+}
+
+async function discoverOpenPackEntries(knownSources, existing) {
+  const limit = normalizedCap(openpackCrawlCap, 100);
+  if (limit === 0) return existingEntriesFor(existing, "openpack");
+  if (!process.env.GITHUB_TOKEN) {
+    console.warn("OpenPack GitHub code search skipped: GITHUB_TOKEN is not set");
+    return existingEntriesFor(existing, "openpack");
+  }
+
+  const entries = [];
+  const seenRepos = new Set();
+  let page = 1;
+  while (entries.length < limit) {
+    const remaining = limit - entries.length;
+    const perPage = Math.min(100, remaining);
+    const query = encodeURIComponent("filename:openpack.json schemaVersion provides");
+    const payload = await fetchJson(`${githubCodeSearchUrl}?q=${query}&per_page=${perPage}&page=${page}`);
+    const items = Array.isArray(payload.items) ? payload.items : [];
+    if (items.length === 0) break;
+    for (const item of items) {
+      const fullName = item?.repository?.full_name;
+      if (!fullName || seenRepos.has(fullName)) continue;
+      seenRepos.add(fullName);
+      const [owner, repo] = fullName.split("/");
+      if (!owner || !repo) continue;
+      try {
+        const entry = await openpackEntry(owner, repo, knownSources);
+        if (entry) entries.push(entry);
+      } catch (error) {
+        console.warn(`OpenPack discovery failed for ${fullName}: ${error.message}`);
+      }
+      if (entries.length >= limit) break;
+    }
+    if (items.length < perPage) break;
+    page += 1;
+  }
+  return entries;
+}
+
+function installNameFor(serverName) {
+  const base = path.basename(serverName);
+  return base.replace(/[^a-z0-9._-]+/gi, "-").replace(/^-+|-+$/g, "") || "mcp-server";
+}
+
+function supportedMcpRemote(remotes) {
+  for (const remote of remotes ?? []) {
+    if (remote?.type !== "streamable-http") continue;
+    if (typeof remote.url !== "string" || !/^https?:\/\//.test(remote.url)) continue;
+    if ((remote.headers ?? []).some((header) => header?.isRequired && header?.isSecret)) continue;
+    return remote;
+  }
+  return null;
+}
+
+function mcpRegistryEntry(server) {
+  if (!server?.name || !supportedMcpRemote(server.remotes)) return null;
+  const title = typeof server.title === "string" && server.title.trim() ? server.title.trim() : server.name;
+  const description = typeof server.description === "string" && server.description.trim()
+    ? server.description.trim()
+    : `${title} MCP server from the public MCP Registry.`;
+  const source = `mcp-registry:${server.name}`;
+  const installName = installNameFor(server.name);
+  const official = Boolean(server._meta?.["io.modelcontextprotocol.registry/official"]?.status);
+  const repositoryUrl = typeof server.repository?.url === "string" ? server.repository.url : null;
+  return {
+    id: `mcp-registry:${server.name}`,
+    name: title,
+    ecosystem: "mcp-registry",
+    type: "mcp",
+    description,
+    tags: official ? ["mcp", "registry", "official"] : ["mcp", "registry"],
+    source,
+    installCommand: `npx agentwheel install "${source}" --mcp ${installName}`,
+    repoUrl: repositoryUrl,
+    homepageUrl: typeof server.websiteUrl === "string" ? server.websiteUrl : null,
+    stars: null,
+    lastPush: null,
+    archived: false,
+    provides: ["mcp"],
+    version: typeof server.version === "string" && server.version ? server.version : null,
+  };
+}
+
+async function discoverMcpRegistryEntries(existing) {
+  const limit = normalizedCap(mcpRegistryCrawlCap, 500);
+  if (limit === 0) return existingEntriesFor(existing, "mcp-registry");
+  const entries = [];
+  const seen = new Set();
+  let cursor = null;
+  try {
+    while (entries.length < limit) {
+      const pageLimit = Math.min(100, limit - entries.length);
+      const url = new URL(`${mcpRegistryBaseUrl}/servers`);
+      url.searchParams.set("limit", String(pageLimit));
+      if (cursor) url.searchParams.set("cursor", cursor);
+      const payload = await fetchRegistryJson(url.toString());
+      const servers = Array.isArray(payload.servers) ? payload.servers : [];
+      for (const item of servers) {
+        const server = item?.server ?? item;
+        if (!server?.name || seen.has(server.name)) continue;
+        const entry = mcpRegistryEntry(server);
+        if (entry) {
+          entries.push(entry);
+          seen.add(server.name);
+        }
+        if (entries.length >= limit) break;
+      }
+      cursor = payload.metadata?.nextCursor ?? payload.nextCursor ?? null;
+      if (!cursor || servers.length === 0) break;
+    }
+    return entries;
+  } catch (error) {
+    console.warn(`MCP registry discovery failed: ${error.message}`);
+    return existingEntriesFor(existing, "mcp-registry");
+  }
+}
+
 function sortEntries(entries) {
   entries.sort((a, b) => {
     const ecosystemDiff = ecosystemOrder.get(a.ecosystem) - ecosystemOrder.get(b.ecosystem);
@@ -439,12 +624,13 @@ function diffSummary(currentEntries, nextEntries) {
   return `added: ${added.length}, removed: ${removed.length}, changed: ${changed.length}`;
 }
 
-async function build() {
+async function build(existingCatalogue) {
   const registry = await readJson(path.join(root, "index.json"));
   const vercelSeeds = await readJson(path.join(root, "catalogue", "seeds", "vercel.json"));
   const skillkitSeeds = await readJson(path.join(root, "catalogue", "seeds", "skillkit.json"));
   const skillkitSeedMap = new Map((skillkitSeeds.entries ?? []).map((seed) => [`${seed.owner}/${seed.repo}`, seed]));
   const skillkitEntries = new Map();
+  const knownOfficialSources = new Set((registry.entries ?? []).map((entry) => sourceKey(entry.source)));
 
   try {
     const skillkitSources = await fetchJson(skillkitSourcesUrl);
@@ -472,6 +658,8 @@ async function build() {
 
   const entries = [
     ...(Array.isArray(registry.entries) ? registry.entries.map(officialEntry) : []),
+    ...await discoverOpenPackEntries(knownOfficialSources, existingCatalogue),
+    ...await discoverMcpRegistryEntries(existingCatalogue),
     ...skillkitEntries.values(),
     ...(Array.isArray(vercelSeeds.entries) ? vercelSeeds.entries.map(vercelEntry) : []),
   ];
@@ -486,7 +674,9 @@ async function build() {
         await enrichOfficialManifest(entry, entry._repo.owner, entry._repo.repo);
       }
     } else {
-      console.warn(`No GitHub repository found for ${entry.id}`);
+      if (entry.ecosystem === "official") {
+        console.warn(`No GitHub repository found for ${entry.id}`);
+      }
       entry.stars = null;
       entry.lastPush = null;
       entry.archived = false;
@@ -578,6 +768,10 @@ async function crawlVercelDescriptions(entries) {
 }
 
 async function buildVercelIndex(existingIndex) {
+  if (!refreshVercelIndex) {
+    console.warn("Vercel skills index refresh skipped by VERCEL_INDEX_REFRESH=0");
+    return existingIndex?.entries ?? null;
+  }
   try {
     const rootXml = await fetchText("https://www.skills.sh/sitemap.xml");
     const sitemapUrls = extractLocs(rootXml).filter((url) => /\/sitemap-skills-\d+\.xml$/.test(url));
@@ -630,7 +824,7 @@ const outputPath = path.join(root, "catalogue-data.json");
 const vercelIndexPath = path.join(root, "catalogue-vercel-index.json");
 const existing = await readJsonIfExists(outputPath);
 const existingVercelIndex = await readJsonIfExists(vercelIndexPath);
-const builtEntries = await build();
+const builtEntries = await build(existing);
 if (!builtEntries) {
   process.exit();
 }
