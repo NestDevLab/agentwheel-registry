@@ -1,6 +1,6 @@
 # Catalogue Data
 
-The catalogue is a generated, browsable data set for agentwheel-installable resources. It combines official registry entries from `index.json` with curated Vercel skills.sh and SkillKit-compatible repositories.
+The catalogue is a generated, browsable data set for agentwheel-installable resources. It combines official registry entries from `index.json`, public OpenPack repositories, installable MCP Registry remotes, curated Vercel skills.sh entries, and SkillKit-compatible repositories.
 
 ## Data Contract
 
@@ -12,7 +12,7 @@ The catalogue is a generated, browsable data set for agentwheel-installable reso
     {
       "id": "official:nestdev-core-toolkit",    // "<ecosystem>:<unique-key>"
       "name": "nestdev-core-toolkit",
-      "ecosystem": "official",                  // "official" | "vercel" | "skillkit"
+      "ecosystem": "official",                  // "official" | "openpack" | "mcp-registry" | "vercel" | "skillkit"
       "type": "package",                        // "package" | "skill" | "plugin" | "mcp" | "adapter"
       "description": "...",
       "tags": ["agents", "skills"],
@@ -30,7 +30,7 @@ The catalogue is a generated, browsable data set for agentwheel-installable reso
 }
 ```
 
-Curated Vercel seed entries in `catalogue-data.json` include `"featured": true`; official registry and SkillKit entries omit the flag.
+Curated Vercel seed entries in `catalogue-data.json` include `"featured": true`; official registry, OpenPack, MCP Registry, and SkillKit entries omit the flag.
 
 The builder also writes `catalogue-vercel-index.json`, a compact index of every skill listed in the skills.sh sitemaps:
 
@@ -49,7 +49,7 @@ This second file is refreshed weekly with the main catalogue, contains roughly 2
 
 ## Adding Entries
 
-All registry entries appear automatically from the root `index.json`. SkillKit entries are collected from SkillKit's marketplace `sources.json`, with `catalogue/seeds/skillkit.json` used as an override layer for curated descriptions and any extra seed-only repositories. Curated Vercel entries are added by pull request to:
+All registry entries appear automatically from the root `index.json`. Public OpenPack repositories are discovered with GitHub code search when `GITHUB_TOKEN` is available. MCP Registry entries are collected from the public registry and included only when they expose an unauthenticated `streamable-http` remote that Agentwheel can install. SkillKit entries are collected from SkillKit's marketplace `sources.json`, with `catalogue/seeds/skillkit.json` used as an override layer for curated descriptions and any extra seed-only repositories. Curated Vercel entries are added by pull request to:
 
 - `catalogue/seeds/vercel.json`
 - `catalogue/seeds/skillkit.json`
@@ -67,3 +67,5 @@ GITHUB_TOKEN="$(gh auth token)" node catalogue/build.mjs
 ```
 
 Use `CRAWL_CAP` to bound skills.sh description page crawls; the default is 5000 and `CRAWL_CAP=0` refreshes catalogue metadata without page crawls. Use `node catalogue/build.mjs --check` to verify that committed catalogue data is current without crawling description pages; check mode ignores volatile GitHub star counts and last-push timestamps.
+
+Use `OPENPACK_CRAWL_CAP` and `MCP_REGISTRY_CRAWL_CAP` to bound OpenPack and MCP Registry discovery. Set either cap to `0` to carry forward already committed entries for that ecosystem without refreshing it.

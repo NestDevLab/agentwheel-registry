@@ -2,7 +2,7 @@
 
 Community registry for discoverable agentwheel packages.
 
-The registry is optional. It gives `agentwheel add <short-name>` a public index to resolve from, but it is not a gatekeeper: direct sources such as git URLs, local paths, `skillkit:...`, and `vercel:...` continue to work without this repository.
+The registry is optional. It gives `agentwheel add <short-name>` a public index to resolve from, but it is not a gatekeeper: direct sources such as git URLs, local paths, `skillkit:...`, `vercel:...`, and `mcp-registry:...` continue to work without this repository.
 
 ## Format
 
@@ -34,7 +34,7 @@ Each entry has these fields:
 ## Catalogue
 
 Registry entries automatically appear in the generated resource catalogue.
-The catalogue data pipeline is documented in [`catalogue/README.md`](catalogue/README.md).
+The catalogue data pipeline also discovers public OpenPack repositories and installable MCP Registry remotes. It is documented in [`catalogue/README.md`](catalogue/README.md).
 Browse the published site page at <https://nestdevlab.github.io/agentwheel/catalogue.html>.
 
 ## Contributing
