@@ -9,18 +9,21 @@ const ecosystemOrder = new Map([
   ["official", 0],
   ["openpack", 1],
   ["mcp-registry", 2],
-  ["skillkit", 3],
-  ["vercel", 4],
+  ["clawhub", 3],
+  ["skillkit", 4],
+  ["vercel", 5],
 ]);
 const entryTypeSet = new Set(["package", "skill", "plugin", "mcp", "adapter"]);
 const ecosystemSet = new Set(ecosystemOrder.keys());
 const crawlCap = Number.parseInt(process.env.CRAWL_CAP ?? "5000", 10);
 const openpackCrawlCap = Number.parseInt(process.env.OPENPACK_CRAWL_CAP ?? "100", 10);
 const mcpRegistryCrawlCap = Number.parseInt(process.env.MCP_REGISTRY_CRAWL_CAP ?? "500", 10);
+const clawhubCrawlCap = Number.parseInt(process.env.CLAWHUB_CRAWL_CAP ?? "100", 10);
 const refreshVercelIndex = process.env.VERCEL_INDEX_REFRESH !== "0";
 const skillkitSourcesUrl = "https://raw.githubusercontent.com/rohitg00/skillkit/main/marketplace/sources.json";
 const githubCodeSearchUrl = "https://api.github.com/search/code";
 const mcpRegistryBaseUrl = "https://registry.modelcontextprotocol.io/v0.1";
+const clawhubBaseUrl = "https://clawhub.ai/api/v1";
 const crawlConcurrency = 8;
 const crawlGapMs = 40;
 const skillPageReadLimit = 64 * 1024;
@@ -68,6 +71,20 @@ async function fetchJson(url) {
 }
 
 async function fetchRegistryJson(url) {
+  await sleep(100);
+  const response = await fetch(url, {
+    headers: {
+      Accept: "application/json",
+      "User-Agent": "agentwheel-catalogue (github.com/NestDevLab/agentwheel-registry)",
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status} ${response.statusText}`);
+  }
+  return response.json();
+}
+
+async function fetchClawHubJson(url) {
   await sleep(100);
   const response = await fetch(url, {
     headers: {
@@ -492,6 +509,85 @@ function mcpRegistryEntry(server) {
   };
 }
 
+function clawhubPluginSlug(item) {
+  const name = String(item.name || "");
+  if (name.startsWith("@") && name.includes("/")) {
+    return name.slice(name.indexOf("/") + 1);
+  }
+  return name;
+}
+
+function clawhubPluginUrl(item) {
+  const owner = String(item.ownerHandle || "").trim();
+  const slug = clawhubPluginSlug(item).trim();
+  if (!owner || !slug) return `https://clawhub.ai/plugins/${encodeURIComponent(String(item.name || ""))}`;
+  return `https://clawhub.ai/${encodeURIComponent(owner)}/plugins/${encodeURIComponent(slug)}`;
+}
+
+function clawhubPluginEntry(item) {
+  if (!item?.name || !["code-plugin", "bundle-plugin"].includes(item.family)) return null;
+  const name = String(item.name).trim();
+  if (!name) return null;
+  const displayName = typeof item.displayName === "string" && item.displayName.trim() ? item.displayName.trim() : name;
+  const categories = Array.isArray(item.categories) ? item.categories.filter((category) => typeof category === "string" && category) : [];
+  const topics = Array.isArray(item.topics) ? item.topics.filter((topic) => typeof topic === "string" && topic) : [];
+  const tags = [...new Set(["openclaw", "clawhub", item.family, item.channel, ...categories, ...topics].filter(Boolean))];
+  const updatedAt = typeof item.updatedAt === "number" ? new Date(item.updatedAt).toISOString() : null;
+  const stars = typeof item.stats?.stars === "number" ? item.stats.stars : null;
+  return {
+    id: `clawhub:${name}`,
+    name: displayName,
+    ecosystem: "clawhub",
+    type: "plugin",
+    description: typeof item.summary === "string" && item.summary.trim()
+      ? item.summary.trim()
+      : `${displayName} OpenClaw plugin from ClawHub.`,
+    tags,
+    source: `clawhub:${name}`,
+    installCommand: `openclaw plugins install "clawhub:${name}"`,
+    repoUrl: null,
+    homepageUrl: clawhubPluginUrl(item),
+    homepageLinkLabel: "ClawHub",
+    stars,
+    lastPush: updatedAt,
+    archived: false,
+    provides: ["plugins"],
+    version: typeof item.latestVersion === "string" && item.latestVersion ? item.latestVersion : null,
+  };
+}
+
+async function discoverClawHubPluginEntries(existing) {
+  const limit = normalizedCap(clawhubCrawlCap, 100);
+  if (limit === 0) return existingEntriesFor(existing, "clawhub");
+  const entries = [];
+  const seen = new Set();
+  let cursor = null;
+
+  try {
+    while (entries.length < limit) {
+      const pageLimit = Math.min(100, limit - entries.length);
+      const url = new URL(`${clawhubBaseUrl}/plugins`);
+      url.searchParams.set("limit", String(pageLimit));
+      if (cursor) url.searchParams.set("cursor", cursor);
+      const payload = await fetchClawHubJson(url.toString());
+      const items = Array.isArray(payload.items) ? payload.items : [];
+      for (const item of items) {
+        const entry = clawhubPluginEntry(item);
+        if (!entry || seen.has(entry.id)) continue;
+        seen.add(entry.id);
+        entries.push(entry);
+        if (entries.length >= limit) break;
+      }
+      cursor = payload.nextCursor ?? payload.metadata?.nextCursor ?? null;
+      if (!cursor || items.length === 0) break;
+    }
+    return entries;
+  } catch (error) {
+    console.warn(`ClawHub plugin discovery failed: ${error.message}`);
+    return existingEntriesFor(existing, "clawhub");
+  }
+}
+
 async function discoverMcpRegistryEntries(existing) {
   const limit = normalizedCap(mcpRegistryCrawlCap, 500);
   if (limit === 0) return existingEntriesFor(existing, "mcp-registry");
@@ -660,6 +756,7 @@ async function build(existingCatalogue) {
     ...(Array.isArray(registry.entries) ? registry.entries.map(officialEntry) : []),
     ...await discoverOpenPackEntries(knownOfficialSources, existingCatalogue),
     ...await discoverMcpRegistryEntries(existingCatalogue),
+    ...await discoverClawHubPluginEntries(existingCatalogue),
     ...skillkitEntries.values(),
     ...(Array.isArray(vercelSeeds.entries) ? vercelSeeds.entries.map(vercelEntry) : []),
   ];
