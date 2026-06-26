@@ -56,6 +56,9 @@ All registry entries appear automatically from the root `index.json`. Public Ope
 
 Keep descriptions concise and tags useful for search.
 
+For AI-agent assisted submissions, use [`publish.md`](publish.md). It keeps source selection,
+install-command checks, and generated-data validation in one prompt-friendly workflow.
+
 ## Refreshing Data
 
 The `Update catalogue data` GitHub Actions workflow refreshes `catalogue-data.json` and `catalogue-vercel-index.json` weekly, on manual dispatch, and after changes to `index.json` or `catalogue/**` on `main`.

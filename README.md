@@ -37,6 +37,9 @@ Registry entries automatically appear in the generated resource catalogue.
 The catalogue data pipeline also discovers public OpenPack repositories and installable MCP Registry remotes. It is documented in [`catalogue/README.md`](catalogue/README.md).
 Browse the published site page at <https://nestdevlab.github.io/agentwheel/catalogue.html>.
 
+For AI-agent assisted publishing, use [`AGENT.md`](AGENT.md), [`llms.txt`](llms.txt), and
+[`catalogue/publish.md`](catalogue/publish.md).
+
 ## Contributing
 
 Open a pull request that updates `index.json`.
