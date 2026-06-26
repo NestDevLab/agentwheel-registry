@@ -56,6 +56,12 @@ All registry entries appear automatically from the root `index.json`. Public Ope
 
 Keep descriptions concise and tags useful for search.
 
+For the quickest submission path, run:
+
+```bash
+npx agentwheel@latest registry publish https://github.com/owner/repo
+```
+
 For AI-agent assisted submissions, use [`publish.md`](publish.md). It keeps source selection,
 install-command checks, and generated-data validation in one prompt-friendly workflow.
 

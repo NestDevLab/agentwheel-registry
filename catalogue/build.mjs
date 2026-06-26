@@ -424,7 +424,9 @@ async function openpackEntry(owner, repo, knownSources) {
 }
 
 function existingEntriesFor(existing, ecosystem) {
-  return (existing?.entries ?? []).filter((entry) => entry?.ecosystem === ecosystem);
+  return (existing?.entries ?? [])
+    .filter((entry) => entry?.ecosystem === ecosystem)
+    .map((entry) => ecosystem === "mcp-registry" ? { ...entry, installCommand: mcpInstallCommand(entry.source) } : entry);
 }
 
 async function discoverOpenPackEntries(knownSources, existing) {
@@ -465,11 +467,6 @@ async function discoverOpenPackEntries(knownSources, existing) {
   return entries;
 }
 
-function installNameFor(serverName) {
-  const base = path.basename(serverName);
-  return base.replace(/[^a-z0-9._-]+/gi, "-").replace(/^-+|-+$/g, "") || "mcp-server";
-}
-
 function supportedMcpRemote(remotes) {
   for (const remote of remotes ?? []) {
     if (remote?.type !== "streamable-http") continue;
@@ -480,6 +477,10 @@ function supportedMcpRemote(remotes) {
   return null;
 }
 
+function mcpInstallCommand(source) {
+  return `npx agentwheel install "${source}" --adapter claude --local`;
+}
+
 function mcpRegistryEntry(server) {
   if (!server?.name || !supportedMcpRemote(server.remotes)) return null;
   const title = typeof server.title === "string" && server.title.trim() ? server.title.trim() : server.name;
@@ -487,7 +488,6 @@ function mcpRegistryEntry(server) {
     ? server.description.trim()
     : `${title} MCP server from the public MCP Registry.`;
   const source = `mcp-registry:${server.name}`;
-  const installName = installNameFor(server.name);
   const official = Boolean(server._meta?.["io.modelcontextprotocol.registry/official"]?.status);
   const repositoryUrl = typeof server.repository?.url === "string" ? server.repository.url : null;
   return {
@@ -498,7 +498,7 @@ function mcpRegistryEntry(server) {
     description,
     tags: official ? ["mcp", "registry", "official"] : ["mcp", "registry"],
     source,
-    installCommand: `npx agentwheel install "${source}" --mcp ${installName}`,
+    installCommand: mcpInstallCommand(source),
     repoUrl: repositoryUrl,
     homepageUrl: typeof server.websiteUrl === "string" ? server.websiteUrl : null,
     stars: null,

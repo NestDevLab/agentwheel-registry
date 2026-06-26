@@ -7,6 +7,20 @@ an Agentwheel catalogue entry.
 
 Add or update a public, installable resource without breaking generated catalogue data.
 
+## Fast Path
+
+Ask the user for the public source if it is missing, then use Agentwheel to draft the submission:
+
+```bash
+npx agentwheel@latest registry publish https://github.com/owner/repo \
+  --description "Reusable skills and rules for coding agents." \
+  --tag skills,rules
+```
+
+The command normalizes GitHub URLs to Agentwheel source strings, infers the entry type when it can,
+prints the registry JSON, prints an install check, and returns a prefilled GitHub issue URL. Use
+`--name`, `--type`, `--description`, and repeated `--tag` options to avoid hand-editing the draft.
+
 ## Decide The Source
 
 Prefer the most direct Agentwheel source string:
@@ -56,7 +70,7 @@ agentwheel install github:owner/repo --adapter codex --local --dry-run
 MCP Registry:
 
 ```bash
-agentwheel install mcp-registry:publisher/server-name --adapter claude --local --mcp server-name --dry-run
+agentwheel install mcp-registry:publisher/server-name --adapter claude --local --dry-run
 ```
 
 ClawHub:

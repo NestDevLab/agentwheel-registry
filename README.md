@@ -42,6 +42,16 @@ For AI-agent assisted publishing, use [`AGENT.md`](AGENT.md), [`llms.txt`](llms.
 
 ## Contributing
 
-Open a pull request that updates `index.json`.
+Prefer the Agentwheel publish helper:
+
+```bash
+npx agentwheel@latest registry publish https://github.com/owner/repo \
+  --description "Reusable skills and rules for coding agents." \
+  --tag skills,rules
+```
+
+It drafts a registry entry, prints an install check, and gives you a prefilled GitHub submission URL
+to review. You can still open a pull request that updates `index.json` directly when you need a
+manual edit.
 
 Entries should point to public, resolvable sources and should not require private credentials. Keep names stable, descriptions concise, and tags generic enough to help discovery.
