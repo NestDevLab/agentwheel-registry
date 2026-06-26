@@ -534,6 +534,7 @@ function clawhubPluginEntry(item) {
   const tags = [...new Set(["openclaw", "clawhub", item.family, item.channel, ...categories, ...topics].filter(Boolean))];
   const updatedAt = typeof item.updatedAt === "number" ? new Date(item.updatedAt).toISOString() : null;
   const stars = typeof item.stats?.stars === "number" ? item.stats.stars : null;
+  const source = `clawhub:${name}`;
   return {
     id: `clawhub:${name}`,
     name: displayName,
@@ -543,8 +544,8 @@ function clawhubPluginEntry(item) {
       ? item.summary.trim()
       : `${displayName} OpenClaw plugin from ClawHub.`,
     tags,
-    source: `clawhub:${name}`,
-    installCommand: `openclaw plugins install "clawhub:${name}"`,
+    source,
+    installCommand: `npx agentwheel install "${source}" --adapter openclaw --local --only-source --execute-plugins`,
     repoUrl: null,
     homepageUrl: clawhubPluginUrl(item),
     homepageLinkLabel: "ClawHub",

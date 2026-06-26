@@ -49,7 +49,7 @@ This second file is refreshed weekly with the main catalogue, contains roughly 2
 
 ## Adding Entries
 
-All registry entries appear automatically from the root `index.json`. Public OpenPack repositories are discovered with GitHub code search when `GITHUB_TOKEN` is available. MCP Registry entries are collected from the public registry and included only when they expose an unauthenticated `streamable-http` remote that Agentwheel can install. ClawHub plugin entries are collected from ClawHub's public plugin API and linked back to the canonical ClawHub listing. SkillKit entries are collected from SkillKit's marketplace `sources.json`, with `catalogue/seeds/skillkit.json` used as an override layer for curated descriptions and any extra seed-only repositories. Curated Vercel entries are added by pull request to:
+All registry entries appear automatically from the root `index.json`. Public OpenPack repositories are discovered with GitHub code search when `GITHUB_TOKEN` is available. MCP Registry entries are collected from the public registry and included only when they expose an unauthenticated `streamable-http` remote that Agentwheel can install. ClawHub plugin entries are collected from ClawHub's public plugin API, linked back to the canonical ClawHub listing, and installed through Agentwheel's `clawhub:` source driver with `--only-source --execute-plugins`. SkillKit entries are collected from SkillKit's marketplace `sources.json`, with `catalogue/seeds/skillkit.json` used as an override layer for curated descriptions and any extra seed-only repositories. Curated Vercel entries are added by pull request to:
 
 - `catalogue/seeds/vercel.json`
 - `catalogue/seeds/skillkit.json`

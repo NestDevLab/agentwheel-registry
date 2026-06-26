@@ -2,7 +2,7 @@
 
 Community registry for discoverable agentwheel packages.
 
-The registry is optional. It gives `agentwheel add <short-name>` a public index to resolve from, but it is not a gatekeeper: direct sources such as git URLs, local paths, `skillkit:...`, `vercel:...`, and `mcp-registry:...` continue to work without this repository.
+The registry is optional. It gives `agentwheel add <short-name>` a public index to resolve from, but it is not a gatekeeper: direct sources such as git URLs, local paths, `skillkit:...`, `vercel:...`, `mcp-registry:...`, and `clawhub:...` continue to work without this repository.
 
 ## Format
 
