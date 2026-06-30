@@ -30,6 +30,8 @@ Each entry has these fields:
 - `type`: one of `package`, `skill`, `plugin`, `mcp`, or `adapter`.
 - `description`: short human-readable summary.
 - `tags`: optional search tags.
+- `select` / `skills`: optional selectors when a short name should install only one artifact from a larger package.
+- `sourceUrl`: optional direct link to the artifact folder or source page shown in the catalogue.
 
 ## Catalogue
 
