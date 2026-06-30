@@ -268,6 +268,27 @@ function selectedSkillName(entry) {
   return null;
 }
 
+function selectedArtifactSelectors(entry) {
+  const selectors = [];
+  if (Array.isArray(entry.select)) {
+    for (const selector of entry.select) {
+      if (typeof selector === "string" && selector.trim()) selectors.push(selector.trim());
+    }
+  }
+  if (Array.isArray(entry.skills)) {
+    for (const skill of entry.skills) {
+      if (typeof skill === "string" && skill.trim()) selectors.push(`skills/${skill.trim()}`);
+    }
+  }
+  return [...new Set(selectors)];
+}
+
+function selectedNameFromSelectors(selectors, type) {
+  if (!Array.isArray(selectors) || selectors.length !== 1) return null;
+  const match = new RegExp(`^${type}/(.+)$`).exec(selectors[0]);
+  return match ? match[1] : null;
+}
+
 function sourceUrlForRegistryEntry(entry, repo) {
   if (typeof entry.sourceUrl === "string" && entry.sourceUrl.trim()) return entry.sourceUrl.trim();
   const skill = selectedSkillName(entry);
@@ -275,8 +296,208 @@ function sourceUrlForRegistryEntry(entry, repo) {
   return `${repoUrl(repo.owner, repo.repo)}/tree/${encodePathSegment(sourceRef(entry.source))}/skills/${encodePathSegment(skill)}`;
 }
 
+function sourceUrlForSource(source, selectors) {
+  if (typeof source !== "string" || !source.trim()) return null;
+  const skill = selectedNameFromSelectors(selectors, "skills");
+  const vercelMatch = /^vercel:skills\.sh\/([^/\s#]+)\/([^/\s#]+)(?:\/([^/\s#]+))?(?:#.*)?$/.exec(source);
+  if (vercelMatch) {
+    const sourceSkill = vercelMatch[3] || skill;
+    if (sourceSkill) return `https://skills.sh/${vercelMatch[1]}/${vercelMatch[2]}/${encodeURIComponent(sourceSkill)}`;
+    return `https://skills.sh/${vercelMatch[1]}/${vercelMatch[2]}`;
+  }
+
+  const githubRepo = repoFromSource(source);
+  if (githubRepo && skill) {
+    return `${repoUrl(githubRepo.owner, githubRepo.repo)}/tree/${encodePathSegment(sourceRef(source))}/skills/${encodePathSegment(skill)}`;
+  }
+
+  return null;
+}
+
+function sourceInstallCommand(source, selectors) {
+  if (typeof source !== "string" || !source.trim()) return null;
+  const skill = selectedNameFromSelectors(selectors, "skills");
+  return skill
+    ? `npx agentwheel install "${source}" --skill ${skill}`
+    : `npx agentwheel install "${source}"`;
+}
+
 function sourceKey(source) {
   return String(source || "").replace(/#.*$/, "").replace(/^git:https:\/\/github\.com\//, "github:").replace(/\.git$/, "").toLowerCase();
+}
+
+function cleanString(value) {
+  return typeof value === "string" && value.trim() ? value.trim() : null;
+}
+
+function cleanStringArray(values) {
+  return Array.isArray(values)
+    ? [...new Set(values.filter((value) => typeof value === "string" && value.trim()).map((value) => value.trim()))]
+    : [];
+}
+
+function normalizeDependency(name, dependency) {
+  if (!dependency || typeof dependency !== "object") return null;
+  const source = cleanString(dependency.source);
+  if (!source) return null;
+  const selectors = cleanStringArray(dependency.select);
+  return {
+    name,
+    source,
+    select: selectors.length ? selectors : undefined,
+    optional: dependency.optional === true,
+    ref: cleanString(dependency.ref) ?? undefined,
+    version: cleanString(dependency.version) ?? undefined,
+    mode: cleanString(dependency.mode) ?? undefined,
+    runtimes: cleanStringArray(dependency.runtimes).length ? cleanStringArray(dependency.runtimes) : undefined,
+    sourceUrl: sourceUrlForSource(source, selectors) ?? undefined,
+    installCommand: sourceInstallCommand(source, selectors) ?? undefined,
+  };
+}
+
+function normalizeDependencies(requires) {
+  if (!requires || typeof requires !== "object" || Array.isArray(requires)) return [];
+  return Object.entries(requires)
+    .map(([name, dependency]) => normalizeDependency(name, dependency))
+    .filter(Boolean)
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function artifactSourcePath(provide, artifactName) {
+  const basePath = cleanString(provide?.path);
+  if (!basePath) return null;
+  return `${basePath.replace(/\/+$/, "")}/${artifactName}`;
+}
+
+function artifactSourceUrl(repo, ref, sourcePath) {
+  if (!repo || !sourcePath) return null;
+  return `${repoUrl(repo.owner, repo.repo)}/tree/${encodePathSegment(ref)}/${encodePathSegment(sourcePath)}`;
+}
+
+function normalizeRequirement(value) {
+  if (typeof value === "string" && value.trim()) {
+    return { selector: value.trim() };
+  }
+  if (!value || typeof value !== "object") return null;
+  const selector = cleanString(value.selector) ?? cleanString(value.name) ?? cleanString(value.source);
+  if (!selector) return null;
+  return {
+    selector,
+    optional: value.optional === true,
+    source: cleanString(value.source) ?? undefined,
+    runtimes: cleanStringArray(value.runtimes).length ? cleanStringArray(value.runtimes) : undefined,
+  };
+}
+
+function normalizeRequirementArray(values) {
+  if (!Array.isArray(values)) return [];
+  return values.map(normalizeRequirement).filter(Boolean);
+}
+
+function manifestItemSelectors(entry, manifest) {
+  const selected = selectedArtifactSelectors(entry);
+  if (selected.length) return selected;
+  if (entry.type !== "package" || !Array.isArray(manifest.provides)) return [];
+
+  const selectors = [];
+  for (const provide of manifest.provides) {
+    if (!provide || typeof provide !== "object" || !provide.items || typeof provide.items !== "object") continue;
+    for (const itemName of Object.keys(provide.items)) {
+      selectors.push(`${provide.type}/${itemName}`);
+    }
+  }
+  return [...new Set(selectors)];
+}
+
+function artifactMetadataForManifest(entry, manifest, repo) {
+  if (!manifest || typeof manifest !== "object" || !Array.isArray(manifest.provides)) return [];
+  const selectors = manifestItemSelectors(entry, manifest);
+  const ref = sourceRef(entry.source);
+  const artifacts = [];
+
+  for (const selector of selectors) {
+    const [type, ...nameParts] = selector.split("/");
+    const name = nameParts.join("/");
+    if (!type || !name) continue;
+    const provide = manifest.provides.find((candidate) => candidate?.type === type);
+    const item = provide?.items && typeof provide.items === "object" ? provide.items[name] : null;
+    const sourcePath = artifactSourcePath(provide, name);
+    const runtimes = cleanStringArray(item?.runtimes).length ? cleanStringArray(item.runtimes) : cleanStringArray(provide?.runtimes);
+    const requires = normalizeRequirementArray(item?.requires);
+    const compose = normalizeRequirementArray(item?.compose);
+    const suggests = cleanStringArray(item?.suggests);
+
+    artifacts.push({
+      selector,
+      type,
+      name,
+      format: cleanString(item?.format) ?? cleanString(provide?.format) ?? undefined,
+      required: provide?.required === true || item?.required === true ? true : undefined,
+      runtimes: runtimes.length ? runtimes : undefined,
+      requires: requires.length ? requires : undefined,
+      compose: compose.length ? compose : undefined,
+      suggests: suggests.length ? suggests : undefined,
+      sourcePath: sourcePath ?? undefined,
+      sourceUrl: artifactSourceUrl(repo, ref, sourcePath) ?? undefined,
+    });
+  }
+
+  return artifacts;
+}
+
+function normalizeSuggestedSkill(name, suggestion) {
+  const source = cleanString(suggestion?.source);
+  const selectors = cleanStringArray(suggestion?.select);
+  return {
+    name,
+    relation: cleanString(suggestion?.relation) ?? "suggested",
+    source: source ?? undefined,
+    select: selectors.length ? selectors : undefined,
+    reason: cleanString(suggestion?.reason) ?? undefined,
+    when: cleanString(suggestion?.when) ?? undefined,
+    sourceUrl: source ? sourceUrlForSource(source, selectors) ?? undefined : undefined,
+    installCommand: source ? sourceInstallCommand(source, selectors) ?? undefined : undefined,
+  };
+}
+
+function suggestedSkillsForEntry(entry, manifest, artifacts) {
+  const names = new Set();
+  for (const artifact of artifacts) {
+    for (const name of artifact.suggests ?? []) names.add(name);
+  }
+  if (entry.type === "package" && names.size === 0 && manifest?.suggests && typeof manifest.suggests === "object") {
+    for (const name of Object.keys(manifest.suggests)) names.add(name);
+  }
+  if (Array.isArray(entry.suggestedSkills)) {
+    for (const item of entry.suggestedSkills) {
+      if (typeof item === "string" && item.trim()) names.add(item.trim());
+      if (item && typeof item === "object" && typeof item.name === "string" && item.name.trim()) names.add(item.name.trim());
+    }
+  }
+
+  const suggestions = [];
+  for (const name of [...names].sort()) {
+    const manifestSuggestion = manifest?.suggests?.[name];
+    const registrySuggestion = Array.isArray(entry.suggestedSkills)
+      ? entry.suggestedSkills.find((item) => item && typeof item === "object" && item.name === name)
+      : null;
+    suggestions.push(normalizeSuggestedSkill(name, registrySuggestion ?? manifestSuggestion ?? {}));
+  }
+  return suggestions;
+}
+
+function normalizeRegistrySuggestedSkills(values) {
+  if (!Array.isArray(values)) return undefined;
+  const suggestions = values
+    .map((item) => {
+      if (typeof item === "string" && item.trim()) {
+        return normalizeSuggestedSkill(item.trim(), {});
+      }
+      if (!item || typeof item !== "object" || typeof item.name !== "string" || !item.name.trim()) return null;
+      return normalizeSuggestedSkill(item.name.trim(), item);
+    })
+    .filter(Boolean);
+  return suggestions.length ? suggestions : undefined;
 }
 
 async function enrichGitHub(entry, owner, repo) {
@@ -312,6 +533,12 @@ async function enrichOfficialManifest(entry, owner, repo) {
         : [];
       entry.provides = [...new Set(provides)].sort();
       entry.version = typeof manifest.version === "string" && manifest.version ? manifest.version : null;
+      const dependencies = entry._exposeDependencies ? normalizeDependencies(manifest.requires) : [];
+      entry.dependencies = dependencies.length ? dependencies : undefined;
+      const artifacts = artifactMetadataForManifest(entry, manifest, { owner, repo });
+      entry.artifactMetadata = artifacts.length ? artifacts : undefined;
+      const suggestions = suggestedSkillsForEntry(entry, manifest, artifacts);
+      entry.suggestedSkills = suggestions.length ? suggestions : undefined;
       return true;
     } catch {
       // Try the fallback manifest name before warning.
@@ -321,6 +548,8 @@ async function enrichOfficialManifest(entry, owner, repo) {
   console.warn(`Official manifest enrichment failed for ${owner}/${repo}`);
   entry.provides = null;
   entry.version = null;
+  entry.dependencies = undefined;
+  entry.artifactMetadata = undefined;
   return false;
 }
 
@@ -335,6 +564,7 @@ function officialEntry(entry) {
     tags: Array.isArray(entry.tags) ? entry.tags : [],
     select: Array.isArray(entry.select) ? entry.select : undefined,
     skills: Array.isArray(entry.skills) ? entry.skills : undefined,
+    suggestedSkills: normalizeRegistrySuggestedSkills(entry.suggestedSkills),
     source: entry.source,
     installCommand: `npx agentwheel install ${entry.name}`,
     repoUrl: repo ? repoUrl(repo.owner, repo.repo) : null,
@@ -347,6 +577,7 @@ function officialEntry(entry) {
     archived: false,
     provides: null,
     version: null,
+    _exposeDependencies: entry.exposeDependencies === true,
     _repo: repo,
   };
 }
@@ -706,6 +937,32 @@ function validate(entries) {
         errors.push(`${entry.id}: ${field} must be an array of non-empty strings when present`);
       }
     }
+    for (const field of ["dependencies", "artifactMetadata", "suggestedSkills"]) {
+      if (entry[field] !== undefined && !Array.isArray(entry[field])) {
+        errors.push(`${entry.id}: ${field} must be an array when present`);
+      }
+    }
+    if (Array.isArray(entry.dependencies)) {
+      for (const dependency of entry.dependencies) {
+        if (!dependency || typeof dependency.name !== "string" || typeof dependency.source !== "string") {
+          errors.push(`${entry.id}: dependencies entries must include name and source strings`);
+        }
+      }
+    }
+    if (Array.isArray(entry.artifactMetadata)) {
+      for (const artifact of entry.artifactMetadata) {
+        if (!artifact || typeof artifact.selector !== "string" || typeof artifact.type !== "string" || typeof artifact.name !== "string") {
+          errors.push(`${entry.id}: artifactMetadata entries must include selector, type, and name strings`);
+        }
+      }
+    }
+    if (Array.isArray(entry.suggestedSkills)) {
+      for (const suggestion of entry.suggestedSkills) {
+        if (!suggestion || typeof suggestion.name !== "string" || !suggestion.name.trim()) {
+          errors.push(`${entry.id}: suggestedSkills entries must include a name string`);
+        }
+      }
+    }
     if (ids.has(entry.id)) {
       errors.push(`${entry.id}: duplicate id`);
     }
@@ -749,7 +1006,7 @@ function validateVercelIndex(entries) {
 }
 
 function publicEntry(entry) {
-  const { _fallbackDescription, _repo, ...rest } = entry;
+  const { _exposeDependencies, _fallbackDescription, _repo, ...rest } = entry;
   return rest;
 }
 
@@ -833,6 +1090,9 @@ async function build(existingCatalogue) {
         if (!manifestEnriched && previous) {
           entry.provides = Array.isArray(previous.provides) ? previous.provides : null;
           entry.version = typeof previous.version === "string" ? previous.version : null;
+          entry.dependencies = entry._exposeDependencies && Array.isArray(previous.dependencies) ? previous.dependencies : undefined;
+          entry.artifactMetadata = Array.isArray(previous.artifactMetadata) ? previous.artifactMetadata : undefined;
+          entry.suggestedSkills = Array.isArray(previous.suggestedSkills) ? previous.suggestedSkills : entry.suggestedSkills;
         }
       }
     } else {

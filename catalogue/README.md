@@ -22,6 +22,41 @@ The catalogue is a generated, browsable data set for agentwheel-installable and 
       "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public", // null for non-GitHub sources
       "homepageUrl": null,                      // skills.sh page for vercel entries, else null
       "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview", // optional direct artifact link
+      "artifactMetadata": [                     // optional selected OpenPack artifact metadata
+        {
+          "selector": "skills/decision-interview",
+          "type": "skills",
+          "name": "decision-interview",
+          "sourcePath": "skills/decision-interview",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview",
+          "suggests": ["brainstorming", "good-thinking", "grill-me"],
+          "runtimes": ["codex", "claude"],
+          "requires": [{ "selector": "rules/base" }],
+          "compose": [{ "selector": "skills/grill-me", "optional": true }]
+        }
+      ],
+      "suggestedSkills": [                      // optional normalized companion skills from OpenPack suggests
+        {
+          "name": "brainstorming",
+          "relation": "suggested",
+          "source": "vercel:skills.sh/jwynia/agent-skills",
+          "select": ["skills/brainstorming"],
+          "reason": "Generate candidate angles before narrowing to an answer or opinion.",
+          "when": "Use before convergence when the option space is still too narrow or underspecified.",
+          "sourceUrl": "https://skills.sh/jwynia/agent-skills/brainstorming",
+          "installCommand": "npx agentwheel install \"vercel:skills.sh/jwynia/agent-skills\" --skill brainstorming"
+        }
+      ],
+      "dependencies": [                         // optional package-level OpenPack requires; official entries must opt in
+        {
+          "name": "companion-pack",
+          "source": "github:owner/repo",
+          "select": ["skills/helper"],
+          "optional": true,
+          "sourceUrl": "https://github.com/owner/repo/tree/main/skills/helper",
+          "installCommand": "npx agentwheel install \"github:owner/repo\" --skill helper"
+        }
+      ],
       "stars": 12,                              // null when enrichment failed
       "lastPush": "2026-06-01T10:00:00Z",       // null when enrichment failed
       "archived": false,
