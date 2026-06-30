@@ -475,31 +475,36 @@ async function discoverOpenPackEntries(knownSources, existing) {
   const entries = [];
   const seenRepos = new Set();
   let page = 1;
-  while (entries.length < limit) {
-    const remaining = limit - entries.length;
-    const perPage = Math.min(100, remaining);
-    const query = encodeURIComponent("filename:openpack.json schemaVersion provides");
-    const payload = await fetchJson(`${githubCodeSearchUrl}?q=${query}&per_page=${perPage}&page=${page}`);
-    const items = Array.isArray(payload.items) ? payload.items : [];
-    if (items.length === 0) break;
-    for (const item of items) {
-      const fullName = item?.repository?.full_name;
-      if (!fullName || seenRepos.has(fullName)) continue;
-      seenRepos.add(fullName);
-      const [owner, repo] = fullName.split("/");
-      if (!owner || !repo) continue;
-      try {
-        const entry = await openpackEntry(owner, repo, knownSources);
-        if (entry) entries.push(entry);
-      } catch (error) {
-        console.warn(`OpenPack discovery failed for ${fullName}: ${error.message}`);
+  try {
+    while (entries.length < limit) {
+      const remaining = limit - entries.length;
+      const perPage = Math.min(100, remaining);
+      const query = encodeURIComponent("filename:openpack.json schemaVersion provides");
+      const payload = await fetchJson(`${githubCodeSearchUrl}?q=${query}&per_page=${perPage}&page=${page}`);
+      const items = Array.isArray(payload.items) ? payload.items : [];
+      if (items.length === 0) break;
+      for (const item of items) {
+        const fullName = item?.repository?.full_name;
+        if (!fullName || seenRepos.has(fullName)) continue;
+        seenRepos.add(fullName);
+        const [owner, repo] = fullName.split("/");
+        if (!owner || !repo) continue;
+        try {
+          const entry = await openpackEntry(owner, repo, knownSources);
+          if (entry) entries.push(entry);
+        } catch (error) {
+          console.warn(`OpenPack discovery failed for ${fullName}: ${error.message}`);
+        }
+        if (entries.length >= limit) break;
       }
-      if (entries.length >= limit) break;
+      if (items.length < perPage) break;
+      page += 1;
     }
-    if (items.length < perPage) break;
-    page += 1;
+    return entries;
+  } catch (error) {
+    console.warn(`OpenPack GitHub code search failed: ${error.message}`);
+    return existingEntriesFor(existing, "openpack");
   }
-  return entries;
 }
 
 function supportedMcpRemote(remotes) {
