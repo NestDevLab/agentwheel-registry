@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-30T08:51:53.920Z",
+  "generatedAt": "2026-06-30T09:15:57.853Z",
   "entries": [
     {
       "id": "official:agent-plugin-extra-message-policy",
@@ -52,7 +52,75 @@
         "rules",
         "skills"
       ],
-      "version": "0.1.0"
+      "version": "0.1.0",
+      "artifactMetadata": [
+        {
+          "selector": "rules/self-improve-on-correction.md",
+          "type": "rules",
+          "name": "self-improve-on-correction.md",
+          "requires": [
+            {
+              "selector": "skills/self-improve"
+            }
+          ],
+          "sourcePath": "rules/self-improve-on-correction.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/rules/self-improve-on-correction.md"
+        },
+        {
+          "selector": "rules/compact-governing-docs.md",
+          "type": "rules",
+          "name": "compact-governing-docs.md",
+          "requires": [
+            {
+              "selector": "skills/compact-skill-creator"
+            },
+            {
+              "selector": "skills/compact-docs-writer"
+            }
+          ],
+          "sourcePath": "rules/compact-governing-docs.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/rules/compact-governing-docs.md"
+        },
+        {
+          "selector": "skills/compact-skill-creator",
+          "type": "skills",
+          "name": "compact-skill-creator",
+          "requires": [
+            {
+              "selector": "skills/compact-docs-writer"
+            }
+          ],
+          "sourcePath": "skills/compact-skill-creator",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/compact-skill-creator"
+        },
+        {
+          "selector": "skills/self-improve",
+          "type": "skills",
+          "name": "self-improve",
+          "requires": [
+            {
+              "selector": "skills/compact-skill-creator"
+            },
+            {
+              "selector": "skills/compact-docs-writer"
+            }
+          ],
+          "sourcePath": "skills/self-improve",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/self-improve"
+        },
+        {
+          "selector": "skills/memory-doctor",
+          "type": "skills",
+          "name": "memory-doctor",
+          "requires": [
+            {
+              "selector": "skills/self-improve"
+            }
+          ],
+          "sourcePath": "skills/memory-doctor",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/memory-doctor"
+        }
+      ]
     },
     {
       "id": "official:decision-interview",
@@ -71,6 +139,44 @@
       "skills": [
         "decision-interview"
       ],
+      "suggestedSkills": [
+        {
+          "name": "brainstorming",
+          "relation": "suggested",
+          "source": "vercel:skills.sh/jwynia/agent-skills",
+          "select": [
+            "skills/brainstorming"
+          ],
+          "reason": "Generate candidate angles before narrowing to an answer or opinion.",
+          "when": "Use before convergence when the option space is still too narrow or underspecified.",
+          "sourceUrl": "https://skills.sh/jwynia/agent-skills/brainstorming",
+          "installCommand": "npx agentwheel install \"vercel:skills.sh/jwynia/agent-skills\" --skill brainstorming"
+        },
+        {
+          "name": "good-thinking",
+          "relation": "suggested",
+          "source": "vercel:skills.sh/jwynia/agent-skills",
+          "select": [
+            "skills/good-thinking"
+          ],
+          "reason": "Audit reasoning quality before presenting a high-confidence answer.",
+          "when": "Use when confidence is important but evidence, assumptions, or tradeoffs need another pass.",
+          "sourceUrl": "https://skills.sh/jwynia/agent-skills/good-thinking",
+          "installCommand": "npx agentwheel install \"vercel:skills.sh/jwynia/agent-skills\" --skill good-thinking"
+        },
+        {
+          "name": "grill-me",
+          "relation": "suggested",
+          "source": "skillkit:github:mattpocock/skills",
+          "select": [
+            "skills/grill-me"
+          ],
+          "reason": "Stress-test a plan, design, or opinion before finalizing it.",
+          "when": "Use when the user asks to challenge the conclusion or when the stakes justify adversarial review.",
+          "sourceUrl": "https://github.com/mattpocock/skills/tree/main/skills/grill-me",
+          "installCommand": "npx agentwheel install \"skillkit:github:mattpocock/skills\" --skill grill-me"
+        }
+      ],
       "source": "github:NestDevLab/agent-core-toolkit-public",
       "installCommand": "npx agentwheel install decision-interview",
       "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
@@ -85,7 +191,21 @@
         "rules",
         "skills"
       ],
-      "version": "0.1.0"
+      "version": "0.1.0",
+      "artifactMetadata": [
+        {
+          "selector": "skills/decision-interview",
+          "type": "skills",
+          "name": "decision-interview",
+          "suggests": [
+            "brainstorming",
+            "good-thinking",
+            "grill-me"
+          ],
+          "sourcePath": "skills/decision-interview",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview"
+        }
+      ]
     },
     {
       "id": "official:nestdev-core-toolkit",
@@ -102,6 +222,44 @@
         "decision-interview",
         "qao"
       ],
+      "suggestedSkills": [
+        {
+          "name": "brainstorming",
+          "relation": "suggested",
+          "source": "vercel:skills.sh/jwynia/agent-skills",
+          "select": [
+            "skills/brainstorming"
+          ],
+          "reason": "Generate candidate angles before narrowing to an answer or opinion.",
+          "when": "Use before convergence when the option space is still too narrow or underspecified.",
+          "sourceUrl": "https://skills.sh/jwynia/agent-skills/brainstorming",
+          "installCommand": "npx agentwheel install \"vercel:skills.sh/jwynia/agent-skills\" --skill brainstorming"
+        },
+        {
+          "name": "good-thinking",
+          "relation": "suggested",
+          "source": "vercel:skills.sh/jwynia/agent-skills",
+          "select": [
+            "skills/good-thinking"
+          ],
+          "reason": "Audit reasoning quality before presenting a high-confidence answer.",
+          "when": "Use when confidence is important but evidence, assumptions, or tradeoffs need another pass.",
+          "sourceUrl": "https://skills.sh/jwynia/agent-skills/good-thinking",
+          "installCommand": "npx agentwheel install \"vercel:skills.sh/jwynia/agent-skills\" --skill good-thinking"
+        },
+        {
+          "name": "grill-me",
+          "relation": "suggested",
+          "source": "skillkit:github:mattpocock/skills",
+          "select": [
+            "skills/grill-me"
+          ],
+          "reason": "Stress-test a plan, design, or opinion before finalizing it.",
+          "when": "Use when the user asks to challenge the conclusion or when the stakes justify adversarial review.",
+          "sourceUrl": "https://github.com/mattpocock/skills/tree/main/skills/grill-me",
+          "installCommand": "npx agentwheel install \"skillkit:github:mattpocock/skills\" --skill grill-me"
+        }
+      ],
       "source": "github:NestDevLab/agent-core-toolkit-public",
       "installCommand": "npx agentwheel install nestdev-core-toolkit",
       "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
@@ -114,7 +272,21 @@
         "rules",
         "skills"
       ],
-      "version": "0.1.0"
+      "version": "0.1.0",
+      "artifactMetadata": [
+        {
+          "selector": "skills/decision-interview",
+          "type": "skills",
+          "name": "decision-interview",
+          "suggests": [
+            "brainstorming",
+            "good-thinking",
+            "grill-me"
+          ],
+          "sourcePath": "skills/decision-interview",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview"
+        }
+      ]
     },
     {
       "id": "official:nestdev-mesh",
