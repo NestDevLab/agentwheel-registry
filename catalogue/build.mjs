@@ -27,6 +27,8 @@ const clawhubBaseUrl = "https://clawhub.ai/api/v1";
 const crawlConcurrency = 8;
 const crawlGapMs = 40;
 const skillPageReadLimit = 64 * 1024;
+const readmeExcerptLimit = 1200;
+const documentationCache = new Map();
 
 async function readJson(filePath) {
   return JSON.parse(await fs.readFile(filePath, "utf8"));
@@ -374,6 +376,72 @@ function artifactSourceUrl(repo, ref, sourcePath) {
   return `${repoUrl(repo.owner, repo.repo)}/tree/${encodePathSegment(ref)}/${encodePathSegment(sourcePath)}`;
 }
 
+function artifactFileUrl(repo, ref, filePath) {
+  if (!repo || !filePath) return null;
+  return `${repoUrl(repo.owner, repo.repo)}/blob/${encodePathSegment(ref)}/${encodePathSegment(filePath)}`;
+}
+
+function artifactRawUrl(repo, ref, filePath) {
+  if (!repo || !filePath) return null;
+  return `https://raw.githubusercontent.com/${repo.owner}/${repo.repo}/${encodePathSegment(ref)}/${encodePathSegment(filePath)}`;
+}
+
+function markdownExcerpt(markdown) {
+  const withoutFrontmatter = String(markdown || "").replace(/^---\s*[\s\S]*?\s*---\s*/, "");
+  const lines = withoutFrontmatter
+    .replace(/<!--[\s\S]*?-->/g, " ")
+    .replace(/```[\s\S]*?```/g, " ")
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .filter((line) => !/^#{1,6}\s+\S+/.test(line))
+    .filter((line) => !/^[-*_]{3,}$/.test(line));
+  const textValue = lines
+    .join(" ")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[*_`]+/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (textValue.length <= readmeExcerptLimit) return textValue;
+  return `${textValue.slice(0, readmeExcerptLimit - 1).trimEnd()}…`;
+}
+
+async function fetchArtifactDocumentation(repo, ref, artifact) {
+  if (!repo || artifact.type !== "skills" || !artifact.sourcePath) return null;
+  const candidates = [
+    { filename: "README.md", title: "README" },
+    { filename: "readme.md", title: "README" },
+    { filename: "SKILL.md", title: "Skill guide" },
+  ];
+
+  for (const candidate of candidates) {
+    const filePath = `${artifact.sourcePath.replace(/\/+$/, "")}/${candidate.filename}`;
+    const rawUrl = artifactRawUrl(repo, ref, filePath);
+    if (!rawUrl) continue;
+    if (!documentationCache.has(rawUrl)) {
+      documentationCache.set(rawUrl, fetchText(rawUrl).catch(() => null));
+    }
+    const markdown = await documentationCache.get(rawUrl);
+    if (!markdown) continue;
+    const excerpt = markdownExcerpt(markdown);
+    if (!excerpt) continue;
+    return {
+      readmeTitle: candidate.title,
+      readmeUrl: artifactFileUrl(repo, ref, filePath) ?? undefined,
+      readmeExcerpt: excerpt,
+    };
+  }
+
+  return null;
+}
+
+async function enrichArtifactDocumentation(artifacts, repo, ref) {
+  for (const artifact of artifacts) {
+    const documentation = await fetchArtifactDocumentation(repo, ref, artifact);
+    if (documentation) Object.assign(artifact, documentation);
+  }
+}
+
 function normalizeRequirement(value) {
   if (typeof value === "string" && value.trim()) {
     return { selector: value.trim() };
@@ -536,7 +604,12 @@ async function enrichOfficialManifest(entry, owner, repo) {
       const dependencies = entry._exposeDependencies ? normalizeDependencies(manifest.requires) : [];
       entry.dependencies = dependencies.length ? dependencies : undefined;
       const artifacts = artifactMetadataForManifest(entry, manifest, { owner, repo });
+      await enrichArtifactDocumentation(artifacts, { owner, repo }, sourceRef(entry.source));
       entry.artifactMetadata = artifacts.length ? artifacts : undefined;
+      const entryDocumentation = artifacts.find((artifact) => artifact.readmeExcerpt);
+      entry.readmeTitle = entryDocumentation?.readmeTitle;
+      entry.readmeUrl = entryDocumentation?.readmeUrl;
+      entry.readmeExcerpt = entryDocumentation?.readmeExcerpt;
       const suggestions = suggestedSkillsForEntry(entry, manifest, artifacts);
       entry.suggestedSkills = suggestions.length ? suggestions : undefined;
       return true;
@@ -550,6 +623,9 @@ async function enrichOfficialManifest(entry, owner, repo) {
   entry.version = null;
   entry.dependencies = undefined;
   entry.artifactMetadata = undefined;
+  entry.readmeTitle = undefined;
+  entry.readmeUrl = undefined;
+  entry.readmeExcerpt = undefined;
   return false;
 }
 
@@ -932,6 +1008,11 @@ function validate(entries) {
         errors.push(`${entry.id}: ${field} must be a non-empty string, null, or omitted`);
       }
     }
+    for (const field of ["readmeTitle", "readmeUrl", "readmeExcerpt"]) {
+      if (entry[field] !== undefined && (typeof entry[field] !== "string" || !entry[field].trim())) {
+        errors.push(`${entry.id}: ${field} must be a non-empty string when present`);
+      }
+    }
     for (const field of ["select", "skills"]) {
       if (entry[field] !== undefined && (!Array.isArray(entry[field]) || entry[field].some((value) => typeof value !== "string" || !value.trim()))) {
         errors.push(`${entry.id}: ${field} must be an array of non-empty strings when present`);
@@ -953,6 +1034,11 @@ function validate(entries) {
       for (const artifact of entry.artifactMetadata) {
         if (!artifact || typeof artifact.selector !== "string" || typeof artifact.type !== "string" || typeof artifact.name !== "string") {
           errors.push(`${entry.id}: artifactMetadata entries must include selector, type, and name strings`);
+        }
+        for (const field of ["readmeTitle", "readmeUrl", "readmeExcerpt"]) {
+          if (artifact?.[field] !== undefined && (typeof artifact[field] !== "string" || !artifact[field].trim())) {
+            errors.push(`${entry.id}: artifactMetadata.${field} must be a non-empty string when present`);
+          }
         }
       }
     }
@@ -1093,6 +1179,9 @@ async function build(existingCatalogue) {
           entry.dependencies = entry._exposeDependencies && Array.isArray(previous.dependencies) ? previous.dependencies : undefined;
           entry.artifactMetadata = Array.isArray(previous.artifactMetadata) ? previous.artifactMetadata : undefined;
           entry.suggestedSkills = Array.isArray(previous.suggestedSkills) ? previous.suggestedSkills : entry.suggestedSkills;
+          entry.readmeTitle = typeof previous.readmeTitle === "string" ? previous.readmeTitle : undefined;
+          entry.readmeUrl = typeof previous.readmeUrl === "string" ? previous.readmeUrl : undefined;
+          entry.readmeExcerpt = typeof previous.readmeExcerpt === "string" ? previous.readmeExcerpt : undefined;
         }
       }
     } else {

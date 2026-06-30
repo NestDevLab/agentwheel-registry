@@ -22,6 +22,9 @@ The catalogue is a generated, browsable data set for agentwheel-installable and 
       "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public", // null for non-GitHub sources
       "homepageUrl": null,                      // skills.sh page for vercel entries, else null
       "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview", // optional direct artifact link
+      "readmeTitle": "Skill guide",             // optional README/SKILL.md excerpt for the selected skill
+      "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/decision-interview/SKILL.md",
+      "readmeExcerpt": "Use this skill to converge on a well-supported answer or opinion before acting.",
       "artifactMetadata": [                     // optional selected OpenPack artifact metadata
         {
           "selector": "skills/decision-interview",
@@ -29,6 +32,9 @@ The catalogue is a generated, browsable data set for agentwheel-installable and 
           "name": "decision-interview",
           "sourcePath": "skills/decision-interview",
           "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview",
+          "readmeTitle": "Skill guide",
+          "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/decision-interview/SKILL.md",
+          "readmeExcerpt": "Use this skill to converge on a well-supported answer or opinion before acting.",
           "suggests": ["brainstorming", "good-thinking", "grill-me"],
           "runtimes": ["codex", "claude"],
           "requires": [{ "selector": "rules/base" }],
