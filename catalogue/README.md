@@ -16,10 +16,12 @@ The catalogue is a generated, browsable data set for agentwheel-installable and 
       "type": "package",                        // "package" | "skill" | "plugin" | "mcp" | "adapter"
       "description": "...",
       "tags": ["agents", "skills"],
+      "skills": ["decision-interview"],          // optional selector for skill entries inside packages
       "source": "github:NestDevLab/agent-core-toolkit-public",   // agentwheel source string
       "installCommand": "npx agentwheel install nestdev-core-toolkit",
       "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public", // null for non-GitHub sources
       "homepageUrl": null,                      // skills.sh page for vercel entries, else null
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview", // optional direct artifact link
       "stars": 12,                              // null when enrichment failed
       "lastPush": "2026-06-01T10:00:00Z",       // null when enrichment failed
       "archived": false,

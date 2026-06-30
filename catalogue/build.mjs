@@ -248,6 +248,33 @@ function githubSource(owner, repo) {
   return `github:${owner}/${repo}`;
 }
 
+function sourceRef(source) {
+  const ref = String(source || "").split("#", 2)[1];
+  return ref || "main";
+}
+
+function encodePathSegment(value) {
+  return String(value).split("/").map((segment) => encodeURIComponent(segment)).join("/");
+}
+
+function selectedSkillName(entry) {
+  if (Array.isArray(entry.skills) && entry.skills.length === 1 && typeof entry.skills[0] === "string") {
+    return entry.skills[0];
+  }
+  if (Array.isArray(entry.select) && entry.select.length === 1 && typeof entry.select[0] === "string") {
+    const match = /^skills\/(.+)$/.exec(entry.select[0]);
+    if (match) return match[1];
+  }
+  return null;
+}
+
+function sourceUrlForRegistryEntry(entry, repo) {
+  if (typeof entry.sourceUrl === "string" && entry.sourceUrl.trim()) return entry.sourceUrl.trim();
+  const skill = selectedSkillName(entry);
+  if (!repo || !skill) return null;
+  return `${repoUrl(repo.owner, repo.repo)}/tree/${encodePathSegment(sourceRef(entry.source))}/skills/${encodePathSegment(skill)}`;
+}
+
 function sourceKey(source) {
   return String(source || "").replace(/#.*$/, "").replace(/^git:https:\/\/github\.com\//, "github:").replace(/\.git$/, "").toLowerCase();
 }
@@ -261,11 +288,13 @@ async function enrichGitHub(entry, owner, repo) {
     if (!entry.description && repoData.description) {
       entry.description = repoData.description;
     }
+    return true;
   } catch (error) {
     console.warn(`GitHub enrichment failed for ${owner}/${repo}: ${error.message}`);
     entry.stars = null;
     entry.lastPush = null;
     entry.archived = false;
+    return false;
   }
 }
 
@@ -283,7 +312,7 @@ async function enrichOfficialManifest(entry, owner, repo) {
         : [];
       entry.provides = [...new Set(provides)].sort();
       entry.version = typeof manifest.version === "string" && manifest.version ? manifest.version : null;
-      return;
+      return true;
     } catch {
       // Try the fallback manifest name before warning.
     }
@@ -292,6 +321,7 @@ async function enrichOfficialManifest(entry, owner, repo) {
   console.warn(`Official manifest enrichment failed for ${owner}/${repo}`);
   entry.provides = null;
   entry.version = null;
+  return false;
 }
 
 function officialEntry(entry) {
@@ -303,10 +333,15 @@ function officialEntry(entry) {
     type: entry.type,
     description: entry.description,
     tags: Array.isArray(entry.tags) ? entry.tags : [],
+    select: Array.isArray(entry.select) ? entry.select : undefined,
+    skills: Array.isArray(entry.skills) ? entry.skills : undefined,
     source: entry.source,
     installCommand: `npx agentwheel install ${entry.name}`,
     repoUrl: repo ? repoUrl(repo.owner, repo.repo) : null,
-    homepageUrl: null,
+    homepageUrl: typeof entry.homepageUrl === "string" && entry.homepageUrl.trim() ? entry.homepageUrl.trim() : null,
+    homepageLinkLabel: typeof entry.homepageLinkLabel === "string" && entry.homepageLinkLabel.trim() ? entry.homepageLinkLabel.trim() : undefined,
+    sourceUrl: sourceUrlForRegistryEntry(entry, repo) ?? undefined,
+    sourceLinkLabel: typeof entry.sourceLinkLabel === "string" && entry.sourceLinkLabel.trim() ? entry.sourceLinkLabel.trim() : undefined,
     stars: null,
     lastPush: null,
     archived: false,
@@ -656,6 +691,16 @@ function validate(entries) {
     if (entry.repoUrl !== null && (typeof entry.repoUrl !== "string" || !entry.repoUrl.trim())) {
       errors.push(`${entry.id}: repoUrl must be a non-empty string or null`);
     }
+    for (const field of ["homepageUrl", "sourceUrl"]) {
+      if (entry[field] !== undefined && entry[field] !== null && (typeof entry[field] !== "string" || !entry[field].trim())) {
+        errors.push(`${entry.id}: ${field} must be a non-empty string, null, or omitted`);
+      }
+    }
+    for (const field of ["select", "skills"]) {
+      if (entry[field] !== undefined && (!Array.isArray(entry[field]) || entry[field].some((value) => typeof value !== "string" || !value.trim()))) {
+        errors.push(`${entry.id}: ${field} must be an array of non-empty strings when present`);
+      }
+    }
     if (ids.has(entry.id)) {
       errors.push(`${entry.id}: duplicate id`);
     }
@@ -723,6 +768,7 @@ function diffSummary(currentEntries, nextEntries) {
 
 async function build(existingCatalogue) {
   const registry = await readJson(path.join(root, "index.json"));
+  const existingById = new Map((existingCatalogue?.entries ?? []).map((entry) => [entry.id, entry]));
   const vercelSeeds = await readJson(path.join(root, "catalogue", "seeds", "vercel.json"));
   const skillkitSeeds = await readJson(path.join(root, "catalogue", "seeds", "skillkit.json"));
   const skillkitSeedMap = new Map((skillkitSeeds.entries ?? []).map((seed) => [`${seed.owner}/${seed.repo}`, seed]));
@@ -764,12 +810,25 @@ async function build(existingCatalogue) {
 
   for (const entry of entries) {
     if (entry._repo) {
-      await enrichGitHub(entry, entry._repo.owner, entry._repo.repo);
+      const previous = existingById.get(entry.id);
+      const githubEnriched = await enrichGitHub(entry, entry._repo.owner, entry._repo.repo);
+      if (!githubEnriched && previous) {
+        entry.stars = previous.stars ?? null;
+        entry.lastPush = previous.lastPush ?? null;
+        entry.archived = Boolean(previous.archived);
+      }
       if (!entry.description && entry._fallbackDescription) {
         entry.description = entry._fallbackDescription;
       }
+      if (!githubEnriched && previous?.description && (!entry.description || entry.description === entry._fallbackDescription)) {
+        entry.description = previous.description;
+      }
       if (entry.ecosystem === "official") {
-        await enrichOfficialManifest(entry, entry._repo.owner, entry._repo.repo);
+        const manifestEnriched = await enrichOfficialManifest(entry, entry._repo.owner, entry._repo.repo);
+        if (!manifestEnriched && previous) {
+          entry.provides = Array.isArray(previous.provides) ? previous.provides : null;
+          entry.version = typeof previous.version === "string" ? previous.version : null;
+        }
       }
     } else {
       if (entry.ecosystem === "official") {
