@@ -82,7 +82,13 @@ async function fetchBounded(url, options = {}, timeoutMs = fetchTimeoutMs) {
   const effectiveTimeoutMs = Number.isFinite(timeoutMs) && timeoutMs > 0 ? timeoutMs : 8000;
   const timeout = setTimeout(() => controller.abort(), effectiveTimeoutMs);
   try {
-    return await fetch(url, { ...options, signal: controller.signal });
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    const body = await response.arrayBuffer();
+    return new Response(body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+    });
   } finally {
     clearTimeout(timeout);
   }
