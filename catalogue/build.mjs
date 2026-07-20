@@ -29,6 +29,8 @@ const crawlGapMs = 40;
 const skillPageReadLimit = 64 * 1024;
 const readmeExcerptLimit = 1200;
 const documentationCache = new Map();
+const refreshStatePath = path.join(root, "catalogue", "refresh-state.json");
+const providerFailures = new Map();
 
 async function readJson(filePath) {
   return JSON.parse(await fs.readFile(filePath, "utf8"));
@@ -53,6 +55,24 @@ function normalizedCrawlCap() {
 
 function normalizedCap(value, fallback) {
   return Number.isFinite(value) && value >= 0 ? value : fallback;
+}
+
+function refreshState(value) {
+  return {
+    schemaVersion: 1,
+    cursors: value?.cursors && typeof value.cursors === "object" ? value.cursors : {},
+    providers: {},
+  };
+}
+
+function providerSucceeded(name, state) {
+  state.providers[name] = { status: "ok", checkedAt: new Date().toISOString() };
+}
+
+function providerFailed(name, state, error) {
+  const message = error instanceof Error ? error.message : String(error);
+  providerFailures.set(name, message);
+  state.providers[name] = { status: "failed", checkedAt: new Date().toISOString(), error: message };
 }
 
 async function fetchJson(url) {
@@ -587,6 +607,37 @@ async function enrichGitHub(entry, owner, repo) {
   }
 }
 
+function skillFrontmatter(text, key) {
+  const match = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(text);
+  if (!match) return null;
+  const value = new RegExp(`^${key}:\\s*(.+?)\\s*$`, "m").exec(match[1])?.[1]?.trim();
+  if (!value) return null;
+  return value.replace(/^(?:["'])(.*)(?:["'])$/, "$1");
+}
+
+async function officialSkillMetadata(repo, ref) {
+  const tree = await fetchJson(`https://api.github.com/repos/${repo.owner}/${repo.repo}/git/trees/${encodeURIComponent(ref)}?recursive=1`);
+  const paths = (Array.isArray(tree.tree) ? tree.tree : [])
+    .filter((item) => item?.type === "blob" && /^skills\/[^/]+\/SKILL\.md$/.test(item.path))
+    .map((item) => item.path)
+    .sort();
+  const skills = [];
+  for (const sourcePath of paths) {
+    const name = /^skills\/([^/]+)\/SKILL\.md$/.exec(sourcePath)?.[1];
+    if (!name) continue;
+    const text = await fetchText(artifactFileUrl(repo, ref, sourcePath));
+    skills.push({
+      selector: `skills/${name}`,
+      type: "skills",
+      name,
+      description: skillFrontmatter(text, "description") ?? `Public skill ${name}.`,
+      sourcePath,
+      sourceUrl: artifactSourceUrl(repo, ref, sourcePath) ?? undefined,
+    });
+  }
+  return skills;
+}
+
 async function enrichOfficialManifest(entry, owner, repo) {
   const urls = [
     `https://raw.githubusercontent.com/${owner}/${repo}/HEAD/openpack.json`,
@@ -604,13 +655,19 @@ async function enrichOfficialManifest(entry, owner, repo) {
       const dependencies = entry._exposeDependencies ? normalizeDependencies(manifest.requires) : [];
       entry.dependencies = dependencies.length ? dependencies : undefined;
       const artifacts = artifactMetadataForManifest(entry, manifest, { owner, repo });
-      await enrichArtifactDocumentation(artifacts, { owner, repo }, sourceRef(entry.source));
-      entry.artifactMetadata = artifacts.length ? artifacts : undefined;
-      const entryDocumentation = artifacts.find((artifact) => artifact.readmeExcerpt);
+      const skills = await officialSkillMetadata({ owner, repo }, sourceRef(entry.source));
+      const artifactBySelector = new Map(artifacts.map((artifact) => [artifact.selector, artifact]));
+      for (const skill of skills) {
+        artifactBySelector.set(skill.selector, { ...artifactBySelector.get(skill.selector), ...skill });
+      }
+      const mergedArtifacts = [...artifactBySelector.values()];
+      await enrichArtifactDocumentation(mergedArtifacts, { owner, repo }, sourceRef(entry.source));
+      entry.artifactMetadata = mergedArtifacts.length ? mergedArtifacts : undefined;
+      const entryDocumentation = mergedArtifacts.find((artifact) => artifact.readmeExcerpt);
       entry.readmeTitle = entryDocumentation?.readmeTitle;
       entry.readmeUrl = entryDocumentation?.readmeUrl;
       entry.readmeExcerpt = entryDocumentation?.readmeExcerpt;
-      const suggestions = suggestedSkillsForEntry(entry, manifest, artifacts);
+      const suggestions = suggestedSkillsForEntry(entry, manifest, mergedArtifacts);
       entry.suggestedSkills = suggestions.length ? suggestions : undefined;
       return true;
     } catch {
@@ -656,6 +713,30 @@ function officialEntry(entry) {
     _exposeDependencies: entry.exposeDependencies === true,
     _repo: repo,
   };
+}
+
+function officialSkillEntries(entry) {
+  if (entry.ecosystem !== "official" || entry.type !== "package") return [];
+  return (entry.artifactMetadata ?? [])
+    .filter((artifact) => artifact?.type === "skills" && typeof artifact.name === "string" && artifact.name)
+    .map((artifact) => ({
+      id: `${entry.id}:${artifact.selector}`,
+      name: artifact.name,
+      ecosystem: "official",
+      type: "skill",
+      description: artifact.description ?? `Public skill ${artifact.name}.`,
+      tags: [...new Set([...(entry.tags ?? []), "skill", "official"])],
+      source: entry.source,
+      select: [artifact.selector],
+      installCommand: `npx agentwheel install ${entry.name} --select ${artifact.selector}`,
+      repoUrl: entry.repoUrl,
+      sourceUrl: artifact.sourceUrl,
+      stars: entry.stars,
+      lastPush: entry.lastPush,
+      archived: entry.archived,
+      provides: ["skills"],
+      version: entry.version,
+    }));
 }
 
 function vercelEntry(seed) {
@@ -771,7 +852,7 @@ function existingEntriesFor(existing, ecosystem) {
     .map((entry) => ecosystem === "mcp-registry" ? { ...entry, installCommand: mcpInstallCommand(entry.source) } : entry);
 }
 
-async function discoverOpenPackEntries(knownSources, existing) {
+async function discoverOpenPackEntries(knownSources, existing, state) {
   const limit = normalizedCap(openpackCrawlCap, 100);
   if (limit === 0) return existingEntriesFor(existing, "openpack");
   if (!process.env.GITHUB_TOKEN) {
@@ -779,17 +860,23 @@ async function discoverOpenPackEntries(knownSources, existing) {
     return existingEntriesFor(existing, "openpack");
   }
 
-  const entries = [];
+  const entries = new Map(existingEntriesFor(existing, "openpack").map((entry) => [entry.id, entry]));
   const seenRepos = new Set();
-  let page = 1;
+  const page = Number.isInteger(state.cursors.openpackPage) && state.cursors.openpackPage > 0
+    ? state.cursors.openpackPage
+    : 1;
+  let found = 0;
   try {
-    while (entries.length < limit) {
-      const remaining = limit - entries.length;
+    while (found < limit) {
+      const remaining = limit - found;
       const perPage = Math.min(100, remaining);
       const query = encodeURIComponent("filename:openpack.json schemaVersion provides");
       const payload = await fetchJson(`${githubCodeSearchUrl}?q=${query}&per_page=${perPage}&page=${page}`);
       const items = Array.isArray(payload.items) ? payload.items : [];
-      if (items.length === 0) break;
+      if (items.length === 0) {
+        state.cursors.openpackPage = 1;
+        break;
+      }
       for (const item of items) {
         const fullName = item?.repository?.full_name;
         if (!fullName || seenRepos.has(fullName)) continue;
@@ -798,18 +885,23 @@ async function discoverOpenPackEntries(knownSources, existing) {
         if (!owner || !repo) continue;
         try {
           const entry = await openpackEntry(owner, repo, knownSources);
-          if (entry) entries.push(entry);
+          if (entry) {
+            entries.set(entry.id, entry);
+            found += 1;
+          }
         } catch (error) {
           console.warn(`OpenPack discovery failed for ${fullName}: ${error.message}`);
         }
-        if (entries.length >= limit) break;
+        if (found >= limit) break;
       }
-      if (items.length < perPage) break;
-      page += 1;
+      state.cursors.openpackPage = items.length < perPage ? 1 : page + 1;
+      break;
     }
-    return entries;
+    providerSucceeded("openpack", state);
+    return [...entries.values()];
   } catch (error) {
     console.warn(`OpenPack GitHub code search failed: ${error.message}`);
+    providerFailed("openpack", state, error);
     return existingEntriesFor(existing, "openpack");
   }
 }
@@ -904,16 +996,17 @@ function clawhubPluginEntry(item) {
   };
 }
 
-async function discoverClawHubPluginEntries(existing) {
+async function discoverClawHubPluginEntries(existing, state) {
   const limit = normalizedCap(clawhubCrawlCap, 100);
   if (limit === 0) return existingEntriesFor(existing, "clawhub");
-  const entries = [];
+  const entries = new Map(existingEntriesFor(existing, "clawhub").map((entry) => [entry.id, entry]));
   const seen = new Set();
-  let cursor = null;
+  let cursor = typeof state.cursors.clawhub === "string" ? state.cursors.clawhub : null;
+  let processed = 0;
 
   try {
-    while (entries.length < limit) {
-      const pageLimit = Math.min(100, limit - entries.length);
+    while (processed < limit) {
+      const pageLimit = Math.min(100, limit - processed);
       const url = new URL(`${clawhubBaseUrl}/plugins`);
       url.searchParams.set("limit", String(pageLimit));
       if (cursor) url.searchParams.set("cursor", cursor);
@@ -923,28 +1016,36 @@ async function discoverClawHubPluginEntries(existing) {
         const entry = clawhubPluginEntry(item);
         if (!entry || seen.has(entry.id)) continue;
         seen.add(entry.id);
-        entries.push(entry);
-        if (entries.length >= limit) break;
+        entries.set(entry.id, entry);
+        processed += 1;
+        if (processed >= limit) break;
       }
       cursor = payload.nextCursor ?? payload.metadata?.nextCursor ?? null;
-      if (!cursor || items.length === 0) break;
+      if (!cursor || items.length === 0) {
+        cursor = null;
+        break;
+      }
     }
-    return entries;
+    state.cursors.clawhub = cursor;
+    providerSucceeded("clawhub", state);
+    return [...entries.values()];
   } catch (error) {
     console.warn(`ClawHub plugin discovery failed: ${error.message}`);
+    providerFailed("clawhub", state, error);
     return existingEntriesFor(existing, "clawhub");
   }
 }
 
-async function discoverMcpRegistryEntries(existing) {
+async function discoverMcpRegistryEntries(existing, state) {
   const limit = normalizedCap(mcpRegistryCrawlCap, 500);
   if (limit === 0) return existingEntriesFor(existing, "mcp-registry");
-  const entries = [];
+  const entries = new Map(existingEntriesFor(existing, "mcp-registry").map((entry) => [entry.id, entry]));
   const seen = new Set();
-  let cursor = null;
+  let cursor = typeof state.cursors.mcpRegistry === "string" ? state.cursors.mcpRegistry : null;
+  let processed = 0;
   try {
-    while (entries.length < limit) {
-      const pageLimit = Math.min(100, limit - entries.length);
+    while (processed < limit) {
+      const pageLimit = Math.min(100, limit - processed);
       const url = new URL(`${mcpRegistryBaseUrl}/servers`);
       url.searchParams.set("limit", String(pageLimit));
       if (cursor) url.searchParams.set("cursor", cursor);
@@ -955,17 +1056,24 @@ async function discoverMcpRegistryEntries(existing) {
         if (!server?.name || seen.has(server.name)) continue;
         const entry = mcpRegistryEntry(server);
         if (entry) {
-          entries.push(entry);
+          entries.set(entry.id, entry);
           seen.add(server.name);
+          processed += 1;
         }
-        if (entries.length >= limit) break;
+        if (processed >= limit) break;
       }
       cursor = payload.metadata?.nextCursor ?? payload.nextCursor ?? null;
-      if (!cursor || servers.length === 0) break;
+      if (!cursor || servers.length === 0) {
+        cursor = null;
+        break;
+      }
     }
-    return entries;
+    state.cursors.mcpRegistry = cursor;
+    providerSucceeded("mcp-registry", state);
+    return [...entries.values()];
   } catch (error) {
     console.warn(`MCP registry discovery failed: ${error.message}`);
+    providerFailed("mcp-registry", state, error);
     return existingEntriesFor(existing, "mcp-registry");
   }
 }
@@ -1114,7 +1222,7 @@ function diffSummary(currentEntries, nextEntries) {
   return `added: ${added.length}, removed: ${removed.length}, changed: ${changed.length}`;
 }
 
-async function build(existingCatalogue) {
+async function build(existingCatalogue, state) {
   const registry = await readJson(path.join(root, "index.json"));
   const existingById = new Map((existingCatalogue?.entries ?? []).map((entry) => [entry.id, entry]));
   const vercelSeeds = await readJson(path.join(root, "catalogue", "seeds", "vercel.json"));
@@ -1136,8 +1244,10 @@ async function build(existingCatalogue) {
       const entry = skillkitMarketplaceEntry(source, seed);
       skillkitEntries.set(entry.id, entry);
     }
+    providerSucceeded("skillkit", state);
   } catch (error) {
     console.warn(`SkillKit marketplace sources refresh failed: ${error.message}`);
+    providerFailed("skillkit", state, error);
   }
 
   for (const seed of skillkitSeeds.entries ?? []) {
@@ -1149,9 +1259,9 @@ async function build(existingCatalogue) {
 
   const entries = [
     ...(Array.isArray(registry.entries) ? registry.entries.map(officialEntry) : []),
-    ...await discoverOpenPackEntries(knownOfficialSources, existingCatalogue),
-    ...await discoverMcpRegistryEntries(existingCatalogue),
-    ...await discoverClawHubPluginEntries(existingCatalogue),
+    ...await discoverOpenPackEntries(knownOfficialSources, existingCatalogue, state),
+    ...await discoverMcpRegistryEntries(existingCatalogue, state),
+    ...await discoverClawHubPluginEntries(existingCatalogue, state),
     ...skillkitEntries.values(),
     ...(Array.isArray(vercelSeeds.entries) ? vercelSeeds.entries.map(vercelEntry) : []),
   ];
@@ -1198,7 +1308,7 @@ async function build(existingCatalogue) {
     }
   }
 
-  const publicEntries = entries.map(publicEntry);
+  const publicEntries = [...entries, ...entries.flatMap(officialSkillEntries)].map(publicEntry);
   sortEntries(publicEntries);
 
   if (!validate(publicEntries)) {
@@ -1208,10 +1318,21 @@ async function build(existingCatalogue) {
   return publicEntries;
 }
 
-async function crawlVercelDescriptions(entries) {
+function circularSlice(entries, start, limit) {
+  if (!entries.length || limit <= 0) return { entries: [], next: 0 };
+  const count = Math.min(limit, entries.length);
+  const offset = ((start % entries.length) + entries.length) % entries.length;
+  return {
+    entries: Array.from({ length: count }, (_, index) => entries[(offset + index) % entries.length]),
+    next: (offset + count) % entries.length,
+  };
+}
+
+async function crawlVercelDescriptions(entries, state) {
   const crawlLimit = normalizedCrawlCap();
   const missing = entries.filter((entry) => !entry.d);
-  const cappedMissing = missing.slice(0, crawlLimit);
+  const missingSlice = circularSlice(missing, Number(state.cursors.vercelMissing) || 0, crawlLimit);
+  const cappedMissing = missingSlice.entries;
 
   async function crawlSlice(slice, onDescription) {
     let cursor = 0;
@@ -1241,6 +1362,7 @@ async function crawlVercelDescriptions(entries) {
   const missingResult = await crawlSlice(cappedMissing, (entry, description) => {
     entry.d = description;
   });
+  state.cursors.vercelMissing = missingSlice.next;
   const stillMissing = entries.filter((entry) => !entry.d).length;
   console.warn(`Vercel description crawl: crawled ${missingResult.crawled}, failed ${missingResult.failed}, still missing ${stillMissing}`);
 
@@ -1252,16 +1374,9 @@ async function crawlVercelDescriptions(entries) {
   if (refreshBudget > 0) {
     const entriesWithD = entries.filter((entry) => entry.d);
     if (entriesWithD.length > 0) {
-      const week = Math.floor(Date.now() / (7 * 86400000));
-      const start = (week * refreshBudget) % entriesWithD.length;
-      const refreshSlice = [];
-      const refreshCount = Math.min(refreshBudget, entriesWithD.length);
+      const refreshSlice = circularSlice(entriesWithD, Number(state.cursors.vercelDescriptions) || 0, refreshBudget);
 
-      for (let index = 0; index < refreshCount; index += 1) {
-        refreshSlice.push(entriesWithD[(start + index) % entriesWithD.length]);
-      }
-
-      const refreshResult = await crawlSlice(refreshSlice, (entry, description) => {
+      const refreshResult = await crawlSlice(refreshSlice.entries, (entry, description) => {
         if (description !== entry.d) {
           entry.d = description;
           changed += 1;
@@ -1269,16 +1384,22 @@ async function crawlVercelDescriptions(entries) {
       });
       refreshed = refreshResult.crawled;
       refreshFailed = refreshResult.failed;
+      state.cursors.vercelDescriptions = refreshSlice.next;
     }
   }
 
   if (refreshFailed > 0) {
     console.warn(`Vercel description refresh failures: ${refreshFailed}`);
   }
+  if (missingResult.failed + refreshFailed > 0) {
+    providerFailed("vercel", state, `${missingResult.failed + refreshFailed} description requests failed`);
+  } else {
+    providerSucceeded("vercel", state);
+  }
   console.warn(`Vercel description refresh: refreshed ${refreshed}, changed ${changed}`);
 }
 
-async function buildVercelIndex(existingIndex) {
+async function buildVercelIndex(existingIndex, state) {
   if (!refreshVercelIndex) {
     console.warn("Vercel skills index refresh skipped by VERCEL_INDEX_REFRESH=0");
     return existingIndex?.entries ?? null;
@@ -1322,11 +1443,12 @@ async function buildVercelIndex(existingIndex) {
       return null;
     }
     if (!check) {
-      await crawlVercelDescriptions(entries);
+      await crawlVercelDescriptions(entries, state);
     }
     return entries;
   } catch (error) {
     console.warn(`Vercel skills index refresh failed: ${error.message}`);
+    providerFailed("vercel", state, error);
     return null;
   }
 }
@@ -1335,11 +1457,12 @@ const outputPath = path.join(root, "catalogue-data.json");
 const vercelIndexPath = path.join(root, "catalogue-vercel-index.json");
 const existing = await readJsonIfExists(outputPath);
 const existingVercelIndex = await readJsonIfExists(vercelIndexPath);
-const builtEntries = await build(existing);
+const state = refreshState(await readJsonIfExists(refreshStatePath));
+const builtEntries = await build(existing, state);
 if (!builtEntries) {
   process.exit();
 }
-const builtVercelIndexEntries = await buildVercelIndex(existingVercelIndex);
+const builtVercelIndexEntries = await buildVercelIndex(existingVercelIndex, state);
 
 if (check) {
   let failed = false;
@@ -1403,3 +1526,7 @@ if (builtVercelIndexEntries) {
   };
   await fs.writeFile(vercelIndexPath, `${JSON.stringify(vercelIndexOutput, null, 2)}\n`);
 }
+
+state.updatedAt = new Date().toISOString();
+state.failures = Object.fromEntries(providerFailures);
+await fs.writeFile(refreshStatePath, `${JSON.stringify(state, null, 2)}\n`);
