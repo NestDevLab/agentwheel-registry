@@ -32,6 +32,7 @@ const documentationCache = new Map();
 const refreshStatePath = path.join(root, "catalogue", "refresh-state.json");
 const providerFailures = new Map();
 const fetchTimeoutMs = Number.parseInt(process.env.FETCH_TIMEOUT_MS ?? "8000", 10);
+const mcpRegistryFetchTimeoutMs = Number.parseInt(process.env.MCP_REGISTRY_FETCH_TIMEOUT_MS ?? "30000", 10);
 
 async function readJson(filePath) {
   return JSON.parse(await fs.readFile(filePath, "utf8"));
@@ -76,9 +77,10 @@ function providerFailed(name, state, error) {
   state.providers[name] = { status: "failed", checkedAt: new Date().toISOString(), error: message };
 }
 
-async function fetchBounded(url, options = {}) {
+async function fetchBounded(url, options = {}, timeoutMs = fetchTimeoutMs) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), Number.isFinite(fetchTimeoutMs) && fetchTimeoutMs > 0 ? fetchTimeoutMs : 8000);
+  const effectiveTimeoutMs = Number.isFinite(timeoutMs) && timeoutMs > 0 ? timeoutMs : 8000;
+  const timeout = setTimeout(() => controller.abort(), effectiveTimeoutMs);
   try {
     return await fetch(url, { ...options, signal: controller.signal });
   } finally {
@@ -110,7 +112,7 @@ async function fetchRegistryJson(url) {
       Accept: "application/json",
       "User-Agent": "agentwheel-catalogue (github.com/NestDevLab/agentwheel-registry)",
     },
-  });
+  }, mcpRegistryFetchTimeoutMs);
   if (!response.ok) {
     throw new Error(`HTTP ${response.status} ${response.statusText}`);
   }
