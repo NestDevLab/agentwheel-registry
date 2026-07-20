@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-20T09:48:10.574Z",
+  "generatedAt": "2026-07-20T18:11:27.750Z",
   "entries": [
     {
       "id": "official:agent-plugin-extra-message-policy",
@@ -31,6 +31,40 @@
       "version": "0.1.2"
     },
     {
+      "id": "official:nestdev-mesh:skills/agent-tmux",
+      "name": "agent-tmux",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill agent-tmux.",
+      "tags": [
+        "agents",
+        "skills",
+        "tmux",
+        "bridge",
+        "claude",
+        "codex",
+        "openclaw",
+        "plugins",
+        "mesh",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/agent-mesh",
+      "select": [
+        "skills/agent-tmux"
+      ],
+      "installCommand": "npx agentwheel install nestdev-mesh --select skills/agent-tmux",
+      "repoUrl": "https://github.com/NestDevLab/agent-mesh",
+      "sourceUrl": "https://github.com/NestDevLab/agent-mesh/tree/main/skills/agent-tmux/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T17:24:45Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.9.0"
+    },
+    {
       "id": "official:agent-toolkit",
       "name": "agent-toolkit",
       "ecosystem": "official",
@@ -46,7 +80,7 @@
       "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
       "homepageUrl": null,
       "stars": 24,
-      "lastPush": "2026-07-20T07:14:17Z",
+      "lastPush": "2026-07-20T17:37:33Z",
       "archived": false,
       "provides": [
         "rules",
@@ -134,11 +168,9 @@
               "selector": "skills/compact-docs-writer"
             }
           ],
-          "sourcePath": "skills/compact-skill-creator",
-          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/compact-skill-creator",
-          "readmeTitle": "Skill guide",
-          "readmeUrl": "https://github.com/FrancescoBorzi/agent-toolkit/blob/main/skills/compact-skill-creator/SKILL.md",
-          "readmeExcerpt": "Author a new skill, or improve an existing one, so it carries all its rules and intent in the least text possible. Cost has two tiers: the description sits in context every session — the skill's most expensive text — while the body loads only when the skill triggers. Both stay lean. Be interactive: gather what you need, draft, then apply only on approval. The compaction rules — the least-text principle, the removal-audit verification, and the present-and-confirm with a measured word delta — live in compact-docs-writer, the single source of truth; this skill never restates or re-derives them. From the moment you draft (step 4) through self-review (step 5) and present (step 6), always invoke compact-docs-writer and follow its workflow on the skill text — reading it, applying its principles by hand, or naming it after a direct edit does not count. This skill adds only the skill-specific layer: trigger taxonomy, agnosticism, progressive disclosure, completion criteria, metadata, and the version-bump decision. How a skill is triggered decides how its description is written. Classify into one: - Mandatory — must auto-load whenever a task type is touched (e.g. \"working on UI components\",…"
+          "sourcePath": "skills/compact-skill-creator/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/compact-skill-creator/SKILL.md",
+          "description": "Public skill compact-skill-creator."
         },
         {
           "selector": "skills/self-improve",
@@ -152,11 +184,9 @@
               "selector": "skills/compact-docs-writer"
             }
           ],
-          "sourcePath": "skills/self-improve",
-          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/self-improve",
-          "readmeTitle": "Skill guide",
-          "readmeUrl": "https://github.com/FrancescoBorzi/agent-toolkit/blob/main/skills/self-improve/SKILL.md",
-          "readmeExcerpt": "Suggest durable improvements to the skill or governing doc that should have steered the agent, so the next session gets it right without being told again — and apply them only after the user approves. The skill proposes; the user stays in control of every change. Three ways in: - Manual — the user invokes /self-improve to deliberately improve a skill or doc. - Self-triggered — the agent notices it was corrected on something a skill/doc governs (or should). Don't silently correct and move on, but don't derail the task either: note the lesson, finish what the user asked for, and offer to persist it at the next natural breakpoint. - Driven by another skill — a caller hands over content that is already durable guidance plus an already-chosen target (scope, form, and path — possibly a new file). It resolved both with the user, so skip steps 1-2 and run only draft + apply. \"Skill/doc\" means any standing instruction: a SKILL.md, AGENTS.md/CLAUDE.md, a coding-standards or convention doc, a rules file — anything that guides future agents. - Confirm before applying. The skill's job is to suggest, never to change text on its own. Never edit a skill or doc without the user's explicit go-ahead…"
+          "sourcePath": "skills/self-improve/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/self-improve/SKILL.md",
+          "description": "Public skill self-improve."
         },
         {
           "selector": "skills/memory-doctor",
@@ -167,11 +197,9 @@
               "selector": "skills/self-improve"
             }
           ],
-          "sourcePath": "skills/memory-doctor",
-          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/memory-doctor",
-          "readmeTitle": "Skill guide",
-          "readmeUrl": "https://github.com/FrancescoBorzi/agent-toolkit/blob/main/skills/memory-doctor/SKILL.md",
-          "readmeExcerpt": "Agent-memory is an unseen side-channel into every session's context window: facts accumulate there, often by accident, that the user never reviews and cannot govern. This skill drains it. Technically nothing should live in project memory — durable guidance belongs in homes the user controls (project docs, project skills/rules, user-level skills/rules), and the rest is garbage. Block by block, move each entry to its proper home or archive it, until memory trends toward empty and the user — not the memory store — decides what reaches the context window. The skill guesses and recommends; the user decides. Every verdict, scope, form, and target is a proposal the user confirms or flips. When unsure, ask. Nothing is moved, deleted, or written without explicit per-item approval. For every block the user gets the whole fixed menu — relocate/merge, archive (delete), keep, or a custom action they type — never just the recommended verdict, never a pruned subset. Find the memory store for the current project. Its location is agent-specific — other agents store it elsewhere, or not at all. Claude Code example: slugify the project's absolute working-directory path by replacing each / with - and…"
+          "sourcePath": "skills/memory-doctor/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/memory-doctor/SKILL.md",
+          "description": "Public skill memory-doctor."
         },
         {
           "selector": "skills/review-ticket",
@@ -182,11 +210,9 @@
               "selector": "skills/fetch-ticket"
             }
           ],
-          "sourcePath": "skills/review-ticket",
-          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/review-ticket",
-          "readmeTitle": "Skill guide",
-          "readmeUrl": "https://github.com/FrancescoBorzi/agent-toolkit/blob/main/skills/review-ticket/SKILL.md",
-          "readmeExcerpt": "A pre-pickup triage glance: read a ticket — or a set of tickets forming one feature — usually before anyone has started it, and decide whether it can be picked up or something must be clarified first. The output briefs the developer on the feature and lists the questions worth asking whoever owns the requirements. - Local ticket document(s): a single .TICKET.md, several, a ticket-set directory, or a .TICKET.md whose ## Ticket set section lists siblings. - One or more ticket URLs or bare ids/keys: delegate — even for a single one — to a subagent that invokes fetch-ticket, so the tickets land on disk without the fetch bloating this session's context, then review the local files. If the input is ambiguous or unrecognized, ask rather than guess. Set mode applies to multiple tickets, a set directory, or a .TICKET.md listing a ## Ticket set. For a lone member file whose intended scope isn't obvious from the request, ask whether to review the whole set or just that ticket. Read the input ticket file(s), visually inspecting the downloaded images and design frames — they are part of the spec and often where the gaps hide. Widen only on demand. When the input already tells the feature clear…"
+          "sourcePath": "skills/review-ticket/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/review-ticket/SKILL.md",
+          "description": "Public skill review-ticket."
         },
         {
           "selector": "skills/refine-pr-review",
@@ -200,11 +226,9 @@
               "selector": "skills/use-conversational-language"
             }
           ],
-          "sourcePath": "skills/refine-pr-review",
-          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/refine-pr-review",
-          "readmeTitle": "Skill guide",
-          "readmeUrl": "https://github.com/FrancescoBorzi/agent-toolkit/blob/main/skills/refine-pr-review/SKILL.md",
-          "readmeExcerpt": "The Refine phase for review feedback: turn a .PR-REVIEW.md (from /fetch-pr-review; ask if the path is ambiguous) into user-settled per-comment verdicts, drafted replies, and a REQUIREMENTS file covering the accepted code changes. Triage and replies are settled here; the plan and execute phases see only code changes. - address: the change enters the requirements in full; the reply stays a canned one-liner (\"fixed\", \"good catch, thanks\"). - partial: part of the change is accepted into the requirements, and the reply explains what was done and what was kept and why. - push back: no code change; the reply carries the reason. Read the code behind each comment first: verify its premise against the current codebase, never judging from the quoted hunk alone. Then form a recommendation — verdict, reasoning, and (for partial and push back) a draft reply. Nothing is decided silently: - Contentious ones one at a time: every comment recommended partial or push back, or uncertain, is its own question carrying recommendation, reasoning, and draft reply. - Obvious ones as one batch: then list the comments recommended address or no action for a single confirmation; the user can pull any item out f…"
+          "sourcePath": "skills/refine-pr-review/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/refine-pr-review/SKILL.md",
+          "description": "Public skill refine-pr-review."
         },
         {
           "selector": "skills/review-code-assistant",
@@ -215,11 +239,9 @@
               "selector": "skills/use-conversational-language"
             }
           ],
-          "sourcePath": "skills/review-code-assistant",
-          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/review-code-assistant",
-          "readmeTitle": "Skill guide",
-          "readmeUrl": "https://github.com/FrancescoBorzi/agent-toolkit/blob/main/skills/review-code-assistant/SKILL.md",
-          "readmeExcerpt": "Assist a human's local code-review pass: read the diff, understand the intent, surface the real issues. You suggest candidate comments; the human decides what to post. Single-pass and lightweight. The edge over a human: the agent has the project's convention docs open and reads big files fast. Output is local text only. Accept input flexibly; a PR link is optional: 1. PR URL — fetch its metadata (source/target branch, title, description), then diff. 2. One branch (\"review branch xxxx\") — diff it against the auto-detected target. 3. Two branches (\"review xxxx against yyyy\") — explicit source and target. 4. Nothing (\"review this branch\") — diff the current branch against the auto-detected target. (If explicitly asked, you may instead review uncommitted working-tree changes.) Diff base: always a three-dot merge-base diff, git diff <target-ref>...<source-ref>, so it matches exactly what the platform shows as the PR with no noise from commits that landed on target after the fork. Fall back to two-dot only when there is no common ancestor. No checkout is needed to produce the diff. Branch freshness: always git fetch first — never git pull: the diff needs no checkout or working-tree upda…"
+          "sourcePath": "skills/review-code-assistant/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/review-code-assistant/SKILL.md",
+          "description": "Public skill review-code-assistant."
         },
         {
           "selector": "skills/check-ticket-implementation",
@@ -230,16 +252,395 @@
               "selector": "skills/fetch-ticket"
             }
           ],
-          "sourcePath": "skills/check-ticket-implementation",
-          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/check-ticket-implementation",
-          "readmeTitle": "Skill guide",
-          "readmeUrl": "https://github.com/FrancescoBorzi/agent-toolkit/blob/main/skills/check-ticket-implementation/SKILL.md",
-          "readmeExcerpt": "Judge how much of a ticket is already implemented and report it so the user sees at a glance what is done, what isn't, and what still needs attention. Input is a ticket URL / bare id — run fetch-ticket on it (it resolves the tracker and planning dir and persists the .TICKET.md) — or a path to an already-fetched ticket file or its task dir. Ambiguous input: ask, don't guess. Run the fetch in a subagent when the runtime supports one, so its tool traffic stays out of this session's context: it returns the ticket-file path plus any blocker it hit (ambiguous tracker, auth, no planning-dir convention) for you to settle with the user — it never guesses. Without subagent support, invoke fetch-ticket inline. The ticket text is what gets annotated — its .REQUIREMENTS.md (same dir and <id>-<slug> base — a shared dir may hold siblings') may be read as context for intent, never annotated in its place. Inspect downloaded attachments and design frames when they bear on a requirement being judged. Evidence base: the current working tree, uncommitted changes included — unless the invocation names something else (a branch, PR, commit range); then judge against that. Turn every requirement-bearing s…"
+          "sourcePath": "skills/check-ticket-implementation/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/check-ticket-implementation/SKILL.md",
+          "description": "Public skill check-ticket-implementation."
+        },
+        {
+          "selector": "skills/compact-docs-writer",
+          "type": "skills",
+          "name": "compact-docs-writer",
+          "description": "Public skill compact-docs-writer.",
+          "sourcePath": "skills/compact-docs-writer/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/compact-docs-writer/SKILL.md"
+        },
+        {
+          "selector": "skills/context-checkup",
+          "type": "skills",
+          "name": "context-checkup",
+          "description": "Public skill context-checkup.",
+          "sourcePath": "skills/context-checkup/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/context-checkup/SKILL.md"
+        },
+        {
+          "selector": "skills/create-implementation-plan",
+          "type": "skills",
+          "name": "create-implementation-plan",
+          "description": "Public skill create-implementation-plan.",
+          "sourcePath": "skills/create-implementation-plan/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/create-implementation-plan/SKILL.md"
+        },
+        {
+          "selector": "skills/create-manual-test-instructions",
+          "type": "skills",
+          "name": "create-manual-test-instructions",
+          "description": "Public skill create-manual-test-instructions.",
+          "sourcePath": "skills/create-manual-test-instructions/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/create-manual-test-instructions/SKILL.md"
+        },
+        {
+          "selector": "skills/fetch-pr-review",
+          "type": "skills",
+          "name": "fetch-pr-review",
+          "description": "Public skill fetch-pr-review.",
+          "sourcePath": "skills/fetch-pr-review/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/fetch-pr-review/SKILL.md"
+        },
+        {
+          "selector": "skills/fetch-ticket",
+          "type": "skills",
+          "name": "fetch-ticket",
+          "description": "Public skill fetch-ticket.",
+          "sourcePath": "skills/fetch-ticket/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/fetch-ticket/SKILL.md"
+        },
+        {
+          "selector": "skills/fresh-eyes-review",
+          "type": "skills",
+          "name": "fresh-eyes-review",
+          "description": "Public skill fresh-eyes-review.",
+          "sourcePath": "skills/fresh-eyes-review/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/fresh-eyes-review/SKILL.md"
+        },
+        {
+          "selector": "skills/refine-ticket",
+          "type": "skills",
+          "name": "refine-ticket",
+          "description": "Public skill refine-ticket.",
+          "sourcePath": "skills/refine-ticket/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/refine-ticket/SKILL.md"
+        },
+        {
+          "selector": "skills/run-nx-checks",
+          "type": "skills",
+          "name": "run-nx-checks",
+          "description": "Public skill run-nx-checks.",
+          "sourcePath": "skills/run-nx-checks/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/run-nx-checks/SKILL.md"
+        },
+        {
+          "selector": "skills/use-conversational-language",
+          "type": "skills",
+          "name": "use-conversational-language",
+          "description": "Public skill use-conversational-language.",
+          "sourcePath": "skills/use-conversational-language/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/use-conversational-language/SKILL.md"
+        },
+        {
+          "selector": "skills/verify-understanding",
+          "type": "skills",
+          "name": "verify-understanding",
+          "description": "Public skill verify-understanding.",
+          "sourcePath": "skills/verify-understanding/SKILL.md",
+          "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/verify-understanding/SKILL.md"
         }
+      ]
+    },
+    {
+      "id": "official:nestdev-core-toolkit:skills/architect",
+      "name": "architect",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill architect.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
       ],
-      "readmeTitle": "Skill guide",
-      "readmeUrl": "https://github.com/FrancescoBorzi/agent-toolkit/blob/main/skills/compact-skill-creator/SKILL.md",
-      "readmeExcerpt": "Author a new skill, or improve an existing one, so it carries all its rules and intent in the least text possible. Cost has two tiers: the description sits in context every session — the skill's most expensive text — while the body loads only when the skill triggers. Both stay lean. Be interactive: gather what you need, draft, then apply only on approval. The compaction rules — the least-text principle, the removal-audit verification, and the present-and-confirm with a measured word delta — live in compact-docs-writer, the single source of truth; this skill never restates or re-derives them. From the moment you draft (step 4) through self-review (step 5) and present (step 6), always invoke compact-docs-writer and follow its workflow on the skill text — reading it, applying its principles by hand, or naming it after a direct edit does not count. This skill adds only the skill-specific layer: trigger taxonomy, agnosticism, progressive disclosure, completion criteria, metadata, and the version-bump decision. How a skill is triggered decides how its description is written. Classify into one: - Mandatory — must auto-load whenever a task type is touched (e.g. \"working on UI components\",…"
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/architect"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/architect",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/architect/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T18:03:23Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/check-ticket-implementation",
+      "name": "check-ticket-implementation",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill check-ticket-implementation.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/check-ticket-implementation"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/check-ticket-implementation",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/check-ticket-implementation/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:nestdev-core-toolkit:skills/code-review",
+      "name": "code-review",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill code-review.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/code-review"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/code-review",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/code-review/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T18:03:23Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:nestdev-core-toolkit:skills/communicator",
+      "name": "communicator",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill communicator.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/communicator"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/communicator",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/communicator/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T18:03:23Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/compact-docs-writer",
+      "name": "compact-docs-writer",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill compact-docs-writer.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/compact-docs-writer"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/compact-docs-writer",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/compact-docs-writer/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/compact-skill-creator",
+      "name": "compact-skill-creator",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill compact-skill-creator.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/compact-skill-creator"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/compact-skill-creator",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/compact-skill-creator/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/context-checkup",
+      "name": "context-checkup",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill context-checkup.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/context-checkup"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/context-checkup",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/context-checkup/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:nestdev-core-toolkit:skills/coordinator",
+      "name": "coordinator",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill coordinator.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/coordinator"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/coordinator",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/coordinator/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T18:03:23Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/create-implementation-plan",
+      "name": "create-implementation-plan",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill create-implementation-plan.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/create-implementation-plan"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/create-implementation-plan",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/create-implementation-plan/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/create-manual-test-instructions",
+      "name": "create-manual-test-instructions",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill create-manual-test-instructions.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/create-manual-test-instructions"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/create-manual-test-instructions",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/create-manual-test-instructions/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "official:decision-interview",
@@ -303,7 +704,7 @@
       "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview",
       "sourceLinkLabel": "Skill source",
       "stars": 0,
-      "lastPush": "2026-07-20T07:16:55Z",
+      "lastPush": "2026-07-20T18:03:23Z",
       "archived": false,
       "provides": [
         "fragments",
@@ -322,16 +723,307 @@
             "good-thinking",
             "grill-me"
           ],
-          "sourcePath": "skills/decision-interview",
-          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview",
-          "readmeTitle": "Skill guide",
-          "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/decision-interview/SKILL.md",
-          "readmeExcerpt": "Use this skill to converge on a well-supported answer or opinion before acting. It supports the QAO pattern: the session alternates between focused questions, provisional answers, and explicit opinions until the remaining uncertainty is acceptable or the user redirects. 1. Classify the target: factual answer, judgment/opinion, decision, plan, diagnosis, or creative direction. 2. State the current uncertainty in one sentence when it affects the next move. 3. Ask the smallest useful next question. Prefer one question at a time. 4. If the answer can be found by inspecting local context, tools, docs, or reliable sources, inspect instead of asking. 5. Continue until one of these is true: - confidence is high enough to answer; - the remaining uncertainty no longer changes the recommendation; - the user chooses speed over more intake; - progress is blocked by unavailable private context, credentials, or a decision only the user can make. 6. Give the answer or opinion with confidence, assumptions, and what would change the conclusion. - Ask concrete questions that reduce decision-relevant uncertainty. - Explain why the question matters only when that is not obvious. - Offer a recommended…"
+          "sourcePath": "skills/decision-interview/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview/SKILL.md",
+          "description": "Public skill decision-interview."
+        },
+        {
+          "selector": "skills/architect",
+          "type": "skills",
+          "name": "architect",
+          "description": "Public skill architect.",
+          "sourcePath": "skills/architect/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/architect/SKILL.md"
+        },
+        {
+          "selector": "skills/code-review",
+          "type": "skills",
+          "name": "code-review",
+          "description": "Public skill code-review.",
+          "sourcePath": "skills/code-review/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/code-review/SKILL.md"
+        },
+        {
+          "selector": "skills/communicator",
+          "type": "skills",
+          "name": "communicator",
+          "description": "Public skill communicator.",
+          "sourcePath": "skills/communicator/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/communicator/SKILL.md"
+        },
+        {
+          "selector": "skills/coordinator",
+          "type": "skills",
+          "name": "coordinator",
+          "description": "Public skill coordinator.",
+          "sourcePath": "skills/coordinator/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/coordinator/SKILL.md"
+        },
+        {
+          "selector": "skills/developer",
+          "type": "skills",
+          "name": "developer",
+          "description": "Public skill developer.",
+          "sourcePath": "skills/developer/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/developer/SKILL.md"
+        },
+        {
+          "selector": "skills/documenter",
+          "type": "skills",
+          "name": "documenter",
+          "description": "Public skill documenter.",
+          "sourcePath": "skills/documenter/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/documenter/SKILL.md"
+        },
+        {
+          "selector": "skills/operator",
+          "type": "skills",
+          "name": "operator",
+          "description": "Public skill operator.",
+          "sourcePath": "skills/operator/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/operator/SKILL.md"
+        },
+        {
+          "selector": "skills/plan-task",
+          "type": "skills",
+          "name": "plan-task",
+          "description": "Public skill plan-task.",
+          "sourcePath": "skills/plan-task/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/plan-task/SKILL.md"
+        },
+        {
+          "selector": "skills/reviewer",
+          "type": "skills",
+          "name": "reviewer",
+          "description": "Public skill reviewer.",
+          "sourcePath": "skills/reviewer/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/reviewer/SKILL.md"
+        },
+        {
+          "selector": "skills/set-context-emoji",
+          "type": "skills",
+          "name": "set-context-emoji",
+          "description": "Public skill set-context-emoji.",
+          "sourcePath": "skills/set-context-emoji/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/set-context-emoji/SKILL.md"
+        },
+        {
+          "selector": "skills/write-docs",
+          "type": "skills",
+          "name": "write-docs",
+          "description": "Public skill write-docs.",
+          "sourcePath": "skills/write-docs/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/write-docs/SKILL.md"
         }
+      ]
+    },
+    {
+      "id": "official:nestdev-core-toolkit:skills/decision-interview",
+      "name": "decision-interview",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill decision-interview.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
       ],
-      "readmeTitle": "Skill guide",
-      "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/decision-interview/SKILL.md",
-      "readmeExcerpt": "Use this skill to converge on a well-supported answer or opinion before acting. It supports the QAO pattern: the session alternates between focused questions, provisional answers, and explicit opinions until the remaining uncertainty is acceptable or the user redirects. 1. Classify the target: factual answer, judgment/opinion, decision, plan, diagnosis, or creative direction. 2. State the current uncertainty in one sentence when it affects the next move. 3. Ask the smallest useful next question. Prefer one question at a time. 4. If the answer can be found by inspecting local context, tools, docs, or reliable sources, inspect instead of asking. 5. Continue until one of these is true: - confidence is high enough to answer; - the remaining uncertainty no longer changes the recommendation; - the user chooses speed over more intake; - progress is blocked by unavailable private context, credentials, or a decision only the user can make. 6. Give the answer or opinion with confidence, assumptions, and what would change the conclusion. - Ask concrete questions that reduce decision-relevant uncertainty. - Explain why the question matters only when that is not obvious. - Offer a recommended…"
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/decision-interview"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/decision-interview",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T18:03:23Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:nestdev-core-toolkit:skills/developer",
+      "name": "developer",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill developer.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/developer"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/developer",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/developer/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T18:03:23Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:nestdev-core-toolkit:skills/documenter",
+      "name": "documenter",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill documenter.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/documenter"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/documenter",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/documenter/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T18:03:23Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/fetch-pr-review",
+      "name": "fetch-pr-review",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill fetch-pr-review.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/fetch-pr-review"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/fetch-pr-review",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/fetch-pr-review/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/fetch-ticket",
+      "name": "fetch-ticket",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill fetch-ticket.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/fetch-ticket"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/fetch-ticket",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/fetch-ticket/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/fresh-eyes-review",
+      "name": "fresh-eyes-review",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill fresh-eyes-review.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/fresh-eyes-review"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/fresh-eyes-review",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/fresh-eyes-review/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/memory-doctor",
+      "name": "memory-doctor",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill memory-doctor.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/memory-doctor"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/memory-doctor",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/memory-doctor/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "official:nestdev-core-toolkit",
@@ -391,7 +1083,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-07-20T07:16:55Z",
+      "lastPush": "2026-07-20T18:03:23Z",
       "archived": false,
       "provides": [
         "fragments",
@@ -410,16 +1102,99 @@
             "good-thinking",
             "grill-me"
           ],
-          "sourcePath": "skills/decision-interview",
-          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview",
-          "readmeTitle": "Skill guide",
-          "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/decision-interview/SKILL.md",
-          "readmeExcerpt": "Use this skill to converge on a well-supported answer or opinion before acting. It supports the QAO pattern: the session alternates between focused questions, provisional answers, and explicit opinions until the remaining uncertainty is acceptable or the user redirects. 1. Classify the target: factual answer, judgment/opinion, decision, plan, diagnosis, or creative direction. 2. State the current uncertainty in one sentence when it affects the next move. 3. Ask the smallest useful next question. Prefer one question at a time. 4. If the answer can be found by inspecting local context, tools, docs, or reliable sources, inspect instead of asking. 5. Continue until one of these is true: - confidence is high enough to answer; - the remaining uncertainty no longer changes the recommendation; - the user chooses speed over more intake; - progress is blocked by unavailable private context, credentials, or a decision only the user can make. 6. Give the answer or opinion with confidence, assumptions, and what would change the conclusion. - Ask concrete questions that reduce decision-relevant uncertainty. - Explain why the question matters only when that is not obvious. - Offer a recommended…"
+          "sourcePath": "skills/decision-interview/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview/SKILL.md",
+          "description": "Public skill decision-interview."
+        },
+        {
+          "selector": "skills/architect",
+          "type": "skills",
+          "name": "architect",
+          "description": "Public skill architect.",
+          "sourcePath": "skills/architect/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/architect/SKILL.md"
+        },
+        {
+          "selector": "skills/code-review",
+          "type": "skills",
+          "name": "code-review",
+          "description": "Public skill code-review.",
+          "sourcePath": "skills/code-review/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/code-review/SKILL.md"
+        },
+        {
+          "selector": "skills/communicator",
+          "type": "skills",
+          "name": "communicator",
+          "description": "Public skill communicator.",
+          "sourcePath": "skills/communicator/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/communicator/SKILL.md"
+        },
+        {
+          "selector": "skills/coordinator",
+          "type": "skills",
+          "name": "coordinator",
+          "description": "Public skill coordinator.",
+          "sourcePath": "skills/coordinator/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/coordinator/SKILL.md"
+        },
+        {
+          "selector": "skills/developer",
+          "type": "skills",
+          "name": "developer",
+          "description": "Public skill developer.",
+          "sourcePath": "skills/developer/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/developer/SKILL.md"
+        },
+        {
+          "selector": "skills/documenter",
+          "type": "skills",
+          "name": "documenter",
+          "description": "Public skill documenter.",
+          "sourcePath": "skills/documenter/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/documenter/SKILL.md"
+        },
+        {
+          "selector": "skills/operator",
+          "type": "skills",
+          "name": "operator",
+          "description": "Public skill operator.",
+          "sourcePath": "skills/operator/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/operator/SKILL.md"
+        },
+        {
+          "selector": "skills/plan-task",
+          "type": "skills",
+          "name": "plan-task",
+          "description": "Public skill plan-task.",
+          "sourcePath": "skills/plan-task/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/plan-task/SKILL.md"
+        },
+        {
+          "selector": "skills/reviewer",
+          "type": "skills",
+          "name": "reviewer",
+          "description": "Public skill reviewer.",
+          "sourcePath": "skills/reviewer/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/reviewer/SKILL.md"
+        },
+        {
+          "selector": "skills/set-context-emoji",
+          "type": "skills",
+          "name": "set-context-emoji",
+          "description": "Public skill set-context-emoji.",
+          "sourcePath": "skills/set-context-emoji/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/set-context-emoji/SKILL.md"
+        },
+        {
+          "selector": "skills/write-docs",
+          "type": "skills",
+          "name": "write-docs",
+          "description": "Public skill write-docs.",
+          "sourcePath": "skills/write-docs/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/write-docs/SKILL.md"
         }
-      ],
-      "readmeTitle": "Skill guide",
-      "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/decision-interview/SKILL.md",
-      "readmeExcerpt": "Use this skill to converge on a well-supported answer or opinion before acting. It supports the QAO pattern: the session alternates between focused questions, provisional answers, and explicit opinions until the remaining uncertainty is acceptable or the user redirects. 1. Classify the target: factual answer, judgment/opinion, decision, plan, diagnosis, or creative direction. 2. State the current uncertainty in one sentence when it affects the next move. 3. Ask the smallest useful next question. Prefer one question at a time. 4. If the answer can be found by inspecting local context, tools, docs, or reliable sources, inspect instead of asking. 5. Continue until one of these is true: - confidence is high enough to answer; - the remaining uncertainty no longer changes the recommendation; - the user chooses speed over more intake; - progress is blocked by unavailable private context, credentials, or a decision only the user can make. 6. Give the answer or opinion with confidence, assumptions, and what would change the conclusion. - Ask concrete questions that reduce decision-relevant uncertainty. - Explain why the question matters only when that is not obvious. - Offer a recommended…"
+      ]
     },
     {
       "id": "official:nestdev-mesh",
@@ -443,14 +1218,24 @@
       "repoUrl": "https://github.com/NestDevLab/agent-mesh",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-07-17T17:13:12Z",
+      "lastPush": "2026-07-20T17:24:45Z",
       "archived": false,
       "provides": [
         "instructions",
         "plugins",
         "skills"
       ],
-      "version": "0.9.0"
+      "version": "0.9.0",
+      "artifactMetadata": [
+        {
+          "selector": "skills/agent-tmux",
+          "type": "skills",
+          "name": "agent-tmux",
+          "description": "Public skill agent-tmux.",
+          "sourcePath": "skills/agent-tmux/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/agent-mesh/tree/main/skills/agent-tmux/SKILL.md"
+        }
+      ]
     },
     {
       "id": "official:nestdev-must-have",
@@ -556,6 +1341,302 @@
       "version": "0.2.1"
     },
     {
+      "id": "official:nestdev-core-toolkit:skills/operator",
+      "name": "operator",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill operator.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/operator"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/operator",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/operator/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T18:03:23Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:nestdev-core-toolkit:skills/plan-task",
+      "name": "plan-task",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill plan-task.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/plan-task"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/plan-task",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/plan-task/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T18:03:23Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/refine-pr-review",
+      "name": "refine-pr-review",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill refine-pr-review.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/refine-pr-review"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/refine-pr-review",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/refine-pr-review/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/refine-ticket",
+      "name": "refine-ticket",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill refine-ticket.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/refine-ticket"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/refine-ticket",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/refine-ticket/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/review-code-assistant",
+      "name": "review-code-assistant",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill review-code-assistant.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/review-code-assistant"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/review-code-assistant",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/review-code-assistant/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/review-ticket",
+      "name": "review-ticket",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill review-ticket.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/review-ticket"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/review-ticket",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/review-ticket/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:nestdev-core-toolkit:skills/reviewer",
+      "name": "reviewer",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill reviewer.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/reviewer"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/reviewer",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/reviewer/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T18:03:23Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/run-nx-checks",
+      "name": "run-nx-checks",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill run-nx-checks.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/run-nx-checks"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/run-nx-checks",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/run-nx-checks/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/self-improve",
+      "name": "self-improve",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill self-improve.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/self-improve"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/self-improve",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/self-improve/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:nestdev-core-toolkit:skills/set-context-emoji",
+      "name": "set-context-emoji",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill set-context-emoji.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/set-context-emoji"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/set-context-emoji",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/set-context-emoji/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T18:03:23Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "official:syncwheel",
       "name": "syncwheel",
       "ecosystem": "official",
@@ -580,7 +1661,137 @@
       "provides": [
         "skills"
       ],
+      "version": "0.20.1",
+      "artifactMetadata": [
+        {
+          "selector": "skills/syncwheel",
+          "type": "skills",
+          "name": "syncwheel",
+          "description": "Public skill syncwheel.",
+          "sourcePath": "skills/syncwheel/SKILL.md",
+          "sourceUrl": "https://github.com/NestDevLab/syncwheel/tree/main/skills/syncwheel/SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "official:syncwheel:skills/syncwheel",
+      "name": "syncwheel",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill syncwheel.",
+      "tags": [
+        "git",
+        "syncwheel",
+        "worktrees",
+        "branches",
+        "skills",
+        "codex",
+        "multi-agent",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/syncwheel",
+      "select": [
+        "skills/syncwheel"
+      ],
+      "installCommand": "npx agentwheel install syncwheel --select skills/syncwheel",
+      "repoUrl": "https://github.com/NestDevLab/syncwheel",
+      "sourceUrl": "https://github.com/NestDevLab/syncwheel/tree/main/skills/syncwheel/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-18T17:46:57Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
       "version": "0.20.1"
+    },
+    {
+      "id": "official:agent-toolkit:skills/use-conversational-language",
+      "name": "use-conversational-language",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill use-conversational-language.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/use-conversational-language"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/use-conversational-language",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/use-conversational-language/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:agent-toolkit:skills/verify-understanding",
+      "name": "verify-understanding",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill verify-understanding.",
+      "tags": [
+        "rules",
+        "skills",
+        "toolkit",
+        "skill",
+        "official"
+      ],
+      "source": "github:FrancescoBorzi/agent-toolkit",
+      "select": [
+        "skills/verify-understanding"
+      ],
+      "installCommand": "npx agentwheel install agent-toolkit --select skills/verify-understanding",
+      "repoUrl": "https://github.com/FrancescoBorzi/agent-toolkit",
+      "sourceUrl": "https://github.com/FrancescoBorzi/agent-toolkit/tree/main/skills/verify-understanding/SKILL.md",
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "official:nestdev-core-toolkit:skills/write-docs",
+      "name": "write-docs",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Public skill write-docs.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/write-docs"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/write-docs",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/write-docs/SKILL.md",
+      "stars": 0,
+      "lastPush": "2026-07-20T18:03:23Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "openpack:eai-org/agent-toolkit",
@@ -597,8 +1808,8 @@
       "installCommand": "npx agentwheel install \"github:eai-org/agent-toolkit\"",
       "repoUrl": "https://github.com/eai-org/agent-toolkit",
       "homepageUrl": null,
-      "stars": null,
-      "lastPush": null,
+      "stars": 24,
+      "lastPush": "2026-07-20T17:37:33Z",
       "archived": false,
       "provides": [
         "rules",
@@ -620,13 +1831,37 @@
       "installCommand": "npx agentwheel install \"github:NestDevLab/agentwheel\"",
       "repoUrl": "https://github.com/NestDevLab/agentwheel",
       "homepageUrl": null,
-      "stars": null,
-      "lastPush": null,
+      "stars": 6,
+      "lastPush": "2026-07-20T18:05:25Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.14.6"
+      "version": "0.14.12"
+    },
+    {
+      "id": "openpack:NestDevLab/obsidian-second-brain",
+      "name": "NestDevLab/obsidian-second-brain",
+      "ecosystem": "openpack",
+      "type": "package",
+      "description": "OpenPack package from NestDevLab/obsidian-second-brain.",
+      "tags": [
+        "openpack",
+        "instructions",
+        "skills"
+      ],
+      "source": "github:NestDevLab/obsidian-second-brain",
+      "installCommand": "npx agentwheel install \"github:NestDevLab/obsidian-second-brain\"",
+      "repoUrl": "https://github.com/NestDevLab/obsidian-second-brain",
+      "homepageUrl": null,
+      "stars": 2,
+      "lastPush": "2026-07-20T10:40:04Z",
+      "archived": false,
+      "provides": [
+        "instructions",
+        "skills"
+      ],
+      "version": "1.8.0"
     },
     {
       "id": "mcp-registry:ai.1325/mcp",
@@ -14545,7 +15780,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:muratcankoylan/Agent-Skills-for-Context-Engineering\"",
       "repoUrl": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
       "homepageUrl": null,
-      "stars": 17354,
+      "stars": 17359,
       "lastPush": "2026-07-14T05:15:52Z",
       "archived": false,
       "provides": null,
@@ -14564,7 +15799,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:kadajett/agent-nestjs-skills\"",
       "repoUrl": "https://github.com/kadajett/agent-nestjs-skills",
       "homepageUrl": null,
-      "stars": 221,
+      "stars": 222,
       "lastPush": "2026-02-04T00:02:22Z",
       "archived": false,
       "provides": null,
@@ -14584,7 +15819,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:vercel-labs/agent-skills\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": null,
-      "stars": 29238,
+      "stars": 29247,
       "lastPush": "2026-07-07T14:05:22Z",
       "archived": false,
       "provides": null,
@@ -14604,7 +15839,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:supabase/agent-skills\"",
       "repoUrl": "https://github.com/supabase/agent-skills",
       "homepageUrl": null,
-      "stars": 2346,
+      "stars": 2347,
       "lastPush": "2026-07-14T10:25:01Z",
       "archived": false,
       "provides": null,
@@ -14623,7 +15858,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:callstackincubator/agent-skills\"",
       "repoUrl": "https://github.com/callstackincubator/agent-skills",
       "homepageUrl": null,
-      "stars": 1547,
+      "stars": 1550,
       "lastPush": "2026-07-10T15:57:04Z",
       "archived": false,
       "provides": null,
@@ -14680,7 +15915,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:softaworks/agent-toolkit\"",
       "repoUrl": "https://github.com/softaworks/agent-toolkit",
       "homepageUrl": null,
-      "stars": 2210,
+      "stars": 2213,
       "lastPush": "2026-03-05T16:46:24Z",
       "archived": false,
       "provides": null,
@@ -14699,7 +15934,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:wshobson/agents\"",
       "repoUrl": "https://github.com/wshobson/agents",
       "homepageUrl": null,
-      "stars": 38071,
+      "stars": 38080,
       "lastPush": "2026-07-20T01:09:04Z",
       "archived": false,
       "provides": null,
@@ -14738,7 +15973,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:sickn33/antigravity-awesome-skills\"",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "homepageUrl": null,
-      "stars": 43613,
+      "stars": 43633,
       "lastPush": "2026-07-20T09:07:42Z",
       "archived": false,
       "provides": null,
@@ -14757,7 +15992,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:ComposioHQ/awesome-claude-skills\"",
       "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 68140,
+      "stars": 68208,
       "lastPush": "2026-05-22T03:17:49Z",
       "archived": false,
       "provides": null,
@@ -14776,7 +16011,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:travisvn/awesome-claude-skills\"",
       "repoUrl": "https://github.com/travisvn/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 14211,
+      "stars": 14217,
       "lastPush": "2026-04-28T19:30:24Z",
       "archived": false,
       "provides": null,
@@ -14795,7 +16030,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jimliu/baoyu-skills\"",
       "repoUrl": "https://github.com/jimliu/baoyu-skills",
       "homepageUrl": null,
-      "stars": 23888,
+      "stars": 23900,
       "lastPush": "2026-07-04T16:25:18Z",
       "archived": false,
       "provides": null,
@@ -14814,7 +16049,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jezweb/claude-skills\"",
       "repoUrl": "https://github.com/jezweb/claude-skills",
       "homepageUrl": null,
-      "stars": 931,
+      "stars": 935,
       "lastPush": "2026-07-02T07:34:37Z",
       "archived": false,
       "provides": null,
@@ -14833,7 +16068,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:mhattingpete/claude-skills-marketplace\"",
       "repoUrl": "https://github.com/mhattingpete/claude-skills-marketplace",
       "homepageUrl": null,
-      "stars": 648,
+      "stars": 649,
       "lastPush": "2026-03-06T10:14:25Z",
       "archived": false,
       "provides": null,
@@ -14882,7 +16117,7 @@
       "name": "dify",
       "ecosystem": "skillkit",
       "type": "package",
-      "description": "Production-ready platform for agentic workflow development.",
+      "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
       "tags": [
         "skillkit"
       ],
@@ -14890,8 +16125,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:langgenius/dify\"",
       "repoUrl": "https://github.com/langgenius/dify",
       "homepageUrl": null,
-      "stars": 149448,
-      "lastPush": "2026-07-20T09:43:48Z",
+      "stars": 149500,
+      "lastPush": "2026-07-20T18:09:28Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -14909,8 +16144,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:NousResearch/hermes-agent\"",
       "repoUrl": "https://github.com/NousResearch/hermes-agent",
       "homepageUrl": null,
-      "stars": 217490,
-      "lastPush": "2026-07-20T09:41:17Z",
+      "stars": 217676,
+      "lastPush": "2026-07-20T18:10:52Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -14928,7 +16163,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:coreyhaines31/marketingskills\"",
       "repoUrl": "https://github.com/coreyhaines31/marketingskills",
       "homepageUrl": null,
-      "stars": 40816,
+      "stars": 40872,
       "lastPush": "2026-07-16T19:07:40Z",
       "archived": false,
       "provides": null,
@@ -14966,7 +16201,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:kepano/obsidian-skills\"",
       "repoUrl": "https://github.com/kepano/obsidian-skills",
       "homepageUrl": null,
-      "stars": 42699,
+      "stars": 42752,
       "lastPush": "2026-06-08T16:12:01Z",
       "archived": false,
       "provides": null,
@@ -14986,7 +16221,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:anthropics/skills\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": null,
-      "stars": 162836,
+      "stars": 162917,
       "lastPush": "2026-07-17T02:47:40Z",
       "archived": false,
       "provides": null,
@@ -15006,8 +16241,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:expo/skills\"",
       "repoUrl": "https://github.com/expo/skills",
       "homepageUrl": null,
-      "stars": 2229,
-      "lastPush": "2026-07-20T09:40:23Z",
+      "stars": 2251,
+      "lastPush": "2026-07-20T16:50:13Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -15026,8 +16261,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:remotion-dev/skills\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": null,
-      "stars": 4022,
-      "lastPush": "2026-07-19T17:39:21Z",
+      "stars": 4030,
+      "lastPush": "2026-07-20T16:18:50Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -15045,8 +16280,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:trailofbits/skills\"",
       "repoUrl": "https://github.com/trailofbits/skills",
       "homepageUrl": null,
-      "stars": 6187,
-      "lastPush": "2026-07-17T16:49:57Z",
+      "stars": 6190,
+      "lastPush": "2026-07-20T15:14:36Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -15123,8 +16358,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:obra/superpowers\"",
       "repoUrl": "https://github.com/obra/superpowers",
       "homepageUrl": null,
-      "stars": 257866,
-      "lastPush": "2026-07-19T22:21:03Z",
+      "stars": 258090,
+      "lastPush": "2026-07-20T10:11:15Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -15161,7 +16396,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:cloudai-x/threejs-skills\"",
       "repoUrl": "https://github.com/cloudai-x/threejs-skills",
       "homepageUrl": null,
-      "stars": 2662,
+      "stars": 2669,
       "lastPush": "2026-07-09T20:45:53Z",
       "archived": false,
       "provides": null,
@@ -15180,7 +16415,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:hyf0/vue-skills\"",
       "repoUrl": "https://github.com/hyf0/vue-skills",
       "homepageUrl": null,
-      "stars": 2714,
+      "stars": 2717,
       "lastPush": "2026-05-30T21:32:00Z",
       "archived": false,
       "provides": null,
@@ -15200,7 +16435,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-browser/agent-browser\"",
       "repoUrl": "https://github.com/vercel-labs/agent-browser",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-browser/agent-browser",
-      "stars": 38819,
+      "stars": 38846,
       "lastPush": "2026-07-19T17:03:43Z",
       "archived": false,
       "provides": null,
@@ -15221,7 +16456,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/skills/find-skills\"",
       "repoUrl": "https://github.com/vercel-labs/skills",
       "homepageUrl": "https://skills.sh/vercel-labs/skills/find-skills",
-      "stars": 26662,
+      "stars": 26696,
       "lastPush": "2026-07-16T17:53:59Z",
       "archived": false,
       "provides": null,
@@ -15242,7 +16477,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/frontend-design\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/frontend-design",
-      "stars": 162836,
+      "stars": 162917,
       "lastPush": "2026-07-17T02:47:40Z",
       "archived": false,
       "provides": null,
@@ -15263,7 +16498,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/mattpocock/skills/grill-me\"",
       "repoUrl": "https://github.com/mattpocock/skills",
       "homepageUrl": "https://skills.sh/mattpocock/skills/grill-me",
-      "stars": 178206,
+      "stars": 178721,
       "lastPush": "2026-07-17T09:51:15Z",
       "archived": false,
       "provides": null,
@@ -15284,8 +16519,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/remotion-dev/skills/remotion-best-practices\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": "https://skills.sh/remotion-dev/skills/remotion-best-practices",
-      "stars": 4022,
-      "lastPush": "2026-07-19T17:39:21Z",
+      "stars": 4030,
+      "lastPush": "2026-07-20T16:18:50Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -15305,7 +16540,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/skill-creator\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/skill-creator",
-      "stars": 162836,
+      "stars": 162917,
       "lastPush": "2026-07-17T02:47:40Z",
       "archived": false,
       "provides": null,
@@ -15326,7 +16561,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/vercel-react-best-practices\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices",
-      "stars": 29238,
+      "stars": 29247,
       "lastPush": "2026-07-07T14:05:22Z",
       "archived": false,
       "provides": null,
@@ -15347,7 +16582,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/web-design-guidelines\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/web-design-guidelines",
-      "stars": 29238,
+      "stars": 29247,
       "lastPush": "2026-07-07T14:05:22Z",
       "archived": false,
       "provides": null,
