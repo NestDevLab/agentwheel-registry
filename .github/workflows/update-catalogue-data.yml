@@ -2,8 +2,10 @@ name: Update catalogue data
 
 on:
   schedule:
-    - cron: "17 6 * * 1"
+    - cron: "17 6 * * *"
   workflow_dispatch:
+  repository_dispatch:
+    types: [catalogue-sync]
   push:
     branches: [main]
     paths:
@@ -12,31 +14,57 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: update-catalogue-data
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: 22
       - name: Build catalogue data
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CRAWL_CAP: 200
+          OPENPACK_CRAWL_CAP: 50
+          MCP_REGISTRY_CRAWL_CAP: 200
+          CLAWHUB_CRAWL_CAP: 50
         run: node catalogue/build.mjs
       - name: Commit changes
         run: |
-          if git diff --quiet -- catalogue-data.json catalogue-vercel-index.json; then
+          if git diff --quiet -- catalogue-data.json catalogue-vercel-index.json catalogue/refresh-state.json; then
             echo "Catalogue data unchanged"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add catalogue-data.json catalogue-vercel-index.json
+          git add catalogue-data.json catalogue-vercel-index.json catalogue/refresh-state.json
           git commit -m "chore: update catalogue data"
           git push
+      - name: Report provider failures
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          state_file=catalogue/refresh-state.json
+          failures=$(jq -r '[.providers | to_entries[] | select(.value.status == "failed") | "\(.key): \(.value.error)"] | join("\n")' "$state_file")
+          issue=$(gh issue list --state open --search '"Catalogue sync failing" in:title' --json number --jq '.[0].number // empty')
+          if [ -n "$failures" ]; then
+            body=$(printf 'Catalogue refresh completed with stale provider data:\n\n%s\n\nRun: %s/actions/runs/%s' "$failures" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" "$GITHUB_RUN_ID")
+            if [ -n "$issue" ]; then
+              gh issue comment "$issue" --body "$body"
+            else
+              gh issue create --title 'Catalogue sync failing' --body "$body"
+            fi
+            exit 1
+          fi
+          if [ -n "$issue" ]; then
+            gh issue comment "$issue" --body "Recovered in $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            gh issue close "$issue"
+          fi
