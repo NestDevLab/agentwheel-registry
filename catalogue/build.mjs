@@ -31,6 +31,7 @@ const readmeExcerptLimit = 1200;
 const documentationCache = new Map();
 const refreshStatePath = path.join(root, "catalogue", "refresh-state.json");
 const providerFailures = new Map();
+const fetchTimeoutMs = Number.parseInt(process.env.FETCH_TIMEOUT_MS ?? "8000", 10);
 
 async function readJson(filePath) {
   return JSON.parse(await fs.readFile(filePath, "utf8"));
@@ -75,6 +76,16 @@ function providerFailed(name, state, error) {
   state.providers[name] = { status: "failed", checkedAt: new Date().toISOString(), error: message };
 }
 
+async function fetchBounded(url, options = {}) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), Number.isFinite(fetchTimeoutMs) && fetchTimeoutMs > 0 ? fetchTimeoutMs : 8000);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function fetchJson(url) {
   await sleep(100);
   const headers = {
@@ -85,7 +96,7 @@ async function fetchJson(url) {
     headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   }
 
-  const response = await fetch(url, { headers });
+  const response = await fetchBounded(url, { headers });
   if (!response.ok) {
     throw new Error(`HTTP ${response.status} ${response.statusText}`);
   }
@@ -94,7 +105,7 @@ async function fetchJson(url) {
 
 async function fetchRegistryJson(url) {
   await sleep(100);
-  const response = await fetch(url, {
+  const response = await fetchBounded(url, {
     headers: {
       Accept: "application/json",
       "User-Agent": "agentwheel-catalogue (github.com/NestDevLab/agentwheel-registry)",
@@ -108,7 +119,7 @@ async function fetchRegistryJson(url) {
 
 async function fetchClawHubJson(url) {
   await sleep(100);
-  const response = await fetch(url, {
+  const response = await fetchBounded(url, {
     headers: {
       Accept: "application/json",
       "User-Agent": "agentwheel-catalogue (github.com/NestDevLab/agentwheel-registry)",
@@ -121,7 +132,7 @@ async function fetchClawHubJson(url) {
 }
 
 async function fetchText(url) {
-  const response = await fetch(url);
+  const response = await fetchBounded(url);
   if (!response.ok) {
     throw new Error(`HTTP ${response.status} ${response.statusText}`);
   }
