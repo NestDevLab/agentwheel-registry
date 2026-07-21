@@ -641,17 +641,19 @@ async function officialSkillMetadata(repo, ref) {
     .map((item) => item.path)
     .sort();
   const skills = [];
-  for (const sourcePath of paths) {
-    const name = /^skills\/([^/]+)\/SKILL\.md$/.exec(sourcePath)?.[1];
+  for (const skillFilePath of paths) {
+    const name = /^skills\/([^/]+)\/SKILL\.md$/.exec(skillFilePath)?.[1];
     if (!name) continue;
-    const text = await fetchText(artifactFileUrl(repo, ref, sourcePath));
+    const sourcePath = `skills/${name}`;
+    const rawUrl = artifactRawUrl(repo, ref, skillFilePath);
+    const text = rawUrl ? await fetchText(rawUrl) : "";
     skills.push({
       selector: `skills/${name}`,
       type: "skills",
       name,
       description: skillFrontmatter(text, "description") ?? `Public skill ${name}.`,
       sourcePath,
-      sourceUrl: artifactSourceUrl(repo, ref, sourcePath) ?? undefined,
+      sourceUrl: artifactSourceUrl(repo, ref, skillFilePath) ?? undefined,
     });
   }
   return skills;
@@ -750,6 +752,9 @@ function officialSkillEntries(entry) {
       installCommand: `npx agentwheel install ${entry.name} --select ${artifact.selector}`,
       repoUrl: entry.repoUrl,
       sourceUrl: artifact.sourceUrl,
+      readmeTitle: artifact.readmeTitle,
+      readmeUrl: artifact.readmeUrl,
+      readmeExcerpt: artifact.readmeExcerpt,
       stars: entry.stars,
       lastPush: entry.lastPush,
       archived: entry.archived,
