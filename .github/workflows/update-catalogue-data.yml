@@ -42,15 +42,30 @@ jobs:
           MCP_REGISTRY_FETCH_TIMEOUT_MS: 30000
           VERCEL_INDEX_REFRESH: ${{ github.event.schedule == '17 6 * * 1' && '1' || '0' }}
         run: node catalogue/build.mjs
+      - name: Install semantic index builder
+        working-directory: catalogue/semantic-spike
+        run: npm ci
+      - name: Check semantic index compatibility
+        id: semantic-index
+        continue-on-error: true
+        working-directory: catalogue/semantic-spike
+        run: npm run check:web-index
+      - name: Rebuild semantic index
+        if: steps.semantic-index.outcome == 'failure'
+        working-directory: catalogue/semantic-spike
+        run: |
+          npm run benchmark -- --model gte --limit 0 --threads 4
+          npm run publish:web-index
+          npm run check:web-index
       - name: Commit changes
         run: |
-          if git diff --quiet -- catalogue-data.json catalogue-vercel-index.json catalogue/refresh-state.json; then
+          if git diff --quiet -- catalogue-data.json catalogue-vercel-index.json catalogue/refresh-state.json catalogue-semantic-index; then
             echo "Catalogue data unchanged"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add catalogue-data.json catalogue-vercel-index.json catalogue/refresh-state.json
+          git add catalogue-data.json catalogue-vercel-index.json catalogue/refresh-state.json catalogue-semantic-index
           git commit -m "chore: update catalogue data"
           git push
       - name: Report provider failures
