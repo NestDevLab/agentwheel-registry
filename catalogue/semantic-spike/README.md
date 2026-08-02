@@ -81,6 +81,18 @@ npm run benchmark -- --model gte --limit 0 --threads 8
 then fills a limited corpus with a deterministic sample. Generated models, vectors, and reports are
 written below `var/` and ignored by Git.
 
+After a complete GTE build, create the browser-facing static bundle with explicit file sizes and
+SHA-256 checksums:
+
+```bash
+npm run publish:web-index -- --input var/gte/<record-count>
+```
+
+The command writes `catalogue-semantic-index/gte-v1/` at the registry root. The browser must still
+verify its catalogue checksums, model contract, file sizes, and content hashes before searching.
+`npm run check:web-index` verifies that published bundle against the current catalogue. The
+catalogue refresh workflow uses this check to rebuild only when the bundle is absent or stale.
+
 ## Try local search
 
 After building the complete GTE index once, run arbitrary English queries against the local files:
@@ -103,6 +115,13 @@ same-name implementations remain inspectable instead of disappearing. Freed slot
 It returns three results by default; use `--limit`, `--json`, and
 `--threads` to change the output or runtime. `--offline` makes model loading fail instead of
 contacting the network when the pinned model is absent from the local cache.
+
+A bounded semantic-intent preparation step handles autonomous-learning requests that compact
+embedding models otherwise confuse with generic agent or chat capabilities. It activates only for
+an explicit self-learning phrase, or when an agent subject, a learning action, and an
+autonomy/feedback context occur together. It expands the embedding query with stable capability
+vocabulary and reranks retrieved candidates from matching names and descriptions. Other query
+classes remain unchanged, and reported cosine scores remain the model's unmodified values.
 
 JSON output separates one-time `initializationTimingsMs` (catalogue, index, centroid, and model)
 from per-query `timingsMs`. The standalone CLI adds `cliColdTotal`, measured from Node process start,

@@ -6,6 +6,8 @@ import {
   classifyDiscoveryIntent,
   deduplicateCapabilities,
   lexicalFusionPolicy,
+  prepareSemanticQuery,
+  rerankSemanticResults,
 } from "./retrieval-policy.mjs";
 
 test("the intent gate suppresses narrow conversation controls without hiding scoped requests", () => {
@@ -51,6 +53,28 @@ test("lexical-only candidates are reserved for short lookup-like queries", () =>
     maxLexicalBoostSemanticRank: null,
     profile: "semantic-natural-language",
   });
+});
+
+test("semantic preparation recognizes autonomous learning but not generic agent chat", () => {
+  assert.equal(prepareSemanticQuery("I need that my agent learns stuff on its own").intent, "self-learning-agent");
+  assert.equal(prepareSemanticQuery("agent that learns while chatting").intent, "self-learning-agent");
+  assert.equal(prepareSemanticQuery("an assistant that adapts automatically from feedback").intent, "self-learning-agent");
+  assert.equal(prepareSemanticQuery("build a chat agent").intent, null);
+  assert.equal(prepareSemanticQuery("teach my agent Spanish").intent, null);
+});
+
+test("semantic intent reranking promotes self-learning capabilities", () => {
+  const records = [
+    { name: "ai-agent", description: "Build a conversational agent", ecosystem: "vercel" },
+    { name: "self-improving-agent", description: "Continuously evolve from experience", ecosystem: "vercel" },
+    { name: "self-improve", description: "Capture corrections for future sessions", ecosystem: "official" },
+  ];
+  const reranked = rerankSemanticResults([
+    { row: 0, score: 0.91 },
+    { row: 1, score: 0.89 },
+    { row: 2, score: 0.88 },
+  ], records, "self-learning-agent");
+  assert.deepEqual(reranked.map(({ row }) => row), [1, 2, 0]);
 });
 
 test("centered confidence suppresses only scores below the conservative threshold", () => {

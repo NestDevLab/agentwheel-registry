@@ -1,4 +1,7 @@
 const DETECTOR = "english-conversation-v1";
+const SELF_LEARNING_CONTEXT = "Self-improving agent that automatically learns from experience, feedback, corrections, conversations, and completed work. Capture learnings as memory, rules, or reusable skills.";
+const SELF_LEARNING_NAME = /\bself (?:improve|improving|improvement|learn|learning)\b/u;
+const SELF_LEARNING_DESCRIPTION = /\b(?:self improving|self improvement|self learning|learns? from|learning from|extract a learned skill|continuously evolve|automatic skill evolution)\b/u;
 
 const EXACT_NON_DISCOVERY = new Map([
   ["yes", "acknowledgement"],
@@ -93,6 +96,34 @@ export function classifyDiscoveryIntent(queryInput) {
     reason: "not-clearly-conversational",
     detector: DETECTOR,
   };
+}
+
+export function prepareSemanticQuery(queryInput) {
+  const query = String(queryInput ?? "").trim();
+  const normalized = normalizeEnglish(query);
+  const explicitIntent = SELF_LEARNING_NAME.test(normalized);
+  const agentSubject = /\b(?:agent|assistant|ai)\b/u.test(normalized);
+  const learningAction = /\b(?:learn|learns|learning|improve|improves|improving|evolve|evolves|evolving|adapt|adapts|adapting)\b/u.test(normalized);
+  const autonomousContext = /\b(?:self|itself|own|automatic|automatically|autonomous|continuously|continuous|while|chat|chatting|conversation|feedback|correction|corrections|experience|experiences)\b/u.test(normalized);
+  if (!explicitIntent && !(agentSubject && learningAction && autonomousContext)) {
+    return { intent: null, embeddingText: query };
+  }
+  return {
+    intent: "self-learning-agent",
+    embeddingText: `${query}. ${SELF_LEARNING_CONTEXT}`,
+  };
+}
+
+export function rerankSemanticResults(results, records, intent) {
+  if (intent !== "self-learning-agent") return results;
+  return results
+    .map((result, index) => ({
+      result,
+      index,
+      rankingScore: result.score + selfLearningBoost(records[result.row]),
+    }))
+    .sort((first, second) => second.rankingScore - first.rankingScore || first.index - second.index)
+    .map(({ result }) => result);
 }
 
 export function lexicalFusionPolicy(queryInput, input = {}) {
@@ -227,6 +258,18 @@ function abstain(reason) {
     reason,
     detector: DETECTOR,
   };
+}
+
+function selfLearningBoost(record) {
+  if (!record) return 0;
+  const name = normalizeEnglish(record.name);
+  const description = normalizeEnglish(record.description);
+  let boost = 0;
+  if (SELF_LEARNING_NAME.test(name)) boost += 0.06;
+  else if (/\b(?:learner|reflection)\b/u.test(name)) boost += 0.025;
+  if (SELF_LEARNING_DESCRIPTION.test(description)) boost += 0.025;
+  if (boost > 0 && record.ecosystem === "official") boost += 0.01;
+  return boost;
 }
 
 function positiveInteger(value, label) {

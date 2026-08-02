@@ -18,6 +18,8 @@ import {
   classifyDiscoveryIntent,
   deduplicateCapabilities,
   lexicalFusionPolicy,
+  prepareSemanticQuery,
+  rerankSemanticResults,
 } from "./retrieval-policy.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -107,6 +109,7 @@ export async function createSearchEngine(input = {}) {
       }
       const retrievalLimit = Math.max(candidateLimit(limit), diagnosticLimit);
       const fusionPolicy = lexicalFusionPolicy(query, { capabilityNames: allCapabilityRows });
+      const preparedQuery = prepareSemanticQuery(query);
 
       const lexicalStartedAt = performance.now();
       const lexicalResults = options.mode === "semantic"
@@ -121,7 +124,7 @@ export async function createSearchEngine(input = {}) {
       let semanticSearchMs = 0;
       if (extractor) {
         const queryStartedAt = performance.now();
-        const tensor = await extractor(`${selectedModel.queryPrefix}${query}`, {
+        const tensor = await extractor(`${selectedModel.queryPrefix}${preparedQuery.embeddingText}`, {
           pooling: selectedModel.pooling,
           normalize: selectedModel.normalize ?? true,
         });
@@ -139,6 +142,7 @@ export async function createSearchEngine(input = {}) {
           queryVector,
           retrievalLimit,
         );
+        semanticResults = rerankSemanticResults(semanticResults, catalogue.records, preparedQuery.intent);
         semanticSearchMs = performance.now() - searchStartedAt;
       }
 
@@ -189,6 +193,7 @@ export async function createSearchEngine(input = {}) {
         },
         retrievalPolicy: {
           fusion: fusionPolicy,
+          semanticIntent: preparedQuery.intent,
           confidenceThreshold: options.confidenceThreshold,
           deduplication: {
             collapsed: deduplicated.collapsed,
