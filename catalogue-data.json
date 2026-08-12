@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-12T15:52:46.501Z",
+  "generatedAt": "2026-08-12T16:55:35.214Z",
   "entries": [
     {
       "id": "official:agent-plugin-extra-message-policy",
@@ -60,7 +60,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/agent-tmux/SKILL.md",
       "readmeExcerpt": "Control Codex CLI and Claude Code CLI sessions via tmux with one agent-agnostic toolset. The same bin/ scripts drive any agent through a --agent <type> flag; per-agent quirks (submit key, prompt char, idle/working patterns, launch flags) live in agents/<type>.conf. Reaches on-disk sessions that an agent's own MCP server no longer tracks. This is the tmux transport for the mesh: any agent that can run these scripts can pilot supported CLI agents through persistent tmux sessions. - Same-runtime fan-out uses native delegation by default. - Do not use this bridge just to create another worker of your own runtime. - Use it for explicit tmux/agent-mesh, session start/resume, existing mesh session control, cross-runtime delegation, or native-unavailable fallback. - If using it as fallback, state why. Prerequisites: bash, tmux, python3, ss, and the target agent CLI (codex and/or claude). All sessions share the dedicated tmux socket mesh (tmux -L mesh), kept alive with exit-empty off — never the default server. Read-only attach: tmux -L mesh attach -t <target> -r; detach with Ctrl-b d. | Caller \\\\ Target | Codex | Claude | |---|---|---| | Claude | --agent codex | --agent claude | | Codex |…",
       "stars": 0,
-      "lastPush": "2026-08-10T16:53:50Z",
+      "lastPush": "2026-08-12T16:36:02Z",
       "archived": false,
       "provides": [
         "skills"
@@ -487,7 +487,7 @@
       "repoUrl": "https://github.com/NestDevLab/agentwheel",
       "homepageUrl": null,
       "stars": 7,
-      "lastPush": "2026-08-12T15:51:27Z",
+      "lastPush": "2026-08-12T16:53:45Z",
       "archived": false,
       "provides": [
         "skills"
@@ -536,7 +536,7 @@
           "sourceUrl": "https://github.com/NestDevLab/agentwheel/tree/main/skills/agentwheel/SKILL.md",
           "readmeTitle": "Skill guide",
           "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel/SKILL.md",
-          "readmeExcerpt": "Agentwheel discovers reusable artifacts and manages their desired state across runtimes. agentwheel is the control plane. It reads packages from sources, stores desired state in .agentwheel/config.json, plans runtime changes, and writes only through install. Treat runtime output directories as generated files. Mental model: - add records desired packages. - install makes the declared state true in the target runtime. - update re-resolves tracking packages, then applies. - uninstall removes configured packages and their managed runtime output. - Prefer agentwheel plan ... or agentwheel install --dry-run before applying changes. - Do not hand-edit generated runtime files such as skills/, .agents/skills, .claude/skills, .github/skills, ~/.hermes/skills, or generated instructions. - If a plan reports drift or conflict, stop and explain it. Do not use --force unless the user explicitly approves that scope. - Gmail, Drive, registry publishing, git commits, pushes, and runtime reloads/restarts are separate external side effects. Get explicit approval for them. - Programmatic adapters execute local code. Use --adapter-module only with --allow-adapter-code after the user approves that loca…"
+          "readmeExcerpt": "Agentwheel discovers reusable artifacts and manages their desired state across runtimes. agentwheel is the control plane. It reads packages from sources, stores desired state in .agentwheel/config.json, plans runtime changes, and writes only through install. Treat runtime output directories as generated files. Mental model: - add records desired packages. - install makes the declared state true in the target runtime. - update re-resolves tracking packages, then applies. - skill update <name> maps a configured skill to its owning package and reconciles only that package closure. - uninstall removes configured packages and their managed runtime output. - Prefer agentwheel plan ... or agentwheel install --dry-run before applying changes. - Do not hand-edit generated runtime files such as skills/, .agents/skills, .claude/skills, .github/skills, ~/.hermes/skills, or generated instructions. - If a plan reports drift or conflict, stop and explain it. Do not use --force unless the user explicitly approves that scope. - Gmail, Drive, registry publishing, git commits, pushes, and runtime reloads/restarts are separate external side effects. Get explicit approval for them. - Programmatic adap…"
         }
       ],
       "readmeTitle": "Skill guide",
@@ -568,9 +568,9 @@
       "sourceUrl": "https://github.com/NestDevLab/agentwheel/tree/main/skills/agentwheel/SKILL.md",
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel/SKILL.md",
-      "readmeExcerpt": "Agentwheel discovers reusable artifacts and manages their desired state across runtimes. agentwheel is the control plane. It reads packages from sources, stores desired state in .agentwheel/config.json, plans runtime changes, and writes only through install. Treat runtime output directories as generated files. Mental model: - add records desired packages. - install makes the declared state true in the target runtime. - update re-resolves tracking packages, then applies. - uninstall removes configured packages and their managed runtime output. - Prefer agentwheel plan ... or agentwheel install --dry-run before applying changes. - Do not hand-edit generated runtime files such as skills/, .agents/skills, .claude/skills, .github/skills, ~/.hermes/skills, or generated instructions. - If a plan reports drift or conflict, stop and explain it. Do not use --force unless the user explicitly approves that scope. - Gmail, Drive, registry publishing, git commits, pushes, and runtime reloads/restarts are separate external side effects. Get explicit approval for them. - Programmatic adapters execute local code. Use --adapter-module only with --allow-adapter-code after the user approves that loca…",
+      "readmeExcerpt": "Agentwheel discovers reusable artifacts and manages their desired state across runtimes. agentwheel is the control plane. It reads packages from sources, stores desired state in .agentwheel/config.json, plans runtime changes, and writes only through install. Treat runtime output directories as generated files. Mental model: - add records desired packages. - install makes the declared state true in the target runtime. - update re-resolves tracking packages, then applies. - skill update <name> maps a configured skill to its owning package and reconciles only that package closure. - uninstall removes configured packages and their managed runtime output. - Prefer agentwheel plan ... or agentwheel install --dry-run before applying changes. - Do not hand-edit generated runtime files such as skills/, .agents/skills, .claude/skills, .github/skills, ~/.hermes/skills, or generated instructions. - If a plan reports drift or conflict, stop and explain it. Do not use --force unless the user explicitly approves that scope. - Gmail, Drive, registry publishing, git commits, pushes, and runtime reloads/restarts are separate external side effects. Get explicit approval for them. - Programmatic adap…",
       "stars": 7,
-      "lastPush": "2026-08-12T15:51:27Z",
+      "lastPush": "2026-08-12T16:53:45Z",
       "archived": false,
       "provides": [
         "skills"
@@ -604,7 +604,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-artifact-evolution/SKILL.md",
       "readmeExcerpt": "Turn verified needs into source-owned OpenPack artifacts. Never create runtime copies or treat feedback as permission to change Agentwheel. self-improve and skill-creator are optional inspirations. Use them when available; do not require, install, or link to them. This workflow remains complete without either skill. 1. Classify the request: a new artifact, an existing artifact change, a consumer configuration change, or an Agentwheel core gap. Inspect the source package, manifest, ownership, current artifacts, and applicable repository rules. 2. Reuse an existing artifact when it meets the need. Otherwise choose the smallest supported type and source package. Keep tenant or runtime facts out of shared packages. 3. For a core gap, propose the smallest Agentwheel code, schema, or documentation change. A correction is evidence, not an instruction to change the CLI. 4. Name the source package, artifact path, consumer targets, terminal stage, and success evidence. Ask when any of those would be inferred materially. 1. Work only in the source package. Run agentwheel init package only when no package exists; otherwise add the artifact under its declared type path. 2. Use the package's co…",
       "stars": 7,
-      "lastPush": "2026-08-12T15:51:27Z",
+      "lastPush": "2026-08-12T16:53:45Z",
       "archived": false,
       "provides": [
         "skills"
@@ -638,7 +638,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-discovery/SKILL.md",
       "readmeExcerpt": "Find reusable capabilities during normal work without silently changing the user's environment. This skill is optional: install it only when proactive recommendations are wanted. The separate agentwheel skill owns artifact management and explicit installation workflows. - Inspect the skills and tools already available in the current session before searching. - Search and trial are read-only. Never add, install, enable, execute, or change configuration without explicit approval for the artifact and target scope. - Treat retrieval scores as ranking signals, not proof that an artifact implements a capability. - Continue useful work while searching when possible; do not interrupt solely to advertise weak or marginal matches. Use this skill before generic brainstorming, planning, or workflow advice whenever the request describes repeated manual work, inconsistent outputs, lost information, a missing operational capability, or an unavailable integration. The user does not need to mention Agentwheel, skills, discovery, search, or a catalogue. Run the first semantic search in the same turn; do not merely describe a workflow and defer discovery. This is a per-turn judgment, not a backgroun…",
       "stars": 7,
-      "lastPush": "2026-08-12T15:51:27Z",
+      "lastPush": "2026-08-12T16:53:45Z",
       "archived": false,
       "provides": [
         "skills"
@@ -672,7 +672,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-smoke/SKILL.md",
       "readmeExcerpt": "Use this skill to answer: \"What harness am I running in, where was this skill installed, and what does Agentwheel think about this target?\" The default workflow is read-only. Do not run agentwheel install, agentwheel update, agentwheel uninstall, agentwheel remember, agentwheel eject, or any file-writing fix while using this skill unless the user separately approves that mutation scope. From the user's current workspace, run the bundled smoke script: Use JSON output only when another tool or script needs to consume the result: When the user names an Agentwheel target, pass only read-only status target flags: Summarize the script output in four parts: - Overall: PASS, WARN, or FAIL. - Harness: detected adapter, installation type, runtime root, and skill path. - Agentwheel: CLI availability, version, config locations, packages, agents, profiles, and status result. - Recommended next command: prefer agentwheel status, agentwheel plan, or agentwheel install --dry-run. Treat these as important signals: - PASS: skill path maps to a documented Agentwheel harness target and agentwheel status reports no pending work. - WARN: the skill is running from package source, status is missing, conf…",
       "stars": 7,
-      "lastPush": "2026-08-12T15:51:27Z",
+      "lastPush": "2026-08-12T16:53:45Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1646,7 +1646,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/mesh-discord-routing/README.md",
       "readmeExcerpt": "Mesh Discord Routing is a small, portable skill that lets agents of any runtime communicate with each other through Discord using simple, explicit routing rules. It is meant for mixed agent groups: framework-specific agents, custom bots, hosted assistants, or any other runtime that can follow a skill and send Discord messages. The shared rule is: - each agent decides who should receive its own reply - agents use semantic recipient labels, not raw Discord mention strings - a small hydrator script turns those labels into the cc-mesh: trigger and Discord mentions - an optional session helper can keep turn state for multi-turn workflows - the human-readable message stays separate from routing metadata This keeps the routing policy simple enough for language models to follow while keeping mention formatting deterministic and runtime-independent. The skill gives agents a common protocol for mesh-mode Discord conversations: 1. If a message contains cc-mesh:, treat it as a routed mesh message. 2. Decide who should receive the reply. 3. Default to notifying the sender when answering directly. 4. Add other recipients only when they should be involved. 5. Use no recipients only when no bot s…",
       "stars": 0,
-      "lastPush": "2026-08-10T16:53:50Z",
+      "lastPush": "2026-08-12T16:36:02Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1896,7 +1896,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-mesh",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-08-10T16:53:50Z",
+      "lastPush": "2026-08-12T16:36:02Z",
       "archived": false,
       "provides": [
         "instructions",
@@ -2626,8 +2626,8 @@
       "installCommand": "npx agentwheel install \"github:NestDevLab/agent-memory-fabric\"",
       "repoUrl": "https://github.com/NestDevLab/agent-memory-fabric",
       "homepageUrl": null,
-      "stars": null,
-      "lastPush": null,
+      "stars": 0,
+      "lastPush": "2026-08-12T16:53:35Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2671,8 +2671,8 @@
       "installCommand": "npx agentwheel install \"github:NestDevLab/obsidian-second-brain\"",
       "repoUrl": "https://github.com/NestDevLab/obsidian-second-brain",
       "homepageUrl": null,
-      "stars": null,
-      "lastPush": null,
+      "stars": 3,
+      "lastPush": "2026-07-20T10:40:04Z",
       "archived": false,
       "provides": [
         "instructions",
@@ -84391,6 +84391,28 @@
       "version": "2.0.0"
     },
     {
+      "id": "mcp-registry:za.co.simcloud/simcloud",
+      "name": "SIMcloud",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "SIMcloud MCP server for wallet balance, network lookup, SMS, airtime, data, and electricity.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:za.co.simcloud/simcloud",
+      "installCommand": "npx agentwheel install \"mcp-registry:za.co.simcloud/simcloud\" --adapter claude --local",
+      "repoUrl": "https://github.com/ErikThiart/simcloud",
+      "homepageUrl": "https://simcloud.co.za/api/ai.html",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.Polsia-Inc/slb-florida-business-intelligence",
       "name": "SLB Florida Business Intelligence",
       "ecosystem": "mcp-registry",
@@ -105817,6 +105839,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:xyz.web3icon/web3icon",
+      "name": "Web3icon by Yuhitsuro",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Free Web3 icons, illustrations, animated SVGs, and Lottie JSON by Yuhitsuro. Read-only.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:xyz.web3icon/web3icon",
+      "installCommand": "npx agentwheel install \"mcp-registry:xyz.web3icon/web3icon\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://web3icon.xyz/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.vuluu2k/webcake-storefront-mcp",
@@ -177957,6 +178001,50 @@
       "version": "0.3.0"
     },
     {
+      "id": "mcp-registry:xyz.virifi.numetric-mcp/numetric",
+      "name": "xyz.virifi.numetric-mcp/numetric",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read-only NuMetric.work accounting & ERP data: statements, KPIs, reports, invoices, documents.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:xyz.virifi.numetric-mcp/numetric",
+      "installCommand": "npx agentwheel install \"mcp-registry:xyz.virifi.numetric-mcp/numetric\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://numetric.work",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "id": "mcp-registry:za.co.zaroniacalculator.api/verify",
+      "name": "za.co.zaroniacalculator.api/verify",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Independent ZARONIA coupon verification for SA FRNs & money-market paper, SARB-compounded index.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:za.co.zaroniacalculator.api/verify",
+      "installCommand": "npx agentwheel install \"mcp-registry:za.co.zaroniacalculator.api/verify\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://zaroniacalculator.co.za",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/zenquotes",
       "name": "zenquotes",
       "ecosystem": "mcp-registry",
@@ -178483,6 +178571,36 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "clawhub:@ww-ai-lab/openclaw-web-search",
+      "name": ".Tmp Clawhub Publish 2026.3.30",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "OpenClaw 的独立外部联网搜索插件，逐步适配国产大模型搜索服务",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web",
+        "Web Search",
+        "Dashscope",
+        "Qwen",
+        "国产大模型"
+      ],
+      "source": "clawhub:@ww-ai-lab/openclaw-web-search",
+      "installCommand": "npx agentwheel install \"clawhub:@ww-ai-lab/openclaw-web-search\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/ww-ai-lab/plugins/openclaw-web-search",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "2026.3.30"
     },
     {
       "id": "clawhub:04515",
@@ -180902,6 +181020,32 @@
         "plugins"
       ],
       "version": "2.0.0"
+    },
+    {
+      "id": "clawhub:@aws/aws-agents-pay",
+      "name": "AWS Agents Pay",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Guarded x402 v2 payments for OpenClaw through AWS AgentCore Payments",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "official",
+        "other"
+      ],
+      "source": "clawhub:@aws/aws-agents-pay",
+      "installCommand": "npx agentwheel install \"clawhub:@aws/aws-agents-pay\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/aws/plugins/aws-agents-pay",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.6"
     },
     {
       "id": "clawhub:@axon402/openclaw-plugin",
@@ -184862,6 +185006,32 @@
         "plugins"
       ],
       "version": "0.2.4"
+    },
+    {
+      "id": "clawhub:@openclaw/buzz",
+      "name": "Buzz",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Connect OpenClaw agents to Buzz rooms",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "official",
+        "other"
+      ],
+      "source": "clawhub:@openclaw/buzz",
+      "installCommand": "npx agentwheel install \"clawhub:@openclaw/buzz\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/openclaw/plugins/buzz",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": null
     },
     {
       "id": "clawhub:openclaw-plugin-byteplus-sandbox",
@@ -191228,7 +191398,7 @@
       "provides": [
         "plugins"
       ],
-      "version": "0.3.0"
+      "version": "0.5.10"
     },
     {
       "id": "clawhub:file-upload-url",
@@ -195730,6 +195900,37 @@
       "version": "0.3.5"
     },
     {
+      "id": "clawhub:llm-wiki-karpathy-plugin",
+      "name": "LLM Wiki Karpathy",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Representation-first multimodal Markdown wiki runtime for Obsidian vaults, with standalone CLI, MCP server, and OpenClaw compatibility.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "models",
+        "MCP",
+        "Wiki",
+        "Claude Code",
+        "Codex",
+        "Cursor"
+      ],
+      "source": "clawhub:llm-wiki-karpathy-plugin",
+      "installCommand": "npx agentwheel install \"clawhub:llm-wiki-karpathy-plugin\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/harrylabsj/plugins/llm-wiki-karpathy-plugin",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "0.4.4"
+    },
+    {
       "id": "clawhub:lp-evil-panda",
       "name": "LP Evil Panda",
       "ecosystem": "clawhub",
@@ -197231,6 +197432,37 @@
         "plugins"
       ],
       "version": "1.0.3"
+    },
+    {
+      "id": "clawhub:openclaw-mpp",
+      "name": "MPP",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Let OpenClaw call pay-per-use APIs using MPP with automatic HTTP 402 payments and a capped Tempo Wallet access key.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "tools",
+        "mpp",
+        "machine-payments",
+        "agent-payments",
+        "tempo",
+        "pay-per-use"
+      ],
+      "source": "clawhub:openclaw-mpp",
+      "installCommand": "npx agentwheel install \"clawhub:openclaw-mpp\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/tempoxyz/plugins/openclaw-mpp",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "0.2.7"
     },
     {
       "id": "clawhub:@openclaw/mxc-sandbox",
@@ -201252,7 +201484,7 @@
       "provides": [
         "plugins"
       ],
-      "version": "0.3.1"
+      "version": "0.3.5"
     },
     {
       "id": "clawhub:@fajarhide/omni-signal-engine",
@@ -221002,6 +221234,39 @@
       "version": "0.2.3"
     },
     {
+      "id": "clawhub:macvoice",
+      "name": "macOS Voice Messages",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "OpenClaw provider for macOS voice message support via voicecli",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "models",
+        "voice",
+        "media",
+        "Macvoice",
+        "Text-to-Speech",
+        "Macos",
+        "Telegram",
+        "Media Understanding"
+      ],
+      "source": "clawhub:macvoice",
+      "installCommand": "npx agentwheel install \"clawhub:macvoice\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/acwilan/plugins/macvoice",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.2.0"
+    },
+    {
       "id": "clawhub:markifact-mcp",
       "name": "markifact",
       "ecosystem": "clawhub",
@@ -223662,7 +223927,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:muratcankoylan/Agent-Skills-for-Context-Engineering\"",
       "repoUrl": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
       "homepageUrl": null,
-      "stars": 17697,
+      "stars": 17699,
       "lastPush": "2026-08-10T14:37:38Z",
       "archived": false,
       "provides": null,
@@ -223701,7 +223966,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:vercel-labs/agent-skills\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": null,
-      "stars": 29972,
+      "stars": 29973,
       "lastPush": "2026-08-12T12:13:36Z",
       "archived": false,
       "provides": null,
@@ -223721,7 +223986,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:supabase/agent-skills\"",
       "repoUrl": "https://github.com/supabase/agent-skills",
       "homepageUrl": null,
-      "stars": 2500,
+      "stars": 2501,
       "lastPush": "2026-08-12T07:37:08Z",
       "archived": false,
       "provides": null,
@@ -223797,7 +224062,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:softaworks/agent-toolkit\"",
       "repoUrl": "https://github.com/softaworks/agent-toolkit",
       "homepageUrl": null,
-      "stars": 2311,
+      "stars": 2312,
       "lastPush": "2026-03-05T16:46:24Z",
       "archived": false,
       "provides": null,
@@ -223816,7 +224081,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:wshobson/agents\"",
       "repoUrl": "https://github.com/wshobson/agents",
       "homepageUrl": null,
-      "stars": 38744,
+      "stars": 38743,
       "lastPush": "2026-08-05T07:11:13Z",
       "archived": false,
       "provides": null,
@@ -223855,7 +224120,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:sickn33/antigravity-awesome-skills\"",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "homepageUrl": null,
-      "stars": 44832,
+      "stars": 44835,
       "lastPush": "2026-08-12T15:01:35Z",
       "archived": false,
       "provides": null,
@@ -223874,7 +224139,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:ComposioHQ/awesome-claude-skills\"",
       "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 72350,
+      "stars": 72355,
       "lastPush": "2026-08-10T21:45:44Z",
       "archived": false,
       "provides": null,
@@ -223893,7 +224158,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:travisvn/awesome-claude-skills\"",
       "repoUrl": "https://github.com/travisvn/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 14615,
+      "stars": 14616,
       "lastPush": "2026-04-28T19:30:24Z",
       "archived": false,
       "provides": null,
@@ -223912,7 +224177,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jimliu/baoyu-skills\"",
       "repoUrl": "https://github.com/jimliu/baoyu-skills",
       "homepageUrl": null,
-      "stars": 24908,
+      "stars": 24910,
       "lastPush": "2026-07-04T16:25:18Z",
       "archived": false,
       "provides": null,
@@ -224007,8 +224272,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:langgenius/dify\"",
       "repoUrl": "https://github.com/langgenius/dify",
       "homepageUrl": null,
-      "stars": 152216,
-      "lastPush": "2026-08-12T15:50:31Z",
+      "stars": 152223,
+      "lastPush": "2026-08-12T16:51:49Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -224026,7 +224291,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:NousResearch/hermes-agent\"",
       "repoUrl": "https://github.com/NousResearch/hermes-agent",
       "homepageUrl": null,
-      "stars": 229427,
+      "stars": 229452,
       "lastPush": "2026-08-12T15:52:21Z",
       "archived": false,
       "provides": null,
@@ -224045,7 +224310,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:coreyhaines31/marketingskills\"",
       "repoUrl": "https://github.com/coreyhaines31/marketingskills",
       "homepageUrl": null,
-      "stars": 44020,
+      "stars": 44029,
       "lastPush": "2026-07-29T05:41:15Z",
       "archived": false,
       "provides": null,
@@ -224083,7 +224348,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:kepano/obsidian-skills\"",
       "repoUrl": "https://github.com/kepano/obsidian-skills",
       "homepageUrl": null,
-      "stars": 45092,
+      "stars": 45103,
       "lastPush": "2026-06-08T16:12:01Z",
       "archived": false,
       "provides": null,
@@ -224103,7 +224368,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:anthropics/skills\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": null,
-      "stars": 168470,
+      "stars": 168480,
       "lastPush": "2026-08-07T17:14:15Z",
       "archived": false,
       "provides": null,
@@ -224162,8 +224427,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:trailofbits/skills\"",
       "repoUrl": "https://github.com/trailofbits/skills",
       "homepageUrl": null,
-      "stars": 6556,
-      "lastPush": "2026-08-12T00:11:06Z",
+      "stars": 6558,
+      "lastPush": "2026-08-12T16:35:31Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -224240,8 +224505,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:obra/superpowers\"",
       "repoUrl": "https://github.com/obra/superpowers",
       "homepageUrl": null,
-      "stars": 271143,
-      "lastPush": "2026-08-12T05:08:28Z",
+      "stars": 271163,
+      "lastPush": "2026-08-12T16:53:21Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -224317,7 +224582,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-browser/agent-browser\"",
       "repoUrl": "https://github.com/vercel-labs/agent-browser",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-browser/agent-browser",
-      "stars": 40487,
+      "stars": 40488,
       "lastPush": "2026-08-11T18:57:02Z",
       "archived": false,
       "provides": null,
@@ -224338,7 +224603,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/skills/find-skills\"",
       "repoUrl": "https://github.com/vercel-labs/skills",
       "homepageUrl": "https://skills.sh/vercel-labs/skills/find-skills",
-      "stars": 28740,
+      "stars": 28746,
       "lastPush": "2026-08-10T17:31:40Z",
       "archived": false,
       "provides": null,
@@ -224359,7 +224624,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/frontend-design\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/frontend-design",
-      "stars": 168470,
+      "stars": 168480,
       "lastPush": "2026-08-07T17:14:15Z",
       "archived": false,
       "provides": null,
@@ -224380,7 +224645,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/mattpocock/skills/grill-me\"",
       "repoUrl": "https://github.com/mattpocock/skills",
       "homepageUrl": "https://skills.sh/mattpocock/skills/grill-me",
-      "stars": 214786,
+      "stars": 214846,
       "lastPush": "2026-08-07T15:50:46Z",
       "archived": false,
       "provides": null,
@@ -224422,7 +224687,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/skill-creator\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/skill-creator",
-      "stars": 168470,
+      "stars": 168480,
       "lastPush": "2026-08-07T17:14:15Z",
       "archived": false,
       "provides": null,
@@ -224443,7 +224708,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/vercel-react-best-practices\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices",
-      "stars": 29972,
+      "stars": 29973,
       "lastPush": "2026-08-12T12:13:36Z",
       "archived": false,
       "provides": null,
@@ -224464,7 +224729,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/web-design-guidelines\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/web-design-guidelines",
-      "stars": 29972,
+      "stars": 29973,
       "lastPush": "2026-08-12T12:13:36Z",
       "archived": false,
       "provides": null,
