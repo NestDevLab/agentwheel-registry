@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-20T18:54:11.338Z",
+  "generatedAt": "2026-08-21T07:09:23.760Z",
   "entries": [
     {
       "id": "official:agent-plugin-extra-message-policy",
@@ -60,7 +60,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/agent-tmux/SKILL.md",
       "readmeExcerpt": "Control Codex CLI and Claude Code CLI sessions via tmux with one agent-agnostic toolset. The same bin/ scripts drive any agent through a --agent <type> flag; per-agent quirks (submit key, prompt char, idle/working patterns, launch flags) live in agents/<type>.conf. Reaches on-disk sessions that an agent's own MCP server no longer tracks. This is the tmux transport for the mesh: any agent that can run these scripts can pilot supported CLI agents through persistent tmux sessions. - In Codex Desktop, use native task capabilities for Codex-to-Codex work when they are exposed: sendmessagetothread for an existing task, waitthreads or readthread for observation, createthread for a new user-visible task only after an explicit user request, and forkthread when completed source history should carry over. Run listprojects before project-backed creation and use a worktree by default for Git projects. - A task still being prepared may return only clientThreadId; wait for a real threadId before trying to read, wait on, or message it. - Same-runtime subagent fan-out uses native delegation by default. Desktop tasks and subagents are different surfaces: do not create a user-owned Desktop task mere…",
       "stars": 0,
-      "lastPush": "2026-08-20T10:54:51Z",
+      "lastPush": "2026-08-20T21:48:48Z",
       "archived": false,
       "provides": [
         "skills"
@@ -534,7 +534,7 @@
       "repoUrl": "https://github.com/NestDevLab/agentwheel",
       "homepageUrl": null,
       "stars": 7,
-      "lastPush": "2026-08-20T18:52:36Z",
+      "lastPush": "2026-08-21T06:10:53Z",
       "archived": false,
       "provides": [
         "skills"
@@ -617,7 +617,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel/SKILL.md",
       "readmeExcerpt": "Agentwheel discovers reusable artifacts and manages their desired state across runtimes. agentwheel is the control plane. It reads packages from sources, stores desired state in .agentwheel/config.json, plans runtime changes, and writes only through install. Treat runtime output directories as generated files. Mental model: - add records desired packages. - install makes the declared state true in the target runtime. - update re-resolves tracking packages, then applies. - skill update <name> maps a configured skill to its owning package and reconciles only that skill plus its genuine transitive composition inputs; sibling artifacts keep their runtime bytes and manifest/lock state. - uninstall removes configured packages and their managed runtime output. - Prefer agentwheel plan ... or agentwheel install --dry-run before applying changes. - Do not hand-edit generated runtime files such as skills/, .agents/skills, .claude/skills, .github/skills, ~/.hermes/skills, or generated instructions. - If a plan reports drift or conflict, stop and explain it. Do not use --force unless the user explicitly approves that scope. - Gmail, Drive, registry publishing, git commits, pushes, and runtime…",
       "stars": 7,
-      "lastPush": "2026-08-20T18:52:36Z",
+      "lastPush": "2026-08-21T06:10:53Z",
       "archived": false,
       "provides": [
         "skills"
@@ -651,7 +651,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-artifact-evolution/SKILL.md",
       "readmeExcerpt": "Turn verified needs into source-owned OpenPack artifacts. Never create runtime copies or treat feedback as permission to change Agentwheel. self-improve and skill-creator are optional inspirations. Use them when available; do not require, install, or link to them. This workflow remains complete without either skill. 1. Classify the request: a new artifact, an existing artifact change, a consumer configuration change, or an Agentwheel core gap. Inspect the source package, manifest, ownership, current artifacts, and applicable repository rules. 2. Reuse an existing artifact when it meets the need. Otherwise choose the smallest supported type and source package. Keep tenant or runtime facts out of shared packages. 3. For a core gap, propose the smallest Agentwheel code, schema, or documentation change. A correction is evidence, not an instruction to change the CLI. 4. Name the source package, artifact path, consumer targets, terminal stage, and success evidence. Ask when any of those would be inferred materially. 1. Work only in the source package. Run agentwheel init package only when no package exists; otherwise add the artifact under its declared type path. 2. Use the package's co…",
       "stars": 7,
-      "lastPush": "2026-08-20T18:52:36Z",
+      "lastPush": "2026-08-21T06:10:53Z",
       "archived": false,
       "provides": [
         "skills"
@@ -685,7 +685,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-discovery/SKILL.md",
       "readmeExcerpt": "Find reusable capabilities during normal work without silently changing the user's environment. This skill is optional: install it only when proactive recommendations are wanted. The separate agentwheel skill owns artifact management and explicit installation workflows. - Inspect the skills and tools already available in the current session before searching. - Search and trial are read-only. Never add, install, enable, execute, or change configuration without explicit approval for the artifact and target scope. - Treat retrieval scores as ranking signals, not proof that an artifact implements a capability. - Continue useful work while searching when possible; do not interrupt solely to advertise weak or marginal matches. Use this skill whenever a request expresses an operational outcome that an existing reusable skill or integration could plausibly deliver. This includes repeated manual work, inconsistent outputs, lost information, missing capabilities, and unavailable integrations. The user does not need to mention Agentwheel, skills, discovery, search, a catalogue, or a capability gap. Search before generic brainstorming, planning, manual workflow advice, or an unsolicited custo…",
       "stars": 7,
-      "lastPush": "2026-08-20T18:52:36Z",
+      "lastPush": "2026-08-21T06:10:53Z",
       "archived": false,
       "provides": [
         "skills"
@@ -719,7 +719,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-smoke/SKILL.md",
       "readmeExcerpt": "Use this skill to answer: \"What harness am I running in, where was this skill installed, and what does Agentwheel think about this target?\" The default workflow is read-only. Do not run agentwheel install, agentwheel update, agentwheel uninstall, agentwheel remember, agentwheel eject, or any file-writing fix while using this skill unless the user separately approves that mutation scope. From the user's current workspace, run the bundled smoke script: Use JSON output only when another tool or script needs to consume the result: When the user names an Agentwheel target, pass only read-only status target flags: Summarize the script output in four parts: - Overall: PASS, WARN, or FAIL. - Harness: detected adapter, installation type, runtime root, and skill path. - Agentwheel: CLI availability, version, config locations, packages, agents, profiles, and status result. - Recommended next command: prefer agentwheel status, agentwheel plan, or agentwheel install --dry-run. Treat these as important signals: - PASS: skill path maps to a documented Agentwheel harness target and agentwheel status reports no pending work. - WARN: the skill is running from package source, status is missing, conf…",
       "stars": 7,
-      "lastPush": "2026-08-20T18:52:36Z",
+      "lastPush": "2026-08-21T06:10:53Z",
       "archived": false,
       "provides": [
         "skills"
@@ -754,7 +754,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/architect/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: architect.",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -825,7 +825,42 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/code-review/SKILL.md",
       "readmeExcerpt": "Use this skill when asked to review a proposed change, patch, configuration, or technical document. - Start with findings, ordered by severity. - Focus on bugs, regressions, safety issues, boundary violations, and missing validation. - Tie each finding to a concrete file, behavior, or requirement. - Separate blocking issues from optional improvements. 1. Read the relevant instructions and the changed files. 2. Identify the intended behavior and validation expectations. 3. Check for correctness, edge cases, data handling, and operational risk. 4. Report findings first. If no issues are found, say that plainly and note residual risk. Use concise sections: - Findings - Open questions - Validation gaps - Summary",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
+      "archived": false,
+      "provides": [
+        "skills"
+      ],
+      "version": "0.3.2"
+    },
+    {
+      "id": "official:nestdev-core-toolkit:skills/codex-suggested-next-message",
+      "name": "codex-suggested-next-message",
+      "ecosystem": "official",
+      "type": "skill",
+      "description": "Configure the opt-in Codex hook that appends a copyable suggested next user message to each response.",
+      "tags": [
+        "agents",
+        "skills",
+        "rules",
+        "instructions",
+        "public-toolkit",
+        "decision-interview",
+        "qao",
+        "skill",
+        "official"
+      ],
+      "source": "github:NestDevLab/agent-core-toolkit-public",
+      "select": [
+        "skills/codex-suggested-next-message"
+      ],
+      "installCommand": "npx agentwheel install nestdev-core-toolkit --select skills/codex-suggested-next-message",
+      "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
+      "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/codex-suggested-next-message/SKILL.md",
+      "readmeTitle": "Skill guide",
+      "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/codex-suggested-next-message/SKILL.md",
+      "readmeExcerpt": "This skill supplies the executable companion for the UserPromptSubmit hook in hooks/codex-suggested-next-message.json. The hook stays inactive until CODEXSUGGESTEDNEXTMESSAGEENABLED=1 is present in the environment that starts Codex. For each submitted prompt, the hook asks gpt-5.6-luna at low reasoning effort for one concise candidate for the user's next message. It then adds an additionalContext instruction that makes the main Codex response end with a copyable Markdown block: text <candidate> The hook is fail-open: a missing dependency, timeout, invalid model output, or unsupported event produces no suggestion and never blocks the main turn. Install the package's skills and hooks with Agentwheel, review the hook, then start Codex with: The hook needs Python 3.9+ and the codex CLI. A user-level install resolves the companion script from ~/.agents/skills. For a project-local install, name that script explicitly when starting Codex: The hook deliberately does not discover scripts below the current repository: a user-level hook must not automatically execute a repository-controlled path. By default, Luna receives only the newly submitted prompt. An authorized integration may set COD…",
+      "stars": 0,
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -860,7 +895,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/communicator/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: communicator.",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1003,7 +1038,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/conversation-handoff/SKILL.md",
       "readmeExcerpt": "Transfer the live thread, not the transcript or project record. Existing work items, specifications, decisions, commits, and diffs remain authoritative; reference them instead of copying them. 1. Resolve this skill's directory and run: Use --output <path> only when the user explicitly chose a durable destination; otherwise the script writes to the OS temporary directory. 2. Fill every placeholder from the conversation and verified local state. Classify claims as Verified, Source-backed, or Assumed; cite a path, URL, command, or check for the first two. 3. Preserve unresolved decisions, rejected options that constrain the next step, blockers with owners/resume conditions, approval gates, and the exact next safe action. Suggest only relevant installed skills or catalogue searches. 4. Redact credentials, tokens, personal data, private payloads, and secret-bearing logs. Keep safe identifiers such as variable names and retrieval locations. 5. Run python3 <skill-dir>/scripts/handoff.py validate <file>. Do not hand off while it reports errors. Return the absolute path and validation result; do not start another agent unless separately requested. 1. Read the entire handoff, then run pytho…",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1038,7 +1073,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/coordinator/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: coordinator.",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1179,10 +1214,11 @@
       "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview",
       "sourceLinkLabel": "Skill source",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "fragments",
+        "hooks",
         "instructions",
         "rules",
         "skills"
@@ -1226,6 +1262,17 @@
           "readmeTitle": "Skill guide",
           "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/code-review/SKILL.md",
           "readmeExcerpt": "Use this skill when asked to review a proposed change, patch, configuration, or technical document. - Start with findings, ordered by severity. - Focus on bugs, regressions, safety issues, boundary violations, and missing validation. - Tie each finding to a concrete file, behavior, or requirement. - Separate blocking issues from optional improvements. 1. Read the relevant instructions and the changed files. 2. Identify the intended behavior and validation expectations. 3. Check for correctness, edge cases, data handling, and operational risk. 4. Report findings first. If no issues are found, say that plainly and note residual risk. Use concise sections: - Findings - Open questions - Validation gaps - Summary"
+        },
+        {
+          "selector": "skills/codex-suggested-next-message",
+          "type": "skills",
+          "name": "codex-suggested-next-message",
+          "description": "Configure the opt-in Codex hook that appends a copyable suggested next user message to each response.",
+          "sourcePath": "skills/codex-suggested-next-message",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/codex-suggested-next-message/SKILL.md",
+          "readmeTitle": "Skill guide",
+          "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/codex-suggested-next-message/SKILL.md",
+          "readmeExcerpt": "This skill supplies the executable companion for the UserPromptSubmit hook in hooks/codex-suggested-next-message.json. The hook stays inactive until CODEXSUGGESTEDNEXTMESSAGEENABLED=1 is present in the environment that starts Codex. For each submitted prompt, the hook asks gpt-5.6-luna at low reasoning effort for one concise candidate for the user's next message. It then adds an additionalContext instruction that makes the main Codex response end with a copyable Markdown block: text <candidate> The hook is fail-open: a missing dependency, timeout, invalid model output, or unsupported event produces no suggestion and never blocks the main turn. Install the package's skills and hooks with Agentwheel, review the hook, then start Codex with: The hook needs Python 3.9+ and the codex CLI. A user-level install resolves the companion script from ~/.agents/skills. For a project-local install, name that script explicitly when starting Codex: The hook deliberately does not discover scripts below the current repository: a user-level hook must not automatically execute a repository-controlled path. By default, Luna receives only the newly submitted prompt. An authorized integration may set COD…"
         },
         {
           "selector": "skills/communicator",
@@ -1370,7 +1417,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/decision-interview/SKILL.md",
       "readmeExcerpt": "Use this skill to converge on a well-supported answer or opinion before acting. It supports the QAO pattern: the session alternates between focused questions, provisional answers, and explicit opinions until the remaining uncertainty is acceptable or the user redirects. 1. Classify the target: factual answer, judgment/opinion, decision, plan, diagnosis, or creative direction. 2. State the current uncertainty in one sentence when it affects the next move. 3. Ask the smallest useful next question. Prefer one question at a time. 4. If the answer can be found by inspecting local context, tools, docs, or reliable sources, inspect instead of asking. 5. Continue until one of these is true: - confidence is high enough to answer; - the remaining uncertainty no longer changes the recommendation; - the user chooses speed over more intake; - progress is blocked by unavailable private context, credentials, or a decision only the user can make. 6. Give the answer or opinion with confidence, assumptions, and what would change the conclusion. - Ask concrete questions that reduce decision-relevant uncertainty. - Explain why the question matters only when that is not obvious. - Offer a recommended…",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1405,7 +1452,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/developer/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: developer.",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1440,7 +1487,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/documenter/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: documenter.",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1693,7 +1740,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/mesh-discord-routing/README.md",
       "readmeExcerpt": "Mesh Discord Routing is a small, portable skill that lets agents of any runtime communicate with each other through Discord using simple, explicit routing rules. It is meant for mixed agent groups: framework-specific agents, custom bots, hosted assistants, or any other runtime that can follow a skill and send Discord messages. The shared rule is: - each agent decides who should receive its own reply - agents use semantic recipient labels, not raw Discord mention strings - a small hydrator script turns those labels into the cc-mesh: trigger and Discord mentions - an optional session helper can keep turn state for multi-turn workflows - the human-readable message stays separate from routing metadata This keeps the routing policy simple enough for language models to follow while keeping mention formatting deterministic and runtime-independent. The skill gives agents a common protocol for mesh-mode Discord conversations: 1. If a message contains cc-mesh:, treat it as a routed mesh message. 2. Decide who should receive the reply. 3. Default to notifying the sender when answering directly. 4. Add other recipients only when they should be involved. 5. Use no recipients only when no bot s…",
       "stars": 0,
-      "lastPush": "2026-08-20T10:54:51Z",
+      "lastPush": "2026-08-20T21:48:48Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1758,10 +1805,11 @@
       "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "fragments",
+        "hooks",
         "instructions",
         "rules",
         "skills"
@@ -1805,6 +1853,17 @@
           "readmeTitle": "Skill guide",
           "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/code-review/SKILL.md",
           "readmeExcerpt": "Use this skill when asked to review a proposed change, patch, configuration, or technical document. - Start with findings, ordered by severity. - Focus on bugs, regressions, safety issues, boundary violations, and missing validation. - Tie each finding to a concrete file, behavior, or requirement. - Separate blocking issues from optional improvements. 1. Read the relevant instructions and the changed files. 2. Identify the intended behavior and validation expectations. 3. Check for correctness, edge cases, data handling, and operational risk. 4. Report findings first. If no issues are found, say that plainly and note residual risk. Use concise sections: - Findings - Open questions - Validation gaps - Summary"
+        },
+        {
+          "selector": "skills/codex-suggested-next-message",
+          "type": "skills",
+          "name": "codex-suggested-next-message",
+          "description": "Configure the opt-in Codex hook that appends a copyable suggested next user message to each response.",
+          "sourcePath": "skills/codex-suggested-next-message",
+          "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/codex-suggested-next-message/SKILL.md",
+          "readmeTitle": "Skill guide",
+          "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/codex-suggested-next-message/SKILL.md",
+          "readmeExcerpt": "This skill supplies the executable companion for the UserPromptSubmit hook in hooks/codex-suggested-next-message.json. The hook stays inactive until CODEXSUGGESTEDNEXTMESSAGEENABLED=1 is present in the environment that starts Codex. For each submitted prompt, the hook asks gpt-5.6-luna at low reasoning effort for one concise candidate for the user's next message. It then adds an additionalContext instruction that makes the main Codex response end with a copyable Markdown block: text <candidate> The hook is fail-open: a missing dependency, timeout, invalid model output, or unsupported event produces no suggestion and never blocks the main turn. Install the package's skills and hooks with Agentwheel, review the hook, then start Codex with: The hook needs Python 3.9+ and the codex CLI. A user-level install resolves the companion script from ~/.agents/skills. For a project-local install, name that script explicitly when starting Codex: The hook deliberately does not discover scripts below the current repository: a user-level hook must not automatically execute a repository-controlled path. By default, Luna receives only the newly submitted prompt. An authorized integration may set COD…"
         },
         {
           "selector": "skills/communicator",
@@ -1943,7 +2002,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-mesh",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-08-20T10:54:51Z",
+      "lastPush": "2026-08-20T21:48:48Z",
       "archived": false,
       "provides": [
         "instructions",
@@ -2110,7 +2169,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/operator/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: operator.",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2145,7 +2204,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/plan-task/SKILL.md",
       "readmeExcerpt": "Use this skill when a request needs sequencing, risk control, or coordination before implementation. Use when the user is brainstorming, says something like \"we should\", gives several tasks at once, or leaves scope/intent unclear. Do not implement during intake unless the user explicitly confirms execution or the change is obvious, narrow, low-risk, and reversible. - Resolve what the codebase can answer; ask only for choices the code cannot settle. - Ask one focused question at a time when a decision blocks the plan. - Prefer selectable options when the UI/tool supports them; otherwise give short recommended choices in plain text. - Put irreversible, external, costly, privileged, or ambiguous edits behind approval gates. - Treat \"go ahead\", \"procedi\", \"do it\", or equivalent confirmation as the implementation handoff. - Make validation part of the plan, not an afterthought. A useful plan includes: - Goal and scope - Current-state observations - Ordered execution steps - Validation checks - Approval gates - Risks and open questions Keep the plan specific enough that an implementer can execute it without hidden context.",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2324,7 +2383,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/reviewer/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: reviewer.",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2467,7 +2526,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/set-visual-title/SKILL.md",
       "readmeExcerpt": "1. Resolve the current session or channel with its native title operation. In Codex, use setthreadtitle. Otherwise discover the host-native title or rename operation; never use another host's threads, API, or local storage. 2. If native identity or an authorized rename operation is unavailable, report that exact limitation and do not rename anything. 3. Infer the substantive current topic from the conversation's target, action, and intended outcome. Replace an early, vague, or superseded title with a concise 1–7-word topic in the user's language. Retain an explicit user-supplied topic when it remains accurate. 4. Accept a project only when the active environment supplies a reliable project name and fixed project emoji. Its project policy may resolve it from the session's launch directory first, then established conversation context. Do not invent a project from a weak mention. 5. Select one widely supported topic emoji that represents the actual work. Keep it distinct from the project emoji. 6. When a project is known, set project emoji topic emoji Project: Topic — for example, 🧩 🛠️ Project: Update dependencies. Otherwise set topic emoji Topic. Do not retain a conflicting old em…",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2494,7 +2553,7 @@
       "repoUrl": "https://github.com/NestDevLab/syncwheel",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-08-20T16:06:37Z",
+      "lastPush": "2026-08-20T20:46:01Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2545,7 +2604,7 @@
       "readmeUrl": "https://github.com/NestDevLab/syncwheel/blob/main/skills/syncwheel/SKILL.md",
       "readmeExcerpt": "Syncwheel makes Git maintenance deterministic and safe when many agents touch the same repositories. Branch ownership, PR stacks, and the integration branch are described in a manifest; Syncwheel reconciles Git to match it. Plain manual git/worktree surgery is the exception path, used only when Syncwheel is unavailable, blocked, or cannot express the needed recovery. First, detect the regime. Before branch, worktree, integration, PR, recovery, or handoff work in any Git repo, check whether it is Syncwheel-managed: a .syncwheel/ directory or manifest is present, or a workspace/project guide says so. When unsure, run syncwheel status. If it is managed — or the repo is shared, fork/upstream, or touched by multiple agents — it is Syncwheel-first: do not reach for manual git branch/worktree/integration surgery as the default path. Reach for Syncwheel before any of these, not after: - editing or handing off work in a Git repository that is shared, managed by Syncwheel, or likely to be touched by multiple agents - creating a PR branch or a stack of dependent PRs - working in a repo that has a .syncwheel/ manifest, or a fork/upstream/integration/PR-stack workflow - committing on integrati…",
       "stars": 0,
-      "lastPush": "2026-08-20T16:06:37Z",
+      "lastPush": "2026-08-20T20:46:01Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2652,7 +2711,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/write-docs/SKILL.md",
       "readmeExcerpt": "Use this skill when creating or updating documentation that future users or agents will rely on. - Identify the canonical source before writing. - Prefer durable guidance over chat-history summaries. - Keep examples generic unless the target document is explicitly private. - Avoid duplicating volatile details when a pointer is enough. 1. Determine the audience and the action the document should enable. 2. Read nearby documentation to match tone and structure. 3. Write concise sections with clear headings. 4. Include validation, ownership, or update guidance where relevant. 5. Remove stale or conflicting wording when replacing guidance.",
       "stars": 0,
-      "lastPush": "2026-08-08T08:43:10Z",
+      "lastPush": "2026-08-21T06:57:34Z",
       "archived": false,
       "provides": [
         "skills"
@@ -29128,6 +29187,50 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.pythonanywhere.baseusdcearn/mcp",
+      "name": "Crypto Market Pulse & Base USDC Stats",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Pay-per-call crypto market data on Base via x402 USDC micropayments.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pythonanywhere.baseusdcearn/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pythonanywhere.baseusdcearn/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://baseusdcearn.pythonanywhere.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.pythonanywhere.cryptopulse/mcp",
+      "name": "Crypto Market Pulse & Base USDC Stats",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Crypto market prices BTC/ETH/SOL/USDC, Base stats, JSON repair, DNS. Pay per call USDC on Base.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pythonanywhere.cryptopulse/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pythonanywhere.cryptopulse/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://cryptopulse.pythonanywhere.com/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.3.0"
     },
     {
       "id": "mcp-registry:io.github.guptaprakhariitr/crypto-prices-mcp",
@@ -58126,6 +58229,28 @@
       "version": "0.2.0"
     },
     {
+      "id": "mcp-registry:com.pythonanywhere.cryptopulse/json-repair",
+      "name": "JSON Repair & Agent Utilities",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Repair malformed JSON, DNS lookup, extract URLs. Pay per call USDC on Base via x402.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pythonanywhere.cryptopulse/json-repair",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pythonanywhere.cryptopulse/json-repair\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://cryptopulse.pythonanywhere.com/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.walkojas-boop/jsonshelf",
       "name": "JSONShelf",
       "ecosystem": "mcp-registry",
@@ -77640,6 +77765,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.oneheartesim.mcp/esim",
+      "name": "ONE HEART eSIM",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "一心eSIM商品目錄查詢與下單服務：查詢各國eSIM上網方案的即時價格與庫存、依旅遊天數與用量推薦方案、協助建立訂單並取得LinePay或ECPay付款連結。",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.oneheartesim.mcp/esim",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.oneheartesim.mcp/esim\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.ootworacle.www/predictions-server",
       "name": "OOTWOracle — Psychedelic Medicine Intelligence",
       "ecosystem": "mcp-registry",
@@ -78828,6 +78975,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.oolkin/oolkin",
+      "name": "Oolkin",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "AI colleagues that keep your standards, your project and their reasoning between sessions",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.oolkin/oolkin",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.oolkin/oolkin\" --adapter claude --local",
+      "repoUrl": "https://github.com/edgarator/understudy",
+      "homepageUrl": "https://www.oolkin.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/ooni",
       "name": "Ooni",
       "ecosystem": "mcp-registry",
@@ -79552,6 +79721,28 @@
         "mcp"
       ],
       "version": "1.1.0"
+    },
+    {
+      "id": "mcp-registry:com.openshopgraph/mcp",
+      "name": "OpenShopGraph",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Open, verified shop database for AI agents: products, offers, price comparison, trust and coupons.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.openshopgraph/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.openshopgraph/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://openshopgraph.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:sh.stipple/openwarrant",
@@ -81204,6 +81395,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.oshyn/mcp",
+      "name": "Oshyn Free AI-Powered Website Tools",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Free AI-powered DXP tools by Oshyn: GEO & Reliability scan, Choose New DXP and Estimate DXP Budget.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.oshyn/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.oshyn/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://mcp.oshyn.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.luhkas2309/osigu-rcm",
       "name": "Osigu RCM",
       "ecosystem": "mcp-registry",
@@ -81358,6 +81571,28 @@
       "version": "2.0.0"
     },
     {
+      "id": "mcp-registry:com.outagedeck/outagedeck-status",
+      "name": "OutageDeck",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Live status for 172 cloud and SaaS vendors from their official feeds. Is it you, or is it them?",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.outagedeck/outagedeck-status",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.outagedeck/outagedeck-status\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://outagedeck.com/developers/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.1.0"
+    },
+    {
       "id": "mcp-registry:com.theoutdoorsapp/outdoors",
       "name": "Outdoors",
       "ecosystem": "mcp-registry",
@@ -81510,6 +81745,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.overlap-ai/overlap",
+      "name": "Overlap",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Records what you're working on so Overlap can introduce you to someone two weeks ahead of you.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.overlap-ai/overlap",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.overlap-ai/overlap\" --adapter claude --local",
+      "repoUrl": "https://github.com/shalevjon/overlap",
+      "homepageUrl": "https://overlap-ai.com/connector",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.2.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/overpass",
@@ -81686,6 +81943,28 @@
         "mcp"
       ],
       "version": "0.7.44"
+    },
+    {
+      "id": "mcp-registry:com.pcblt/pcblt",
+      "name": "PCBLT — Live Checks",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Live DNS, email-auth and redirect checks, HTTP security headers, uptime history, PC hardware prices.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pcblt/pcblt",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pcblt/pcblt\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://pcblt.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.4.0"
     },
     {
       "id": "mcp-registry:ai.portablecontext/pcd",
@@ -82370,6 +82649,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.pally/pally",
+      "name": "Pally",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Chat with your Pally, the AI assistant in your texts, from any MCP-compatible AI app.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pally/pally",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pally/pally\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://pally.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:ai.palmyr/palmyr",
       "name": "Palmyr",
       "ecosystem": "mcp-registry",
@@ -82500,6 +82801,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.pantts/pantts",
+      "name": "Pantts",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read and manage your Pantts boards — kanban, gantt, table and graph over one shared card model.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pantts/pantts",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pantts/pantts\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://pantts.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.1.0"
     },
     {
       "id": "mcp-registry:io.github.SantoraReplica/panya",
@@ -82810,6 +83133,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.parameterfit/parameter",
+      "name": "Parameter",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Your AI writes training plans that arrive as structured workouts on iPhone and Apple Watch.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.parameterfit/parameter",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.parameterfit/parameter\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://parameterfit.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.junoventures/paraiso-sampa-br",
       "name": "Paraíso",
       "ecosystem": "mcp-registry",
@@ -82823,6 +83168,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.junoventures/paraiso-sampa-br\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://paraiso.sampa.br",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.parcellaunch/parcellaunch",
+      "name": "ParcelLaunch — 3D property listings from an address",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Turn a US address or parcel number into an interactive 3D flyover listing in about a minute.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.parcellaunch/parcellaunch",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.parcellaunch/parcellaunch\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://parcellaunch.com/for-agents",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -83096,6 +83463,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.pastepile/mcp",
+      "name": "Pastepile",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Durable, versioned memory for AI assistants: save, checkpoint, and retrieve context by stable URL.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pastepile/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pastepile/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://www.pastepile.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.5.0"
+    },
+    {
       "id": "mcp-registry:dev.patent/patent",
       "name": "Patent Connector",
       "ecosystem": "mcp-registry",
@@ -83270,6 +83659,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.payrent/mcp",
+      "name": "PayRent",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Connect AI assistants to PayRent to manage landlord portfolios, confirming changes first.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.payrent/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.payrent/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.payu-intrepos/payu-developer-mcp",
@@ -83624,6 +84035,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.pepevolution/peptide-sources",
+      "name": "PepEvolution Peptide Sources",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Find where to buy peptides from vetted, COA-tested vendors and check if a peptide vendor is legit.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pepevolution/peptide-sources",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pepevolution/peptide-sources\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://pepevolution.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.2.0"
+    },
+    {
       "id": "mcp-registry:io.github.pepesto-solutions/agent-to-cart-mcp",
       "name": "Pepesto Agent-to-Cart",
       "ecosystem": "mcp-registry",
@@ -83637,6 +84070,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.pepesto-solutions/agent-to-cart-mcp\" --adapter claude --local",
       "repoUrl": "https://github.com/pepesto-solutions/agent-to-cart-mcp",
       "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.peppolstatus/api",
+      "name": "PeppolStatus",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Peppol market intelligence and network monitoring: migrations, provider churn, leads, and uptime.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.peppolstatus/api",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.peppolstatus/api\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://peppolstatus.com/mcp",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -83778,6 +84233,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.perkusai/search",
+      "name": "Perkusai (US)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "AI shopping search: real, in-stock US and Amazon products with prices, ratings and buy links.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.perkusai/search",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.perkusai/search\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://perkusai.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/permid",
       "name": "Permid",
       "ecosystem": "mcp-registry",
@@ -83813,6 +84290,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.checkmycontractorquote/permit-pilot\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://checkmycontractorquote.com/passive-store/ai-appstore/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.permitreporter/georgia-permits",
+      "name": "PermitReporter — Georgia Permit Intelligence",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Source-linked Georgia permit search, county coverage, contractor signals, and authorized watches.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.permitreporter/georgia-permits",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.permitreporter/georgia-permits\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://permitreporter.com/ai-permit-search",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -83932,6 +84431,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.personyze/mcp",
+      "name": "Personyze",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Manage web personalization campaigns, audiences and visitor data in Personyze.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.personyze/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.personyze/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://personyze.com/wiki/mcp:start",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:ai.getperspective/mcp",
       "name": "Perspective AI",
       "ecosystem": "mcp-registry",
@@ -83952,6 +84473,28 @@
         "mcp"
       ],
       "version": "0.0.7"
+    },
+    {
+      "id": "mcp-registry:com.persuadioai/mcp",
+      "name": "PersuadioAI",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Analyze leads, draft follow-up campaigns, and launch SMS outreach only with explicit human approval.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.persuadioai/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.persuadioai/mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mannyfernandezvc/persuadioai-platform",
+      "homepageUrl": "https://persuadioai.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.1"
     },
     {
       "id": "mcp-registry:app.wishpool/peru-invoice-mcp",
@@ -83998,6 +84541,50 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.pestpin/pestpin",
+      "name": "PestPin",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "US pest control license lookup, licensed-company search by city, and cost planning ranges.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pestpin/pestpin",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pestpin/pestpin\" --adapter claude --local",
+      "repoUrl": "https://github.com/vijaygopalbalasa/pestpin",
+      "homepageUrl": "https://pestpin.com/license-data",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.petforai/pet-data-station",
+      "name": "Pet Data Station",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Source-verified pet food regulations, recalls, nutrient standards and species care data.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.petforai/pet-data-station",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.petforai/pet-data-station\" --adapter claude --local",
+      "repoUrl": "https://github.com/LongJourneyCai/Pet-data-station",
+      "homepageUrl": "https://petforai.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:ai.com.mcp/petstore",
       "name": "Petstore MCP Server",
       "ecosystem": "mcp-registry",
@@ -84018,6 +84605,28 @@
         "mcp"
       ],
       "version": "0.6.0"
+    },
+    {
+      "id": "mcp-registry:com.pexafy/pexafy-mcp",
+      "name": "Pexafy",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Stock photo search: by description, by example image, or more like this.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pexafy/pexafy-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pexafy/pexafy-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/Pexafy/pexafy-mcp",
+      "homepageUrl": "https://pexafy.com/mcp/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.2.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/pexels",
@@ -85384,6 +85993,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.podmule/podmule",
+      "name": "PodMule",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Search, draft and manage your podcast workspace from your agent.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.podmule/podmule",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.podmule/podmule\" --adapter claude --local",
+      "repoUrl": "https://github.com/Squared-Lemons-Ltd/podmule-plugin",
+      "homepageUrl": "https://app.podmule.com/mcp-setup",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/podatki-si",
       "name": "Podatki Si",
       "ecosystem": "mcp-registry",
@@ -85492,6 +86123,50 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.pointbagel/pointbagel",
+      "name": "PointBagel",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Which card to use, what your points are worth, and whether each annual fee earns its keep.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pointbagel/pointbagel",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pointbagel/pointbagel\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://pointbagel.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.pointerminerals/oil-gas-data",
+      "name": "Pointer Minerals — Texas Oil & Gas Data",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read-only Texas oil & gas data: operator directory, county production, and dataset catalog.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pointerminerals/oil-gas-data",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pointerminerals/oil-gas-data\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://www.pointerminerals.com/datasets",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.pointifytravels/travel",
@@ -86110,6 +86785,28 @@
       "version": "0.1.2"
     },
     {
+      "id": "mcp-registry:com.powerstationplatform/powerstation",
+      "name": "PowerStation Platform",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Transmission market data and TSR actions (MISO/SPP OASIS) from the PowerStation trading platform.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.powerstationplatform/powerstation",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.powerstationplatform/powerstation\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://www.powerstationplatform.com/aboutpowerstation",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/powo",
       "name": "Powo",
       "ecosystem": "mcp-registry",
@@ -86704,6 +87401,28 @@
       "version": "0.1.1"
     },
     {
+      "id": "mcp-registry:com.printonic/printonic",
+      "name": "Printonic",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Print-on-demand catalog, listings, and fulfillment for AI agents.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.printonic/printonic",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.printonic/printonic\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://platform.printonic.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:app.priorify/priorify",
       "name": "Priorify",
       "ecosystem": "mcp-registry",
@@ -86805,6 +87524,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.prismclip/prismclip\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.prismfact/hub",
+      "name": "PrismFact",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Факты о бизнесе Томской области по ИНН: деньги, налоги, долг, статус. С источником и датой.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.prismfact/hub",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.prismfact/hub\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://prismfact.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -87010,6 +87751,72 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.professorsausages/sausage-onchain",
+      "name": "Professor Sausages — On-chain",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "EVM gas, Chainlink prices, token-safety, swap quotes, ENS, OFAC & NFT via x402.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.professorsausages/sausage-onchain",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.professorsausages/sausage-onchain\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://x402.professorsausages.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.1"
+    },
+    {
+      "id": "mcp-registry:com.professorsausages/sausage-trust",
+      "name": "Professor Sausages — Trust & Verification",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Email, phone, domain, URL & OFAC verification; phishing and IBAN checks via x402.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.professorsausages/sausage-trust",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.professorsausages/sausage-trust\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://x402.professorsausages.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.1"
+    },
+    {
+      "id": "mcp-registry:com.professorsausages/sausage-web",
+      "name": "Professor Sausages — Web & Documents",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read pages & files to text, news, weather, market holidays and timezones via x402.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.professorsausages/sausage-web",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.professorsausages/sausage-web\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://x402.professorsausages.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.1"
     },
     {
       "id": "mcp-registry:io.github.Wxt-ai/profile-retention-key-workbench",
@@ -88002,6 +88809,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.publora/mcp-server",
+      "name": "Publora",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Schedule and publish to 10 social platforms: LinkedIn, X, Instagram, TikTok, YouTube, and more.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.publora/mcp-server",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.publora/mcp-server\" --adapter claude --local",
+      "repoUrl": "https://github.com/publora/mcp-server",
+      "homepageUrl": "https://publora.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.1.1"
+    },
+    {
       "id": "mcp-registry:app.pulltrader/seller-economics",
       "name": "Pulltrader Seller Economics",
       "ecosystem": "mcp-registry",
@@ -88308,6 +89137,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.qr-top/qr-top",
+      "name": "QR Top",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Dynamic QR codes by chat: edit destinations after printing, smart routing, and scan analytics.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.qr-top/qr-top",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.qr-top/qr-top\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://qr-top.com/en/docs/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.qrstuff/qrstuff-mcp",
@@ -144366,6 +145217,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.openwakeword/wake-word-training",
+      "name": "com.openwakeword/wake-word-training",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Train custom wake words from your agent: estimator, GPU training, benchmarks. Card or crypto.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.openwakeword/wake-word-training",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.openwakeword/wake-word-training\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://openwakeword.com/agents",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.opuslumiere/booking",
+      "name": "com.opuslumiere/booking",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read-only booking info for Opus Lumiere photography, London: services, prices, availability.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.opuslumiere/booking",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.opuslumiere/booking\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://opuslumiere.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "2.0.0"
+    },
+    {
       "id": "mcp-registry:com.organikpi/organikpi",
       "name": "com.organikpi/organikpi",
       "ecosystem": "mcp-registry",
@@ -144467,6 +145362,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.pactlio/contracts\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://www.pactlio.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.pakistancaselaw/caselaw",
+      "name": "com.pakistancaselaw/caselaw",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Search 197,000+ Pakistani court judgments (1970-2025) and walk their citation graph.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pakistancaselaw/caselaw",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pakistancaselaw/caselaw\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://pakistancaselaw.com/for-ai",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -144586,6 +145503,50 @@
       "version": "0.2.0"
     },
     {
+      "id": "mcp-registry:com.pcrzero/mcp",
+      "name": "com.pcrzero/mcp",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Issue signed receipts for AI agent actions; verify any receipt offline - free, no account.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pcrzero/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pcrzero/mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/Scytalex-LLC/pcrzero-mcp",
+      "homepageUrl": "https://pcrzero.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "id": "mcp-registry:com.pdfgate/mcp-server",
+      "name": "com.pdfgate/mcp-server",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "MCP server for the PDFGate API. Generate PDFs, manage documents and handle e-signatures.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pdfgate/mcp-server",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pdfgate/mcp-server\" --adapter claude --local",
+      "repoUrl": "https://github.com/pdfgate/pdfgate-mcp-server",
+      "homepageUrl": "https://pdfgate.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.1.0"
+    },
+    {
       "id": "mcp-registry:com.pearl.mcp/pearl-api-mcp-server",
       "name": "com.pearl.mcp/pearl-api-mcp-server",
       "ecosystem": "mcp-registry",
@@ -144650,6 +145611,28 @@
         "mcp"
       ],
       "version": "0.1.13"
+    },
+    {
+      "id": "mcp-registry:com.pentonym/clearance",
+      "name": "com.pentonym/clearance",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "US & EU trademark, domain & handle clearance — a signed three-state verdict, not legal advice.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pentonym/clearance",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pentonym/clearance\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://pentonym.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.petabloom/podcasts",
@@ -144762,6 +145745,28 @@
       "version": "0.9.6"
     },
     {
+      "id": "mcp-registry:com.pirchjobs/pirch",
+      "name": "com.pirchjobs/pirch",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Verified job search: every listing confirmed live and accepting applicants within the last 72h.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pirchjobs/pirch",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pirchjobs/pirch\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://pirchjobs.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.pitchcentric/mcp-server",
       "name": "com.pitchcentric/mcp-server",
       "ecosystem": "mcp-registry",
@@ -144804,6 +145809,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.pixfaro/mcp",
+      "name": "com.pixfaro/mcp",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Generate images with any major model — one API key, one prepaid balance, one MCP.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.pixfaro/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.pixfaro/mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/pixfaro/mcp",
+      "homepageUrl": "https://pixfaro.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.2"
     },
     {
       "id": "mcp-registry:com.playcallerapp/mcp",
@@ -144872,6 +145899,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.politicalcomms/docs",
+      "name": "com.politicalcomms/docs",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Political Comms documentation MCP server: search docs, query the docs filesystem. No auth.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.politicalcomms/docs",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.politicalcomms/docs\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://docs.politicalcomms.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.ponito/product-intelligence",
+      "name": "com.ponito/product-intelligence",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "GTIN-keyed product search, best offers and daily price history across Swiss and European shops.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.ponito/product-intelligence",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.ponito/product-intelligence\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://www.ponito.com/platform/products/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:com.postgate-ai/microsoft-exchange",
       "name": "com.postgate-ai/microsoft-exchange",
       "ecosystem": "mcp-registry",
@@ -144894,6 +145965,28 @@
       "version": "2026.7.11"
     },
     {
+      "id": "mcp-registry:com.postrippl/postrippl",
+      "name": "com.postrippl/postrippl",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Schedule social media posts to Instagram, TikTok, LinkedIn, YouTube, Threads, Bluesky, Discord",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.postrippl/postrippl",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.postrippl/postrippl\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.potomacledger/trades",
       "name": "com.potomacledger/trades",
       "ecosystem": "mcp-registry",
@@ -144907,6 +146000,72 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.potomacledger/trades\" --adapter claude --local",
       "repoUrl": "https://github.com/mattransmith-cmyk/potomac-ledger",
       "homepageUrl": "https://potomacledger.com/ai/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.powerpoint-sucks/decks",
+      "name": "com.powerpoint-sucks/decks",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Upload AI-written HTML presentations and manage expiring, revocable share links over OAuth.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.powerpoint-sucks/decks",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.powerpoint-sucks/decks\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://powerpoint-sucks.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.precision-concretecoating/mcp",
+      "name": "com.precision-concretecoating/mcp",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Precision Concrete Coating MCP for services, estimates, scheduling, and business information.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.precision-concretecoating/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.precision-concretecoating/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.predictionmarketspicks/fantasy-draft",
+      "name": "com.predictionmarketspicks/fantasy-draft",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "AI fantasy football draft assistant — 2026 board, best available, sleepers, ADP gaps. Who to draft?",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.predictionmarketspicks/fantasy-draft",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.predictionmarketspicks/fantasy-draft\" --adapter claude --local",
+      "repoUrl": "https://github.com/predictionmarketspicks/fantasy-draft-mcp",
+      "homepageUrl": "https://predictionmarketspicks.com/draft",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -144980,6 +146139,116 @@
         "mcp"
       ],
       "version": "0.33.0"
+    },
+    {
+      "id": "mcp-registry:com.printinglabs/printing-labs",
+      "name": "com.printinglabs/printing-labs",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Corporate gifting: catalog search, bulk GST pricing, quotes, meetings, HR welcome-kit automation.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.printinglabs/printing-labs",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.printinglabs/printing-labs\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://printinglabs.com/developers",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.professorsausages/sausage-finance",
+      "name": "com.professorsausages/sausage-finance",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "SEC filings, insider trades, 13F, IPO calendar, macro & FX MCP tools via x402.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.professorsausages/sausage-finance",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.professorsausages/sausage-finance\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://x402.professorsausages.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.promtpress/ads",
+      "name": "com.promtpress/ads",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Buy Telegram subscribers and website traffic, billed per verified result.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.promtpress/ads",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.promtpress/ads\" --adapter claude --local",
+      "repoUrl": "https://github.com/x3clv/promtpress-mcp",
+      "homepageUrl": "https://promtpress.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.proscendia/google-workspace",
+      "name": "com.proscendia/google-workspace",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Permissioned access to Gmail, Drive and Calendar via the user's own Google account",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.proscendia/google-workspace",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.proscendia/google-workspace\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://proscendia.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.proscendia/microsoft-365",
+      "name": "com.proscendia/microsoft-365",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Permissioned access to Outlook, OneDrive and Teams via the user's own Microsoft account",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.proscendia/microsoft-365",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.proscendia/microsoft-365\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://proscendia.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.proxylink-mcp/mcp-server",
@@ -186848,6 +188117,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.papacasper/mcp-toolbelt",
+      "name": "mcp-toolbelt",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Pay-per-call web, SEO, DNS, and network tools via the x402 protocol.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.papacasper/mcp-toolbelt",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.papacasper/mcp-toolbelt\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.gautamgb/mcp-server-mcpindex",
       "name": "mcpindex",
       "ecosystem": "mcp-registry",
@@ -190073,6 +191364,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:porn.tik-tok/tiktokporn\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://tik-tok.porn/mcp-server",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.post-mesh/mcp",
+      "name": "post mesh",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Schedule and publish to YouTube, TikTok, Instagram, X, Threads & Facebook. Japanese-language SaaS.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.post-mesh/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.post-mesh/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://post-mesh.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -203872,6 +205185,36 @@
       "version": "0.1.0"
     },
     {
+      "id": "clawhub:claw-crumbs",
+      "name": "Claw Crumbs",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Per-project bootstrap crumbs for OpenClaw",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "tools",
+        "runtime",
+        "Claw Crumbs Refresh",
+        "Claw Crumbs Status",
+        "Scheduler"
+      ],
+      "source": "clawhub:claw-crumbs",
+      "installCommand": "npx agentwheel install \"clawhub:claw-crumbs\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/mokulelekoa/plugins/claw-crumbs",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "clawhub:claw-guardian",
       "name": "Claw Guardian",
       "ecosystem": "clawhub",
@@ -212737,6 +214080,37 @@
       "version": "0.0.50"
     },
     {
+      "id": "clawhub:@outshift-open/insightclaw",
+      "name": "InsightClaw Plugin",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "InsightClaw plugin for OpenClaw — traces, metrics, and deep observability for your OpenClaw agents.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "runtime",
+        "observability",
+        "metrics",
+        "opentelemetry",
+        "multi-agentic-observability",
+        "traceability"
+      ],
+      "source": "clawhub:@outshift-open/insightclaw",
+      "installCommand": "npx agentwheel install \"clawhub:@outshift-open/insightclaw\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/outshift-open/plugins/insightclaw",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "0.1.3"
+    },
+    {
       "id": "clawhub:@agntdata/openclaw-instagram",
       "name": "Instagram API",
       "ecosystem": "clawhub",
@@ -213686,6 +215060,36 @@
         "plugins"
       ],
       "version": "2.0.0"
+    },
+    {
+      "id": "clawhub:@plak/openclaw-keet-channel",
+      "name": "Keet",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "OpenClaw channel plugin for Keet/Holepunch messaging through a local bridge adapter.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "other",
+        "keet",
+        "holepunch",
+        "messaging",
+        "bridge"
+      ],
+      "source": "clawhub:@plak/openclaw-keet-channel",
+      "installCommand": "npx agentwheel install \"clawhub:@plak/openclaw-keet-channel\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/plak/plugins/openclaw-keet-channel",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "0.1.21"
     },
     {
       "id": "clawhub:kepler.bundle",
@@ -224024,6 +225428,35 @@
       "version": "1.0.0"
     },
     {
+      "id": "clawhub:any-sync",
+      "name": "Openclaw Plugin",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Cross-device sync for OpenClaw workspace (skills, memory, settings) via GitHub",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "memory",
+        "Sync",
+        "GitHub",
+        "Workspace"
+      ],
+      "source": "clawhub:any-sync",
+      "installCommand": "npx agentwheel install \"clawhub:any-sync\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/imink/plugins/any-sync",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "0.2.6"
+    },
+    {
       "id": "clawhub:openclaw-plugin-csg-bidding",
       "name": "Openclaw Plugin Csg Bidding",
       "ecosystem": "clawhub",
@@ -225134,6 +226567,37 @@
       "installCommand": "npx agentwheel install \"clawhub:pdf-extract-text\" --adapter openclaw --local --only-source --execute-plugins",
       "repoUrl": null,
       "homepageUrl": "https://clawhub.ai/rishabhdugar/plugins/pdf-extract-text",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.1"
+    },
+    {
+      "id": "clawhub:pdf-lock-unlock",
+      "name": "PDF Lock & Unlock",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Lock and unlock PDF documents. Add AES-256/AES-128/RC4 encryption with granular permissions, unlock encrypted PDFs with multiple decryption engines, and inspect encryption status. Powered by PDFAPIHub.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "security",
+        "PDF Lock",
+        "PDF Security",
+        "Pdfapihub",
+        "Password Protect",
+        "PDF Decrypt"
+      ],
+      "source": "clawhub:pdf-lock-unlock",
+      "installCommand": "npx agentwheel install \"clawhub:pdf-lock-unlock\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/rishabhdugar/plugins/pdf-lock-unlock",
       "homepageLinkLabel": "ClawHub",
       "stars": null,
       "lastPush": null,
@@ -243814,7 +245278,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:kadajett/agent-nestjs-skills\"",
       "repoUrl": "https://github.com/kadajett/agent-nestjs-skills",
       "homepageUrl": null,
-      "stars": 256,
+      "stars": 257,
       "lastPush": "2026-07-23T02:35:52Z",
       "archived": false,
       "provides": null,
@@ -243834,7 +245298,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:vercel-labs/agent-skills\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": null,
-      "stars": 30269,
+      "stars": 30284,
       "lastPush": "2026-08-18T14:36:59Z",
       "archived": false,
       "provides": null,
@@ -243854,7 +245318,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:supabase/agent-skills\"",
       "repoUrl": "https://github.com/supabase/agent-skills",
       "homepageUrl": null,
-      "stars": 2530,
+      "stars": 2532,
       "lastPush": "2026-08-12T07:37:08Z",
       "archived": false,
       "provides": null,
@@ -243930,7 +245394,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:softaworks/agent-toolkit\"",
       "repoUrl": "https://github.com/softaworks/agent-toolkit",
       "homepageUrl": null,
-      "stars": 2365,
+      "stars": 2369,
       "lastPush": "2026-03-05T16:46:24Z",
       "archived": false,
       "provides": null,
@@ -243949,7 +245413,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:wshobson/agents\"",
       "repoUrl": "https://github.com/wshobson/agents",
       "homepageUrl": null,
-      "stars": 38957,
+      "stars": 38974,
       "lastPush": "2026-08-18T15:56:45Z",
       "archived": false,
       "provides": null,
@@ -243969,8 +245433,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:stripe/ai\"",
       "repoUrl": "https://github.com/stripe/ai",
       "homepageUrl": null,
-      "stars": 1753,
-      "lastPush": "2026-08-20T14:22:18Z",
+      "stars": 1755,
+      "lastPush": "2026-08-21T05:46:38Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -243988,7 +245452,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:sickn33/antigravity-awesome-skills\"",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "homepageUrl": null,
-      "stars": 45185,
+      "stars": 45205,
       "lastPush": "2026-08-20T18:24:50Z",
       "archived": false,
       "provides": null,
@@ -244007,7 +245471,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:ComposioHQ/awesome-claude-skills\"",
       "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 72888,
+      "stars": 72920,
       "lastPush": "2026-08-10T21:45:44Z",
       "archived": false,
       "provides": null,
@@ -244026,7 +245490,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:travisvn/awesome-claude-skills\"",
       "repoUrl": "https://github.com/travisvn/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 14741,
+      "stars": 14750,
       "lastPush": "2026-04-28T19:30:24Z",
       "archived": false,
       "provides": null,
@@ -244045,7 +245509,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jimliu/baoyu-skills\"",
       "repoUrl": "https://github.com/jimliu/baoyu-skills",
       "homepageUrl": null,
-      "stars": 25201,
+      "stars": 25210,
       "lastPush": "2026-07-04T16:25:18Z",
       "archived": false,
       "provides": null,
@@ -244102,7 +245566,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:waynesutton/convexskills\"",
       "repoUrl": "https://github.com/waynesutton/convexskills",
       "homepageUrl": null,
-      "stars": 403,
+      "stars": 404,
       "lastPush": "2026-02-06T01:49:59Z",
       "archived": false,
       "provides": null,
@@ -244140,8 +245604,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:langgenius/dify\"",
       "repoUrl": "https://github.com/langgenius/dify",
       "homepageUrl": null,
-      "stars": 153034,
-      "lastPush": "2026-08-20T18:39:12Z",
+      "stars": 153093,
+      "lastPush": "2026-08-21T07:06:13Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -244159,8 +245623,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:NousResearch/hermes-agent\"",
       "repoUrl": "https://github.com/NousResearch/hermes-agent",
       "homepageUrl": null,
-      "stars": 233484,
-      "lastPush": "2026-08-20T18:36:10Z",
+      "stars": 233677,
+      "lastPush": "2026-08-21T07:08:25Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -244178,7 +245642,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:coreyhaines31/marketingskills\"",
       "repoUrl": "https://github.com/coreyhaines31/marketingskills",
       "homepageUrl": null,
-      "stars": 45058,
+      "stars": 45110,
       "lastPush": "2026-08-19T18:16:52Z",
       "archived": false,
       "provides": null,
@@ -244216,7 +245680,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:kepano/obsidian-skills\"",
       "repoUrl": "https://github.com/kepano/obsidian-skills",
       "homepageUrl": null,
-      "stars": 46897,
+      "stars": 46942,
       "lastPush": "2026-06-08T16:12:01Z",
       "archived": false,
       "provides": null,
@@ -244236,7 +245700,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:anthropics/skills\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": null,
-      "stars": 170659,
+      "stars": 170742,
       "lastPush": "2026-08-18T16:02:06Z",
       "archived": false,
       "provides": null,
@@ -244256,8 +245720,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:expo/skills\"",
       "repoUrl": "https://github.com/expo/skills",
       "homepageUrl": null,
-      "stars": 2437,
-      "lastPush": "2026-08-20T14:29:21Z",
+      "stars": 2440,
+      "lastPush": "2026-08-21T01:08:31Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -244276,7 +245740,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:remotion-dev/skills\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": null,
-      "stars": 4355,
+      "stars": 4358,
       "lastPush": "2026-08-20T12:06:25Z",
       "archived": false,
       "provides": null,
@@ -244295,7 +245759,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:trailofbits/skills\"",
       "repoUrl": "https://github.com/trailofbits/skills",
       "homepageUrl": null,
-      "stars": 6740,
+      "stars": 6760,
       "lastPush": "2026-08-20T16:26:59Z",
       "archived": false,
       "provides": null,
@@ -244314,7 +245778,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:better-auth/skills\"",
       "repoUrl": "https://github.com/better-auth/skills",
       "homepageUrl": null,
-      "stars": 207,
+      "stars": 208,
       "lastPush": "2026-07-11T00:03:58Z",
       "archived": false,
       "provides": null,
@@ -244352,7 +245816,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:dimillian/skills\"",
       "repoUrl": "https://github.com/dimillian/skills",
       "homepageUrl": null,
-      "stars": 3912,
+      "stars": 3913,
       "lastPush": "2026-03-29T15:28:02Z",
       "archived": false,
       "provides": null,
@@ -244373,7 +245837,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:obra/superpowers\"",
       "repoUrl": "https://github.com/obra/superpowers",
       "homepageUrl": null,
-      "stars": 274829,
+      "stars": 275174,
       "lastPush": "2026-08-19T17:33:23Z",
       "archived": false,
       "provides": null,
@@ -244392,7 +245856,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:emalorenzo/three-agent-skills\"",
       "repoUrl": "https://github.com/emalorenzo/three-agent-skills",
       "homepageUrl": null,
-      "stars": 44,
+      "stars": 46,
       "lastPush": "2026-01-28T15:56:21Z",
       "archived": false,
       "provides": null,
@@ -244411,7 +245875,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:cloudai-x/threejs-skills\"",
       "repoUrl": "https://github.com/cloudai-x/threejs-skills",
       "homepageUrl": null,
-      "stars": 3053,
+      "stars": 3055,
       "lastPush": "2026-07-09T20:45:53Z",
       "archived": false,
       "provides": null,
@@ -244430,7 +245894,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:hyf0/vue-skills\"",
       "repoUrl": "https://github.com/hyf0/vue-skills",
       "homepageUrl": null,
-      "stars": 2798,
+      "stars": 2797,
       "lastPush": "2026-05-30T21:32:00Z",
       "archived": false,
       "provides": null,
@@ -244450,8 +245914,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-browser/agent-browser\"",
       "repoUrl": "https://github.com/vercel-labs/agent-browser",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-browser/agent-browser",
-      "stars": 41021,
-      "lastPush": "2026-08-19T15:33:45Z",
+      "stars": 41057,
+      "lastPush": "2026-08-20T21:07:59Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -244471,7 +245935,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/skills/find-skills\"",
       "repoUrl": "https://github.com/vercel-labs/skills",
       "homepageUrl": "https://skills.sh/vercel-labs/skills/find-skills",
-      "stars": 29324,
+      "stars": 29359,
       "lastPush": "2026-08-18T20:28:34Z",
       "archived": false,
       "provides": null,
@@ -244492,7 +245956,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/frontend-design\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/frontend-design",
-      "stars": 170659,
+      "stars": 170742,
       "lastPush": "2026-08-18T16:02:06Z",
       "archived": false,
       "provides": null,
@@ -244513,7 +245977,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/mattpocock/skills/grill-me\"",
       "repoUrl": "https://github.com/mattpocock/skills",
       "homepageUrl": "https://skills.sh/mattpocock/skills/grill-me",
-      "stars": 225894,
+      "stars": 227400,
       "lastPush": "2026-08-20T10:35:33Z",
       "archived": false,
       "provides": null,
@@ -244534,7 +245998,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/remotion-dev/skills/remotion-best-practices\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": "https://skills.sh/remotion-dev/skills/remotion-best-practices",
-      "stars": 4355,
+      "stars": 4358,
       "lastPush": "2026-08-20T12:06:25Z",
       "archived": false,
       "provides": null,
@@ -244555,7 +246019,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/skill-creator\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/skill-creator",
-      "stars": 170659,
+      "stars": 170742,
       "lastPush": "2026-08-18T16:02:06Z",
       "archived": false,
       "provides": null,
@@ -244576,7 +246040,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/vercel-react-best-practices\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices",
-      "stars": 30269,
+      "stars": 30284,
       "lastPush": "2026-08-18T14:36:59Z",
       "archived": false,
       "provides": null,
@@ -244597,7 +246061,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/web-design-guidelines\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/web-design-guidelines",
-      "stars": 30269,
+      "stars": 30284,
       "lastPush": "2026-08-18T14:36:59Z",
       "archived": false,
       "provides": null,
