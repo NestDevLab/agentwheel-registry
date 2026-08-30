@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-30T12:05:57.014Z",
+  "generatedAt": "2026-08-30T21:13:52.207Z",
   "entries": [
     {
       "id": "official:agent-plugin-extra-message-policy",
@@ -60,7 +60,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/agent-tmux/SKILL.md",
       "readmeExcerpt": "Control Codex CLI and Claude Code CLI sessions via tmux with one agent-agnostic toolset. The same bin/ scripts drive any agent through a --agent <type> flag; per-agent quirks (submit key, prompt char, idle/working patterns, launch flags) live in agents/<type>.conf. Reaches on-disk sessions that an agent's own MCP server no longer tracks. This is the tmux transport for the mesh: any agent that can run these scripts can pilot supported CLI agents through persistent tmux sessions. - In Codex Desktop, use native task capabilities for Codex-to-Codex work when they are exposed: sendmessagetothread for an existing task, waitthreads or readthread for observation, createthread for a new user-visible task only after an explicit user request, and forkthread when completed source history should carry over. Run listprojects before project-backed creation and use a worktree by default for Git projects. - A task still being prepared may return only clientThreadId; wait for a real threadId before trying to read, wait on, or message it. - Same-runtime subagent fan-out uses native delegation by default. Desktop tasks and subagents are different surfaces: do not create a user-owned Desktop task mere…",
       "stars": 0,
-      "lastPush": "2026-08-30T10:05:16Z",
+      "lastPush": "2026-08-30T21:01:32Z",
       "archived": false,
       "provides": [
         "skills"
@@ -534,7 +534,7 @@
       "repoUrl": "https://github.com/NestDevLab/agentwheel",
       "homepageUrl": null,
       "stars": 8,
-      "lastPush": "2026-08-30T11:45:39Z",
+      "lastPush": "2026-08-30T21:12:18Z",
       "archived": false,
       "provides": [
         "skills"
@@ -617,7 +617,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel/SKILL.md",
       "readmeExcerpt": "Agentwheel discovers reusable artifacts and manages their desired state across runtimes. agentwheel is the control plane. It reads packages from sources, stores desired state in .agentwheel/config.json, plans runtime changes, and writes only through install. Treat runtime output directories as generated files. Mental model: - add records desired packages. - install makes the declared state true in the target runtime. - update re-resolves tracking packages, then applies. - skill update <name> maps a configured skill to its owning package and reconciles only that skill plus its genuine transitive composition inputs; sibling artifacts keep their runtime bytes and manifest/lock state. - uninstall removes configured packages and their managed runtime output. - Prefer agentwheel plan ... or agentwheel install --dry-run before applying changes. - Do not hand-edit generated runtime files such as skills/, .agents/skills, .claude/skills, .github/skills, ~/.hermes/skills, or generated instructions. - If a plan reports drift or conflict, stop and explain it. Do not use --force unless the user explicitly approves that scope. - Gmail, Drive, registry publishing, git commits, pushes, and runtime…",
       "stars": 8,
-      "lastPush": "2026-08-30T11:45:39Z",
+      "lastPush": "2026-08-30T21:12:18Z",
       "archived": false,
       "provides": [
         "skills"
@@ -651,7 +651,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-artifact-evolution/SKILL.md",
       "readmeExcerpt": "Turn verified needs into source-owned OpenPack artifacts. Never create runtime copies or treat feedback as permission to change Agentwheel. self-improve and skill-creator are optional inspirations. Use them when available; do not require, install, or link to them. This workflow remains complete without either skill. 1. Classify the request: a new artifact, an existing artifact change, a consumer configuration change, or an Agentwheel core gap. Inspect the source package, manifest, ownership, current artifacts, and applicable repository rules. 2. Reuse an existing artifact when it meets the need. Otherwise choose the smallest supported type and source package. Keep tenant or runtime facts out of shared packages. 3. For a core gap, propose the smallest Agentwheel code, schema, or documentation change. A correction is evidence, not an instruction to change the CLI. 4. Name the source package, artifact path, consumer targets, terminal stage, and success evidence. Ask when any of those would be inferred materially. 1. Work only in the source package. Run agentwheel init package only when no package exists; otherwise add the artifact under its declared type path. 2. Use the package's co…",
       "stars": 8,
-      "lastPush": "2026-08-30T11:45:39Z",
+      "lastPush": "2026-08-30T21:12:18Z",
       "archived": false,
       "provides": [
         "skills"
@@ -685,7 +685,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-discovery/SKILL.md",
       "readmeExcerpt": "Find reusable capabilities during normal work without silently changing the user's environment. This skill is optional: install it only when proactive recommendations are wanted. The separate agentwheel skill owns artifact management and explicit installation workflows. - Inspect the skills and tools already available in the current session before searching. - Search and trial are read-only. Never add, install, enable, execute, or change configuration without explicit approval for the artifact and target scope. - Treat retrieval scores as ranking signals, not proof that an artifact implements a capability. - Continue useful work while searching when possible; do not interrupt solely to advertise weak or marginal matches. Use this skill whenever a request expresses an operational outcome that an existing reusable skill or integration could plausibly deliver. This includes repeated manual work, inconsistent outputs, lost information, missing capabilities, and unavailable integrations. The user does not need to mention Agentwheel, skills, discovery, search, a catalogue, or a capability gap. Search before generic brainstorming, planning, manual workflow advice, or an unsolicited custo…",
       "stars": 8,
-      "lastPush": "2026-08-30T11:45:39Z",
+      "lastPush": "2026-08-30T21:12:18Z",
       "archived": false,
       "provides": [
         "skills"
@@ -719,7 +719,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-smoke/SKILL.md",
       "readmeExcerpt": "Use this skill to answer: \"What harness am I running in, where was this skill installed, and what does Agentwheel think about this target?\" The default workflow is read-only. Do not run agentwheel install, agentwheel update, agentwheel uninstall, agentwheel remember, agentwheel eject, or any file-writing fix while using this skill unless the user separately approves that mutation scope. From the user's current workspace, run the bundled smoke script: Use JSON output only when another tool or script needs to consume the result: When the user names an Agentwheel target, pass only read-only status target flags: Summarize the script output in four parts: - Overall: PASS, WARN, or FAIL. - Harness: detected adapter, installation type, runtime root, and skill path. - Agentwheel: CLI availability, version, config locations, packages, agents, profiles, and status result. - Recommended next command: prefer agentwheel status, agentwheel plan, or agentwheel install --dry-run. Treat these as important signals: - PASS: skill path maps to a documented Agentwheel harness target and agentwheel status reports no pending work. - WARN: the skill is running from package source, status is missing, conf…",
       "stars": 8,
-      "lastPush": "2026-08-30T11:45:39Z",
+      "lastPush": "2026-08-30T21:12:18Z",
       "archived": false,
       "provides": [
         "skills"
@@ -754,12 +754,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/architect/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: architect.",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:agent-toolkit:skills/check-ticket-implementation",
@@ -825,12 +825,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/code-review/SKILL.md",
       "readmeExcerpt": "Use this skill when asked to review a proposed change, patch, configuration, or technical document. - Start with findings, ordered by severity. - Focus on bugs, regressions, safety issues, boundary violations, and missing validation. - Tie each finding to a concrete file, behavior, or requirement. - Separate blocking issues from optional improvements. 1. Read the relevant instructions and the changed files. 2. Identify the intended behavior and validation expectations. 3. Check for correctness, edge cases, data handling, and operational risk. 4. Report findings first. If no issues are found, say that plainly and note residual risk. Use concise sections: - Findings - Open questions - Validation gaps - Summary",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:nestdev-core-toolkit:skills/codex-suggested-next-message",
@@ -860,12 +860,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/codex-suggested-next-message/SKILL.md",
       "readmeExcerpt": "This skill supplies the executable companion for the Stop hook in hooks/codex-suggested-next-message.json. The hook stays inactive until CODEXSUGGESTEDNEXTMESSAGEENABLED=1 is present in the environment that starts Codex. After each completed response, the hook gives gpt-5.6-luna at low reasoning effort only the latest user context and bounded final answer. It then requests one concise candidate for the user's next message and uses one guarded Stop continuation to append this copyable Markdown block: text <candidate> The hook is fail-open: a missing dependency, timeout, invalid model output, or unsupported event produces no suggestion and never blocks the main turn. The stophookactive guard prevents a second continuation. Install the package's skills and hooks with Agentwheel, review the hook, then start Codex with: The hook needs Python 3.9+ and the codex CLI. A user-level install resolves the companion script from ~/.agents/skills. For a project-local install, name that script explicitly when starting Codex: The hook deliberately does not discover scripts below the current repository: a user-level hook must not automatically execute a repository-controlled path. By default, Luna…",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:nestdev-core-toolkit:skills/communicator",
@@ -895,12 +895,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/communicator/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: communicator.",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:agent-toolkit:skills/compact-docs-writer",
@@ -1038,12 +1038,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/conversation-handoff/SKILL.md",
       "readmeExcerpt": "Transfer the live thread, not the transcript or project record. Existing work items, specifications, decisions, commits, and diffs remain authoritative; reference them instead of copying them. 1. Resolve this skill's directory and run: Use --output <path> only when the user explicitly chose a durable destination; otherwise the script writes to the OS temporary directory. 2. Fill every placeholder from the conversation and verified local state. Classify claims as Verified, Source-backed, or Assumed; cite a path, URL, command, or check for the first two. 3. Preserve unresolved decisions, rejected options that constrain the next step, blockers with owners/resume conditions, approval gates, and the exact next safe action. Suggest only relevant installed skills or catalogue searches. 4. Redact credentials, tokens, personal data, private payloads, and secret-bearing logs. Keep safe identifiers such as variable names and retrieval locations. 5. Run python3 <skill-dir>/scripts/handoff.py validate <file>. Do not hand off while it reports errors. Return the absolute path and validation result; do not start another agent unless separately requested. 1. Read the entire handoff, then run pytho…",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:nestdev-core-toolkit:skills/coordinator",
@@ -1073,12 +1073,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/coordinator/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: coordinator.",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:agent-toolkit:skills/create-implementation-plan",
@@ -1214,7 +1214,7 @@
       "sourceUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/tree/main/skills/decision-interview",
       "sourceLinkLabel": "Skill source",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "fragments",
@@ -1223,7 +1223,7 @@
         "rules",
         "skills"
       ],
-      "version": "0.4.0",
+      "version": "0.4.1",
       "artifactMetadata": [
         {
           "selector": "skills/decision-interview",
@@ -1428,12 +1428,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/decision-interview/SKILL.md",
       "readmeExcerpt": "Use this skill to converge on a well-supported answer or opinion before acting. It supports the QAO pattern: the session alternates between focused questions, provisional answers, and explicit opinions until the remaining uncertainty is acceptable or the user redirects. 1. Classify the target: factual answer, judgment/opinion, decision, plan, diagnosis, or creative direction. 2. State the current uncertainty in one sentence when it affects the next move. 3. Ask the smallest useful next question. Prefer one question at a time. 4. If the answer can be found by inspecting local context, tools, docs, or reliable sources, inspect instead of asking. 5. Continue until one of these is true: - confidence is high enough to answer; - the remaining uncertainty no longer changes the recommendation; - the user chooses speed over more intake; - progress is blocked by unavailable private context, credentials, or a decision only the user can make. 6. Give the answer or opinion with confidence, assumptions, and what would change the conclusion. - Ask concrete questions that reduce decision-relevant uncertainty. - Explain why the question matters only when that is not obvious. - Offer a recommended…",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:nestdev-core-toolkit:skills/developer",
@@ -1463,12 +1463,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/developer/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: developer.",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:nestdev-core-toolkit:skills/documenter",
@@ -1498,12 +1498,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/documenter/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: documenter.",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:agent-toolkit:skills/fetch-pr-review",
@@ -1751,7 +1751,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/mesh-discord-routing/README.md",
       "readmeExcerpt": "Mesh Discord Routing is a small, portable skill that lets agents of any runtime communicate with each other through Discord using simple, explicit routing rules. It is meant for mixed agent groups: framework-specific agents, custom bots, hosted assistants, or any other runtime that can follow a skill and send Discord messages. The shared rule is: - each agent decides who should receive its own reply - agents use semantic recipient labels, not raw Discord mention strings - a small hydrator script turns those labels into the cc-mesh: trigger and Discord mentions - an optional session helper can keep turn state for multi-turn workflows - the human-readable message stays separate from routing metadata This keeps the routing policy simple enough for language models to follow while keeping mention formatting deterministic and runtime-independent. The skill gives agents a common protocol for mesh-mode Discord conversations: 1. If a message contains cc-mesh:, treat it as a routed mesh message. 2. Decide who should receive the reply. 3. Default to notifying the sender when answering directly. 4. Add other recipients only when they should be involved. 5. Use no recipients only when no bot s…",
       "stars": 0,
-      "lastPush": "2026-08-30T10:05:16Z",
+      "lastPush": "2026-08-30T21:01:32Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1816,7 +1816,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-core-toolkit-public",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "fragments",
@@ -1825,7 +1825,7 @@
         "rules",
         "skills"
       ],
-      "version": "0.4.0",
+      "version": "0.4.1",
       "artifactMetadata": [
         {
           "selector": "skills/decision-interview",
@@ -2024,7 +2024,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-mesh",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-08-30T10:05:16Z",
+      "lastPush": "2026-08-30T21:01:32Z",
       "archived": false,
       "provides": [
         "instructions",
@@ -2080,7 +2080,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-must-have",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-08-29T16:02:49Z",
+      "lastPush": "2026-08-30T17:05:11Z",
       "archived": false,
       "provides": [],
       "version": "0.2.1"
@@ -2105,7 +2105,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-must-have",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-08-29T16:02:49Z",
+      "lastPush": "2026-08-30T17:05:11Z",
       "archived": false,
       "provides": [],
       "version": "0.2.1"
@@ -2132,7 +2132,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-must-have",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-08-29T16:02:49Z",
+      "lastPush": "2026-08-30T17:05:11Z",
       "archived": false,
       "provides": [],
       "version": "0.2.1"
@@ -2158,7 +2158,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-must-have",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-08-29T16:02:49Z",
+      "lastPush": "2026-08-30T17:05:11Z",
       "archived": false,
       "provides": [],
       "version": "0.2.1"
@@ -2191,12 +2191,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/operator/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: operator.",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:nestdev-core-toolkit:skills/plan-task",
@@ -2226,12 +2226,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/plan-task/SKILL.md",
       "readmeExcerpt": "Use this skill when a request needs sequencing, risk control, or coordination before implementation. Use when the user is brainstorming, says something like \"we should\", gives several tasks at once, or leaves scope/intent unclear. Do not implement during intake unless the user explicitly confirms execution or the change is obvious, narrow, low-risk, and reversible. - Resolve what the codebase can answer; ask only for choices the code cannot settle. - Ask one focused question at a time when a decision blocks the plan. - Prefer selectable options when the UI/tool supports them; otherwise give short recommended choices in plain text. - Put irreversible, external, costly, privileged, or ambiguous edits behind approval gates. - Treat \"go ahead\", \"procedi\", \"do it\", or equivalent confirmation as the implementation handoff. - Make validation part of the plan, not an afterthought. A useful plan includes: - Goal and scope - Current-state observations - Ordered execution steps - Validation checks - Approval gates - Risks and open questions Keep the plan specific enough that an implementer can execute it without hidden context.",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:agent-toolkit:skills/refine-pr-review",
@@ -2405,12 +2405,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/reviewer/SKILL.md",
       "readmeExcerpt": "State the active role when adopting it: Active role: reviewer.",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:agent-toolkit:skills/run-nx-checks",
@@ -2548,12 +2548,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/set-visual-title/SKILL.md",
       "readmeExcerpt": "1. Resolve the current session or channel with its native title operation. In Codex, use setthreadtitle. Otherwise discover the host-native title or rename operation; never use another host's threads, API, or local storage. 2. If native identity or an authorized rename operation is unavailable, report that exact limitation and do not rename anything. 3. Infer the substantive current topic from the conversation's target, action, and intended outcome. Replace an early, vague, or superseded title with a concise 1–7-word topic in the user's language. Retain an explicit user-supplied topic when it remains accurate. 4. Accept a project only when the active environment supplies a reliable project name and fixed project emoji. Its project policy may resolve it from the session's launch directory first, then established conversation context. Do not invent a project from a weak mention. 5. Select one widely supported topic emoji that represents the actual work. Keep it distinct from the project emoji. 6. When a project is known, set project emoji topic emoji Project: Topic — for example, 🧩 🛠️ Project: Update dependencies. Otherwise set topic emoji Topic. Do not retain a conflicting old em…",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:nestdev-core-toolkit:skills/skill-evolution",
@@ -2583,12 +2583,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/skill-evolution/SKILL.md",
       "readmeExcerpt": "Turn verified improvement signals into source-aware, reversible skill revisions. - Treat installed and generated copies as evidence, never source. - Resolve source, revision, owner, license, and policy before drafting. - Prefer deterministic enforcement; prose alone is incomplete when a script, test, lint, schema, or hook can encode the improvement. - A candidate cannot approve changes to its classifier, evaluator, policy, promoter, observer, schema, activation fragment, or this skill. - Persist only bounded, sanitized evidence; never prompts, secrets, or complete tool payloads. 1. Normalize the signal as skill-evolution.event.v1; deduplicate by target, base hash, check, and evidence fingerprint. 2. Resolve the authoritative source from manager provenance. Stop on ambiguity or source drift. 3. Route ownership: - owned source: revise the origin; - redistributable third party: create or update the configured derivative, preserve license and upstream binding, and declare supersedes; - restricted or unknown license: retain an overlay and block publication. 4. Enforce before drafting. If deterministic, create or update the authoritative transformer and focused tests, register it, and p…",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "official:syncwheel",
@@ -2610,12 +2610,12 @@
       "repoUrl": "https://github.com/NestDevLab/syncwheel",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-08-30T02:29:42Z",
+      "lastPush": "2026-08-30T21:07:46Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.35.1",
+      "version": "0.35.2",
       "artifactMetadata": [
         {
           "selector": "skills/syncwheel",
@@ -2661,12 +2661,12 @@
       "readmeUrl": "https://github.com/NestDevLab/syncwheel/blob/main/skills/syncwheel/SKILL.md",
       "readmeExcerpt": "Syncwheel makes Git maintenance deterministic and safe when many agents touch the same repositories. Branch ownership, PR stacks, and the integration branch are described in a manifest; Syncwheel reconciles Git to match it. Plain manual git/worktree surgery is the exception path, used only when Syncwheel is unavailable, blocked, or cannot express the needed recovery. First, detect the regime. Before branch, worktree, integration, PR, recovery, or handoff work in any Git repo, check whether it is Syncwheel-managed: a .syncwheel/ directory or manifest is present, or a workspace/project guide says so. When unsure, run syncwheel status. If it is managed — or the repo is shared, fork/upstream, or touched by multiple agents — it is Syncwheel-first: do not reach for manual git branch/worktree/integration surgery as the default path. Reach for Syncwheel before any of these, not after: - editing or handing off work in a Git repository that is shared, managed by Syncwheel, or likely to be touched by multiple agents - creating a PR branch or a stack of dependent PRs - working in a repo that has a .syncwheel/ manifest, or a fork/upstream/integration/PR-stack workflow - committing on integrati…",
       "stars": 0,
-      "lastPush": "2026-08-30T02:29:42Z",
+      "lastPush": "2026-08-30T21:07:46Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.35.1"
+      "version": "0.35.2"
     },
     {
       "id": "official:agent-toolkit:skills/use-conversational-language",
@@ -2768,12 +2768,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-core-toolkit-public/blob/main/skills/write-docs/SKILL.md",
       "readmeExcerpt": "Use this skill when creating or updating documentation that future users or agents will rely on. - Identify the canonical source before writing. - Prefer durable guidance over chat-history summaries. - Keep examples generic unless the target document is explicitly private. - Avoid duplicating volatile details when a pointer is enough. 1. Determine the audience and the action the document should enable. 2. Read nearby documentation to match tone and structure. 3. Write concise sections with clear headings. 4. Include validation, ownership, or update guidance where relevant. 5. Remove stale or conflicting wording when replacing guidance.",
       "stars": 0,
-      "lastPush": "2026-08-30T04:42:46Z",
+      "lastPush": "2026-08-30T21:10:45Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.4.0"
+      "version": "0.4.1"
     },
     {
       "id": "openpack:NestDevLab/agent-memory-fabric",
@@ -7950,6 +7950,28 @@
       "version": "0.1.7"
     },
     {
+      "id": "mcp-registry:io.github.model-mischief-managed/agent-observatory",
+      "name": "Agent Observatory",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Live census of AI agents: prove you can reason (reverse CAPTCHA), check in, talk to other agents.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.model-mischief-managed/agent-observatory",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.model-mischief-managed/agent-observatory\" --adapter claude --local",
+      "repoUrl": "https://github.com/model-mischief-managed/agent-observatory",
+      "homepageUrl": "https://agent-observatory-flame.vercel.app",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.virus-alert/agent-observatory",
       "name": "Agent Observatory Canary",
       "ecosystem": "mcp-registry",
@@ -9314,6 +9336,50 @@
       "version": "9.0.0"
     },
     {
+      "id": "mcp-registry:io.github.mitchellOpZero/agentwork",
+      "name": "AgentWork Outcome Router",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Get one evidence-backed route when an agent cannot finish a real-world outcome",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mitchellOpZero/agentwork",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mitchellOpZero/agentwork\" --adapter claude --local",
+      "repoUrl": "https://github.com/mitchellOpZero/agentwork",
+      "homepageUrl": "https://agentwork-api.mitchellmosesai.chatgpt.site/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mitchellOpZero/agentwork-outcomes",
+      "name": "AgentWork Outcomes",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Buy a finished outcome through services, agents, marketplaces, humans, tools, or swarms.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mitchellOpZero/agentwork-outcomes",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mitchellOpZero/agentwork-outcomes\" --adapter claude --local",
+      "repoUrl": "https://github.com/mitchellOpZero/agentwork-api",
+      "homepageUrl": "https://agentwork-api.mitchellmosesai.chatgpt.site",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.ceedot-rock/agent-rider",
       "name": "Agent^Rider",
       "ecosystem": "mcp-registry",
@@ -9994,6 +10060,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mo-grantsmith/agora",
+      "name": "Agora",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Find governed AI capabilities and verify signed receipts. Read-only, no account.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mo-grantsmith/agora",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mo-grantsmith/agora\" --adapter claude --local",
+      "repoUrl": "https://github.com/mo-grantsmith/Agora",
+      "homepageUrl": "https://agora-console-production.up.railway.app",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.rhein1/agoragentic",
@@ -24890,6 +24978,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.mcp-dir/tst_cndt-mcp",
+      "name": "CNDT (Débitos Trabalhistas)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Issues the labor debt clearance certificate (CNDT) from the TST for a person or company from the CPF",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tst_cndt-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tst_cndt-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tst_cndt-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.mcp-dir/cnep-mcp",
       "name": "CNEP (Empresas Punidas)",
       "ecosystem": "mcp-registry",
@@ -25438,6 +25548,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.milesdev888/guardian",
+      "name": "CYRE Guardian",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Solana address risk grades and token scans for AI agents. Pay-per-call via x402 (USDC on Base).",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.milesdev888/guardian",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.milesdev888/guardian\" --adapter claude --local",
+      "repoUrl": "https://github.com/milesdev888/cyre-fraud-prediction",
+      "homepageUrl": "https://cyre.dev",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/ca-grants",
@@ -28146,6 +28278,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.mcp-dir/tse_crimes_eleitorais-mcp",
+      "name": "Certidão de Crimes Eleitorais (TSE)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Issues a person's electoral crimes clearance at the Electoral Court (TSE) from the name, CPF, voter",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tse_crimes_eleitorais-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tse_crimes_eleitorais-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tse_crimes_eleitorais-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.mcp-dir/certidao_debitos_pf-mcp",
       "name": "Certidão de Débitos PF",
       "ecosystem": "mcp-registry",
@@ -28180,6 +28334,28 @@
       "source": "mcp-registry:io.github.mcp-dir/certidao_debitos_pj-mcp",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/certidao_debitos_pj-mcp\" --adapter claude --local",
       "repoUrl": "https://github.com/mcp-dir/certidao_debitos_pj-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tse_quitacao_eleitoral-mcp",
+      "name": "Certidão de Quitação Eleitoral (TSE)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Issues a person's voter good-standing clearance at the Electoral Court (TSE) from the name, CPF, vot",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tse_quitacao_eleitoral-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tse_quitacao_eleitoral-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tse_quitacao_eleitoral-mcp",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -28914,6 +29090,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.moelayyan90/checkouttruth",
+      "name": "CheckoutTruth",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Verify live product price, currency, stock, variants and published shipping evidence for AI agents.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.moelayyan90/checkouttruth",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.moelayyan90/checkouttruth\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/chembl",
@@ -34042,6 +34240,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.mcp-dir/veiculo_estadual-mcp",
+      "name": "Consulta Veicular Estadual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Vehicle data from its plate sourced directly from state traffic databases (DETRAN), including debts",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/veiculo_estadual-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/veiculo_estadual-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/veiculo_estadual-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/veiculo_nacional-mcp",
+      "name": "Consulta Veicular Nacional",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Registration data for a vehicle from its plate in a national database: make, model, year, color, and",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/veiculo_nacional-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/veiculo_nacional-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/veiculo_nacional-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.mcp-dir/multas-mcp",
       "name": "Consulta de Multas",
       "ecosystem": "mcp-registry",
@@ -34920,6 +35162,28 @@
         "mcp"
       ],
       "version": "1.0.7"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/worldcup-mcp",
+      "name": "Copa do Mundo 2026",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Schedules and results for the 2026 FIFA World Cup in natural language: today's matches, kickoff time",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/worldcup-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/worldcup-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/worldcup-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:dev.pages.corbelworks/reliability",
@@ -65128,6 +65392,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.mcp-dir/veiculo_historico-mcp",
+      "name": "Histórico Veicular Nacional",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "History of vehicles linked to a CPF or CNPJ nationwide. Platform-hosted, no credentials, pay per que",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/veiculo_historico-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/veiculo_historico-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/veiculo_historico-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/veiculo_historico_sp-mcp",
+      "name": "Histórico Veicular SP",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "History of vehicles linked to a CPF or CNPJ in the state of São Paulo. Platform-hosted, no credentia",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/veiculo_historico_sp-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/veiculo_historico_sp-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/veiculo_historico_sp-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.HitTheRoad-Git/hittheroad-mcp",
       "name": "Hit The Road Rentals",
       "ecosystem": "mcp-registry",
@@ -86776,6 +87084,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.mem-labs/mem",
+      "name": "Mem",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Securely search, create, and organize your Mem notes and collections from AI assistants.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mem-labs/mem",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mem-labs/mem\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://mem.ai",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.nazar256/memheaven",
       "name": "MemHeaven",
       "ecosystem": "mcp-registry",
@@ -87742,6 +88072,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.metis-rwa/mcp",
+      "name": "Metis RWA Research",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Research tokenized real-world assets on Solana: issuer controls, supply, liquidity, premiums",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.metis-rwa/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.metis-rwa/mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/metis-rwa/mcp",
+      "homepageUrl": "https://metisagent.co",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.1"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/metmuseum",
@@ -94190,6 +94542,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.michaelcolenso/nobodynamed",
+      "name": "NobodyNamed",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "US baby name popularity data from SSA records (1880-2025): search, trends, geography, culture.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.michaelcolenso/nobodynamed",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.michaelcolenso/nobodynamed\" --adapter claude --local",
+      "repoUrl": "https://github.com/michaelcolenso/babynames",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pgalyen1987/nodeproxy",
       "name": "NodeProxy Web Surface Markdown Parser",
       "ecosystem": "mcp-registry",
@@ -97906,6 +98280,28 @@
         "mcp"
       ],
       "version": "1.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mdotk/open-for-agents-website-visibility",
+      "name": "Open for Agents Website Visibility",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Check how well AI agents can discover and understand a public website.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mdotk/open-for-agents-website-visibility",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mdotk/open-for-agents-website-visibility\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://www.openforagents.com/connect",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.trakkr-aisearch/openai-ads-mcp",
@@ -102460,6 +102856,28 @@
         "mcp"
       ],
       "version": "0.5.0"
+    },
+    {
+      "id": "mcp-registry:io.github.michaelyousrie/patchlog",
+      "name": "Patchlog",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Create, update, and publish changelog entries on your Patchlog changelog from any MCP client.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.michaelyousrie/patchlog",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.michaelyousrie/patchlog\" --adapter claude --local",
+      "repoUrl": "https://github.com/michaelyousrie/patchlog-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:dev.patent/patent",
@@ -110504,6 +110922,28 @@
       "source": "mcp-registry:io.github.mcp-dir/tj_processos-mcp",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tj_processos-mcp\" --adapter claude --local",
       "repoUrl": "https://github.com/mcp-dir/tj_processos-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/trt_processos-mcp",
+      "name": "Processos TRT (Justiça do Trabalho)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Looks up cases of a person or company at the Regional Labor Court (TRT) from the CPF or CNPJ and reg",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/trt_processos-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/trt_processos-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/trt_processos-mcp",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -126704,6 +127144,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mlava/scholar-sidekick-mcp",
+      "name": "Scholar Sidekick",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Catch AI-fabricated citations (real DOI + fake title). Retraction, open-access, 10,000+ CSL styles.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mlava/scholar-sidekick-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mlava/scholar-sidekick-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mlava/scholar-sidekick-mcp",
+      "homepageUrl": "https://scholar-sidekick.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.8.8"
     },
     {
       "id": "mcp-registry:io.github.laibniz/scholarfetch",
@@ -146330,6 +146792,1392 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trf4_certidao-mcp",
+      "name": "Tribunal TRF4: Certidão Negativa Cível e Criminal",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRF4: Certificate Negativa Cível e Criminal, official-source lookup. Platform-hosted, pay p",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trf4_certidao-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trf4_certidao-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trf4_certidao-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trf5_certidao-mcp",
+      "name": "Tribunal TRF5: Certidão Negativa Cível e Criminal",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRF5: Certificate Negativa Cível e Criminal, official-source lookup. Platform-hosted, pay p",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trf5_certidao-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trf5_certidao-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trf5_certidao-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trf5_processo-mcp",
+      "name": "Tribunal TRF5: Processo",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRF5: Court Case, official-source lookup. Platform-hosted, pay per query with prepaid credi",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trf5_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trf5_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trf5_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trf6_certidao-mcp",
+      "name": "Tribunal TRF6: Certidão Negativa Cível e Criminal",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRF6: Certificate Negativa Cível e Criminal, official-source lookup. Platform-hosted, pay p",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trf6_certidao-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trf6_certidao-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trf6_certidao-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trf6_processo-mcp",
+      "name": "Tribunal TRF6: Processo",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRF6: Court Case, official-source lookup. Platform-hosted, pay per query with prepaid credi",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trf6_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trf6_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trf6_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trf_cert_unificada-mcp",
+      "name": "Tribunal TRF: Certidão Unificada da Justiça Federal",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRF: Certificate Unificada da Justiça Federal, official-source lookup. Platform-hosted, pay",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trf_cert_unificada-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trf_cert_unificada-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trf_cert_unificada-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt10_ceat-mcp",
+      "name": "Tribunal TRT10: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT10: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt10_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt10_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt10_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt10_ceat_digital-mcp",
+      "name": "Tribunal TRT10: Certidão Eletrônica de Ações Trabalhistas (CEAT) - Processos Digitais",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT10: Certificate Eletrônica de Ações Trabalhistas (CEAT) - Court Cases Digitais, official",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt10_ceat_digital-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt10_ceat_digital-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt10_ceat_digital-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt10_processo-mcp",
+      "name": "Tribunal TRT10: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT10: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt10_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt10_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt10_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt11_ceat-mcp",
+      "name": "Tribunal TRT11: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT11: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt11_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt11_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt11_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt11_processo-mcp",
+      "name": "Tribunal TRT11: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT11: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt11_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt11_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt11_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt12_ceat-mcp",
+      "name": "Tribunal TRT12: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT12: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt12_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt12_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt12_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt12_processo-mcp",
+      "name": "Tribunal TRT12: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT12: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt12_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt12_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt12_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt13_ceat-mcp",
+      "name": "Tribunal TRT13: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT13: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt13_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt13_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt13_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt13_processo-mcp",
+      "name": "Tribunal TRT13: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT13: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt13_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt13_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt13_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt14_ceat-mcp",
+      "name": "Tribunal TRT14: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT14: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt14_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt14_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt14_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt14_processo-mcp",
+      "name": "Tribunal TRT14: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT14: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt14_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt14_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt14_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt15_ceat-mcp",
+      "name": "Tribunal TRT15: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT15: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt15_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt15_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt15_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt15_processo-mcp",
+      "name": "Tribunal TRT15: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT15: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt15_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt15_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt15_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt16_ceat-mcp",
+      "name": "Tribunal TRT16: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT16: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt16_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt16_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt16_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt16_processo-mcp",
+      "name": "Tribunal TRT16: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT16: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt16_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt16_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt16_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt17_ceat-mcp",
+      "name": "Tribunal TRT17: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT17: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt17_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt17_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt17_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt17_processo-mcp",
+      "name": "Tribunal TRT17: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT17: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt17_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt17_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt17_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt18_ceat-mcp",
+      "name": "Tribunal TRT18: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT18: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt18_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt18_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt18_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt18_processo-mcp",
+      "name": "Tribunal TRT18: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT18: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt18_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt18_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt18_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt19_ceat-mcp",
+      "name": "Tribunal TRT19: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT19: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt19_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt19_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt19_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt19_processo-mcp",
+      "name": "Tribunal TRT19: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT19: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt19_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt19_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt19_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt1_ceat-mcp",
+      "name": "Tribunal TRT1: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT1: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platform",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt1_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt1_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt1_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt1_processo-mcp",
+      "name": "Tribunal TRT1: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT1: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepai",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt1_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt1_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt1_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt20_ceat-mcp",
+      "name": "Tribunal TRT20: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT20: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt20_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt20_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt20_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt20_processo-mcp",
+      "name": "Tribunal TRT20: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT20: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt20_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt20_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt20_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt21_ceat-mcp",
+      "name": "Tribunal TRT21: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT21: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt21_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt21_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt21_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt21_processo-mcp",
+      "name": "Tribunal TRT21: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT21: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt21_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt21_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt21_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt22_processo-mcp",
+      "name": "Tribunal TRT22: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT22: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt22_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt22_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt22_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt23_ceat-mcp",
+      "name": "Tribunal TRT23: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT23: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt23_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt23_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt23_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt24_ceat-mcp",
+      "name": "Tribunal TRT24: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT24: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platfor",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt24_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt24_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt24_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt24_processo-mcp",
+      "name": "Tribunal TRT24: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT24: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepa",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt24_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt24_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt24_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt2_ceat_digital-mcp",
+      "name": "Tribunal TRT2: Certidão Eletrônica de Ações Trabalhistas (CEAT) - Processos Digitais",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT2: Certificate Eletrônica de Ações Trabalhistas (CEAT) - Court Cases Digitais, official-",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt2_ceat_digital-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt2_ceat_digital-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt2_ceat_digital-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt2_ceat-mcp",
+      "name": "Tribunal TRT2: Certidão Eletrônica de Ações Trabalhistas (CEAT) - Processos Físicos",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT2: Certificate Eletrônica de Ações Trabalhistas (CEAT) - Court Cases Físicos, official-s",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt2_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt2_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt2_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt2_processo-mcp",
+      "name": "Tribunal TRT2: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT2: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepai",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt2_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt2_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt2_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt3_ceat-mcp",
+      "name": "Tribunal TRT3: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT3: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platform",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt3_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt3_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt3_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt4_ceat-mcp",
+      "name": "Tribunal TRT4: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT4: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platform",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt4_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt4_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt4_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt4_processo-mcp",
+      "name": "Tribunal TRT4: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT4: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepai",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt4_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt4_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt4_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt5_ceat-mcp",
+      "name": "Tribunal TRT5: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT5: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platform",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt5_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt5_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt5_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt5_processo-mcp",
+      "name": "Tribunal TRT5: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT5: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepai",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt5_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt5_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt5_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt6_certidao-mcp",
+      "name": "Tribunal TRT6: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT6: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platform",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt6_certidao-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt6_certidao-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt6_certidao-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt6_processo-mcp",
+      "name": "Tribunal TRT6: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT6: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepai",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt6_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt6_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt6_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt7_ceat-mcp",
+      "name": "Tribunal TRT7: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT7: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platform",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt7_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt7_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt7_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt7_ceat_digital-mcp",
+      "name": "Tribunal TRT7: Certidão Eletrônica de Ações Trabalhistas (CEAT) - Processos Digitais",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT7: Certificate Eletrônica de Ações Trabalhistas (CEAT) - Court Cases Digitais, official-",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt7_ceat_digital-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt7_ceat_digital-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt7_ceat_digital-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt7_processo-mcp",
+      "name": "Tribunal TRT7: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT7: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepai",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt7_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt7_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt7_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt8_ceat-mcp",
+      "name": "Tribunal TRT8: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT8: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platform",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt8_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt8_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt8_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt8_processo-mcp",
+      "name": "Tribunal TRT8: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT8: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepai",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt8_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt8_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt8_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt9_ceat-mcp",
+      "name": "Tribunal TRT9: Certidão Eletrônica de Ações Trabalhistas (CEAT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT9: Certificate Eletrônica de Ações Trabalhistas (CEAT), official-source lookup. Platform",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt9_ceat-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt9_ceat-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt9_ceat-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt9_processo-mcp",
+      "name": "Tribunal TRT9: Consulta Processual",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT9: Lookup Processual, official-source lookup. Platform-hosted, pay per query with prepai",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt9_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt9_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt9_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_trt_processo-mcp",
+      "name": "Tribunal TRT: Consulta Processual Unificada",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TRT: Lookup Processual Unificada, official-source lookup. Platform-hosted, pay per query wi",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_trt_processo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_trt_processo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_trt_processo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_tse_certidao-mcp",
+      "name": "Tribunal TSE: Certidão de Quitação Eleitoral",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TSE: Certificate de Quitação Eleitoral, official-source lookup. Platform-hosted, pay per qu",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_tse_certidao-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_tse_certidao-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_tse_certidao-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_tse_doador_fornecedor-mcp",
+      "name": "Tribunal TSE: Doadores e Fornecedores",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TSE: Doadores e Fornecedores, official-source lookup. Platform-hosted, pay per query with p",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_tse_doador_fornecedor-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_tse_doador_fornecedor-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_tse_doador_fornecedor-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_tse_pje-mcp",
+      "name": "Tribunal TSE: Processo Judicial Eletrônico (PJe)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TSE: Court Case Judicial Eletrônico (PJe), official-source lookup. Platform-hosted, pay per",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_tse_pje-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_tse_pje-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_tse_pje-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_tse_situacao-mcp",
+      "name": "Tribunal TSE: Situação Eleitoral",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TSE: Situação Eleitoral, official-source lookup. Platform-hosted, pay per query with prepai",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_tse_situacao-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_tse_situacao-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_tse_situacao-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_tse_titulo-mcp",
+      "name": "Tribunal TSE: Título Eleitoral",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TSE: Título Eleitoral, official-source lookup. Platform-hosted, pay per query with prepaid",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_tse_titulo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_tse_titulo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_tse_titulo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_tst_banco_falencias-mcp",
+      "name": "Tribunal TST: Banco de Falências",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TST: Banco de Falências, official-source lookup. Platform-hosted, pay per query with prepai",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_tst_banco_falencias-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_tst_banco_falencias-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_tst_banco_falencias-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_tst_cndt-mcp",
+      "name": "Tribunal TST: CNDT",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TST: CNDT, official-source lookup. Platform-hosted, pay per query with prepaid credit.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_tst_cndt-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_tst_cndt-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_tst_cndt-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/tribunal_tst_validacao_cndt-mcp",
+      "name": "Tribunal TST: Validação de CNDT",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tribunal TST: Validação de CNDT, official-source lookup. Platform-hosted, pay per query with prepaid",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/tribunal_tst_validacao_cndt-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/tribunal_tst_validacao_cndt-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/tribunal_tst_validacao_cndt-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.snehdhruv/trillboards-dooh",
       "name": "Trillboards DOOH Advertising",
       "ecosystem": "mcp-registry",
@@ -150466,6 +152314,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.mcp-dir/veiculo_fipe-mcp",
+      "name": "Valor FIPE do Veículo",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Vehicle data from its plate or chassis, with the market value from the FIPE table. Platform-hosted,",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/veiculo_fipe-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/veiculo_fipe-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/veiculo_fipe-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/valorant",
       "name": "Valorant",
       "ecosystem": "mcp-registry",
@@ -151256,6 +153126,50 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/veiculo-mcp",
+      "name": "Veículo",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Look up a vehicle by license plate against official sources (make/model, year, status, restrictions)",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/veiculo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/veiculo-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/veiculo-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/veiculo_frotas-mcp",
+      "name": "Veículos do Proprietário",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Lists the vehicles linked to a CPF or CNPJ nationwide, from the document provided. Platform-hosted,",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/veiculo_frotas-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/veiculo_frotas-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/veiculo_frotas-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.mcp-dir/transparencia_servidores_viagens-mcp",
@@ -152512,6 +154426,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.mcp-dir/vinculo_empregaticio-mcp",
+      "name": "Vínculo Empregatício",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Looks up employment relationships associated with a company from the CNPJ. Platform-hosted, no crede",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/vinculo_empregaticio-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/vinculo_empregaticio-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/vinculo_empregaticio-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/vinculos_societarios-mcp",
+      "name": "Vínculos Societários",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Maps the corporate ownership ties of a person or company from the CPF or CNPJ, showing holdings and",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/vinculos_societarios-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/vinculos_societarios-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/vinculos_societarios-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/w3c",
       "name": "W3c",
       "ecosystem": "mcp-registry",
@@ -152576,6 +154534,28 @@
         "mcp"
       ],
       "version": "1.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/whoop-mcp",
+      "name": "WHOOP",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Your WHOOP data in the assistant, read-only: recovery, sleep, strain, workouts, cycles and body meas",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/whoop-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/whoop-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/whoop-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:com.missingmcp/whoop",
@@ -153854,6 +155834,28 @@
       "version": "0.4.1"
     },
     {
+      "id": "mcp-registry:io.github.mcp-dir/webmotors-mcp",
+      "name": "Webmotors",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Vehicle search on Webmotors, Brazil's largest automotive marketplace. Search listings by make/model,",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/webmotors-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/webmotors-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/webmotors-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.OsbornVentures/websiteiq",
       "name": "WebsiteIQ",
       "ecosystem": "mcp-registry",
@@ -154226,6 +156228,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/whatsapp-mcp",
+      "name": "WhatsApp",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Connect a personal/Business WhatsApp account via QR pairing (multi-device, like WhatsApp Web). Send",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/whatsapp-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/whatsapp-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/whatsapp-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.InitechSoftware/whatsapp-mcp-by-timelinesai",
@@ -156164,6 +158188,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.moelayyan90/xguard",
+      "name": "XGuard",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Discover x402-paid HTTP APIs and MCP tools cataloged by the XGuard facilitator.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.moelayyan90/xguard",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.moelayyan90/xguard\" --adapter claude --local",
+      "repoUrl": "https://github.com/moelayyan90/XGuard",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.3.0"
+    },
+    {
+      "id": "mcp-registry:io.github.moelayyan90/xguard-control-plane",
+      "name": "XGuard Settlement Control Plane",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "In-path x402 payment firewall with facilitator failover, replay protection and reconciliation.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.moelayyan90/xguard-control-plane",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.moelayyan90/xguard-control-plane\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://xguardgate.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "3.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.mcp-dir/xp-mcp",
       "name": "XP MCP",
       "ecosystem": "mcp-registry",
@@ -156736,6 +158804,50 @@
       "version": "3.2.3"
     },
     {
+      "id": "mcp-registry:io.github.mcp-dir/youtube-mcp",
+      "name": "YouTube",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Search, video, channel, playlist, comments, trending and related items from YouTube. Hosted by the p",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/youtube-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/youtube-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/youtube-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/youtube_email-mcp",
+      "name": "YouTube Email Finder",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Find the contact email of YouTube channels from the link, the @handle or the channel_id. Resolves th",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/youtube_email-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/youtube_email-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/youtube_email-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:com.youtubestudiomcp/youtube-studio",
       "name": "YouTube Studio MCP",
       "ecosystem": "mcp-registry",
@@ -156925,6 +159037,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:app.wishpool/zambia-payments-mcp\" --adapter claude --local",
       "repoUrl": "https://github.com/junter1989k-ai/zambia-payments-mcp",
       "homepageUrl": "https://github.com/junter1989k-ai/zambia-payments-mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mcp-dir/zapsign-mcp",
+      "name": "ZapSign",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ZapSign electronic document signing via the official API: create documents for signature (from PDF,",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/zapsign-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/zapsign-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/zapsign-mcp",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -219194,6 +221328,28 @@
       "version": "0.0.3"
     },
     {
+      "id": "mcp-registry:io.github.meemoprasad/meeba-brain",
+      "name": "io.github.meemoprasad/meeba-brain",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Ground-truth code graph for your codebase: exact callers, callees, symbols & dependencies.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.meemoprasad/meeba-brain",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.meemoprasad/meeba-brain\" --adapter claude --local",
+      "repoUrl": "https://github.com/meemoprasad/meeba-brain-marketplace",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.megabrainee/sectora",
       "name": "io.github.megabrainee/sectora",
       "ecosystem": "mcp-registry",
@@ -219414,6 +221570,50 @@
       "version": "1.0.1"
     },
     {
+      "id": "mcp-registry:io.github.merg357/leakledger-ota-recovery",
+      "name": "io.github.merg357/leakledger-ota-recovery",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Detects OTA reconciliation exceptions and stages recovery actions until recovered revenue is posted.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.merg357/leakledger-ota-recovery",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.merg357/leakledger-ota-recovery\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.merlhn/ehliyet-digital",
+      "name": "io.github.merlhn/ehliyet-digital",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Türkiye ehliyet sınavı hazırlık: 200 çıkmış soru, 76 hap bilgi, 43 ders özeti, deneme sınavı.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.merlhn/ehliyet-digital",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.merlhn/ehliyet-digital\" --adapter claude --local",
+      "repoUrl": "https://github.com/merlhn/ehliyet",
+      "homepageUrl": "https://ehliyet.digital",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.metamorphosis-sre/devdrops-property",
       "name": "io.github.metamorphosis-sre/devdrops-property",
       "ecosystem": "mcp-registry",
@@ -219449,6 +221649,72 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.mgthompo1/anchorr-mcp\" --adapter claude --local",
       "repoUrl": "https://github.com/mgthompo1/anchorr-mcp",
       "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mhimed-crustdata/crustdata",
+      "name": "io.github.mhimed-crustdata/crustdata",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Real-time B2B data for agents: search and enrich 1B+ people and 200M+ company profiles.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mhimed-crustdata/crustdata",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mhimed-crustdata/crustdata\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://crustdata.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.michal-lefler/secure-flows",
+      "name": "io.github.michal-lefler/secure-flows",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "MCP server for secureFlows (secure-flows.com). Alias of io.github.michal-lefler/secureflows-mcp.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.michal-lefler/secure-flows",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.michal-lefler/secure-flows\" --adapter claude --local",
+      "repoUrl": "https://github.com/michal-lefler/secure-flows",
+      "homepageUrl": "https://www.secure-flows.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "id": "mcp-registry:io.github.michal-lefler/secureflows-mcp",
+      "name": "io.github.michal-lefler/secureflows-mcp",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "MCP server for secureFlows: token-free URL builders and integration-linting tools for AI agents.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.michal-lefler/secureflows-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.michal-lefler/secureflows-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/michal-lefler/secureflows-mcp",
+      "homepageUrl": "https://www.secure-flows.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -219942,6 +222208,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.minsooparkk/korea-tax-law-mcp",
+      "name": "io.github.minsooparkk/korea-tax-law-mcp",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Korean tax law graph: current statutes, 150k+ court/tribunal cases, 145k+ NTS rulings.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.minsooparkk/korea-tax-law-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.minsooparkk/korea-tax-law-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/minsooparkk/korea-tax-law-mcp",
+      "homepageUrl": "https://github.com/minsooparkk/korea-tax-law-mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.2.0"
+    },
+    {
       "id": "mcp-registry:io.github.mintmas/oracle42-intelligence",
       "name": "io.github.mintmas/oracle42-intelligence",
       "ecosystem": "mcp-registry",
@@ -220030,6 +222318,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.mister-franklin/wetwetwet-legislation",
+      "name": "io.github.mister-franklin/wetwetwet-legislation",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Search Belgian & EU legislation: verbatim article text, per-article links, legal Q&A.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mister-franklin/wetwetwet-legislation",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mister-franklin/wetwetwet-legislation\" --adapter claude --local",
+      "repoUrl": "https://github.com/mister-franklin/mcp-wetwetwet",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.mixall11/botcorpus",
       "name": "io.github.mixall11/botcorpus",
       "ecosystem": "mcp-registry",
@@ -220043,6 +222353,50 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.mixall11/botcorpus\" --adapter claude --local",
       "repoUrl": "https://github.com/mixall11/botcorpus.com",
       "homepageUrl": "https://botcorpus.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mjaskolski/developer-toolkit-mcp",
+      "name": "io.github.mjaskolski/developer-toolkit-mcp",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "The documentation, as a tool your agent can call: 950+ AI-dev guides. Search + fetch tools.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mjaskolski/developer-toolkit-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mjaskolski/developer-toolkit-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mjaskolski/developer-toolkit-mcp",
+      "homepageUrl": "https://developertoolkit.ai/en/mcp/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mjaskolski/wondel-skills-mcp",
+      "name": "io.github.mjaskolski/wondel-skills-mcp",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read-only MCP server over 50 book-based agent skills: routes a task to the right framework.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mjaskolski/wondel-skills-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mjaskolski/wondel-skills-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mjaskolski/wondel-skills-mcp",
+      "homepageUrl": "https://skills.wondel.ai/mcp",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -220086,6 +222440,72 @@
       "source": "mcp-registry:io.github.mklfarha/nuzur-mcp-server",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.mklfarha/nuzur-mcp-server\" --adapter claude --local",
       "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mkrupkin/rixot-mcp",
+      "name": "io.github.mkrupkin/rixot-mcp",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Let AI agents buy dofollow backlinks: search 50,000+ vetted sites, order, publish. 7 hosted tools.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mkrupkin/rixot-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mkrupkin/rixot-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mkrupkin/rixot-mcp",
+      "homepageUrl": "https://rixot.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.mmahdiahamed92-png/autonomous-intelligence",
+      "name": "io.github.mmahdiahamed92-png/autonomous-intelligence",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Non-custodial, rug-gated crypto swaps + token safety + discovery for AI agents.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mmahdiahamed92-png/autonomous-intelligence",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mmahdiahamed92-png/autonomous-intelligence\" --adapter claude --local",
+      "repoUrl": "https://github.com/mmahdiahamed92-png/ai-deploy",
+      "homepageUrl": "https://autonomousintelligence.io/docs#agents",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.1"
+    },
+    {
+      "id": "mcp-registry:io.github.modern-ai-inc/w0-mcp-server",
+      "name": "io.github.modern-ai-inc/w0-mcp-server",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Look up a brand's AI Recommendation Rate: how often it's the #1 AI pick.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.modern-ai-inc/w0-mcp-server",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.modern-ai-inc/w0-mcp-server\" --adapter claude --local",
+      "repoUrl": "https://github.com/modern-ai-inc/w0-mcp-server",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -239676,6 +242096,28 @@
       "version": "0.3.6"
     },
     {
+      "id": "mcp-registry:io.github.mcp-dir/webposto-mcp",
+      "name": "webPosto",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "webPosto ERP (management for gas stations and convenience stores) via session capture with your auth",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.mcp-dir/webposto-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/webposto-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/mcp-dir/webposto-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:com.webforj/mcp",
       "name": "webforJ MCP Server",
       "ecosystem": "mcp-registry",
@@ -252178,7 +254620,7 @@
       "provides": [
         "plugins"
       ],
-      "version": "2.14.0"
+      "version": "2.19.1"
     },
     {
       "id": "clawhub:clawhand-agent-tools",
@@ -260257,6 +262699,37 @@
         "plugins"
       ],
       "version": "1.0.4"
+    },
+    {
+      "id": "clawhub:internet-court",
+      "name": "Internet Court",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Internet Court Skill",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "bundle-plugin",
+        "community",
+        "other",
+        "agent-payments",
+        "x402",
+        "erc-7710",
+        "escrow",
+        "dispute-resolution"
+      ],
+      "source": "clawhub:internet-court",
+      "installCommand": "npx agentwheel install \"clawhub:internet-court\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/rasca/plugins/internet-court",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "clawhub:internet-radio-music-webui",
@@ -290057,7 +292530,7 @@
       "provides": [
         "plugins"
       ],
-      "version": "1.7.4"
+      "version": "1.8.2"
     },
     {
       "id": "clawhub:autobuttonpanelspluginoperators",
@@ -292677,7 +295150,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:muratcankoylan/Agent-Skills-for-Context-Engineering\"",
       "repoUrl": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
       "homepageUrl": null,
-      "stars": 17866,
+      "stars": 17869,
       "lastPush": "2026-08-19T01:55:00Z",
       "archived": false,
       "provides": null,
@@ -292716,7 +295189,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:vercel-labs/agent-skills\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": null,
-      "stars": 30629,
+      "stars": 30642,
       "lastPush": "2026-08-28T13:36:31Z",
       "archived": false,
       "provides": null,
@@ -292736,7 +295209,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:supabase/agent-skills\"",
       "repoUrl": "https://github.com/supabase/agent-skills",
       "homepageUrl": null,
-      "stars": 2562,
+      "stars": 2563,
       "lastPush": "2026-08-12T07:37:08Z",
       "archived": false,
       "provides": null,
@@ -292793,7 +295266,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:intellectronica/agent-skills\"",
       "repoUrl": "https://github.com/intellectronica/agent-skills",
       "homepageUrl": null,
-      "stars": 289,
+      "stars": 290,
       "lastPush": "2026-04-25T15:31:50Z",
       "archived": false,
       "provides": null,
@@ -292812,7 +295285,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:softaworks/agent-toolkit\"",
       "repoUrl": "https://github.com/softaworks/agent-toolkit",
       "homepageUrl": null,
-      "stars": 2401,
+      "stars": 2402,
       "lastPush": "2026-03-05T16:46:24Z",
       "archived": false,
       "provides": null,
@@ -292831,7 +295304,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:wshobson/agents\"",
       "repoUrl": "https://github.com/wshobson/agents",
       "homepageUrl": null,
-      "stars": 39259,
+      "stars": 39275,
       "lastPush": "2026-08-26T12:14:16Z",
       "archived": false,
       "provides": null,
@@ -292851,8 +295324,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:stripe/ai\"",
       "repoUrl": "https://github.com/stripe/ai",
       "homepageUrl": null,
-      "stars": 1779,
-      "lastPush": "2026-08-29T00:43:54Z",
+      "stars": 1780,
+      "lastPush": "2026-08-30T13:40:48Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -292870,7 +295343,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:sickn33/antigravity-awesome-skills\"",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "homepageUrl": null,
-      "stars": 45686,
+      "stars": 45704,
       "lastPush": "2026-08-30T10:12:41Z",
       "archived": false,
       "provides": null,
@@ -292889,7 +295362,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:ComposioHQ/awesome-claude-skills\"",
       "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 74038,
+      "stars": 74065,
       "lastPush": "2026-08-10T21:45:44Z",
       "archived": false,
       "provides": null,
@@ -292908,7 +295381,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:travisvn/awesome-claude-skills\"",
       "repoUrl": "https://github.com/travisvn/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 14896,
+      "stars": 14899,
       "lastPush": "2026-04-28T19:30:24Z",
       "archived": false,
       "provides": null,
@@ -292927,7 +295400,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jimliu/baoyu-skills\"",
       "repoUrl": "https://github.com/jimliu/baoyu-skills",
       "homepageUrl": null,
-      "stars": 25473,
+      "stars": 25483,
       "lastPush": "2026-07-04T16:25:18Z",
       "archived": false,
       "provides": null,
@@ -292946,7 +295419,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jezweb/claude-skills\"",
       "repoUrl": "https://github.com/jezweb/claude-skills",
       "homepageUrl": null,
-      "stars": 982,
+      "stars": 984,
       "lastPush": "2026-07-02T07:34:37Z",
       "archived": false,
       "provides": null,
@@ -293022,8 +295495,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:langgenius/dify\"",
       "repoUrl": "https://github.com/langgenius/dify",
       "homepageUrl": null,
-      "stars": 153884,
-      "lastPush": "2026-08-30T06:25:29Z",
+      "stars": 153909,
+      "lastPush": "2026-08-30T17:04:48Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -293041,8 +295514,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:NousResearch/hermes-agent\"",
       "repoUrl": "https://github.com/NousResearch/hermes-agent",
       "homepageUrl": null,
-      "stars": 238313,
-      "lastPush": "2026-08-30T12:02:07Z",
+      "stars": 238469,
+      "lastPush": "2026-08-30T21:07:14Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -293060,7 +295533,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:coreyhaines31/marketingskills\"",
       "repoUrl": "https://github.com/coreyhaines31/marketingskills",
       "homepageUrl": null,
-      "stars": 46112,
+      "stars": 46169,
       "lastPush": "2026-08-28T22:23:47Z",
       "archived": false,
       "provides": null,
@@ -293098,7 +295571,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:kepano/obsidian-skills\"",
       "repoUrl": "https://github.com/kepano/obsidian-skills",
       "homepageUrl": null,
-      "stars": 47520,
+      "stars": 47539,
       "lastPush": "2026-06-08T16:12:01Z",
       "archived": false,
       "provides": null,
@@ -293118,7 +295591,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:anthropics/skills\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": null,
-      "stars": 172562,
+      "stars": 172637,
       "lastPush": "2026-08-21T17:10:55Z",
       "archived": false,
       "provides": null,
@@ -293158,7 +295631,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:remotion-dev/skills\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": null,
-      "stars": 4439,
+      "stars": 4443,
       "lastPush": "2026-08-26T16:35:35Z",
       "archived": false,
       "provides": null,
@@ -293177,7 +295650,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:trailofbits/skills\"",
       "repoUrl": "https://github.com/trailofbits/skills",
       "homepageUrl": null,
-      "stars": 6913,
+      "stars": 6919,
       "lastPush": "2026-08-28T20:37:02Z",
       "archived": false,
       "provides": null,
@@ -293234,7 +295707,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:dimillian/skills\"",
       "repoUrl": "https://github.com/dimillian/skills",
       "homepageUrl": null,
-      "stars": 3932,
+      "stars": 3935,
       "lastPush": "2026-03-29T15:28:02Z",
       "archived": false,
       "provides": null,
@@ -293255,7 +295728,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:obra/superpowers\"",
       "repoUrl": "https://github.com/obra/superpowers",
       "homepageUrl": null,
-      "stars": 279536,
+      "stars": 279657,
       "lastPush": "2026-08-29T03:21:18Z",
       "archived": false,
       "provides": null,
@@ -293274,7 +295747,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:emalorenzo/three-agent-skills\"",
       "repoUrl": "https://github.com/emalorenzo/three-agent-skills",
       "homepageUrl": null,
-      "stars": 48,
+      "stars": 49,
       "lastPush": "2026-01-28T15:56:21Z",
       "archived": false,
       "provides": null,
@@ -293293,7 +295766,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:cloudai-x/threejs-skills\"",
       "repoUrl": "https://github.com/cloudai-x/threejs-skills",
       "homepageUrl": null,
-      "stars": 3188,
+      "stars": 3191,
       "lastPush": "2026-07-09T20:45:53Z",
       "archived": false,
       "provides": null,
@@ -293332,7 +295805,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-browser/agent-browser\"",
       "repoUrl": "https://github.com/vercel-labs/agent-browser",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-browser/agent-browser",
-      "stars": 41571,
+      "stars": 41583,
       "lastPush": "2026-08-30T00:51:45Z",
       "archived": false,
       "provides": null,
@@ -293353,7 +295826,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/skills/find-skills\"",
       "repoUrl": "https://github.com/vercel-labs/skills",
       "homepageUrl": "https://skills.sh/vercel-labs/skills/find-skills",
-      "stars": 30002,
+      "stars": 30025,
       "lastPush": "2026-08-18T20:28:34Z",
       "archived": false,
       "provides": null,
@@ -293374,7 +295847,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/frontend-design\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/frontend-design",
-      "stars": 172562,
+      "stars": 172637,
       "lastPush": "2026-08-21T17:10:55Z",
       "archived": false,
       "provides": null,
@@ -293395,7 +295868,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/mattpocock/skills/grill-me\"",
       "repoUrl": "https://github.com/mattpocock/skills",
       "homepageUrl": "https://skills.sh/mattpocock/skills/grill-me",
-      "stars": 241425,
+      "stars": 241764,
       "lastPush": "2026-08-24T14:20:17Z",
       "archived": false,
       "provides": null,
@@ -293416,7 +295889,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/remotion-dev/skills/remotion-best-practices\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": "https://skills.sh/remotion-dev/skills/remotion-best-practices",
-      "stars": 4439,
+      "stars": 4443,
       "lastPush": "2026-08-26T16:35:35Z",
       "archived": false,
       "provides": null,
@@ -293437,7 +295910,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/skill-creator\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/skill-creator",
-      "stars": 172562,
+      "stars": 172637,
       "lastPush": "2026-08-21T17:10:55Z",
       "archived": false,
       "provides": null,
@@ -293458,7 +295931,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/vercel-react-best-practices\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices",
-      "stars": 30629,
+      "stars": 30642,
       "lastPush": "2026-08-28T13:36:31Z",
       "archived": false,
       "provides": null,
@@ -293479,7 +295952,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/web-design-guidelines\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/web-design-guidelines",
-      "stars": 30629,
+      "stars": 30642,
       "lastPush": "2026-08-28T13:36:31Z",
       "archived": false,
       "provides": null,
