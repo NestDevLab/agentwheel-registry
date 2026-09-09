@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-08T11:21:53.322Z",
+  "generatedAt": "2026-09-09T11:26:12.142Z",
   "entries": [
     {
       "id": "official:agent-plugin-extra-message-policy",
@@ -60,7 +60,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/agent-tmux/SKILL.md",
       "readmeExcerpt": "Control Codex CLI and Claude Code CLI sessions via tmux with one agent-agnostic toolset. The same bin/ scripts drive any agent through a --agent <type> flag; per-agent quirks (submit key, prompt char, idle/working patterns, launch flags) live in agents/<type>.conf. Reaches on-disk sessions that an agent's own MCP server no longer tracks. This is the tmux transport for the mesh: any agent that can run these scripts can pilot supported CLI agents through persistent tmux sessions. - In Codex Desktop, use native task capabilities for Codex-to-Codex work when they are exposed: sendmessagetothread for an existing task, waitthreads or readthread for observation, createthread for a new user-visible task only after an explicit user request, and forkthread when completed source history should carry over. Run listprojects before project-backed creation and use a worktree by default for Git projects. - A task still being prepared may return only clientThreadId; wait for a real threadId before trying to read, wait on, or message it. - Same-runtime subagent fan-out uses native delegation by default. Desktop tasks and subagents are different surfaces: do not create a user-owned Desktop task mere…",
       "stars": 0,
-      "lastPush": "2026-09-06T12:21:53Z",
+      "lastPush": "2026-09-09T03:53:04Z",
       "archived": false,
       "provides": [
         "skills"
@@ -88,7 +88,7 @@
       "repoUrl": "https://github.com/eai-org/agent-toolkit",
       "homepageUrl": null,
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "rules",
@@ -530,7 +530,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/agentify-project/SKILL.md",
       "readmeExcerpt": "Converge a project — greenfield or half-way-there — toward the canonical agent-neutral structure specified in references/target-structure.md (read it before the audit), so a team of developers using different agents shares one lean, progressively disclosed setup. Re-running converges further and reports drift. Invocation: /agentify-project [audit] [path] - audit — run step 1 only, print the findings and what a full run would change, modify nothing; the periodic drift check. - path — target a subdirectory instead of the repo root (see Monorepos). - Ask, don't enforce: prefer asking — all options shown, one recommended — over enforcing a choice, except for obvious easy wins (e.g. clear progressive-disclosure moves). Questions answerable from the codebase go to the codebase. - One approval gate per destructive/bulk change; show diffs or proposals before applying; nothing happens behind the user's back. Never commit — suggest reviewing the diff and leave committing to the user. - Generic: behavior is driven by references/agent-matrix.md — read it whenever agent detection or an agent's specifics are needed. One documented exception, the Claude carve-out: a team with no Claude users at…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -812,7 +812,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/check-ticket-implementation/SKILL.md",
       "readmeExcerpt": "Judge how much of a ticket is already implemented and report it so the user sees at a glance what is done, what isn't, and what still needs attention. Input is a ticket URL / bare id — run fetch-ticket on it (it resolves the tracker and planning dir and persists the .TICKET.md) — or a path to an already-fetched ticket file or its task dir. Ambiguous input: ask, don't guess. Run the fetch in a subagent when the runtime supports one, so its tool traffic stays out of this session's context: it returns the ticket-file path plus any blocker it hit (ambiguous tracker, auth, no planning-dir convention) for you to settle with the user — it never guesses. Without subagent support, invoke fetch-ticket inline. The ticket text is what gets annotated — its .REQUIREMENTS.md (same dir and <id>-<slug> base — a shared dir may hold siblings') may be read as context for intent, never annotated in its place. Inspect downloaded attachments and design frames when they bear on a requirement being judged. Evidence base: the current working tree, uncommitted changes included — unless the invocation names something else (a branch, PR, commit range); then judge against that. Turn every requirement-bearing s…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -953,7 +953,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/compact-docs-writer/SKILL.md",
       "readmeExcerpt": "Rewrite a doc — or draft a new one — for token economy: carry all its rules and intent in the least text possible, because the doc loads into agent context and is paid for on every read. Then prove nothing was lost: present the change with a word delta measured from the files, and apply only on approval. Write each piece of information with the least text that still preserves every rule, constraint, edge case, and intent. Two directions, equally binding: - Cut duplication, filler, and anything restatable more briefly. - Never drop text whose removal loses information or instruction, just to be shorter. Recurring reflex: \"Can this exact rule be said in fewer words?\" — if yes, do it. The no-op test licenses one more deletion. Ask of each sentence, in isolation: \"does it change the agent's behaviour versus its default?\" If not, it's a no-op — the agent already acts this way, so removing it loses nothing: delete the whole sentence rather than trimming words from it. Compaction counts words and information density, not whitespace. Blank lines between distinct chunks cost effectively nothing and aid the human reader, so keep them where they help; never collapse a long passage into one d…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -989,7 +989,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/compact-skill-creator/SKILL.md",
       "readmeExcerpt": "Author a new skill, or improve an existing one, so it carries all its rules and intent in the least text possible. Cost has two tiers: the description sits in context every session — the skill's most expensive text — while the body loads only when the skill triggers. Both stay lean. Be interactive: gather what you need, draft, then apply only on approval. The compaction rules — the least-text principle, the removal-audit verification, and the present-and-confirm with a measured word delta — live in compact-docs-writer, the single source of truth; this skill never restates or re-derives them. From the moment you draft (step 4) through self-review (step 5) and present (step 6), always invoke compact-docs-writer and follow its workflow on the skill text — reading it, applying its principles by hand, or naming it after a direct edit does not count. This skill adds only the skill-specific layer: trigger taxonomy, agnosticism, progressive disclosure, completion criteria, metadata, and the version-bump decision. How a skill is triggered decides how its description is written. Classify into one: - Mandatory — must auto-load whenever a task type is touched (e.g. \"working on UI components\",…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1025,7 +1025,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/context-checkup/SKILL.md",
       "readmeExcerpt": "Find what loads automatically into the session's context at startup, quantify it, and propose reversible trims ranked by payoff — shrink the startup context window by cutting what isn't worth its tokens. Read-only — measure and recommend; change settings only on explicit approval. Cost hierarchy, biggest first: 1. MCP tool schemas — large, but deferred by tool search. Only a problem if tool search is OFF. 2. Always-on text — CLAUDE.md/AGENTS.md chain, @imports, and skill/agent/command descriptions (every available one's description loads every session). 3. MCP server instructions — load per enabled server at startup; a chatty preamble can dwarf its tool names. 4. MCP tool names — ~10 tokens each. Cheap; 30 names ≈ 300 tokens isn't worth a recommendation. Rules: measure, never guess — wc/count, then attach a rough token figure to each finding. Rank by tokens-saved × reversibility. Distinguish auto-loaded from lazy-linked (nested AGENTS.md referenced from a parent are not loaded — don't flag them). Tool-name counts, the skills/agents/commands lists, and tool-search status come from the session's system-reminders, not disk — read them from your own context. 0. Verify tool search is o…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1131,7 +1131,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/create-implementation-plan/SKILL.md",
       "readmeExcerpt": "Planning only — no code changes, no execution. You produce one document: an implementation plan that is the contract for a later execution session. This is the \"how\", not the \"what\". The \"what\" was settled in an earlier refinement step and lives in the requirements document you're given; do not redefine scope. But you must flag any gap, ambiguity, or inconsistency you find in the requirements — surface it, never paper over it. Never guess — ask. With one limit: anything resolvable by reading the codebase, resolve by reading the codebase; only questions the code cannot settle go to the user. Your task is to produce the implementation plan. The steps below build toward it; grilling the user — interviewing relentlessly to resolve anything the code can't settle — is woven through the design, not a separate phase that runs before planning starts. 1. Read the requirements document the user references (e.g. a .REQUIREMENTS.md). If the path is ambiguous, ask. 2. Verify against the actual codebase. Open the files the requirements cite and confirm the prior-art references still hold; note anything that has shifted since the requirements were written. The requirements may also carry verified…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1167,7 +1167,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/create-manual-test-instructions/SKILL.md",
       "readmeExcerpt": "Read the input ticket or requirements document (and, where needed for accurate navigation, the code it cites). Write the manual-test file in the same directory, naming it by replacing .REQUIREMENTS or .TICKET with .MANUAL-TEST (e.g. FOO.REQUIREMENTS.md → FOO.MANUAL-TEST.md); if the input follows neither convention, append .MANUAL-TEST before .md. If there is no file (pasted text), follow the project's/user's convention for where plans live (default: .agents/plans/), derive a kebab-case <slug> from the content, and write <slug>/<slug>.MANUAL-TEST.md there. Running forked, you can't ask mid-run: flag any guessed location or slug in the final message for the user to verify. The file must be followable by someone unfamiliar with the ticket — short but complete. Four parts: 1. What changed — 1–2 sentences: the feature and the user-visible difference. 2. How to get there — concrete navigation to the affected area (entry point, page/screen name, any prerequisite state). 3. Before vs after — how the area behaved before, how it should behave now. 4. What to verify — checklist of behaviors to confirm, including edge cases (empty values, multiple items, boundaries) where relevant. Do not mod…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1602,7 +1602,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/execute-plan-tasks/SKILL.md",
       "readmeExcerpt": "One task per run — implement it, verify it, tick it, stop. The review between tasks is the point; never carry on into the next. Invocation: /execute-plan-tasks <plan-path> [task-id] Read the plan whole — summary, conventions and overrides, the steps the task cites, acceptance criteria — then its ## Tasks section. Ambiguous or missing plan path → ask. Several task sections → ask which one this run works from. No task section → stop and point at /split-plan-tasks. task-id given → that task; none → the first unticked one in order. A range or a whole group → run its first task only, saying the rest need their own runs; a task already ticked → say so and ask whether to redo it. Its dependencies — earlier tasks in its group, plus every task in each group its Depends on line names — must be ticked; name any unticked dependency and ask before proceeding. Done when the chosen task, its steps, its acceptance criteria and its dependency state are stated. - Scope is the task's steps, nothing else: no work belonging to a later task, no drive-by refactors. Work the plan calls for that no task covers → report it, don't absorb it. - The plan's conventions and overrides bind every task, this one i…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1638,7 +1638,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/fetch-pr-review/SKILL.md",
       "readmeExcerpt": "Fetch only — capture the review feedback left on a pull request; never fix code, reply, or judge the comments. Output is a self-contained .PR-REVIEW.md a fresh session can pick up and act on (e.g. via /refine-pr-review). Identify the platform from the PR URL (host shape) and fetch through the matching MCP server or CLI — e.g. GitHub MCP / gh for GitHub PRs, Azure DevOps MCP for ADO pull requests. Use whichever equivalent tools are connected; tool name prefixes vary by config. If the input is ambiguous, or no matching MCP/CLI is available, ask the user / stop — don't guess. Every uncertainty is confirmed with the user before proceeding: a thread's resolved status, the planning directory, the slug, anything ambiguous in between. A plausible guess is a question, not an answer. 1. Resolve the input. Accept a full PR URL; extract repo/project and PR id. If unrecognizable, ask. 2. Fetch the PR metadata — title, description, source/target branch, state, author, linked ticket/work item — and all feedback: - inline review threads (file, line, code context, full reply chain); - top-level review verdicts (approve / request changes / …) with their summary text; - general conversation comments…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1674,7 +1674,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/fetch-ticket/SKILL.md",
       "readmeExcerpt": "Fetch only — no analysis, requirements, or planning. Output is a self-contained .TICKET.md. Identify the tracker from the input (URL host, or id shape) and fetch through the matching MCP server — e.g. Azure DevOps MCP for ADO work items, Atlassian MCP for Jira issues, GitHub MCP / gh for GitHub issues. Use whichever equivalent tools are connected; tool name prefixes vary by config. Resolve once any handle the MCP needs (e.g. Atlassian cloudId, ADO project) and reuse it. If the input is ambiguous, ask the user — don't guess. If no matching MCP is connected: a public ticket may be scraped from its URL as a fallback (you may still suggest installing the matching MCP when it would do the job better); a private one can't — the URL returns a login page, not the ticket — so stop and tell the user to install and authenticate the matching MCP server, then re-run. 1. Resolve the input. Accept a full ticket URL or a bare id/key; extract the identifier. If the tracker uses a key prefix (e.g. XX-1234), keep it; otherwise use the bare number. If the input is unrecognizable, ask. 2. Fetch the ticket. Get the work item/issue with its full field set, comments inline, and related links/relations ex…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1710,7 +1710,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/fresh-eyes-review/SKILL.md",
       "readmeExcerpt": "A context that produced a change reads its intent, not its text, so same-context review misses what a fresh reader would catch. The fix is procedural: a reviewer whose context holds only the artifacts. 1. Resolve the inputs. The changeset: whatever the invocation names — a branch, a commit, a diff range, a draft vs its original. Given none, infer it from the session — usually the work just finished, committed or not; no VCS required. With no session context to draw on, fall back to the current git diff; when that too yields nothing, ask the user what to review. Pin the changeset as concretely as the environment allows — a diff or commit range where one exists, otherwise the touched files, with their prior state when reconstructable. Alongside it, a short statement of what the change is supposed to achieve, when one exists (the task as stated, a PR or ticket description); when this session authored the change, never include the session's own reasoning, plan, or messages — leaked rationale recreates the blindness the fresh context exists to remove. Done when changeset and intent are pinned down and free of authoring context. 2. Confirm the prompt. Assemble the reviewer prompt — chan…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1746,7 +1746,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/handover/SKILL.md",
       "readmeExcerpt": "Package a finished change so its reviewers never reconstruct intent from the diff. Write for a reviewer holding the diff and nothing else — no planning docs, no session, no knowledge that either exists. The input is any partial reference — ticket id, slug, a planning artifact's path — or nothing, meaning the session's task; in a fresh session, infer it from branch name and recent commits. Resolve it to the task's planning home: its <id>-<slug>/ directory in the project's planning directory, or its flat <id>-<slug>. files in a shared family directory. One clear match → proceed, stating the home and artifacts found. Inferred, or several candidates (-vN, …) → confirm first. An explicit reference matching nothing local → stop and ask; never guess. Read these, skipping what doesn't exist: 1. Task artifacts — every <id>-<slug>.md in the planning home: ticket, requirements, plan, decisions log, prior review and handover rounds, whatever else matches. 2. Related tickets — one hop only: parent (climbing higher only past thin containers), direct predecessors/successors, explicit relations, family-directory siblings; never expand their own relations. Local .TICKET.mds first; fetch from the t…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1782,7 +1782,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/maintainer-review/SKILL.md",
       "readmeExcerpt": "You are the merge gate, not the author's assistant: the question is whether this ships, and the contributor will argue back. Review in this session, not a subagent. A session opened for the PR is fresh already, and staying in it keeps the diff, the comments and your findings in hand for the argument that follows. Session already loaded with unrelated work, say so and offer a fresh one first. Take a PR reference on any forge and pull, through whatever tooling is connected, all of it before judging: metadata (title, description, author, base and head refs, draft state, labels, mergeability, required-check results), the diff, and every comment stream — conversation comments, review verdicts with their bodies, and inline threads with their replies. A single \"view PR\" call typically misses the review bodies and the inline threads; expect one request per stream. Fetch here, never via a review-capture skill: those write the author's triage file and take thread status from the forge, which step 3 re-derives against the current head. Fetch, then diff the merge base — <base>...<head>, three-dot — so the target's own commits don't read as the author's. A fork's head has no local ref; fetch t…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1818,7 +1818,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/memory-doctor/SKILL.md",
       "readmeExcerpt": "Agent-memory is an unseen side-channel into every session's context window: facts accumulate there, often by accident, that the user never reviews and cannot govern. This skill drains it. Technically nothing should live in project memory — durable guidance belongs in homes the user controls (project docs, project skills/rules, user-level skills/rules), and the rest is garbage. Block by block, move each entry to its proper home or archive it, until memory trends toward empty and the user — not the memory store — decides what reaches the context window. The skill guesses and recommends; the user decides. Every verdict, scope, form, and target is a proposal the user confirms or flips. When unsure, ask. Nothing is moved, deleted, or written without explicit per-item approval. For every block the user gets the whole fixed menu — relocate/merge, archive (delete), keep, or a custom action they type — never just the recommended verdict, never a pruned subset. Find the memory store for the current project. Its location is agent-specific — other agents store it elsewhere, or not at all. Claude Code example: slugify the project's absolute working-directory path by replacing each / with - and…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1855,7 +1855,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/mesh-discord-routing/README.md",
       "readmeExcerpt": "Mesh Discord Routing is a small, portable skill that lets agents of any runtime communicate with each other through Discord using simple, explicit routing rules. It is meant for mixed agent groups: framework-specific agents, custom bots, hosted assistants, or any other runtime that can follow a skill and send Discord messages. The shared rule is: - each agent decides who should receive its own reply - agents use semantic recipient labels, not raw Discord mention strings - a small hydrator script turns those labels into the cc-mesh: trigger and Discord mentions - an optional session helper can keep turn state for multi-turn workflows - the human-readable message stays separate from routing metadata This keeps the routing policy simple enough for language models to follow while keeping mention formatting deterministic and runtime-independent. The skill gives agents a common protocol for mesh-mode Discord conversations: 1. If a message contains cc-mesh:, treat it as a routed mesh message. 2. Decide who should receive the reply. 3. Default to notifying the sender when answering directly. 4. Add other recipients only when they should be involved. 5. Use no recipients only when no bot s…",
       "stars": 0,
-      "lastPush": "2026-09-06T12:21:53Z",
+      "lastPush": "2026-09-09T03:53:04Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2139,7 +2139,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-mesh",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-09-06T12:21:53Z",
+      "lastPush": "2026-09-09T03:53:04Z",
       "archived": false,
       "provides": [
         "instructions",
@@ -2377,7 +2377,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/refine-pr-review/SKILL.md",
       "readmeExcerpt": "The Refine phase for review feedback: turn a .PR-REVIEW.md (from /fetch-pr-review; ask if the path is ambiguous) into user-settled per-comment verdicts, drafted replies, and a REQUIREMENTS file covering the accepted code changes. Triage and replies are settled here; the plan and execute phases see only code changes. - address: the change enters the requirements in full; the reply stays a canned one-liner (\"fixed\", \"good catch, thanks\"). - partial: part of the change is accepted into the requirements, and the reply explains what was done and what was kept and why. - push back: no code change; the reply carries the reason. Read the code behind each comment first: verify its premise against the current codebase, never judging from the quoted hunk alone. Then form a recommendation — verdict, reasoning, and (for partial and push back) a draft reply. Nothing is decided silently: - Contentious ones one at a time: every comment recommended partial or push back, or uncertain, is its own question carrying recommendation, reasoning, and draft reply. - Obvious ones as one batch: then list the comments recommended address or no action for a single confirmation; the user can pull any item out f…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2413,7 +2413,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/refine-ticket/SKILL.md",
       "readmeExcerpt": "The Refine phase of Refine → Plan → Act: turn a raw ticket — or an idea to brainstorm — into a validated requirements document a fresh session can plan from. Analysis only — it defines what must be true when the work is done, never how to build it, and never touches code. An idea is a ticket that doesn't exist yet: treat the user's words as the ticket text, and grill to shape the idea itself — goal, in vs out of scope — before closing the branches that block implementation. You cannot define the \"what\" in a vacuum. Every requirement must be checked against the actual code, config, and design — a ticket may be stale, ambiguous, contradicted by the codebase, or depend on upstream work that isn't implemented yet (e.g. a prerequisite ticket still open). Reading the code here is for validating requirements, not for designing the solution. - Anything determinable by reading the code, resolve by reading the code — never ask the user about it. - Anything not determinable from ticket + code, ask — never fill the gap with a plausible assumption. - Local environment state (config files, DB contents, env vars) describes only the machine it's on — never assume it matches the environment where…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2449,7 +2449,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/review-code-assistant/SKILL.md",
       "readmeExcerpt": "Assist a human's local code-review pass: read the diff, understand the intent, surface the real issues. You suggest candidate comments; the human decides what to post. Single-pass and lightweight. The edge over a human: the agent has the project's convention docs open and reads big files fast. Output is local text only. Accept input flexibly; a PR link is optional: 1. PR URL — fetch its metadata (source/target branch, title, description), then diff. 2. One branch (\"review branch xxxx\") — diff it against the auto-detected target. 3. Two branches (\"review xxxx against yyyy\") — explicit source and target. 4. Nothing (\"review this branch\") — diff the current branch against the auto-detected target. (If explicitly asked, you may instead review uncommitted working-tree changes.) Diff base: always a three-dot merge-base diff, git diff <target-ref>...<source-ref>, so it matches exactly what the platform shows as the PR with no noise from commits that landed on target after the fork. Fall back to two-dot only when there is no common ancestor. No checkout is needed to produce the diff. Branch freshness: always git fetch first — never git pull: the diff needs no checkout or working-tree upda…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2485,7 +2485,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/review-ticket/SKILL.md",
       "readmeExcerpt": "A pre-pickup triage glance: read a ticket — or a set of tickets forming one feature — usually before anyone has started it, and decide whether it can be picked up or something must be clarified first. The output briefs the developer on the feature and lists the questions worth asking whoever owns the requirements. - Local ticket document(s): a single .TICKET.md, several, a ticket-set directory, or a .TICKET.md whose ## Ticket set section lists siblings. - One or more ticket URLs or bare ids/keys: delegate — even for a single one — to a subagent that invokes fetch-ticket, so the tickets land on disk without the fetch bloating this session's context, then review the local files. If the input is ambiguous or unrecognized, ask rather than guess. Set mode applies to multiple tickets, a set directory, or a .TICKET.md listing a ## Ticket set. For a lone member file whose intended scope isn't obvious from the request, ask whether to review the whole set or just that ticket. Read the input ticket file(s), visually inspecting the downloaded images and design frames — they are part of the spec and often where the gaps hide. Widen only on demand. When the input already tells the feature clear…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2556,7 +2556,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/run-nx-checks/SKILL.md",
       "readmeExcerpt": "Run format, lint, test, build. Fix unambiguous failures. Report anything judgment-laden. $ARGUMENTS — optional, space-separated: [cpuCount] [projectName] [--remote-cache]. Number token → cpuCount. Non-number, non-flag token → projectName. --remote-cache flag → opt back into the remote cache by dropping the remote-cache-off prefix. Default cpuCount = cores - 4 (min 1); count cores with getconf NPROCESSORSONLN (nproc is GNU-only). Default project scope = affected. Default remote-cache state = off (see Steps). Run nx commands from wherever nx.json lives in this repo (commonly the root; in some repos a subdirectory). Keep the Nx daemon warm so the project graph is reused across targets: - Apply only mechanical/unambiguous fixes: lint auto-fix output, missing imports/types, obvious type errors, test expectations that mirror a clear code change. - Never guess on anything judgment-laden: test failure that could be a real bug vs. an outdated assertion, errors pointing at unrelated areas, pre-existing failures unrelated to recent work, anything where multiple plausible fixes exist. Running forked, you can't ask mid-run: leave such failures unfixed and carry them, with your analysis, into t…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2592,7 +2592,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/self-improve/SKILL.md",
       "readmeExcerpt": "Suggest durable improvements to the skill or governing doc that should have steered the agent, so the next session gets it right without being told again — and apply them only after the user approves. The skill proposes; the user stays in control of every change. Three ways in: - Manual — the user invokes /self-improve to deliberately improve a skill or doc. - Self-triggered — the agent notices it was corrected on something a skill/doc governs (or should). Don't silently correct and move on, but don't derail the task either: note the lesson, finish what the user asked for, and offer to persist it at the next natural breakpoint. - Driven by another skill — a caller hands over content that is already durable guidance plus an already-chosen target (scope, form, and path — possibly a new file). It resolved both with the user, so skip steps 1-2 and run only draft + apply. \"Skill/doc\" means any standing instruction: a SKILL.md, AGENTS.md/CLAUDE.md, a coding-standards or convention doc, a rules file — anything that guides future agents. - Confirm before applying. The skill's job is to suggest, never to change text on its own. Never edit a skill or doc without the user's explicit go-ahead…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2628,7 +2628,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/self-review/SKILL.md",
       "readmeExcerpt": "Make a changeset merge-ready before submission — no regressions, sound code, the project's conventions respected — and prove it was scrutinized: a fresh-context reviewer hunts for what would block the merge, the author answers every finding, and a compact report — scannable by a maintainer in seconds — records the outcome. The report is the review record only; the change's what/why belongs to the PR description (e.g. via /handover), never here. Only for a changeset you authored. The fresh-context reviewer exists to escape authoring blindness, so someone else's PR has nothing to escape and belongs to maintainer-review. 1. Resolve source and target. No input → current branch against the auto-detected target: the default branch of the upstream remote when one exists (fork workflow), else of origin — via git ls-remote --symref <remote> HEAD, never the often-absent local refs/remotes/<remote>/HEAD; that failing (e.g. offline), the sole existing candidate among main, master, develop/development (preferring upstream's remote-tracking ref, then origin's, then the local branch) — still ambiguous or none → ask. Explicit branches in the invocation win; a detached HEAD → ask which branch is u…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2734,7 +2734,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/split-plan-tasks/SKILL.md",
       "readmeExcerpt": "Append a task breakdown to a plan so the work lands in small increments — one task, then a review, a correction pass, a commit — instead of one sweep. Authoring only: executing the tasks is a later, separate session. Invocation: /split-plan-tasks <plan-path> Ambiguous or missing path → ask. A plan with numbered steps and an acceptance-criteria checklist splits best; any plan markdown works — reference tasks to headings when steps aren't numbered, and drop the AC line when there is no such checklist. A plan already carrying a task section → stop and ask which the user wants: replace it, add a second one beside it, or carry the ticked tasks forward and reformulate only the remaining work. Done when the plan is read and, where a section already existed, the user has chosen. - Task — the smallest chunk that leaves the project building and its tests passing, so it can be reviewed and committed on its own. Steps that only make sense together are one task, never two. - Group — one PR: independently mergeable, delivering something coherent. Order the groups and state each one's dependency on earlier groups. - Respect the plan's ordering: a task never precedes what it depends on. - Front-l…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2848,7 +2848,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/use-conversational-language/SKILL.md",
       "readmeExcerpt": "Defines only the voice, how to word text a human should read as if a person typed it, never the content: each caller keeps its own rules for what to say (evidence bars, scope, structure). Apply the baseline always, plus the section matching the situation. Sections are collections of rules and examples, not silos: whatever fits the text at hand applies, from any section. Bans (\"no …\", \"never …\") are hard rules; everything else is a tip, and quoted snippets (\"wdyt\") are examples, never required wording. Concise, plain language that reads like natural conversation. No AI tells: over-formality, exclamation marks, emoji, semicolon-heavy prose, \"Certainly!\"-style openers, bullet lists where a sentence would do. Stop at the last point. No closer that only rounds the text off: wrap-up, reassurance, closing counterfactual (\"hope that helps\", \"that should be enough to reproduce it\", \"if we skipped X, Y would break\"). Never use dashes (em or en). The dash slips in as a connector, the closer as a sign-off, and reciting the rules isn't enough: before sending, re-read the final text, reword every dash away (comma, period, or line break), and delete an ending that only rounds off. Write the way…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2884,7 +2884,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/verify-understanding/SKILL.md",
       "readmeExcerpt": "One goal, nothing more, nothing less: verify the engineer is ready to move to the implementation phase. Exercise their understanding of a feature before they work on it — the pipeline's other artifacts serve fresh agent sessions; this step serves the human. Active recall: the user produces the feature in their own words, you only steer and fix. Re-runnable: right after the ticket review, or days later just before implementation — every run starts fresh from the review file, no state kept between runs. A .TICKET-REVIEW.md. Read it and the ticket files and parent it links. A reference that exists only as a tracker URL (no local file) may be fetched read-only at conversation time. A conversation, not a test — the last sync between a dev and their PO before development starts. 1. Ask the user to explain the feature in their own words: who uses it, what they see and do, why the feature exists, and what each ticket contributes. 2. Let them produce the narrative. Probe one weak spot at a time; correct and complete only from the review file and the referenced materials — flag what those don't settle, never improvise requirements. 3. Stay at that PO–dev depth: journey, actors, purpose, per…",
       "stars": 46,
-      "lastPush": "2026-09-07T17:43:21Z",
+      "lastPush": "2026-09-09T07:39:09Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2940,8 +2940,8 @@
       "installCommand": "npx agentwheel install \"github:NestDevLab/agent-memory-fabric\"",
       "repoUrl": "https://github.com/NestDevLab/agent-memory-fabric",
       "homepageUrl": null,
-      "stars": null,
-      "lastPush": null,
+      "stars": 0,
+      "lastPush": "2026-09-02T16:59:05Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2985,8 +2985,8 @@
       "installCommand": "npx agentwheel install \"github:NestDevLab/obsidian-second-brain\"",
       "repoUrl": "https://github.com/NestDevLab/obsidian-second-brain",
       "homepageUrl": null,
-      "stars": null,
-      "lastPush": null,
+      "stars": 3,
+      "lastPush": "2026-07-20T10:40:04Z",
       "archived": false,
       "provides": [
         "instructions",
@@ -7529,6 +7529,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:tools.adminhub/telegram",
+      "name": "AdminHub for Telegram",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Run a Telegram channel from your AI agent. Posts go out through your own bot, not your account.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:tools.adminhub/telegram",
+      "installCommand": "npx agentwheel install \"mcp-registry:tools.adminhub/telegram\" --adapter claude --local",
+      "repoUrl": "https://github.com/siteboss777-lgtm/telegram-admin-hub",
+      "homepageUrl": "https://adminhub.tools/mcp/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.1.0"
+    },
+    {
       "id": "mcp-registry:com.admitbase/admissions",
       "name": "AdmitBase Admissions",
       "ecosystem": "mcp-registry",
@@ -8121,6 +8143,28 @@
         "mcp"
       ],
       "version": "4.0.0"
+    },
+    {
+      "id": "mcp-registry:top.agentarcade/agent-arcade",
+      "name": "Agent Arcade Protocol 5",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "AI-only game publishing, autonomous play, live observation, replay and independent certification.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:top.agentarcade/agent-arcade",
+      "installCommand": "npx agentwheel install \"mcp-registry:top.agentarcade/agent-arcade\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://agentarcade.top",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "5.0.0"
     },
     {
       "id": "mcp-registry:io.github.smukh/agent-arena",
@@ -11707,6 +11751,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.allpaintcolours/mcp",
+      "name": "All Paint Colours",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Every UK paint colour, matched across brands by ΔE and priced; palettes, planner projects, trends.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.allpaintcolours/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.allpaintcolours/mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/hwam91/allpaintcolours-api",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.allgoodinsp/mcp-server",
@@ -17803,6 +17869,50 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:uk.co.atinamos/agent-shop",
+      "name": "Atinamos Agent Shop",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Machine-service catalogue, payment hand-off and free market discovery for autonomous AI agents.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.atinamos/agent-shop",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.atinamos/agent-shop\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://agent.atinamos.co.uk/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.atinamos/evidence",
+      "name": "Atinamos Evidence",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read-only verification evidence for paid machine services and buyer policy checks.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.atinamos/evidence",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.atinamos/evidence\" --adapter claude --local",
+      "repoUrl": "https://github.com/Atinamos/agent-verification-research",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.brian8a1/atisbo-docs",
       "name": "Atisbo Documentation",
       "ecosystem": "mcp-registry",
@@ -21798,6 +21908,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.apollowinner/billtruth\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://billtruth.co/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:tv.makata/bim",
+      "name": "Bim",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Design-review threads, comments, reactions and deployments from Bim. Sign in with Google.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:tv.makata/bim",
+      "installCommand": "npx agentwheel install \"mcp-registry:tv.makata/bim\" --adapter claude --local",
+      "repoUrl": "https://github.com/Makata-Studio/bim-mcp",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -27307,6 +27439,28 @@
       "version": "1.13.0"
     },
     {
+      "id": "mcp-registry:tools.calculator/mcp",
+      "name": "Calculator Tools MCP",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Publish a live calculator, tracker, tool, or game from Cursor, Claude, or ChatGPT.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:tools.calculator/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:tools.calculator/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://calculator.tools/mcp/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.1"
+    },
+    {
       "id": "mcp-registry:io.github.Wxt-ai/calendar-handoff-reader",
       "name": "Calendar Handoff Reader",
       "ecosystem": "mcp-registry",
@@ -30473,6 +30627,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:ua.org.chertov/chertov",
+      "name": "Chertov & Vorobyov physics problem solutions",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read-only search and lookup over the Chertov & Vorobyov physics problem solutions (chertov.org.ua).",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:ua.org.chertov/chertov",
+      "installCommand": "npx agentwheel install \"mcp-registry:ua.org.chertov/chertov\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://www.chertov.org.ua/mcp-api",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:health.chia/chia-mcp",
@@ -34169,6 +34345,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:top.comunicate/publishing",
+      "name": "Comunicate.top",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Publish press releases and advertorials on 3,800+ news sites: catalogue, prices, orders.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:top.comunicate/publishing",
+      "installCommand": "npx agentwheel install \"mcp-registry:top.comunicate/publishing\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://comunicate.top/en/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/conceptnet",
@@ -50517,6 +50715,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:uk.co.cybercentry/erc-8126-scan",
+      "name": "ERC-8126 Scan",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Search 378k+ ERC-8004 agents and read their security verifications. Pay in USDC over x402.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.cybercentry/erc-8126-scan",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.cybercentry/erc-8126-scan\" --adapter claude --local",
+      "repoUrl": "https://github.com/Cybercentry/erc-8126-scan-mcp",
+      "homepageUrl": "https://erc8126scan.ai",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.PatrickPi1312/eu-compliance",
       "name": "EU Compliance Tools (pay-per-call, x402)",
       "ecosystem": "mcp-registry",
@@ -57227,6 +57447,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:uk.co.filtersolutions/public-content",
+      "name": "Filter Solutions Ltd Public Technical Content",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read-only MCP access to Filter Solutions Ltd public filtration and oil monitoring content.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.filtersolutions/public-content",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.filtersolutions/public-content\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.3.0"
+    },
+    {
       "id": "mcp-registry:com.filtrous/mcp-catalog",
       "name": "Filtrous MCP Catalog Server",
       "ecosystem": "mcp-registry",
@@ -58758,6 +59000,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.flywhereto/mcp\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://flywhereto.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:to.flyn/mcp",
+      "name": "Flyn",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Create, edit and analyse short links and QR codes. OAuth sign-in works on the free plan.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:to.flyn/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:to.flyn/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://www.flyn.to/ai",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -67844,6 +68108,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.tdavidson/mcp-hemrock\" --adapter claude --local",
       "repoUrl": "https://github.com/tdavidson/mcp-hemrock",
       "homepageUrl": "https://hemrock.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.herstack/herstack",
+      "name": "HerStack",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read-only women's health supplement guidance: Solgar UK products, GB-authorised claims, citations.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.herstack/herstack",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.herstack/herstack\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://herstack.co.uk/mcp",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -84001,6 +84287,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:town.liars/arena",
+      "name": "Liars Town Arena",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Play Werewolf against other AI agents. join once, then loop observe/act. Public ELO leaderboard.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:town.liars/arena",
+      "installCommand": "npx agentwheel install \"mcp-registry:town.liars/arena\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://liars.town",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.2.0"
+    },
+    {
       "id": "mcp-registry:io.github.junoventures/liberdade-sampa-br",
       "name": "Liberdade",
       "ecosystem": "mcp-registry",
@@ -85209,6 +85517,28 @@
         "mcp"
       ],
       "version": "0.1.1"
+    },
+    {
+      "id": "mcp-registry:to.viibe/living-memory",
+      "name": "Living Memory",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "An MCP memory server. One memory your agents share — across models, devices and apps.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:to.viibe/living-memory",
+      "installCommand": "npx agentwheel install \"mcp-registry:to.viibe/living-memory\" --adapter claude --local",
+      "repoUrl": "https://github.com/v1b3x0r/living-memory-engine",
+      "homepageUrl": "https://viibe.to/living-memory/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.2"
     },
     {
       "id": "mcp-registry:ai.livingmeta/ai-in-research",
@@ -111655,6 +111985,28 @@
       "version": "0.20.8"
     },
     {
+      "id": "mcp-registry:tv.popoff/data",
+      "name": "PopOff Data",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Reality-TV follower analytics for AI agents: histories, growth, follow graphs, engagement, CSV.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:tv.popoff/data",
+      "installCommand": "npx agentwheel install \"mcp-registry:tv.popoff/data\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://popoff.tv/data",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:ai.popdot/popdot-mcp",
       "name": "Popdot AI",
       "ecosystem": "mcp-registry",
@@ -131101,6 +131453,28 @@
         "mcp"
       ],
       "version": "0.9.0"
+    },
+    {
+      "id": "mcp-registry:trade.snacs/snacs-data",
+      "name": "SNACS Data",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "SEC dilution data, live market data, and news for U.S. equities, with point-in-time as-of queries.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:trade.snacs/snacs-data",
+      "installCommand": "npx agentwheel install \"mcp-registry:trade.snacs/snacs-data\" --adapter claude --local",
+      "repoUrl": "https://github.com/snacstrade/snacs-mcp",
+      "homepageUrl": "https://snacs.trade/api",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "3.5.0"
     },
     {
       "id": "mcp-registry:io.github.mcp-dir/sncr_imoveis-mcp",
@@ -157063,6 +157437,28 @@
       "version": "1.0.2"
     },
     {
+      "id": "mcp-registry:uk.co.cleantechcontent/uk-energy-data",
+      "name": "UK Energy Data (tariffs, price cap, EV charging)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Verified UK energy tariffs, the Ofgem price cap by region and EV charging prices, with sources.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.cleantechcontent/uk-energy-data",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.cleantechcontent/uk-energy-data\" --adapter claude --local",
+      "repoUrl": "https://github.com/cleantech-content/uk-energy-prices-skill",
+      "homepageUrl": "https://data.cleantechcontent.co.uk/docs/mcp/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.paulieb89/uk-legal-mcp",
       "name": "UK Legal Research",
       "ecosystem": "mcp-registry",
@@ -160948,6 +161344,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.verixid/verifier\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://verixid.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:top.verseworks/verseworks",
+      "name": "VerseWorks",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "AI-native fiction platform. Any AI can register, read, search and co-author novels via MCP or REST.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:top.verseworks/verseworks",
+      "installCommand": "npx agentwheel install \"mcp-registry:top.verseworks/verseworks\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://verseworks.top",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -252983,6 +253401,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:tennis.grand/4grand",
+      "name": "tennis.grand/4grand",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Free fantasy pools for the four tennis Grand Slams. What play for love means, and who is winning.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:tennis.grand/4grand",
+      "installCommand": "npx agentwheel install \"mcp-registry:tennis.grand/4grand\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://grand.tennis",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:live.alpic.new-test-cli-239fbe01/new-test-cli",
       "name": "test mcp server",
       "ecosystem": "mcp-registry",
@@ -253047,6 +253487,28 @@
         "mcp"
       ],
       "version": "1.1.0"
+    },
+    {
+      "id": "mcp-registry:th.in.legaltech/thai-legal",
+      "name": "th.in.legaltech/thai-legal",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Thai legal search MCP — statutes, gazette, opinions, court cases, with checkable citations.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:th.in.legaltech/thai-legal",
+      "installCommand": "npx agentwheel install \"mcp-registry:th.in.legaltech/thai-legal\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "2.23.0"
     },
     {
       "id": "mcp-registry:io.github.nirholas/threews-3d-studio-free",
@@ -253238,6 +253700,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:today.lmk/commerce\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://lmk.today/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:today.solarstorm/solarstorm",
+      "name": "today.solarstorm/solarstorm",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Space weather: Kp index, NOAA 3-day geomagnetic forecast, solar flares, aurora visibility.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:today.solarstorm/solarstorm",
+      "installCommand": "npx agentwheel install \"mcp-registry:today.solarstorm/solarstorm\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -253643,6 +254127,72 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:tv.sleipnir/sleipnir",
+      "name": "tv.sleipnir/sleipnir",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Multistream to Twitch, YouTube and Kick; generate OBS overlays from a plain-English prompt.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:tv.sleipnir/sleipnir",
+      "installCommand": "npx agentwheel install \"mcp-registry:tv.sleipnir/sleipnir\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://sleipnir.tv",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:tw.org.legaltech/taiwan-law",
+      "name": "tw.org.legaltech/taiwan-law",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Taiwan legal research MCP: 判決書、全國法規、釋字/憲判與立法歷程查詢，12 個工具，回應均附官方出處 URL。",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:tw.org.legaltech/taiwan-law",
+      "installCommand": "npx agentwheel install \"mcp-registry:tw.org.legaltech/taiwan-law\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://legaltech.org.tw/tools/taiwan-law-mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.3.0"
+    },
+    {
+      "id": "mcp-registry:tw.tobid/tenders",
+      "name": "tw.tobid/tenders",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Taiwan government tender search and intelligence: 14M+ notices, vendor and agency reports.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:tw.tobid/tenders",
+      "installCommand": "npx agentwheel install \"mcp-registry:tw.tobid/tenders\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://tobid.tw/guide/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:sh.twitr/twitr",
       "name": "twitr.sh",
       "ecosystem": "mcp-registry",
@@ -253709,6 +254259,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:ua.com.mfoxa/catalog",
+      "name": "ua.com.mfoxa/catalog",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read-only catalog of licensed Ukrainian MFOs: loan terms, NBU licenses, ratings and reviews.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:ua.com.mfoxa/catalog",
+      "installCommand": "npx agentwheel install \"mcp-registry:ua.com.mfoxa/catalog\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://mfoxa.com.ua",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/bible",
       "name": "uiule",
       "ecosystem": "mcp-registry",
@@ -253731,6 +254303,1546 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:uk.bankconvert/site",
+      "name": "uk.bankconvert/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Bank Convert: the site's own MCP server — compare, enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.bankconvert/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.bankconvert/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://bankconvert.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.abnormalloadquotes/site",
+      "name": "uk.co.abnormalloadquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Abnormal Load Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.abnormalloadquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.abnormalloadquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://abnormalloadquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.accesscontrolcost/site",
+      "name": "uk.co.accesscontrolcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Access Control Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.accesscontrolcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.accesscontrolcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://accesscontrolcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.adrcourses/site",
+      "name": "uk.co.adrcourses/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ADR Courses: the site's own MCP server — enquiry (enquiry = a human handoff, not a purchase);...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.adrcourses/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.adrcourses/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://adrcourses.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.agriculturalbuildingcost/site",
+      "name": "uk.co.agriculturalbuildingcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Agricultural Building Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.agriculturalbuildingcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.agriculturalbuildingcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://agriculturalbuildingcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.asbestosdisposalcost/site",
+      "name": "uk.co.asbestosdisposalcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Asbestos Disposal Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.asbestosdisposalcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.asbestosdisposalcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://asbestosdisposalcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.asbestosremovalcosts/site",
+      "name": "uk.co.asbestosremovalcosts/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Asbestos Removal Costs: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.asbestosremovalcosts/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.asbestosremovalcosts/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://asbestosremovalcosts.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.asbestossurveyquotes/site",
+      "name": "uk.co.asbestossurveyquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Asbestos Survey Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.asbestossurveyquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.asbestossurveyquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://asbestossurveyquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.basementexcavationcost/site",
+      "name": "uk.co.basementexcavationcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Basement Excavation Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.basementexcavationcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.basementexcavationcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://basementexcavationcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.batsurveycost/site",
+      "name": "uk.co.batsurveycost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Bat Survey Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.batsurveycost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.batsurveycost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://batsurveycost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.batterystoragecost/site",
+      "name": "uk.co.batterystoragecost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Battery Storage Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.batterystoragecost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.batterystoragecost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://batterystoragecost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.binruleschecker/site",
+      "name": "uk.co.binruleschecker/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Bin Rules Checker: the site's own MCP server — checker, enquiry (enquiry = a human handoff, not...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.binruleschecker/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.binruleschecker/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://binruleschecker.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.bngquotes/site",
+      "name": "uk.co.bngquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "BNG Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a purchase);...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.bngquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.bngquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://bngquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.boreholedrillingcost/site",
+      "name": "uk.co.boreholedrillingcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Borehole Drilling Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.boreholedrillingcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.boreholedrillingcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://boreholedrillingcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.businessgrantsfinder/site",
+      "name": "uk.co.businessgrantsfinder/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Business Grants Finder: the site's own MCP server — checker, enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.businessgrantsfinder/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.businessgrantsfinder/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://businessgrantsfinder.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.businessvaluationcost/site",
+      "name": "uk.co.businessvaluationcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Business Valuation Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.businessvaluationcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.businessvaluationcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://businessvaluationcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.campervanconversioncost/site",
+      "name": "uk.co.campervanconversioncost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Campervan Conversion Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.campervanconversioncost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.campervanconversioncost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://campervanconversioncost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.caravanstorageprices/site",
+      "name": "uk.co.caravanstorageprices/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Caravan Storage Prices: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.caravanstorageprices/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.caravanstorageprices/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://caravanstorageprices.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.careinspectorateregistration/site",
+      "name": "uk.co.careinspectorateregistration/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Care Inspectorate Registration: the site's own MCP server — enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.careinspectorateregistration/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.careinspectorateregistration/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://careinspectorateregistration.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.carimportcalculator/site",
+      "name": "uk.co.carimportcalculator/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Car Import Calculator: the site's own MCP server — calculator, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.carimportcalculator/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.carimportcalculator/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://carimportcalculator.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.cataractsurgerycost/site",
+      "name": "uk.co.cataractsurgerycost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Cataract Surgery Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.cataractsurgerycost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.cataractsurgerycost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://cataractsurgerycost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.catchmentchecker/site",
+      "name": "uk.co.catchmentchecker/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Catchment Checker: the site's own MCP server — checker, enquiry (enquiry = a human handoff, not...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.catchmentchecker/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.catchmentchecker/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://catchmentchecker.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.cctvdrainsurveycost/site",
+      "name": "uk.co.cctvdrainsurveycost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CCTV Drain Survey Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.cctvdrainsurveycost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.cctvdrainsurveycost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://cctvdrainsurveycost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.cctvinstallationcost/site",
+      "name": "uk.co.cctvinstallationcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CCTV Installation Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.cctvinstallationcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.cctvinstallationcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://cctvinstallationcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.ciwregistration/site",
+      "name": "uk.co.ciwregistration/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CIW Registration: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.ciwregistration/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.ciwregistration/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://ciwregistration.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.classiccarrestorationcost/site",
+      "name": "uk.co.classiccarrestorationcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Classic Car Restoration Cost: the site's own MCP server — enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.classiccarrestorationcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.classiccarrestorationcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://classiccarrestorationcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.classqchecker/site",
+      "name": "uk.co.classqchecker/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Class Q Checker: the site's own MCP server — checker, enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.classqchecker/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.classqchecker/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://classqchecker.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.clinicalwastequotes/site",
+      "name": "uk.co.clinicalwastequotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Clinical Waste Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.clinicalwastequotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.clinicalwastequotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://clinicalwastequotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.clubgrants/site",
+      "name": "uk.co.clubgrants/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Club Grants: the site's own MCP server — checker, enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.clubgrants/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.clubgrants/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://clubgrants.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.coldroominstallationcost/site",
+      "name": "uk.co.coldroominstallationcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Cold Room Installation Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.coldroominstallationcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.coldroominstallationcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://coldroominstallationcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.commercialdrainagequotes/site",
+      "name": "uk.co.commercialdrainagequotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Commercial Drainage Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.commercialdrainagequotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.commercialdrainagequotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://commercialdrainagequotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.commercialepccost/site",
+      "name": "uk.co.commercialepccost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Commercial EPC Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.commercialepccost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.commercialepccost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://commercialepccost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.commercialheatpumpcost/site",
+      "name": "uk.co.commercialheatpumpcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Commercial Heat Pump Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.commercialheatpumpcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.commercialheatpumpcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://commercialheatpumpcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.commercialkitchencost/site",
+      "name": "uk.co.commercialkitchencost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Commercial Kitchen Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.commercialkitchencost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.commercialkitchencost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://commercialkitchencost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.commerciallaundrycost/site",
+      "name": "uk.co.commerciallaundrycost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Commercial Laundry Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.commerciallaundrycost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.commerciallaundrycost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://commerciallaundrycost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.comparemyconveyancing/site",
+      "name": "uk.co.comparemyconveyancing/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Compare My Conveyancing: the site's own MCP server — compare, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.comparemyconveyancing/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.comparemyconveyancing/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://comparemyconveyancing.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.compressedairservicing/site",
+      "name": "uk.co.compressedairservicing/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Compressed Air Servicing: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.compressedairservicing/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.compressedairservicing/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://compressedairservicing.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.concretepumpinghire/site",
+      "name": "uk.co.concretepumpinghire/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Concrete Pumping Hire: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.concretepumpinghire/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.concretepumpinghire/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://concretepumpinghire.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.confinedspacetrainingcost/site",
+      "name": "uk.co.confinedspacetrainingcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Confined Space Training Cost: the site's own MCP server — enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.confinedspacetrainingcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.confinedspacetrainingcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://confinedspacetrainingcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.contractorpaycalculator/site",
+      "name": "uk.co.contractorpaycalculator/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Contractor Pay Calculator: the site's own MCP server — calculator, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.contractorpaycalculator/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.contractorpaycalculator/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://contractorpaycalculator.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.cqcregistrationchecker/site",
+      "name": "uk.co.cqcregistrationchecker/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CQC Registration Checker: the site's own MCP server — checker, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.cqcregistrationchecker/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.cqcregistrationchecker/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://cqcregistrationchecker.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.cryptoaccountantsdirectory/site",
+      "name": "uk.co.cryptoaccountantsdirectory/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Crypto Accountants Directory: the site's own MCP server — compare, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.cryptoaccountantsdirectory/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.cryptoaccountantsdirectory/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://cryptoaccountantsdirectory.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.currentannuityrates/site",
+      "name": "uk.co.currentannuityrates/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Current Annuity Rates: the site's own MCP server — calculator, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.currentannuityrates/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.currentannuityrates/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://currentannuityrates.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.cybercentry/verification",
+      "name": "uk.co.cybercentry/verification",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Pay-per-call security verification for wallets, contracts, agents and apps, in USDC over x402.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.cybercentry/verification",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.cybercentry/verification\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://centry.cybercentry.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.cyberessentialscost/site",
+      "name": "uk.co.cyberessentialscost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Cyber Essentials Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.cyberessentialscost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.cyberessentialscost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://cyberessentialscost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.cyberinsurancecost/site",
+      "name": "uk.co.cyberinsurancecost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Cyber Insurance Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.cyberinsurancecost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.cyberinsurancecost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://cyberinsurancecost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.dampsurveyprices/site",
+      "name": "uk.co.dampsurveyprices/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Damp Survey Prices: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.dampsurveyprices/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.dampsurveyprices/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://dampsurveyprices.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.demolitionquotes/site",
+      "name": "uk.co.demolitionquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Demolition Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.demolitionquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.demolitionquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://demolitionquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.devexitfinance/site",
+      "name": "uk.co.devexitfinance/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Development Exit Finance: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.devexitfinance/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.devexitfinance/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://devexitfinance.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.dilapidationscost/site",
+      "name": "uk.co.dilapidationscost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Dilapidations Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.dilapidationscost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.dilapidationscost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://dilapidationscost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.dilapidationsquotes/site",
+      "name": "uk.co.dilapidationsquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Dilapidations Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.dilapidationsquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.dilapidationsquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://dilapidationsquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.drainprices/site",
+      "name": "uk.co.drainprices/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Drain Prices: the site's own MCP server — enquiry (enquiry = a human handoff, not a purchase);...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.drainprices/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.drainprices/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://drainprices.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.drivershourscalculator/site",
+      "name": "uk.co.drivershourscalculator/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Drivers' Hours Calculator: the site's own MCP server — calculator, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.drivershourscalculator/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.drivershourscalculator/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://drivershourscalculator.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.dronelicencechecker/site",
+      "name": "uk.co.dronelicencechecker/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Drone Licence Checker: the site's own MCP server — checker, enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.dronelicencechecker/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.dronelicencechecker/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://dronelicencechecker.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.dsearassessmentcost/site",
+      "name": "uk.co.dsearassessmentcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "DSEAR Assessment Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.dsearassessmentcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.dsearassessmentcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://dsearassessmentcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.ductcleaningquotes/site",
+      "name": "uk.co.ductcleaningquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Duct Cleaning Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.ductcleaningquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.ductcleaningquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://ductcleaningquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.employercostcalculator/site",
+      "name": "uk.co.employercostcalculator/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Employer Cost Calculator: the site's own MCP server — calculator, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.employercostcalculator/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.employercostcalculator/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://employercostcalculator.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.employmentcontractgenerator/site",
+      "name": "uk.co.employmentcontractgenerator/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Employment Contract Generator: the site's own MCP server — checker, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.employmentcontractgenerator/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.employmentcontractgenerator/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://employmentcontractgenerator.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.employmentrightschecker/site",
+      "name": "uk.co.employmentrightschecker/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Employment Rights Checker: the site's own MCP server — checker, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.employmentrightschecker/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.employmentrightschecker/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://employmentrightschecker.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.energyauditcost/site",
+      "name": "uk.co.energyauditcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Energy Audit Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.energyauditcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.energyauditcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://energyauditcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.enginerebuildcost/site",
+      "name": "uk.co.enginerebuildcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Engine Rebuild Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.enginerebuildcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.enginerebuildcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://enginerebuildcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.epcupgradecost/site",
+      "name": "uk.co.epcupgradecost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "EPC Upgrade Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.epcupgradecost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.epcupgradecost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://epcupgradecost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.eventhirecosts/site",
+      "name": "uk.co.eventhirecosts/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Event Hire Costs: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.eventhirecosts/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.eventhirecosts/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://eventhirecosts.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.executivesearchfees/site",
+      "name": "uk.co.executivesearchfees/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Executive Search Fees: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.executivesearchfees/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.executivesearchfees/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://executivesearchfees.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.exhibitionstandcost/site",
+      "name": "uk.co.exhibitionstandcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Exhibition Stand Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.exhibitionstandcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.exhibitionstandcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://exhibitionstandcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.farmgrantdeadlines/site",
+      "name": "uk.co.farmgrantdeadlines/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Farm Grant Deadlines: the site's own MCP server — checker, enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.farmgrantdeadlines/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.farmgrantdeadlines/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://farmgrantdeadlines.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.findacopacker/site",
+      "name": "uk.co.findacopacker/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Find A Co-Packer: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.findacopacker/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.findacopacker/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://findacopacker.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.firealarmservicingcost/site",
+      "name": "uk.co.firealarmservicingcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Fire Alarm Servicing Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.firealarmservicingcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.firealarmservicingcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://firealarmservicingcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.firecompliancecost/site",
+      "name": "uk.co.firecompliancecost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Fire Compliance Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.firecompliancecost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.firecompliancecost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://firecompliancecost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.fireriskquotes/site",
+      "name": "uk.co.fireriskquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Fire Risk Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.fireriskquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.fireriskquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://fireriskquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:uk.co.flatscope/flatscope",
       "name": "uk.co.flatscope/flatscope",
       "ecosystem": "mcp-registry",
@@ -253744,6 +255856,270 @@
       "installCommand": "npx agentwheel install \"mcp-registry:uk.co.flatscope/flatscope\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://www.flatscope.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.foodhygienealerts/site",
+      "name": "uk.co.foodhygienealerts/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Food Hygiene Alerts: the site's own MCP server — checker, enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.foodhygienealerts/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.foodhygienealerts/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://foodhygienealerts.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.footballtrialsdatabase/site",
+      "name": "uk.co.footballtrialsdatabase/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Football Trials Database: the site's own MCP server — checker, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.footballtrialsdatabase/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.footballtrialsdatabase/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://footballtrialsdatabase.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.forensicaccountantcost/site",
+      "name": "uk.co.forensicaccountantcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Forensic Accountant Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.forensicaccountantcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.forensicaccountantcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://forensicaccountantcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.forkliftcoursefinder/site",
+      "name": "uk.co.forkliftcoursefinder/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Forklift Course Finder: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.forkliftcoursefinder/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.forkliftcoursefinder/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://forkliftcoursefinder.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.forkliftservicingcost/site",
+      "name": "uk.co.forkliftservicingcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Forklift Servicing Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.forkliftservicingcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.forkliftservicingcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://forkliftservicingcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.forklifttrainingquotes/site",
+      "name": "uk.co.forklifttrainingquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Forklift Training Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.forklifttrainingquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.forklifttrainingquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://forklifttrainingquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.forsaccreditationcost/site",
+      "name": "uk.co.forsaccreditationcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FORS Accreditation Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.forsaccreditationcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.forsaccreditationcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://forsaccreditationcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.fsmacrypto/site",
+      "name": "uk.co.fsmacrypto/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FSMA Crypto Promotions Checker: the site's own MCP server — checker, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.fsmacrypto/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.fsmacrypto/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://fsmacrypto.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.gallbladdersurgerycost/site",
+      "name": "uk.co.gallbladdersurgerycost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Gallbladder Surgery Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.gallbladdersurgerycost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.gallbladdersurgerycost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://gallbladdersurgerycost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.gearboxreconditioningcost/site",
+      "name": "uk.co.gearboxreconditioningcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Gearbox Reconditioning Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.gearboxreconditioningcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.gearboxreconditioningcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://gearboxreconditioningcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.gearboxrepairquotes/site",
+      "name": "uk.co.gearboxrepairquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Gearbox Repair Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.gearboxrepairquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.gearboxrepairquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://gearboxrepairquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.generatorservicingcost/site",
+      "name": "uk.co.generatorservicingcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Generator Servicing Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.generatorservicingcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.generatorservicingcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://generatorservicingcost.co.uk",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -253775,6 +256151,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:uk.co.glazierprices/site",
+      "name": "uk.co.glazierprices/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Glazier Prices: the site's own MCP server — enquiry (enquiry = a human handoff, not a purchase);...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.glazierprices/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.glazierprices/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://glazierprices.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.grainstoragecosts/site",
+      "name": "uk.co.grainstoragecosts/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Grain Storage Costs: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.grainstoragecosts/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.grainstoragecosts/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://grainstoragecosts.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:uk.co.grantiq/mcp",
       "name": "uk.co.grantiq/mcp",
       "ecosystem": "mcp-registry",
@@ -253788,6 +256208,974 @@
       "installCommand": "npx agentwheel install \"mcp-registry:uk.co.grantiq/mcp\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.greasetrapcleaningcost/site",
+      "name": "uk.co.greasetrapcleaningcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Grease Trap Cleaning Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.greasetrapcleaningcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.greasetrapcleaningcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://greasetrapcleaningcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.haccpsoftware/site",
+      "name": "uk.co.haccpsoftware/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HACCP Software Compare: the site's own MCP server — compare, enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.haccpsoftware/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.haccpsoftware/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://haccpsoftware.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.heatnetworkcheck/site",
+      "name": "uk.co.heatnetworkcheck/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Heat Network Check: the site's own MCP server — checker, enquiry (enquiry = a human handoff, not...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.heatnetworkcheck/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.heatnetworkcheck/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://heatnetworkcheck.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.heritagestatementcost/site",
+      "name": "uk.co.heritagestatementcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Heritage Statement Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.heritagestatementcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.heritagestatementcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://heritagestatementcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.herniasurgerycost/site",
+      "name": "uk.co.herniasurgerycost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Hernia Surgery Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.herniasurgerycost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.herniasurgerycost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://herniasurgerycost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.hgvhourscalculator/site",
+      "name": "uk.co.hgvhourscalculator/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HGV Hours Calculator: the site's own MCP server — calculator, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.hgvhourscalculator/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.hgvhourscalculator/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://hgvhourscalculator.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.hmolicencechecker/site",
+      "name": "uk.co.hmolicencechecker/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HMO Licence Checker: the site's own MCP server — checker, enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.hmolicencechecker/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.hmolicencechecker/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://hmolicencechecker.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.hmomortgagecalculator/site",
+      "name": "uk.co.hmomortgagecalculator/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HMO Mortgage Calculator: the site's own MCP server — calculator, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.hmomortgagecalculator/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.hmomortgagecalculator/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://hmomortgagecalculator.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.hvacmaintenancecost/site",
+      "name": "uk.co.hvacmaintenancecost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HVAC Maintenance Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.hvacmaintenancecost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.hvacmaintenancecost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://hvacmaintenancecost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.hydraulicrepairquotes/site",
+      "name": "uk.co.hydraulicrepairquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Hydraulic Repair Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.hydraulicrepairquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.hydraulicrepairquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://hydraulicrepairquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.idvdeadline/site",
+      "name": "uk.co.idvdeadline/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "IDV Deadline: the site's own MCP server — checker, enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.idvdeadline/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.idvdeadline/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://idvdeadline.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.iht2027calculator/site",
+      "name": "uk.co.iht2027calculator/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "IHT 2027 Calculator: the site's own MCP server — calculator, enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.iht2027calculator/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.iht2027calculator/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://iht2027calculator.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.industrialcleaningquotes/site",
+      "name": "uk.co.industrialcleaningquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Industrial Cleaning Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.industrialcleaningquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.industrialcleaningquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://industrialcleaningquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.industrialflooringcost/site",
+      "name": "uk.co.industrialflooringcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Industrial Flooring Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.industrialflooringcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.industrialflooringcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://industrialflooringcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.industrialfridgeservice/site",
+      "name": "uk.co.industrialfridgeservice/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Industrial Fridge Service: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.industrialfridgeservice/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.industrialfridgeservice/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://industrialfridgeservice.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.industrialroofingcost/site",
+      "name": "uk.co.industrialroofingcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Industrial Roofing Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.industrialroofingcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.industrialroofingcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://industrialroofingcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.interceptorcleaningcost/site",
+      "name": "uk.co.interceptorcleaningcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Interceptor Cleaning Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.interceptorcleaningcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.interceptorcleaningcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://interceptorcleaningcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.invoicefactoringcost/site",
+      "name": "uk.co.invoicefactoringcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Invoice Factoring Cost: the site's own MCP server — calculator, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.invoicefactoringcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.invoicefactoringcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://invoicefactoringcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.isocertificationcost/site",
+      "name": "uk.co.isocertificationcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO Certification Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.isocertificationcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.isocertificationcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://isocertificationcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.itsupportcostcalculator/site",
+      "name": "uk.co.itsupportcostcalculator/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "IT Support Cost Calculator: the site's own MCP server — calculator, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.itsupportcostcalculator/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.itsupportcostcalculator/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://itsupportcostcalculator.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.kneereplacementcost/site",
+      "name": "uk.co.kneereplacementcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Knee Replacement Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.kneereplacementcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.kneereplacementcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://kneereplacementcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.landdrainagecontractors/site",
+      "name": "uk.co.landdrainagecontractors/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Land Drainage Contractors: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.landdrainagecontractors/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.landdrainagecontractors/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://landdrainagecontractors.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.landlorddatabasecheck/site",
+      "name": "uk.co.landlorddatabasecheck/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Landlord Database Check: the site's own MCP server — checker, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.landlorddatabasecheck/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.landlorddatabasecheck/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://landlorddatabasecheck.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.latentdefectsinsurancecost/site",
+      "name": "uk.co.latentdefectsinsurancecost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Latent Defects Insurance Cost: the site's own MCP server — enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.latentdefectsinsurancecost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.latentdefectsinsurancecost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://latentdefectsinsurancecost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.latepaymentinterest/site",
+      "name": "uk.co.latepaymentinterest/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Late Payment Interest: the site's own MCP server — calculator, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.latepaymentinterest/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.latepaymentinterest/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://latepaymentinterest.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.leaseextensionquotes/site",
+      "name": "uk.co.leaseextensionquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Lease Extension Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.leaseextensionquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.leaseextensionquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://leaseextensionquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.leaserenewalcost/site",
+      "name": "uk.co.leaserenewalcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Lease Renewal Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.leaserenewalcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.leaserenewalcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://leaserenewalcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.legionellaassessmentcost/site",
+      "name": "uk.co.legionellaassessmentcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Legionella Assessment Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.legionellaassessmentcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.legionellaassessmentcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://legionellaassessmentcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.lettingagentsoftware/site",
+      "name": "uk.co.lettingagentsoftware/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Letting Agent Software: the site's own MCP server — compare, enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.lettingagentsoftware/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.lettingagentsoftware/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://lettingagentsoftware.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.levtestingcost/site",
+      "name": "uk.co.levtestingcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "LEV Testing Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.levtestingcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.levtestingcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://levtestingcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.liveryprices/site",
+      "name": "uk.co.liveryprices/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Livery Prices: the site's own MCP server — enquiry (enquiry = a human handoff, not a purchase);...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.liveryprices/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.liveryprices/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://liveryprices.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.locumtaxcalculator/site",
+      "name": "uk.co.locumtaxcalculator/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Locum Tax Calculator: the site's own MCP server — calculator, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.locumtaxcalculator/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.locumtaxcalculator/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://locumtaxcalculator.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.m365migrationcost/site",
+      "name": "uk.co.m365migrationcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "M365 Migration Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.m365migrationcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.m365migrationcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://m365migrationcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.machineryrepairquotes/site",
+      "name": "uk.co.machineryrepairquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Machinery Repair Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.machineryrepairquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.machineryrepairquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://machineryrepairquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.machinerytransportquotes/site",
+      "name": "uk.co.machinerytransportquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Machinery Transport Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.machinerytransportquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.machinerytransportquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://machinerytransportquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.marinesurveycost/site",
+      "name": "uk.co.marinesurveycost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Marine Survey Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.marinesurveycost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.marinesurveycost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://marinesurveycost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.marketingin/mcp",
+      "name": "uk.co.marketingin/mcp",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Marketingin agency services directory for AI agents.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.marketingin/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.marketingin/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://marketingin.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.martynslawcost/site",
+      "name": "uk.co.martynslawcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Martyn's Law Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.martynslawcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.martynslawcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://martynslawcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.measuredsurveycost/site",
+      "name": "uk.co.measuredsurveycost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Measured Survey Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.measuredsurveycost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.measuredsurveycost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://measuredsurveycost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.metalfabricationquotes/site",
+      "name": "uk.co.metalfabricationquotes/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Metal Fabrication Quotes: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.metalfabricationquotes/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.metalfabricationquotes/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://metalfabricationquotes.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.mezzaninefloorcost/site",
+      "name": "uk.co.mezzaninefloorcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Mezzanine Floor Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.mezzaninefloorcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.mezzaninefloorcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://mezzaninefloorcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.motorrewindcost/site",
+      "name": "uk.co.motorrewindcost/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Motor Rewind Cost: the site's own MCP server — enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.motorrewindcost/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.motorrewindcost/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://motorrewindcost.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.motortradeinsurancecompare/site",
+      "name": "uk.co.motortradeinsurancecompare/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Motor Trade Insurance Compare: the site's own MCP server — compare, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.motortradeinsurancecompare/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.motortradeinsurancecompare/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://motortradeinsurancecompare.co.uk",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:uk.co.motsoftware/site",
+      "name": "uk.co.motsoftware/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "MOT Software: the site's own MCP server — compare, enquiry (enquiry = a human handoff, not a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:uk.co.motsoftware/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:uk.co.motsoftware/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://motsoftware.co.uk",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -259216,7 +262604,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "research"
       ],
       "source": "clawhub:@warppay402/crypto-alpha-governance",
       "installCommand": "npx agentwheel install \"clawhub:@warppay402/crypto-alpha-governance\" --adapter openclaw --local --only-source --execute-plugins",
@@ -261091,7 +264479,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "sales-marketing"
       ],
       "source": "clawhub:@adaptlypost/openclaw-plugin",
       "installCommand": "npx agentwheel install \"clawhub:@adaptlypost/openclaw-plugin\" --adapter openclaw --local --only-source --execute-plugins",
@@ -262459,7 +265847,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "security"
       ],
       "source": "clawhub:agenticdome-openclaw-security",
       "installCommand": "npx agentwheel install \"clawhub:agenticdome-openclaw-security\" --adapter openclaw --local --only-source --execute-plugins",
@@ -270817,7 +274205,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "memory"
       ],
       "source": "clawhub:openclaw-dexi",
       "installCommand": "npx agentwheel install \"clawhub:openclaw-dexi\" --adapter openclaw --local --only-source --execute-plugins",
@@ -273069,7 +276457,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "data-analytics"
       ],
       "source": "clawhub:@flowsery/openclaw-plugin",
       "installCommand": "npx agentwheel install \"clawhub:@flowsery/openclaw-plugin\" --adapter openclaw --local --only-source --execute-plugins",
@@ -278861,7 +282249,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "memory"
       ],
       "source": "clawhub:@linggen/linggen",
       "installCommand": "npx agentwheel install \"clawhub:@linggen/linggen\" --adapter openclaw --local --only-source --execute-plugins",
@@ -298982,7 +302370,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "security"
       ],
       "source": "clawhub:twzrd-preflight",
       "installCommand": "npx agentwheel install \"clawhub:twzrd-preflight\" --adapter openclaw --local --only-source --execute-plugins",
@@ -300769,9 +304157,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools",
-        "security",
-        "gateway"
+        "security"
       ],
       "source": "clawhub:@solvely/tidebroker",
       "installCommand": "npx agentwheel install \"clawhub:@solvely/tidebroker\" --adapter openclaw --local --only-source --execute-plugins",
@@ -305824,7 +309210,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "security"
       ],
       "source": "clawhub:@alpha-ceema/agent-authentication",
       "installCommand": "npx agentwheel install \"clawhub:@alpha-ceema/agent-authentication\" --adapter openclaw --local --only-source --execute-plugins",
@@ -308984,7 +312370,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "security"
       ],
       "source": "clawhub:@seekrit/openclaw-plugin",
       "installCommand": "npx agentwheel install \"clawhub:@seekrit/openclaw-plugin\" --adapter openclaw --local --only-source --execute-plugins",
@@ -310805,7 +314191,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:muratcankoylan/Agent-Skills-for-Context-Engineering\"",
       "repoUrl": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
       "homepageUrl": null,
-      "stars": 17945,
+      "stars": 17950,
       "lastPush": "2026-08-19T01:55:00Z",
       "archived": false,
       "provides": null,
@@ -310844,7 +314230,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:vercel-labs/agent-skills\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": null,
-      "stars": 30959,
+      "stars": 30998,
       "lastPush": "2026-08-28T13:36:31Z",
       "archived": false,
       "provides": null,
@@ -310864,7 +314250,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:supabase/agent-skills\"",
       "repoUrl": "https://github.com/supabase/agent-skills",
       "homepageUrl": null,
-      "stars": 2584,
+      "stars": 2589,
       "lastPush": "2026-08-12T07:37:08Z",
       "archived": false,
       "provides": null,
@@ -310883,7 +314269,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:callstackincubator/agent-skills\"",
       "repoUrl": "https://github.com/callstackincubator/agent-skills",
       "homepageUrl": null,
-      "stars": 1638,
+      "stars": 1639,
       "lastPush": "2026-08-08T04:42:24Z",
       "archived": false,
       "provides": null,
@@ -310940,7 +314326,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:softaworks/agent-toolkit\"",
       "repoUrl": "https://github.com/softaworks/agent-toolkit",
       "homepageUrl": null,
-      "stars": 2446,
+      "stars": 2450,
       "lastPush": "2026-03-05T16:46:24Z",
       "archived": false,
       "provides": null,
@@ -310959,7 +314345,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:wshobson/agents\"",
       "repoUrl": "https://github.com/wshobson/agents",
       "homepageUrl": null,
-      "stars": 39493,
+      "stars": 39518,
       "lastPush": "2026-09-07T01:09:29Z",
       "archived": false,
       "provides": null,
@@ -310979,8 +314365,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:stripe/ai\"",
       "repoUrl": "https://github.com/stripe/ai",
       "homepageUrl": null,
-      "stars": 1794,
-      "lastPush": "2026-09-03T22:54:46Z",
+      "stars": 1795,
+      "lastPush": "2026-09-09T07:22:36Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -310990,7 +314376,7 @@
       "name": "antigravity-awesome-skills",
       "ecosystem": "skillkit",
       "type": "package",
-      "description": "AAS Core is the local, agent-first control plane for complete catalog discovery, agent-owned selection, stack validation, and planning, backed by 2,100+ agentic skills. Includes CLI, local MCP, catalog, plugins, and Workbench.",
+      "description": "AAS Core is the local, agent-first control plane for complete catalog discovery, agent-owned selection, stack validation, and planning, backed by 2,115+ agentic skills. Includes CLI, local MCP, catalog, plugins, and Workbench.",
       "tags": [
         "skillkit"
       ],
@@ -310998,8 +314384,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:sickn33/antigravity-awesome-skills\"",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "homepageUrl": null,
-      "stars": 46148,
-      "lastPush": "2026-09-07T07:23:33Z",
+      "stars": 46190,
+      "lastPush": "2026-09-08T17:24:31Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -311017,7 +314403,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:ComposioHQ/awesome-claude-skills\"",
       "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 74659,
+      "stars": 74721,
       "lastPush": "2026-08-10T21:45:44Z",
       "archived": false,
       "provides": null,
@@ -311036,7 +314422,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:travisvn/awesome-claude-skills\"",
       "repoUrl": "https://github.com/travisvn/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 15003,
+      "stars": 15008,
       "lastPush": "2026-04-28T19:30:24Z",
       "archived": false,
       "provides": null,
@@ -311055,8 +314441,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jimliu/baoyu-skills\"",
       "repoUrl": "https://github.com/jimliu/baoyu-skills",
       "homepageUrl": null,
-      "stars": 25745,
-      "lastPush": "2026-07-04T16:25:18Z",
+      "stars": 25772,
+      "lastPush": "2026-09-09T06:26:35Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -311131,7 +314517,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:giuseppe-trisciuoglio/developer-kit\"",
       "repoUrl": "https://github.com/giuseppe-trisciuoglio/developer-kit",
       "homepageUrl": null,
-      "stars": 342,
+      "stars": 343,
       "lastPush": "2026-08-18T13:20:00Z",
       "archived": false,
       "provides": null,
@@ -311150,8 +314536,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:langgenius/dify\"",
       "repoUrl": "https://github.com/langgenius/dify",
       "homepageUrl": null,
-      "stars": 154967,
-      "lastPush": "2026-09-08T11:18:15Z",
+      "stars": 155180,
+      "lastPush": "2026-09-09T11:06:14Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -311169,8 +314555,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:NousResearch/hermes-agent\"",
       "repoUrl": "https://github.com/NousResearch/hermes-agent",
       "homepageUrl": null,
-      "stars": 243232,
-      "lastPush": "2026-09-08T11:06:34Z",
+      "stars": 243647,
+      "lastPush": "2026-09-09T11:22:24Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -311188,7 +314574,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:coreyhaines31/marketingskills\"",
       "repoUrl": "https://github.com/coreyhaines31/marketingskills",
       "homepageUrl": null,
-      "stars": 48464,
+      "stars": 49119,
       "lastPush": "2026-09-05T04:48:10Z",
       "archived": false,
       "provides": null,
@@ -311207,7 +314593,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:onmax/nuxt-skills\"",
       "repoUrl": "https://github.com/onmax/nuxt-skills",
       "homepageUrl": null,
-      "stars": 707,
+      "stars": 708,
       "lastPush": "2026-09-08T07:27:18Z",
       "archived": false,
       "provides": null,
@@ -311226,7 +314612,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:kepano/obsidian-skills\"",
       "repoUrl": "https://github.com/kepano/obsidian-skills",
       "homepageUrl": null,
-      "stars": 48020,
+      "stars": 48063,
       "lastPush": "2026-06-08T16:12:01Z",
       "archived": false,
       "provides": null,
@@ -311246,7 +314632,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:anthropics/skills\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": null,
-      "stars": 175144,
+      "stars": 175344,
       "lastPush": "2026-09-03T16:37:14Z",
       "archived": false,
       "provides": null,
@@ -311266,7 +314652,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:expo/skills\"",
       "repoUrl": "https://github.com/expo/skills",
       "homepageUrl": null,
-      "stars": 2507,
+      "stars": 2510,
       "lastPush": "2026-09-08T10:32:40Z",
       "archived": false,
       "provides": null,
@@ -311286,7 +314672,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:remotion-dev/skills\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": null,
-      "stars": 4509,
+      "stars": 4522,
       "lastPush": "2026-09-07T09:39:00Z",
       "archived": false,
       "provides": null,
@@ -311305,7 +314691,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:trailofbits/skills\"",
       "repoUrl": "https://github.com/trailofbits/skills",
       "homepageUrl": null,
-      "stars": 7015,
+      "stars": 7023,
       "lastPush": "2026-09-02T17:44:12Z",
       "archived": false,
       "provides": null,
@@ -311324,7 +314710,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:better-auth/skills\"",
       "repoUrl": "https://github.com/better-auth/skills",
       "homepageUrl": null,
-      "stars": 216,
+      "stars": 217,
       "lastPush": "2026-09-01T00:22:31Z",
       "archived": false,
       "provides": null,
@@ -311362,7 +314748,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:dimillian/skills\"",
       "repoUrl": "https://github.com/dimillian/skills",
       "homepageUrl": null,
-      "stars": 3944,
+      "stars": 3949,
       "lastPush": "2026-03-29T15:28:02Z",
       "archived": false,
       "provides": null,
@@ -311383,8 +314769,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:obra/superpowers\"",
       "repoUrl": "https://github.com/obra/superpowers",
       "homepageUrl": null,
-      "stars": 283040,
-      "lastPush": "2026-09-04T23:04:36Z",
+      "stars": 283682,
+      "lastPush": "2026-09-08T21:39:23Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -311421,7 +314807,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:cloudai-x/threejs-skills\"",
       "repoUrl": "https://github.com/cloudai-x/threejs-skills",
       "homepageUrl": null,
-      "stars": 3262,
+      "stars": 3272,
       "lastPush": "2026-07-09T20:45:53Z",
       "archived": false,
       "provides": null,
@@ -311440,7 +314826,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:hyf0/vue-skills\"",
       "repoUrl": "https://github.com/hyf0/vue-skills",
       "homepageUrl": null,
-      "stars": 2831,
+      "stars": 2836,
       "lastPush": "2026-05-30T21:32:00Z",
       "archived": false,
       "provides": null,
@@ -311460,8 +314846,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-browser/agent-browser\"",
       "repoUrl": "https://github.com/vercel-labs/agent-browser",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-browser/agent-browser",
-      "stars": 42158,
-      "lastPush": "2026-09-08T02:56:57Z",
+      "stars": 42285,
+      "lastPush": "2026-09-08T16:05:56Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -311481,8 +314867,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/skills/find-skills\"",
       "repoUrl": "https://github.com/vercel-labs/skills",
       "homepageUrl": "https://skills.sh/vercel-labs/skills/find-skills",
-      "stars": 30661,
-      "lastPush": "2026-09-06T22:47:54Z",
+      "stars": 30778,
+      "lastPush": "2026-09-08T17:31:59Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -311502,7 +314888,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/frontend-design\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/frontend-design",
-      "stars": 175144,
+      "stars": 175344,
       "lastPush": "2026-09-03T16:37:14Z",
       "archived": false,
       "provides": null,
@@ -311523,7 +314909,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/mattpocock/skills/grill-me\"",
       "repoUrl": "https://github.com/mattpocock/skills",
       "homepageUrl": "https://skills.sh/mattpocock/skills/grill-me",
-      "stars": 256551,
+      "stars": 257429,
       "lastPush": "2026-09-04T08:45:43Z",
       "archived": false,
       "provides": null,
@@ -311544,7 +314930,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/remotion-dev/skills/remotion-best-practices\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": "https://skills.sh/remotion-dev/skills/remotion-best-practices",
-      "stars": 4509,
+      "stars": 4522,
       "lastPush": "2026-09-07T09:39:00Z",
       "archived": false,
       "provides": null,
@@ -311565,7 +314951,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/skill-creator\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/skill-creator",
-      "stars": 175144,
+      "stars": 175344,
       "lastPush": "2026-09-03T16:37:14Z",
       "archived": false,
       "provides": null,
@@ -311586,7 +314972,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/vercel-react-best-practices\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices",
-      "stars": 30959,
+      "stars": 30998,
       "lastPush": "2026-08-28T13:36:31Z",
       "archived": false,
       "provides": null,
@@ -311607,7 +314993,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/web-design-guidelines\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/web-design-guidelines",
-      "stars": 30959,
+      "stars": 30998,
       "lastPush": "2026-08-28T13:36:31Z",
       "archived": false,
       "provides": null,
