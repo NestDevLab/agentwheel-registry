@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21T01:13:06.142Z",
+  "generatedAt": "2026-09-21T10:44:14.575Z",
   "entries": [
     {
       "id": "official:agent-plugin-extra-message-policy",
@@ -60,7 +60,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/agent-tmux/SKILL.md",
       "readmeExcerpt": "Control Codex CLI and Claude Code CLI sessions via tmux with one agent-agnostic toolset. The same bin/ scripts drive any agent through a --agent <type> flag; per-agent quirks (submit key, prompt char, idle/working patterns, launch flags) live in agents/<type>.conf. Reaches on-disk sessions that an agent's own MCP server no longer tracks. This is the tmux transport for the mesh: any agent that can run these scripts can pilot supported CLI agents through persistent tmux sessions. - In Codex Desktop, use native task capabilities for Codex-to-Codex work when they are exposed: sendmessagetothread for an existing task, waitthreads or readthread for observation, createthread for a new user-visible task only after an explicit user request, and forkthread when completed source history should carry over. Run listprojects before project-backed creation and use a worktree by default for Git projects. - A task still being prepared may return only clientThreadId; wait for a real threadId before trying to read, wait on, or message it. - Same-runtime subagent fan-out uses native delegation by default. Desktop tasks and subagents are different surfaces: do not create a user-owned Desktop task mere…",
       "stars": 0,
-      "lastPush": "2026-09-20T19:38:31Z",
+      "lastPush": "2026-09-21T09:13:05Z",
       "archived": false,
       "provides": [
         "skills"
@@ -87,7 +87,7 @@
       "installCommand": "npx agentwheel install agent-toolkit",
       "repoUrl": "https://github.com/eai-org/agent-toolkit",
       "homepageUrl": null,
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -596,7 +596,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/agentify-project/SKILL.md",
       "readmeExcerpt": "Converge a project — greenfield or half-way-there — toward the canonical agent-neutral structure specified in references/target-structure.md (read it before the audit), so a team of developers using different agents shares one lean, progressively disclosed setup. Re-running converges further and reports drift. Invocation: /agentify-project [audit] [path] - audit — run step 1 only, print the findings and what a full run would change, modify nothing; the periodic drift check. - path — target a subdirectory instead of the repo root (see Monorepos). - Ask, don't enforce: prefer asking — all options shown, one recommended — over enforcing a choice, except for obvious easy wins (e.g. clear progressive-disclosure moves). Questions answerable from the codebase go to the codebase. - One approval gate per destructive/bulk change; show diffs or proposals before applying; nothing happens behind the user's back. Never commit — suggest reviewing the diff and leave committing to the user. - Generic: behavior is driven by references/agent-matrix.md — read it whenever agent detection or an agent's specifics are needed. One documented exception, the Claude carve-out: a team with no Claude users at…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -623,12 +623,12 @@
       "repoUrl": "https://github.com/NestDevLab/agentwheel",
       "homepageUrl": null,
       "stars": 9,
-      "lastPush": "2026-09-21T01:11:10Z",
+      "lastPush": "2026-09-21T10:41:55Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.20.16",
+      "version": "0.20.17",
       "artifactMetadata": [
         {
           "selector": "skills/agentwheel-artifact-evolution",
@@ -706,12 +706,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel/SKILL.md",
       "readmeExcerpt": "Agentwheel discovers reusable artifacts and manages their desired state across runtimes. agentwheel is the control plane. It reads packages from sources, stores desired state in .agentwheel/config.json, plans runtime changes, and writes only through install. Treat runtime output directories as generated files. Mental model: - add records desired packages. - install makes the declared state true in the target runtime. - update re-resolves tracking packages, then applies. - skill update <name> maps a configured skill to its owning package and reconciles only that skill plus its genuine transitive composition inputs; sibling artifacts keep their runtime bytes and manifest/lock state. - uninstall removes configured packages and their managed runtime output. - Prefer agentwheel plan ... or agentwheel install --dry-run before applying changes. - Do not hand-edit generated runtime files such as skills/, .agents/skills, .claude/skills, .github/skills, ~/.hermes/skills, or generated instructions. - If a plan reports drift or conflict, stop and explain it. Do not use --force unless the user explicitly approves that scope. - Gmail, Drive, registry publishing, git commits, pushes, and runtime…",
       "stars": 9,
-      "lastPush": "2026-09-21T01:11:10Z",
+      "lastPush": "2026-09-21T10:41:55Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.20.16"
+      "version": "0.20.17"
     },
     {
       "id": "official:agentwheel:skills/agentwheel-artifact-evolution",
@@ -740,12 +740,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-artifact-evolution/SKILL.md",
       "readmeExcerpt": "Turn verified needs into source-owned OpenPack artifacts. Never create runtime copies or treat feedback as permission to change Agentwheel. self-improve and skill-creator are optional inspirations. Use them when available; do not require, install, or link to them. This workflow remains complete without either skill. 1. Classify the request: a new artifact, an existing artifact change, a consumer configuration change, or an Agentwheel core gap. Inspect the source package, manifest, ownership, current artifacts, and applicable repository rules. 2. Reuse an existing artifact when it meets the need. Otherwise choose the smallest supported type and source package. Keep tenant or runtime facts out of shared packages. 3. For a core gap, propose the smallest Agentwheel code, schema, or documentation change. A correction is evidence, not an instruction to change the CLI. 4. Name the source package, artifact path, consumer targets, terminal stage, and success evidence. Ask when any of those would be inferred materially. 1. Work only in the source package. Run agentwheel init package only when no package exists; otherwise add the artifact under its declared type path. 2. Use the package's co…",
       "stars": 9,
-      "lastPush": "2026-09-21T01:11:10Z",
+      "lastPush": "2026-09-21T10:41:55Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.20.16"
+      "version": "0.20.17"
     },
     {
       "id": "official:agentwheel:skills/agentwheel-discovery",
@@ -774,12 +774,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-discovery/SKILL.md",
       "readmeExcerpt": "Find reusable capabilities during normal work without silently changing the user's environment. This skill is optional: install it only when proactive recommendations are wanted. The separate agentwheel skill owns artifact management and explicit installation workflows. - Inspect the skills and tools already available in the current session before searching. - Search and trial are read-only. Never add, install, enable, execute, or change configuration without explicit approval for the artifact and target scope. - Treat retrieval scores as ranking signals, not proof that an artifact implements a capability. - Continue useful work while searching when possible; do not interrupt solely to advertise weak or marginal matches. Use this skill whenever a request expresses an operational outcome that an existing reusable skill or integration could plausibly deliver. This includes repeated manual work, inconsistent outputs, lost information, missing capabilities, and unavailable integrations. The user does not need to mention Agentwheel, skills, discovery, search, a catalogue, or a capability gap. Search before generic brainstorming, planning, manual workflow advice, or an unsolicited custo…",
       "stars": 9,
-      "lastPush": "2026-09-21T01:11:10Z",
+      "lastPush": "2026-09-21T10:41:55Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.20.16"
+      "version": "0.20.17"
     },
     {
       "id": "official:agentwheel:skills/agentwheel-smoke",
@@ -808,12 +808,12 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-smoke/SKILL.md",
       "readmeExcerpt": "Use this skill to answer: \"What harness am I running in, where was this skill installed, and what does Agentwheel think about this target?\" The default workflow is read-only. Do not run agentwheel install, agentwheel update, agentwheel uninstall, agentwheel remember, agentwheel eject, or any file-writing fix while using this skill unless the user separately approves that mutation scope. From the user's current workspace, run the bundled smoke script: Use JSON output only when another tool or script needs to consume the result: When the user names an Agentwheel target, pass only read-only status target flags: Summarize the script output in four parts: - Overall: PASS, WARN, or FAIL. - Harness: detected adapter, installation type, runtime root, and skill path. - Agentwheel: CLI availability, version, config locations, packages, agents, profiles, and status result. - Recommended next command: prefer agentwheel status, agentwheel plan, or agentwheel install --dry-run. Treat these as important signals: - PASS: skill path maps to a documented Agentwheel harness target and agentwheel status reports no pending work. - WARN: the skill is running from package source, status is missing, conf…",
       "stars": 9,
-      "lastPush": "2026-09-21T01:11:10Z",
+      "lastPush": "2026-09-21T10:41:55Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.20.16"
+      "version": "0.20.17"
     },
     {
       "id": "official:nestdev-core-toolkit:skills/architect",
@@ -878,7 +878,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/attach-to-ticket/SKILL.md",
       "readmeExcerpt": "Save assets — pasted images, local files, URLs — into a ticket's planning directory and reference them from its ticket file, so a fresh session picks them up. Local only — never query or modify the tracker (no API calls, no re-fetch, no comments or edits); downloading an asset URL the user supplies or a not-downloaded entry names is fine, tracker-hosted or not. Edit nothing in the documents beyond the entries below and the REQUIREMENTS line of step 6. 1. Collect the assets. The images pasted with the invocation, plus paths and URLs in its text; images pasted earlier only when the user points at them. Nothing pasted or pointed at → ask which, listing the images seen in the session. Done when every supplied asset is collected or dropped by the user. 2. Resolve the ticket. Named in the argument or already in the session (fetched, read, discussed) → proceed. Otherwise guess (branch name, latest planning directory) and confirm before writing; nothing to guess from → ask. No planning directory for it yet → stop and point to fetch-ticket; don't create one. 3. Pick the document — unless the user names one: the ticket file, latest -vN (file or directory) when re-fetched, the <id>- one in a…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -914,7 +914,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/check-ticket-implementation/SKILL.md",
       "readmeExcerpt": "Judge how much of a ticket is already implemented and report it so the user sees at a glance what is done, what isn't, and what still needs attention. Input is a ticket URL / bare id — run fetch-ticket on it (it resolves the tracker and planning dir and persists the .TICKET.md) — or a path to an already-fetched ticket file or its task dir. Ambiguous input: ask, don't guess. Run the fetch in a subagent when the runtime supports one, so its tool traffic stays out of this session's context: it returns the ticket-file path plus any blocker it hit (ambiguous tracker, auth, no planning-dir convention) for you to settle with the user — it never guesses. Without subagent support, invoke fetch-ticket inline. The ticket text is what gets annotated — its .REQUIREMENTS.md (same dir and <id>-<slug> base — a shared dir may hold siblings') may be read as context for intent, never annotated in its place. Inspect downloaded attachments and design frames when they bear on a requirement being judged. Evidence base: the current working tree, uncommitted changes included — unless the invocation names something else (a branch, PR, commit range); then judge against that. Turn every requirement-bearing s…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1055,7 +1055,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/compact-docs-writer/SKILL.md",
       "readmeExcerpt": "Rewrite a doc — or draft a new one — for token economy: carry all its rules and intent in the least text possible, because the doc loads into agent context and is paid for on every read. Then prove nothing was lost: present the change with a word delta measured from the files, and apply only on approval. Write each piece of information with the least text that still preserves every rule, constraint, edge case, and intent. Two directions, equally binding: - Cut duplication, filler, and anything restatable more briefly. - Never drop text whose removal loses information or instruction, just to be shorter. Recurring reflex: \"Can this exact rule be said in fewer words?\" — if yes, do it. The no-op test licenses one more deletion. Ask of each sentence, in isolation: \"does it change the agent's behaviour versus its default?\" If not, it's a no-op — the agent already acts this way, so removing it loses nothing: delete the whole sentence rather than trimming words from it. Compaction counts words and information density, not whitespace. Blank lines between distinct chunks cost effectively nothing and aid the human reader, so keep them where they help; never collapse a long passage into one d…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1091,7 +1091,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/compact-skill-creator/SKILL.md",
       "readmeExcerpt": "Author a new skill, or improve an existing one, so it carries all its rules and intent in the least text possible. Cost has two tiers: the description sits in context every session — the skill's most expensive text — while the body loads only when the skill triggers. Both stay lean. Be interactive: gather what you need, draft, then apply only on approval. The compaction rules — the least-text principle, the removal-audit verification, and the present-and-confirm with a measured word delta — live in compact-docs-writer, the single source of truth; this skill never restates or re-derives them. From the moment you draft (step 4) through self-review (step 5) and present (step 6), always invoke compact-docs-writer and follow its workflow on the skill text — reading it, applying its principles by hand, or naming it after a direct edit does not count. This skill adds only the skill-specific layer: trigger taxonomy, agnosticism, progressive disclosure, completion criteria, metadata, and the version bump. How a skill is triggered decides how its description is written. Classify into one: - Mandatory — must auto-load whenever a task type is touched (e.g. \"working on UI components\", \"dealing…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1127,7 +1127,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/context-checkup/SKILL.md",
       "readmeExcerpt": "Find what loads automatically into the session's context at startup, quantify it, and propose reversible trims ranked by payoff — shrink the startup context window by cutting what isn't worth its tokens. Read-only — measure and recommend; change settings only on explicit approval. Cost hierarchy, biggest first: 1. MCP tool schemas — large, but deferred by tool search. Only a problem if tool search is OFF. 2. Always-on text — CLAUDE.md/AGENTS.md chain, @imports, and skill/agent/command descriptions (every available one's description loads every session). 3. MCP server instructions — load per enabled server at startup; a chatty preamble can dwarf its tool names. 4. MCP tool names — ~10 tokens each. Cheap; 30 names ≈ 300 tokens isn't worth a recommendation. Rules: measure, never guess — wc/count, then attach a rough token figure to each finding. Rank by tokens-saved × reversibility. Distinguish auto-loaded from lazy-linked (nested AGENTS.md referenced from a parent are not loaded — don't flag them). Tool-name counts, the skills/agents/commands lists, and tool-search status come from the session's system-reminders, not disk — read them from your own context. 0. Verify tool search is o…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1233,7 +1233,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/create-implementation-plan/SKILL.md",
       "readmeExcerpt": "Planning only — no code changes, no execution. You produce one document: an implementation plan that is the contract for a later execution session. This is the \"how\", not the \"what\". The \"what\" was settled in an earlier refinement step and lives in the requirements document you're given; do not redefine scope. But you must flag any gap, ambiguity, or inconsistency you find in the requirements — surface it, never paper over it. Never guess — ask. With one limit: anything resolvable by reading the codebase, resolve by reading the codebase; only questions the code cannot settle go to the user. Your task is to produce the implementation plan. The steps below build toward it; grilling the user — interviewing relentlessly to resolve anything the code can't settle — is woven through the design, not a separate phase that runs before planning starts. 1. Read the requirements document the user references (e.g. a .REQUIREMENTS.md). If the path is ambiguous, ask. 2. Verify against the actual codebase. Open the files the requirements cite and confirm the prior-art references still hold; note anything that has shifted since the requirements were written. The requirements may also carry verified…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1269,7 +1269,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/create-manual-test-instructions/SKILL.md",
       "readmeExcerpt": "Read the input ticket or requirements document (and, where needed for accurate navigation, the code it cites). Write the manual-test file in the same directory, naming it by replacing .REQUIREMENTS or .TICKET with .MANUAL-TEST (e.g. FOO.REQUIREMENTS.md → FOO.MANUAL-TEST.md); if the input follows neither convention, append .MANUAL-TEST before .md. If there is no file (pasted text), follow the project's/user's convention for where plans live (default: .agents/plans/), derive a kebab-case <slug> from the content, and write <slug>/<slug>.MANUAL-TEST.md there. Running forked, you can't ask mid-run: flag any guessed location or slug in the final message for the user to verify. The file must be followable by someone unfamiliar with the ticket — short but complete. Four parts: 1. What changed — 1–2 sentences: the feature and the user-visible difference. 2. How to get there — concrete navigation to the affected area (entry point, page/screen name, any prerequisite state). 3. Before vs after — how the area behaved before, how it should behave now. 4. What to verify — checklist of behaviors to confirm, including edge cases (empty values, multiple items, boundaries) where relevant. Do not mod…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1704,7 +1704,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/execute-plan-tasks/SKILL.md",
       "readmeExcerpt": "One task per run — implement it, verify it, tick it, stop. The review between tasks is the point; never carry on into the next. Invocation: /execute-plan-tasks <plan-path> [task-id] Read the plan whole — summary, conventions and overrides, the steps the task cites, acceptance criteria — then its ## Tasks section. Ambiguous or missing plan path → ask. Several task sections → ask which one this run works from. No task section → stop and point at /split-plan-tasks. task-id given → that task; none → the first unticked one in order. A range or a whole group → run its first task only, saying the rest need their own runs; a task already ticked → say so and ask whether to redo it. Its dependencies — earlier tasks in its group, plus every task in each group its Depends on line names — must be ticked; name any unticked dependency and ask before proceeding. Done when the chosen task, its steps, its acceptance criteria and its dependency state are stated. - Scope is the task's steps, nothing else: no work belonging to a later task, no drive-by refactors. Work the plan calls for that no task covers → report it, don't absorb it. - The plan's conventions and overrides bind every task, this one i…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1740,7 +1740,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/explain-in-simple-language/SKILL.md",
       "readmeExcerpt": "Comprehension is the only goal: the reader understands on the first read. Defines only the wording of what you say to the user; what to say (evidence, scope, structure) stays with whatever asked for the text. Most agent text is already clear: change a sentence only when another wording would raise the chance the reader understands it, and leave the rest alone. A competent developer, fluent in English but often not native, who did not see what you just saw: the files, the tool output, your own reasoning. Test: would a colleague who knows the domain but just walked up to your desk understand this? - Name things concretely. Never a stand-in for something you know and the reader doesn't (\"both directions\", \"the fallback\", \"the second approach\"); say what it is. Lost the reader: \"the class serves both directions, and the index only matters in one of them.\" Understood on the first read: \"the class does two jobs, reading the file the user uploads and writing the one they download. The index only matters for the reading job.\" Longer, and better. - Words. Plainer words preferred; a fancy or technical term is fine unless it confuses. Keep a term the user already used or that is the subject;…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1776,7 +1776,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/fetch-pr-review/SKILL.md",
       "readmeExcerpt": "Fetch only — capture the review feedback left on a pull request; never fix code, reply, or judge the comments. Output is a self-contained .PR-REVIEW.md a fresh session can pick up and act on (e.g. via /refine-pr-review). Identify the platform from the PR URL (host shape) and fetch through the matching MCP server or CLI — e.g. GitHub MCP / gh for GitHub PRs, Azure DevOps MCP for ADO pull requests. Use whichever equivalent tools are connected; tool name prefixes vary by config. If the input is ambiguous, or no matching MCP/CLI is available, ask the user / stop — don't guess. Every uncertainty is confirmed with the user before proceeding: a thread's resolved status, the planning directory, the slug, anything ambiguous in between. A plausible guess is a question, not an answer. 1. Resolve the input. Accept a full PR URL; extract repo/project and PR id. If unrecognizable, ask. 2. Fetch the PR metadata — title, description, source/target branch, state, author, linked ticket/work item — and all feedback: - inline review threads (file, line, code context, full reply chain); - top-level review verdicts (approve / request changes / …) with their summary text; - general conversation comments…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1812,7 +1812,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/fetch-ticket/SKILL.md",
       "readmeExcerpt": "Fetch only — no analysis, requirements, or planning. Output is a self-contained .TICKET.md. Identify the tracker from the input (URL host, or id shape) and fetch through the matching MCP server — e.g. Azure DevOps MCP for ADO work items, Atlassian MCP for Jira issues, GitHub MCP / gh for GitHub issues. Use whichever equivalent tools are connected; tool name prefixes vary by config. Resolve once any handle the MCP needs (e.g. Atlassian cloudId, ADO project) and reuse it. If the input is ambiguous, ask the user — don't guess. If no matching MCP is connected: a public ticket may be scraped from its URL as a fallback (you may still suggest installing the matching MCP when it would do the job better); a private one can't — the URL returns a login page, not the ticket — so stop and tell the user to install and authenticate the matching MCP server, then re-run. 1. Resolve the input. Accept a full ticket URL or a bare id/key; extract the identifier. If the tracker uses a key prefix (e.g. XX-1234), keep it; otherwise use the bare number. If the input is unrecognizable, ask. 2. Fetch the ticket. Get the work item/issue with its full field set, comments inline, and related links/relations ex…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1848,7 +1848,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/fresh-eyes-review/SKILL.md",
       "readmeExcerpt": "A context that produced a change reads its intent, not its text, so same-context review misses what a fresh reader would catch. The fix is procedural: a reviewer whose context holds only the artifacts. 1. Resolve the inputs. The changeset: whatever the invocation names — a branch, a commit, a diff range, a draft vs its original. Given none, infer it from the session — usually the work just finished, committed or not; no VCS required. With no session context to draw on, fall back to the current git diff; when that too yields nothing, ask the user what to review. Pin the changeset as concretely as the environment allows — a diff or commit range where one exists, otherwise the touched files, with their prior state when reconstructable. Alongside it, a short statement of what the change is supposed to achieve, when one exists (the task as stated, a PR or ticket description); when this session authored the change, never include the session's own reasoning, plan, or messages — leaked rationale recreates the blindness the fresh context exists to remove. Strip what the change deliberately leaves for later, whatever its source: naming it walls off the omissions lens below. Done when change…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1884,7 +1884,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/handover/SKILL.md",
       "readmeExcerpt": "Package a finished change so its reviewers never reconstruct intent from the diff. Write for a reviewer holding the diff and nothing else — no planning docs, no session, no knowledge that either exists. The input is any partial reference — ticket id, slug, a planning artifact's path — or nothing, meaning the session's task; in a fresh session, infer it from branch name and recent commits. Resolve it to the task's planning home: its <id>-<slug>/ directory in the project's planning directory, or its flat <id>-<slug>. files in a shared family directory. One clear match → proceed, stating the home and artifacts found. Inferred, or several candidates (-vN, …) → confirm first. An explicit reference matching nothing local → stop and ask; never guess. Read these, skipping what doesn't exist: 1. Task artifacts — every <id>-<slug>.md in the planning home: ticket, requirements, plan, decisions log, prior review and handover rounds, whatever else matches. 2. Related tickets — one hop only: parent (climbing higher only past thin containers), direct predecessors/successors, explicit relations, family-directory siblings; never expand their own relations. Local .TICKET.mds first; fetch from the t…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1920,7 +1920,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/maintainer-review/SKILL.md",
       "readmeExcerpt": "You are the merge gate, not the author's assistant: the question is whether this ships, and the contributor will argue back. Review in this session, not a subagent. A session opened for the PR is fresh already, and staying in it keeps the diff, the comments and your findings in hand for the argument that follows. Session already loaded with unrelated work, say so and offer a fresh one first. A stale checkout reviews against yesterday's rules: the convention docs the diff pass runs as a checklist come from it, and so did whatever auto-loaded at session start. Before the gather: git fetch. Fetch failed, say so and ask rather than compare against a stale ref. Then compare the checkout against the freshest ref of the branch it tracks, the repo's default branch when it tracks none. Behind it, say so and offer to fast-forward; the update is a write, so it waits for a go-ahead, and a dirty or diverged tree is reported, never resolved for the user. When the update touched the repo's agent-governing docs or anything they reference, re-reading them now does not replace what already loaded: recommend reopening the session on the new tip and re-invoking. The checkout's position never decides…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1956,7 +1956,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/memory-doctor/SKILL.md",
       "readmeExcerpt": "Agent-memory is an unseen side-channel into every session's context window: facts accumulate there, often by accident, that the user never reviews and cannot govern. This skill drains it. Technically nothing should live in project memory — durable guidance belongs in homes the user controls (project docs, project skills/rules, user-level skills/rules), and the rest is garbage. Block by block, move each entry to its proper home or archive it, until memory trends toward empty and the user — not the memory store — decides what reaches the context window. The skill guesses and recommends; the user decides. Every verdict, scope, form, and target is a proposal the user confirms or flips. When unsure, ask. Nothing is moved, deleted, or written without explicit per-item approval. For every block the user gets the whole fixed menu — relocate/merge, archive (delete), keep, or a custom action they type — never just the recommended verdict, never a pruned subset. Find the memory store for the current project. Its location is agent-specific — other agents store it elsewhere, or not at all. Claude Code example: slugify the project's absolute working-directory path by replacing each / with - and…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -1994,7 +1994,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/mesh-discord-routing/README.md",
       "readmeExcerpt": "Mesh Discord Routing is a small, portable skill that lets agents of any runtime communicate with each other through Discord using simple, explicit routing rules. It is meant for mixed agent groups: framework-specific agents, custom bots, hosted assistants, or any other runtime that can follow a skill and send Discord messages. The shared rule is: - each agent decides who should receive its own reply - agents use semantic recipient labels, not raw Discord mention strings - a small hydrator script turns those labels into the cc-mesh: trigger and Discord mentions - an optional session helper can keep turn state for multi-turn workflows - the human-readable message stays separate from routing metadata This keeps the routing policy simple enough for language models to follow while keeping mention formatting deterministic and runtime-independent. The skill gives agents a common protocol for mesh-mode Discord conversations: 1. If a message contains cc-mesh:, treat it as a routed mesh message. 2. Decide who should receive the reply. 3. Default to notifying the sender when answering directly. 4. Add other recipients only when they should be involved. 5. Use no recipients only when no bot s…",
       "stars": 0,
-      "lastPush": "2026-09-20T19:38:31Z",
+      "lastPush": "2026-09-21T09:13:05Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2278,7 +2278,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-mesh",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-09-20T19:38:31Z",
+      "lastPush": "2026-09-21T09:13:05Z",
       "archived": false,
       "provides": [
         "instructions",
@@ -2515,7 +2515,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/prepare-prompt/SKILL.md",
       "readmeExcerpt": "Write for a session holding only this text — no chat history, no memory of what was meant — and make it as short as that reader allows: nothing it needs is cut for brevity, nothing else stays. The reader is a fresh interactive session the user pastes it into; a subagent brief only when the invocation asks for one, under the same rules. The user's goal, in a line, plus this session. Draft at once; ask only what neither settles — typically whether the next session may change things or only report — one question at a time, with a recommended answer. A suggested order, every part optional: a part is never filled to exist, and two lines are a complete prompt when two lines cover the case. 1. Situation — what exists that the next session builds on, and what is open or was missed, each with its identifier (ticket URL, branch, commit, PR, task ids). 2. Task and deliverable — what to do, and in what form to report or produce it (a chat report with a given structure, a file, a code change). 3. Latitude and boundaries — what it may decide alone, when deviating is fine, what it must not touch (read-only, no git or tracker writes, files to ignore). 4. Facts it cannot derive — paths, the planni…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -2551,7 +2551,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/refine-pr-review/SKILL.md",
       "readmeExcerpt": "The Refine phase for review feedback: turn a .PR-REVIEW.md (from /fetch-pr-review; ask if the path is ambiguous) into user-settled per-comment verdicts, drafted replies, and a REQUIREMENTS file covering the accepted code changes. Triage and replies are settled here; the plan and execute phases see only code changes. - address: the change enters the requirements in full; the reply stays a canned one-liner (\"fixed\", \"good catch, thanks\"). - partial: part of the change is accepted into the requirements, and the reply explains what was done and what was kept and why. - push back: no code change; the reply carries the reason. Never refer to a comment by index or position, anywhere — questions, batch lists, hand-off text. Quote its opening words instead, truncated to the shortest unique prefix — the comment \"the null check here misses …\". Always verbatim, never translated or corrected, so the quote can be searched on the page. Only the ANSWERS table's own row numbers stay, for in-file cross-references. Read the code behind each comment first: verify its premise against the current codebase, never judging from the quoted hunk alone. Then form a recommendation — verdict, reasoning, and (f…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -2587,7 +2587,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/refine-ticket/SKILL.md",
       "readmeExcerpt": "The Refine phase of Refine → Plan → Act: turn a raw ticket — or an idea to brainstorm — into a validated requirements document a fresh session can plan from. Analysis only — it defines what must be true when the work is done, never how to build it, and never touches code. An idea is a ticket that doesn't exist yet: treat the user's words as the ticket text, and grill to shape the idea itself — goal, in vs out of scope — before closing the branches that block implementation. You cannot define the \"what\" in a vacuum. Every requirement must be checked against the actual code, config, and design — a ticket may be stale, ambiguous, contradicted by the codebase, or depend on upstream work that isn't implemented yet (e.g. a prerequisite ticket still open). Reading the code here is for validating requirements, not for designing the solution. - Anything determinable by reading the code, resolve by reading the code — never ask the user about it. - Anything not determinable from ticket + code, ask — never fill the gap with a plausible assumption. - Local environment state (config files, DB contents, env vars) describes only the machine it's on — never assume it matches the environment where…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -2623,7 +2623,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/review-code-assistant/SKILL.md",
       "readmeExcerpt": "Assist a human's local code-review pass: read the diff, understand the intent, surface the real issues. You suggest candidate comments; the human decides what to post. Single-pass and lightweight. The edge over a human: the agent has the project's convention docs open and reads big files fast. Output is local text only. Accept input flexibly; a PR link is optional: 1. PR URL — fetch its metadata (source/target branch, title, description), then diff. 2. One branch (\"review branch xxxx\") — diff it against the auto-detected target. 3. Two branches (\"review xxxx against yyyy\") — explicit source and target. 4. Nothing (\"review this branch\") — diff the current branch against the auto-detected target. (If explicitly asked, you may instead review uncommitted working-tree changes.) Diff base: always a three-dot merge-base diff, git diff <target-ref>...<source-ref>, so it matches exactly what the platform shows as the PR with no noise from commits that landed on target after the fork. Fall back to two-dot only when there is no common ancestor. No checkout is needed to produce the diff. Branch freshness: always git fetch first — never git pull: the diff needs no checkout or working-tree upda…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -2659,7 +2659,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/review-ticket/SKILL.md",
       "readmeExcerpt": "A pre-pickup triage glance: read a ticket — or a set of tickets forming one feature — usually before anyone has started it, and decide whether it can be picked up or something must be clarified first. The output briefs the developer on the feature and lists the questions worth asking whoever owns the requirements. - Local ticket document(s): a single .TICKET.md, several, a ticket-set directory, or a .TICKET.md whose ## Ticket set section lists siblings. - One or more ticket URLs or bare ids/keys: delegate — even for a single one — to a subagent that invokes fetch-ticket, so the tickets land on disk without the fetch bloating this session's context, then review the local files. If the input is ambiguous or unrecognized, ask rather than guess. Set mode applies to multiple tickets, a set directory, or a .TICKET.md listing a ## Ticket set. For a lone member file whose intended scope isn't obvious from the request, ask whether to review the whole set or just that ticket. Read the input ticket file(s), visually inspecting the downloaded images and design frames — they are part of the spec and often where the gaps hide. Widen only on demand. When the input already tells the feature clear…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -2730,7 +2730,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/run-nx-checks/SKILL.md",
       "readmeExcerpt": "Run format, lint, test, build. Fix unambiguous failures. Report anything judgment-laden. $ARGUMENTS — optional, space-separated: [cpuCount] [projectName] [--remote-cache]. Number token → cpuCount. Non-number, non-flag token → projectName. --remote-cache flag → opt back into the remote cache by dropping the remote-cache-off prefix. Default cpuCount = cores - 4 (min 1); count cores with getconf NPROCESSORSONLN (nproc is GNU-only). Default project scope = affected. Default remote-cache state = off (see Steps). Run nx commands from wherever nx.json lives in this repo (commonly the root; in some repos a subdirectory). Keep the Nx daemon warm so the project graph is reused across targets: nx affected diffs against the local default branch, which is often stale or missing. Resolve the remote-tracking ref once and write it literally into every affected, format:write and show projects --affected command below as --base=$base (each call is a fresh shell, see Steps): - Omit --base when the ref is missing (Nx falls back to defaultBase) or NXBASE is set (Nx reads it itself; the fetch still runs). - Never pass --head. With both flags Nx diffs two commits and ignores uncommitted and untracked fi…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -2766,7 +2766,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/self-improve/SKILL.md",
       "readmeExcerpt": "Suggest durable improvements to the skill or governing doc that should have steered the agent, so the next session gets it right without being told again — and apply them only after the user approves. The skill proposes; the user stays in control of every change. Three ways in: - Manual — the user invokes /self-improve to deliberately improve a skill or doc. - Self-triggered — the agent notices it was corrected on something a skill/doc governs (or should). Don't silently correct and move on, but don't derail the task either: note the lesson, finish what the user asked for, and offer to persist it at the next natural breakpoint. - Driven by another skill — a caller hands over content that is already durable guidance plus an already-chosen target (scope, form, and path — possibly a new file). It resolved both with the user, so skip steps 1-2 and run only draft + apply. \"Skill/doc\" means any standing instruction: a SKILL.md, AGENTS.md/CLAUDE.md, a coding-standards or convention doc, a rules file — anything that guides future agents. - Confirm before applying. The skill's job is to suggest, never to change text on its own. Never edit a skill or doc without the user's explicit go-ahead…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -2802,7 +2802,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/self-review/SKILL.md",
       "readmeExcerpt": "Make a changeset merge-ready before submission — no regressions, sound code, the project's conventions respected — and prove it was scrutinized: a fresh-context reviewer hunts for what would block the merge, the author answers every finding, and a compact report — scannable by a maintainer in seconds — records the outcome. The report is the review record only; the change's what/why belongs to the PR description (e.g. via /handover), never here. Only for a changeset you authored. The fresh-context reviewer exists to escape authoring blindness, so someone else's PR has nothing to escape and belongs to maintainer-review. 1. Resolve source and target. No input → current branch against the auto-detected target: the default branch of the upstream remote when one exists (fork workflow), else of origin — via git ls-remote --symref <remote> HEAD, never the often-absent local refs/remotes/<remote>/HEAD; that failing (e.g. offline), the sole existing candidate among main, master, develop/development (preferring upstream's remote-tracking ref, then origin's, then the local branch) — still ambiguous or none → ask. Explicit branches in the invocation win; a detached HEAD → ask which branch is u…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -2908,7 +2908,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/split-plan-tasks/SKILL.md",
       "readmeExcerpt": "Append a task breakdown to a plan so the work lands in small increments — one task, then a review, a correction pass, a commit — instead of one sweep. Authoring only: executing the tasks is a later, separate session. Invocation: /split-plan-tasks <plan-path> Ambiguous or missing path → ask. A plan with numbered steps and an acceptance-criteria checklist splits best; any plan markdown works — reference tasks to headings when steps aren't numbered, and drop the AC line when there is no such checklist. A plan already carrying a task section → stop and ask which the user wants: replace it, add a second one beside it, or carry the ticked tasks forward and reformulate only the remaining work. Done when the plan is read and, where a section already existed, the user has chosen. - Task — the smallest chunk that leaves the project building and its tests passing, so it can be reviewed and committed on its own. Steps that only make sense together are one task, never two — building alone isn't the test: a step that only re-runs a generator (API clients, specs, snapshots) lands with the change it regenerates. - Group — one PR: independently mergeable, delivering something coherent. Order the g…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -2936,7 +2936,7 @@
       "repoUrl": "https://github.com/NestDevLab/syncwheel",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-09-20T23:46:55Z",
+      "lastPush": "2026-09-21T10:35:26Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2987,7 +2987,7 @@
       "readmeUrl": "https://github.com/NestDevLab/syncwheel/blob/main/skills/syncwheel/SKILL.md",
       "readmeExcerpt": "Syncwheel makes Git maintenance deterministic and safe when many agents touch the same repositories. Branch ownership, PR stacks, and the integration branch are described in a manifest; Syncwheel reconciles Git to match it. Plain manual git/worktree surgery is the exception path, used only when Syncwheel is unavailable, blocked, or cannot express the needed recovery. These four are ratified operating rules (MGT-0206), not suggestions. A real incident happened because an operator resolved a rebuild conflict with raw git instead of rule 2 — the mechanism already existed; only the visibility was missing. Read rule 2 twice. 1. Never author in the primary checkout. It stays on manifest.integration.branch as the shared test projection. Open a governed lane instead: As of 0.42.4, where the guard hooks are installed, this is enforced: a manual commit on the primary, or an unauthorized move of the integration ref there, is refused, and every mutating Syncwheel command refuses to run while the primary has tracked changes. Arm the guard once per clone: Opt out only with a reasoned, ledgered, clone-local disable: 2. Never resolve a replay conflict with raw git. A plumbing replay never descend…",
       "stars": 0,
-      "lastPush": "2026-09-20T23:46:55Z",
+      "lastPush": "2026-09-21T10:35:26Z",
       "archived": false,
       "provides": [
         "skills"
@@ -3022,7 +3022,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/use-conversational-language/SKILL.md",
       "readmeExcerpt": "Defines only the voice, how to word text a human should read as if a person typed it, never the content: each caller keeps its own rules for what to say (evidence bars, scope, structure). Apply the baseline always, plus the section matching the situation. Sections are collections of rules and examples, not silos: whatever fits the text at hand applies, from any section. Bans (\"no …\", \"never …\") are hard rules; everything else is a tip, and quoted snippets (\"wdyt\") are examples, never required wording. Concise, plain language that reads like natural conversation. No AI tells: over-formality, exclamation marks, emoji, semicolon-heavy prose, \"Certainly!\"-style openers, bullet lists where a sentence would do. Stop at the last point. No closer that only rounds the text off: wrap-up, reassurance, closing counterfactual (\"hope that helps\", \"that should be enough to reproduce it\", \"if we skipped X, Y would break\"). Never use dashes (em or en). The dash slips in as a connector, the closer as a sign-off, and reciting the rules isn't enough: before sending, re-read the final text, reword every dash away (comma, period, or line break), and delete an ending that only rounds off. Write the way…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -3058,7 +3058,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/verify-understanding/SKILL.md",
       "readmeExcerpt": "One goal, nothing more, nothing less: verify the engineer is ready to move to the implementation phase. Exercise their understanding of a feature before they work on it — the pipeline's other artifacts serve fresh agent sessions; this step serves the human. Active recall: the user produces the feature in their own words, you only steer and fix. Re-runnable: right after the ticket review, or days later just before implementation — every run starts fresh from the review file, no state kept between runs. A .TICKET-REVIEW.md. Read it and the ticket files and parent it links. A reference that exists only as a tracker URL (no local file) may be fetched read-only at conversation time. A conversation, not a test — the last sync between a dev and their PO before development starts. Word your probes and corrections via explain-in-simple-language when available. 1. Ask the user to explain the feature in their own words: who uses it, what they see and do, why the feature exists, and what each ticket contributes. 2. Let them produce the narrative. Probe one weak spot at a time; correct and complete only from the review file and the referenced materials — flag what those don't settle, never imp…",
-      "stars": 47,
+      "stars": 48,
       "lastPush": "2026-09-17T11:34:36Z",
       "archived": false,
       "provides": [
@@ -10696,6 +10696,28 @@
       "version": "0.3.0"
     },
     {
+      "id": "mcp-registry:com.hotschmoe.agents/agentworld",
+      "name": "Agent World",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Live data for agents: prices, uptime, attestation, audits. Free status tool; others paid per call.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hotschmoe.agents/agentworld",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hotschmoe.agents/agentworld\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://agents.hotschmoe.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.onchainagentintel/agent-zero-intel",
       "name": "Agent Zero — ERC-8004 Agent Intelligence",
       "ecosystem": "mcp-registry",
@@ -14588,6 +14610,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.gumballtools/amortize",
+      "name": "Amortization Schedule",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Row-by-row loan amortization schedules: monthly or daily accrual, extra principal, PMI, biweekly.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/amortize",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/amortize\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://amortize.gumballtools.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:com.amplitude/mcp-server",
@@ -27240,6 +27284,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.gumballtools/body-metrics",
+      "name": "Body Metrics",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Convert height and weight, compute BMI, TDEE and protein targets with error bounds.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/body-metrics",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/body-metrics\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://body-metrics.gumballtools.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/boe-uk",
       "name": "Boe Uk",
       "ecosystem": "mcp-registry",
@@ -34258,6 +34324,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.homeoceutics/catalog",
+      "name": "Catalogue Homeoceutics / Homeoceutics Catalog",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Catalogue public anonyme en lecture seule. Anonymous, read-only public catalog.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.homeoceutics/catalog",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.homeoceutics/catalog\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://homeoceutics.com/fr/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/catalogueoflife",
       "name": "Catalogueoflife",
       "ecosystem": "mcp-registry",
@@ -35950,6 +36038,28 @@
         "mcp"
       ],
       "version": "1.2.0"
+    },
+    {
+      "id": "mcp-registry:com.gumballtools/check-digit",
+      "name": "Check Digit Validator",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Validates IBAN/ISBN/EAN/Luhn checksums and finds the one wrong digit",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/check-digit",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/check-digit\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://check-digit.gumballtools.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:dev.toolstop/check-digits",
@@ -39331,6 +39441,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/color\" --adapter claude --local",
       "repoUrl": "https://github.com/pipeworx-io/mcp-color",
       "homepageUrl": "https://pipeworx.io/packs/color",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.gumballtools/color-companion",
+      "name": "Color Companion",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Convert colours between hex, RGB, HSL, OKLCH and CMYK, and compute harmonies.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/color-companion",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/color-companion\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://color-companion.gumballtools.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -57534,6 +57666,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.gumballtools/due-date",
+      "name": "Due Date",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Estimate a due date from LMP, conception, or ultrasound, with ACOG redating rules.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/due-date",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/due-date\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://due-date.gumballtools.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/duffel",
       "name": "Duffel",
       "ecosystem": "mcp-registry",
@@ -62240,6 +62394,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.gumballtools/equation-steps",
+      "name": "Equation Steps",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Step-by-step solver for linear/quadratic equations in one variable, signs and ± always right.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/equation-steps",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/equation-steps\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://equation-steps.gumballtools.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:com.equity-rank.api/equity-rank",
@@ -68767,6 +68943,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.flightdb/flightdb\" --adapter claude --local",
       "repoUrl": "https://github.com/flightdb/FlightDB-MCP",
       "homepageUrl": "https://flightdb.org/mcp/connect",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.himaxym/flightfinder-aviation-safety",
+      "name": "FlightFinder Aviation Safety Data",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Aviation accident narratives from 128 official authorities, plus FAA wildlife, laser and drone data",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.himaxym/flightfinder-aviation-safety",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.himaxym/flightfinder-aviation-safety\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://himaxym.com/developers",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -76916,6 +77114,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.greenlitbooks/catalog",
+      "name": "Greenlit Books",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Search the Greenlit Books catalog: practical books on AI verification, agents, and governance.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.greenlitbooks/catalog",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.greenlitbooks/catalog\" --adapter claude --local",
+      "repoUrl": "https://github.com/greenlitbooks/mcp",
+      "homepageUrl": "https://greenlitbooks.com/developers",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/greynoise",
       "name": "Greynoise",
       "ecosystem": "mcp-registry",
@@ -77268,6 +77488,72 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.growsurf/growsurf",
+      "name": "GrowSurf",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Build and manage GrowSurf referral and affiliate programs through AI assistants.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.growsurf/growsurf",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.growsurf/growsurf\" --adapter claude --local",
+      "repoUrl": "https://github.com/growsurf/growsurf-mcp",
+      "homepageUrl": "https://docs.growsurf.com/build-with-ai",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.12.2"
+    },
+    {
+      "id": "mcp-registry:com.growvib/growvib",
+      "name": "GrowVib: Social Media Growth",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Discover, compare and buy social media growth for Instagram, TikTok, YouTube, Telegram, X and more",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.growvib/growvib",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.growvib/growvib\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://growvib.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.growaify/mcp",
+      "name": "Growaify — Autonomous Commerce for AI Agents",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Autonomous commerce for AI agents: discover, quote, order, pay, verify.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.growaify/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.growaify/mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/h-abar/growaify-mcp",
+      "homepageUrl": "https://growaify.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "2.3.0"
+    },
+    {
       "id": "mcp-registry:com.growomat/growomat",
       "name": "Growomat",
       "ecosystem": "mcp-registry",
@@ -77310,6 +77596,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.growthr/seo-geo-mcp",
+      "name": "Growthr SEO + GEO MCP",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "SEO + GEO tools in your AI editor: scan as ChatGPT and Google crawlers see it, fix order, llms.txt.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.growthr/seo-geo-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.growthr/seo-geo-mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://mcp.growthr.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.1.0"
     },
     {
       "id": "mcp-registry:io.github.grtwo-jcansler/gryz",
@@ -77664,6 +77972,50 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.guruhotel/mcp",
+      "name": "GuruHotel",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "GuruHotel product knowledge: direct booking platform for hotels, PMS compatibility and pricing.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.guruhotel/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.guruhotel/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://guruhotel.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.guruhotel/manager",
+      "name": "GuruHotel Manager",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Manage your GuruHotel hotel: reservations, revenue, rates, KPIs, traffic and ARI updates (OAuth).",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.guruhotel/manager",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.guruhotel/manager\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://manager.guruhotel.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.guruwalk/mcp",
       "name": "GuruWalk",
       "ecosystem": "mcp-registry",
@@ -77884,6 +78236,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.homebridgepc.agent-commerce/halo-ai-surfaces",
+      "name": "HALO Homebridge AI Surfaces",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Live Shopify catalog and configuration for Homebridge's five major architectural product categories.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.homebridgepc.agent-commerce/halo-ai-surfaces",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.homebridgepc.agent-commerce/halo-ai-surfaces\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://homebridgepc.com/pages/ai-shopping",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:ai.com.mcp/hapi-mcp",
       "name": "HAPI MCP Server",
       "ecosystem": "mcp-registry",
@@ -77948,6 +78322,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.hlaverify/hla-verify",
+      "name": "HLA-Verify",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Verify HLA allele names and score donor-recipient matches against a pinned IPD-IMGT/HLA release.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hlaverify/hla-verify",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hlaverify/hla-verify\" --adapter claude --local",
+      "repoUrl": "https://github.com/jasonbrelsford/verifiable-science-envs",
+      "homepageUrl": "https://hlaverify.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.olyport/hmda",
@@ -78412,6 +78808,28 @@
       "version": "1.2.3"
     },
     {
+      "id": "mcp-registry:com.hyperneobroker.mcp/broker",
+      "name": "HYPERneobroker.com",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Live prices, perps, prediction markets and a paper trading desk over one MCP.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hyperneobroker.mcp/broker",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hyperneobroker.mcp/broker\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://mcp.hyperneobroker.com/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.haasonline/trade-server",
       "name": "HaasOnline Trade Server",
       "ecosystem": "mcp-registry",
@@ -78830,6 +79248,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.handledlocal/locator",
+      "name": "Handled Locator",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Manage a store locator by chatting: locations, tags, booking buttons, map styling, embed code.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.handledlocal/locator",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.handledlocal/locator\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://locator.handledlocal.com/developers/mcp-server",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.tiagoyonamine/handoff",
       "name": "Handoff",
       "ecosystem": "mcp-registry",
@@ -78896,6 +79336,28 @@
       "version": "1.16.0"
     },
     {
+      "id": "mcp-registry:com.handsforagents/hands",
+      "name": "Hands for Agents",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Human-operated physical world in the EU: make, assemble, measure, verify, ship.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.handsforagents/hands",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.handsforagents/hands\" --adapter claude --local",
+      "repoUrl": "https://github.com/handsforagents/handsforagents-mcp",
+      "homepageUrl": "https://handsforagents.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:com.hapticpaper/mcp",
       "name": "Haptic Paper",
       "ecosystem": "mcp-registry",
@@ -78938,6 +79400,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.harpd/agent-data",
+      "name": "Harpd Agent Data",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Live rankings and pricing for 10,000+ AI products and LLMs. Free tier; paid data via x402.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.harpd/agent-data",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.harpd/agent-data\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.harrisboatworks/mercury-repower",
@@ -79138,6 +79622,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.haveitprinted/print-and-mail",
+      "name": "Have It Printed",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Print and mail physical documents in the US via USPS, with quotes, agent payment and tracking.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.haveitprinted/print-and-mail",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.haveitprinted/print-and-mail\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://haveitprinted.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.Spacemandomains/hawaii-conditions",
       "name": "Hawaii Conditions MCP Server",
       "ecosystem": "mcp-registry",
@@ -79180,6 +79686,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.haycion/haycion",
+      "name": "Haycion",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Research companies and competitors with an AI advisor, and run vendor comparisons.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.haycion/haycion",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.haycion/haycion\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://haycion.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/hdx",
@@ -79468,6 +79996,28 @@
       "version": "1.12.01"
     },
     {
+      "id": "mcp-registry:com.hedgespecialty.www/broker",
+      "name": "Hedge Broker",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Wholesale commercial insurance appetite, submissions, policies, payments, and broker workflows.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hedgespecialty.www/broker",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hedgespecialty.www/broker\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.hedgefundalpha/public-research",
       "name": "Hedge Fund Alpha Research",
       "ecosystem": "mcp-registry",
@@ -79688,6 +80238,28 @@
       "version": "0.0.1"
     },
     {
+      "id": "mcp-registry:com.helloretail/hello-retail",
+      "name": "Hello Retail",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Set up and tune ecommerce Search, Recommendations, Pages, Email, Product Agents and Analytics.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.helloretail/hello-retail",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.helloretail/hello-retail\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://developer.helloretail.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.3.0"
+    },
+    {
       "id": "mcp-registry:io.github.HelloBooksAIAgents/hellobooks-mcp",
       "name": "HelloBooks AI Agents MCP Server",
       "ecosystem": "mcp-registry",
@@ -79732,6 +80304,28 @@
       "version": "0.1.4"
     },
     {
+      "id": "mcp-registry:com.helpusagree/conciliation",
+      "name": "Help Us Agree",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Private, voluntary AI-assisted conciliation with human approval before consequential actions.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.helpusagree/conciliation",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.helpusagree/conciliation\" --adapter claude --local",
+      "repoUrl": "https://github.com/tedtrux/helpusagree",
+      "homepageUrl": "https://helpusagree.com/agents",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:com.helprentdanang/rentals",
       "name": "HelpRent Da Nang",
       "ecosystem": "mcp-registry",
@@ -79745,6 +80339,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.helprentdanang/rentals\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.helpyself/tools",
+      "name": "HelpySelf",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Convert and compress PDFs and images, redact personal data, and run text and data utilities.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.helpyself/tools",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.helpyself/tools\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://helpyself.com/api/",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -79821,25 +80437,25 @@
     },
     {
       "id": "mcp-registry:com.hemmabo/hemmabo-mcp-server",
-      "name": "HemmaBo Direct Booking",
+      "name": "HemmaBo Host Booking Engine",
       "ecosystem": "mcp-registry",
       "type": "mcp",
-      "description": "Direct vacation-rental booking across HemmaBo host nodes. Zero platform fees.",
+      "description": "Host-owned vacation-rental direct booking via VRP. Signed offers, 0% commission. Not an OTA.",
       "tags": [
         "mcp",
         "registry"
       ],
       "source": "mcp-registry:com.hemmabo/hemmabo-mcp-server",
       "installCommand": "npx agentwheel install \"mcp-registry:com.hemmabo/hemmabo-mcp-server\" --adapter claude --local",
-      "repoUrl": "https://github.com/HemmaBo-se/hemmabo-smart-stays",
-      "homepageUrl": "https://hemmabo.se",
+      "repoUrl": "https://github.com/HemmaBo-se/hemmabo-mcp-server",
+      "homepageUrl": "https://www.hemmabo.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
       "provides": [
         "mcp"
       ],
-      "version": "1.0.0"
+      "version": "3.2.15"
     },
     {
       "id": "mcp-registry:io.github.tdavidson/mcp-hemrock",
@@ -79972,6 +80588,28 @@
         "mcp"
       ],
       "version": "0.1.139"
+    },
+    {
+      "id": "mcp-registry:com.hesperatlas/hesper-atlas",
+      "name": "Hesper Atlas Evidence",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Verify stock signals, replay evidence, provenance, freshness, and caveats.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hesperatlas/hesper-atlas",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hesperatlas/hesper-atlas\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://hesperatlas.com/agents",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.6.0"
     },
     {
       "id": "mcp-registry:io.github.almostjacked/hevy-mcp",
@@ -80172,6 +80810,28 @@
       "version": "0.9.0"
     },
     {
+      "id": "mcp-registry:com.heymetra/heymetra",
+      "name": "HeyMetra",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Ask across your ads, analytics, store, CRM and subscription accounts; writes wait for approval.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.heymetra/heymetra",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.heymetra/heymetra\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://heymetra.com/mcp/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:ai.heyyumi/heyyumi",
       "name": "HeyYumi",
       "ecosystem": "mcp-registry",
@@ -80282,6 +80942,28 @@
       "version": "0.4.14"
     },
     {
+      "id": "mcp-registry:com.hiddenswap/swap",
+      "name": "HiddenSwap",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "No-KYC crypto swaps, no account or email. Read-only quotes, coins, swap links, order status.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hiddenswap/swap",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hiddenswap/swap\" --adapter claude --local",
+      "repoUrl": "https://github.com/hiddenswap/hiddenswap-mcp",
+      "homepageUrl": "https://hiddenswap.com/open-source",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.1.0"
+    },
+    {
       "id": "mcp-registry:co.hilead/hilead",
       "name": "Hilead",
       "ecosystem": "mcp-registry",
@@ -80295,6 +80977,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:co.hilead/hilead\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://hilead.co",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hillsignal/hillsignalapp",
+      "name": "HillSignal",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Federal contracts, SAM notices, congressional trades, PAC money, insider trades, bills, EOs, themes.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hillsignal/hillsignalapp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hillsignal/hillsignalapp\" --adapter claude --local",
+      "repoUrl": "https://github.com/jonwickdev/HillSignal",
+      "homepageUrl": "https://www.hillsignal.com/developers",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -80524,6 +81228,72 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.hiringcensus/hiring-census",
+      "name": "HiringCensus",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Is this company actually hiring, or is the board just still switched on? Verdicts and real ages.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hiringcensus/hiring-census",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hiringcensus/hiring-census\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://hiringcensus.com/data/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hihirosmartservice/hiro-radar",
+      "name": "Hiro Radar",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Hiro Radar: AI-assisted monitoring for leads, competitors, opportunities and web changes.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hihirosmartservice/hiro-radar",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hihirosmartservice/hiro-radar\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://hihirosmartservice.com/hiro-radar.html",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.1"
+    },
+    {
+      "id": "mcp-registry:com.hispanic-legacy/hispanic-legacy",
+      "name": "Hispanic Legacy",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Spain's contributions to world science, exploration and culture, rigorously sourced",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hispanic-legacy/hispanic-legacy",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hispanic-legacy/hispanic-legacy\" --adapter claude --local",
+      "repoUrl": "https://github.com/citarium/hispanic-legacy-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.6.14"
+    },
+    {
       "id": "mcp-registry:io.github.mcp-dir/veiculo_historico-mcp",
       "name": "Histórico Veicular Nacional",
       "ecosystem": "mcp-registry",
@@ -80590,6 +81360,28 @@
       "version": "3.0.0"
     },
     {
+      "id": "mcp-registry:com.hit-pay/mcp",
+      "name": "HitPay MCP Server",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Official HitPay MCP: sales, payouts, balances; create payment links and invoices. OAuth; no refunds.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hit-pay/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hit-pay/mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/hit-pay/claude-code-plugin",
+      "homepageUrl": "https://hitpayapp.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.hitsteps/analytics-operations",
       "name": "Hitsteps Analytics and Operations",
       "ecosystem": "mcp-registry",
@@ -80610,6 +81402,28 @@
         "mcp"
       ],
       "version": "1.1.0"
+    },
+    {
+      "id": "mcp-registry:com.hivepublish/hive",
+      "name": "Hive",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Publish, schedule, analyse and automate DMs across twelve social networks.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hivepublish/hive",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hivepublish/hive\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://hivepublish.com/developers",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.srotzin/hive-mcp-abtest",
@@ -82350,6 +83164,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.honen/honen",
+      "name": "Honen",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Create courses, search approved knowledge, preview learning content, and manage learning sites.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.honen/honen",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.honen/honen\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://honen.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.zalize.qr/honestqr",
       "name": "HonestQR",
       "ecosystem": "mcp-registry",
@@ -82526,6 +83362,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.hoptodesk/dashboard",
+      "name": "HopToDesk",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Reach the computers you manage: list devices, run fixes, take screenshots, add devices.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hoptodesk/dashboard",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hoptodesk/dashboard\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://www.hoptodesk.com/connect",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:sh.alchemylab.horizon/briefing",
       "name": "Horizon AI Intelligence",
       "ecosystem": "mcp-registry",
@@ -82612,6 +83470,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.hortosapp/au",
+      "name": "HortOS (Australia)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Search Australian wholesale plant growers' live stock lists and price a whole plant list. Read-only.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hortosapp/au",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hortosapp/au\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://au.hortosapp.com/ai",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.hosco/hospitality-jobs",
@@ -82744,6 +83624,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hotelscasa/hotelscasa-mcp",
+      "name": "HotelsCasa",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Travel search: 1.3M hotels and apartments, owner homes, tours, flights, taxi, car rental.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hotelscasa/hotelscasa-mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hotelscasa/hotelscasa-mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/hotelscasa/hotelscasa-mcp",
+      "homepageUrl": "https://hotelscasa.com/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "2.0.0"
     },
     {
       "id": "mcp-registry:io.github.mcp-dir/hotmart-mcp",
@@ -83472,6 +84374,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.humanslikestuff/mcp",
+      "name": "HumansLikeStuff MCP",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Arrange US physical gifts and branded merchandise with human quote and payment approval.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.humanslikestuff/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.humanslikestuff/mcp\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://humanslikestuff.com/connect",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.4.0"
+    },
+    {
       "id": "mcp-registry:app.wishpool/hungary-invoice-mcp",
       "name": "Hungary Invoices (NAV Online Szamla 3.0 reporting API)",
       "ecosystem": "mcp-registry",
@@ -83639,6 +84563,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.apology-is-policy/hyades\" --adapter claude --local",
       "repoUrl": "https://github.com/apology-is-policy/hyades",
       "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hydrafetch/web",
+      "name": "Hydrafetch",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Turn any URL into clean Markdown and structured data. Scrape, crawl, search and extract.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hydrafetch/web",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hydrafetch/web\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://hydrafetch.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -84374,6 +85320,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.igdigi/igdigi",
+      "name": "IG Digital Lab",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "IG Digital Lab: AI implementation agency in Sacramento, CA. Company facts, services, contact.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.igdigi/igdigi",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.igdigi/igdigi\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://igdigi.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.SidneyBissoli/ilo-mcp-server",
       "name": "ILOSTAT — ILO Labour Statistics (provenance-first)",
       "ecosystem": "mcp-registry",
@@ -84394,6 +85362,28 @@
         "mcp"
       ],
       "version": "0.2.0"
+    },
+    {
+      "id": "mcp-registry:com.imbawallet/agent-docs",
+      "name": "IMBA Agent Docs",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read-only IMBA Agent API docs MCP. No register, deposit, buy, or withdraw.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.imbawallet/agent-docs",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.imbawallet/agent-docs\" --adapter claude --local",
+      "repoUrl": "https://github.com/IMBAwallet/IMBA_front",
+      "homepageUrl": "https://imbawallet.com/agent_api_about_en.html",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:com.imergea/ma-advisory",
@@ -84924,6 +85914,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.ip99/ip99",
+      "name": "IP99 IP risk & geolocation",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Free IP risk and geolocation lookup: proxy, VPN and datacenter detection. No API key.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.ip99/ip99",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.ip99/ip99\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://ip99.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.ipogrid/ipogrid",
       "name": "IPOGrid IPO Calendar & Filing Research",
       "ecosystem": "mcp-registry",
@@ -84981,6 +85993,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/iso\" --adapter claude --local",
       "repoUrl": "https://github.com/pipeworx-io/mcp-iso",
       "homepageUrl": "https://pipeworx.io/packs/iso",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.gumballtools/iso-week",
+      "name": "ISO Week Number",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 8601 week numbers: date to week, week to date, weeks-per-year.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/iso-week",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/iso-week\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://iso-week.gumballtools.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -85122,6 +86156,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.ibipoint/esim-catalog",
+      "name": "IbiPoint eSIM Catalog",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Search prepaid travel eSIM data plans for 200+ countries with live prices and a buy link.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.ibipoint/esim-catalog",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.ibipoint/esim-catalog\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://ibipoint.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.Staringatthesun1996/ibiza-housing-mission",
       "name": "Ibiza Housing Mission",
       "ecosystem": "mcp-registry",
@@ -85144,6 +86200,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.icejuicetrading/ice-juice-trading",
+      "name": "Ice Juice Trading",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Automate trading on your own Alpaca account - build, backtest and run strategies via your AI.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.icejuicetrading/ice-juice-trading",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.icejuicetrading/ice-juice-trading\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://icejuicetrading.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.iconiccls/reserve",
       "name": "Iconic CLS",
       "ecosystem": "mcp-registry",
@@ -85157,6 +86235,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.iconiccls/reserve\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://iconiccls.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.ideatomotion/idea-to-motion",
+      "name": "Idea to Motion",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Make animated videos by asking Claude, Cursor or any MCP client. Your AI writes it, we render it.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.ideatomotion/idea-to-motion",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.ideatomotion/idea-to-motion\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://ideatomotion.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -85276,6 +86376,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.idle9/idle9",
+      "name": "Idle9",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "A persistent Linux computer for your AI: what it installs and writes survives the session.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.idle9/idle9",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.idle9/idle9\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://idle9.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.2.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/ieee-standards",
       "name": "Ieee Standards",
       "ecosystem": "mcp-registry",
@@ -85340,6 +86462,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.ifa-wisdom/library",
+      "name": "Ifá Wisdom — biblioteca de Ifá e Orixás",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Cited library on Ifá, the Orishas and Yoruba philosophy in 4 languages. Read-only; not an oracle.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.ifa-wisdom/library",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.ifa-wisdom/library\" --adapter claude --local",
+      "repoUrl": "https://github.com/paboohwow-arch/ifa-wisdom",
+      "homepageUrl": "https://www.ifa-wisdom.com/para-agentes",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.gusgordon/ignav-flights",
@@ -85861,6 +87005,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.incisory/incisory\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://incisory.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.inclusifyapp/inclusify",
+      "name": "Inclusify Accessibility",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Accessibility and WCAG data for your own websites: fix lists, live checks, and fix validation.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.inclusifyapp/inclusify",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.inclusifyapp/inclusify\" --adapter claude --local",
+      "repoUrl": "https://github.com/magebitcom/inclusify-plugin",
+      "homepageUrl": "https://inclusifyapp.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -86420,6 +87586,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.infectrisk/infectrisk",
+      "name": "InfectRisk",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Current flu, COVID-19 and RSV activity for 24 countries, from public surveillance data.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.infectrisk/infectrisk",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.infectrisk/infectrisk\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://infectrisk.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.benseverndev-oss/infermap",
       "name": "InferMap",
       "ecosystem": "mcp-registry",
@@ -86704,6 +87892,50 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.infypng/png-clipart",
+      "name": "InfyPNG — Free Transparent PNG Clipart",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Search thousands of free transparent PNG clipart images. Free for commercial use, no attribution.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.infypng/png-clipart",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.infypng/png-clipart\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://infypng.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.infysvg/svg-clipart",
+      "name": "InfySVG — Free SVG Clipart",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Search thousands of free SVG cut files & clipart. Free for commercial use, no attribution.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.infysvg/svg-clipart",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.infysvg/svg-clipart\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.Inistate/inistate-mcp",
@@ -87190,6 +88422,28 @@
       "version": "1.5.0"
     },
     {
+      "id": "mcp-registry:com.instilus/gpsr",
+      "name": "Instilus compliance and business decision tools",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "GPSR compliance check and small-business valuation estimate, from Instilus.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.instilus/gpsr",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.instilus/gpsr\" --adapter claude --local",
+      "repoUrl": "https://github.com/astarsupply-hub/forge",
+      "homepageUrl": "https://www.instilus.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.1"
+    },
+    {
       "id": "mcp-registry:io.github.skewing1/insurelink",
       "name": "InsureLink",
       "ecosystem": "mcp-registry",
@@ -87364,6 +88618,28 @@
         "mcp"
       ],
       "version": "0.1.2-beta"
+    },
+    {
+      "id": "mcp-registry:com.intermind/intermind",
+      "name": "InterMIND",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Create InterMIND meeting links and read recaps of meetings you hosted, from your AI assistant.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.intermind/intermind",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.intermind/intermind\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://intermind.com/docs/integrations/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.ibkr/interactive-brokers-ibkr",
@@ -87562,6 +88838,28 @@
         "mcp"
       ],
       "version": "1.0.7"
+    },
+    {
+      "id": "mcp-registry:com.interviewflowai/mcp",
+      "name": "InterviewFlowAI",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Query InterviewFlowAI candidate and interview data from MCP-compatible AI assistants.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.interviewflowai/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.interviewflowai/mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/interviewflowai/interviewflowai-mcp",
+      "homepageUrl": "https://interviewflowai.com/features/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.intesta/registry",
@@ -89190,6 +90488,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.gumballtools/json-to-types",
+      "name": "JSON to Types",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Convert JSON samples into TypeScript interfaces and Zod schemas, with inference caveats.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/json-to-types",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/json-to-types\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://json-to-types.gumballtools.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.walkojas-boop/jsonshelf",
@@ -92490,6 +93810,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hakuto-0209/kata",
+      "name": "Kata (型)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "実在の日本のLP/HPを参考に返す。業種や雰囲気からURLと実測配色を数件。無料・鍵不要。",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hakuto-0209/kata",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hakuto-0209/kata\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://hakuto-0209.com/lab.html",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "20260916"
     },
     {
       "id": "mcp-registry:io.github.katalon-studio/testops-mcp",
@@ -123468,6 +124810,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.gumballtools/payload-validator",
+      "name": "Payload Validator",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Validate JSON, YAML, XML and CSV with exact line/column errors and silent-corruption warnings.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/payload-validator",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/payload-validator\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://payload-validator.gumballtools.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.tooloracle/paymentoracle",
       "name": "PaymentOracle — Verifiable Multi-Rail Payment Receipts",
       "ecosystem": "mcp-registry",
@@ -123921,6 +125285,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/pa-dmv\" --adapter claude --local",
       "repoUrl": "https://github.com/pipeworx-io/mcp-pa-dmv",
       "homepageUrl": "https://pipeworx.io/packs/pa-dmv",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.gumballtools/penny-rounding",
+      "name": "Penny Rounding",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Round cash totals to the nearest nickel correctly — after tax, on the total, cash only.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/penny-rounding",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/penny-rounding\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://penny-rounding.gumballtools.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -132686,6 +134072,28 @@
       "version": "4.7.0"
     },
     {
+      "id": "mcp-registry:com.gumballtools/platform",
+      "name": "Project Gumball",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "One MCP server exposing every tool in the Gumball portfolio.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/platform",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/platform\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://gumballtools.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.Wxt-ai/project-code-notes-identifier",
       "name": "Project Intake Identifier",
       "ecosystem": "mcp-registry",
@@ -138771,6 +140179,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:ai.reglayer/instant-decision-briefs\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://reglayer.ai/agents",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.gumballtools/regex-explainer",
+      "name": "Regex Explainer",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Explain a regex in plain English and detect catastrophic backtracking risk.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/regex-explainer",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/regex-explainer\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://regex-explainer.gumballtools.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -158624,6 +160054,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.igods/space-monkey",
+      "name": "Space Monkey Mailchimp Dashboard",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Mailchimp engagement intelligence for AI agents: campaign analytics and audience insights.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.igods/space-monkey",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.igods/space-monkey\" --adapter claude --local",
+      "repoUrl": "https://github.com/CameronKnowlton/spacemonkey",
+      "homepageUrl": "https://spacemonkey.igods.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.a2awire/data-space-weather-kp-index-solar-flare",
       "name": "Space Weather (Kp Index, Solar Flares) — buy per-query in-session (spaceweather)",
       "ecosystem": "mcp-registry",
@@ -159605,6 +161057,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/sports-game-odds\" --adapter claude --local",
       "repoUrl": "https://github.com/pipeworx-io/mcp-sports-game-odds",
       "homepageUrl": "https://pipeworx.io/packs/sports-game-odds",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.gumballtools/sports-rules",
+      "name": "Sports Rules",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Work an offside call through IFAB Law 11 or NHL Rule 83, step by step.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/sports-rules",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/sports-rules\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://sports-rules.gumballtools.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -169725,6 +171199,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/timestamp\" --adapter claude --local",
       "repoUrl": "https://github.com/pipeworx-io/mcp-timestamp",
       "homepageUrl": "https://pipeworx.io/packs/timestamp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:com.gumballtools/timezone-truth",
+      "name": "Timezone Truth",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Convert times between IANA zones and detect skipped or ambiguous DST local times.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/timezone-truth",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/timezone-truth\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://timezone-truth.gumballtools.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -185530,6 +187026,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.gumballtools/words-in-context",
+      "name": "Words in Context",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Words-in-context vocabulary practice questions with distractor explanations.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.gumballtools/words-in-context",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.gumballtools/words-in-context\" --adapter claude --local",
+      "repoUrl": "https://github.com/bwalvoord/gumball",
+      "homepageUrl": "https://words-in-context.gumballtools.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.workcontextprotocol/wcp",
       "name": "Work Context Protocol",
       "ecosystem": "mcp-registry",
@@ -199302,6 +200820,28 @@
       "version": "2.0.0"
     },
     {
+      "id": "mcp-registry:com.honeycomb-tech.ailis/ailis",
+      "name": "ailis",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Save to-dos from AI chats to the iPhone lock screen. Say the trigger word and it shows up as a card.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.honeycomb-tech.ailis/ailis",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.honeycomb-tech.ailis/ailis\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://ailis.honeycomb-tech.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:app.aiponge/mcp",
       "name": "aiponge",
       "ecosystem": "mcp-registry",
@@ -202072,6 +203612,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hakuto-0209/b612",
+      "name": "b612 (hakuto AI)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Design-review copilot: industry design checkpoints, edge cases, and Japanese legal notes.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hakuto-0209/b612",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hakuto-0209/b612\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://hakuto-0209.com/lab.html",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "20260913"
     },
     {
       "id": "mcp-registry:cloud.basebalance/basebalance",
@@ -218618,6 +220180,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.greencalculus/api",
+      "name": "com.greencalculus/api",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Sourced carbon emission factors + audit-traced calculations an AI can cite.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.greencalculus/api",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.greencalculus/api\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://greencalculus.com/developers",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.2"
+    },
+    {
       "id": "mcp-registry:com.griffnode/griffnode",
       "name": "com.griffnode/griffnode",
       "ecosystem": "mcp-registry",
@@ -218728,6 +220312,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.halffee/coinrebate",
+      "name": "com.halffee/coinrebate",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Compliance-filtered crypto exchange fee comparison and rebate-link routing for AI agents.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.halffee/coinrebate",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.halffee/coinrebate\" --adapter claude --local",
+      "repoUrl": "https://github.com/skheman2026-sketch/coinrebate-mcp-server",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "2.5.0"
+    },
+    {
+      "id": "mcp-registry:com.handovra/site",
+      "name": "com.handovra/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Handovra: the site's own MCP server — dataset; every answer cites the site.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.handovra/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.handovra/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://handovra.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.handsofflinks/link-followability",
       "name": "com.handsofflinks/link-followability",
       "ecosystem": "mcp-registry",
@@ -218741,6 +220369,72 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.handsofflinks/link-followability\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://handsofflinks.com/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hardenvo/site",
+      "name": "com.hardenvo/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Hardenvo: the site's own MCP server — dataset; every answer cites the site.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hardenvo/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hardenvo/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://hardenvo.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hardfmly/site",
+      "name": "com.hardfmly/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HardFM: the site's own MCP server — dataset; every answer cites the site.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hardfmly/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hardfmly/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://hardfmly.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hardscapedesk/site",
+      "name": "com.hardscapedesk/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HardscapeDesk: the site's own MCP server — dataset; every answer cites the site.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hardscapedesk/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hardscapedesk/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://hardscapedesk.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -218794,6 +220488,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.headcountdesk/site",
+      "name": "com.headcountdesk/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HeadcountDesk: the site's own MCP server — dataset; every answer cites the site.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.headcountdesk/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.headcountdesk/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://headcountdesk.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.heatpumpcosteurope/site",
+      "name": "com.heatpumpcosteurope/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Wärmepumpe Kosten Europa: the site's own MCP server — dataset, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.heatpumpcosteurope/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.heatpumpcosteurope/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://heatpumpcosteurope.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.hebertmagic/booking",
       "name": "com.hebertmagic/booking",
       "ecosystem": "mcp-registry",
@@ -218807,6 +220545,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.hebertmagic/booking\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hedwig-ai/hedwig",
+      "name": "com.hedwig-ai/hedwig",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read, arrange, and build agents on your Hedwig email board from any AI client. Nothing ever sends.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hedwig-ai/hedwig",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hedwig-ai/hedwig\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://www.hedwig-ai.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -218904,6 +220664,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.hibot/hibot",
+      "name": "com.hibot/hibot",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HiBot public knowledge: the ANSWER framework for AI visibility, audit plans, case studies, research",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hibot/hibot",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hibot/hibot\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://hibot.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.historiapojazduvin/site",
+      "name": "com.historiapojazduvin/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Historia Pojazdu VIN: the site's own MCP server — dataset, enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.historiapojazduvin/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.historiapojazduvin/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://historiapojazduvin.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.hjarni/hjarni",
       "name": "com.hjarni/hjarni",
       "ecosystem": "mcp-registry",
@@ -218948,6 +220752,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.homecoverhq/site",
+      "name": "com.homecoverhq/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HomeCover HQ: the site's own MCP server — dataset; every answer cites the site.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.homecoverhq/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.homecoverhq/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://homecoverhq.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.homevisto/mcp-server",
       "name": "com.homevisto/mcp-server",
       "ecosystem": "mcp-registry",
@@ -218970,6 +220796,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.hostingbystack/site",
+      "name": "com.hostingbystack/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HostingByStack: the site's own MCP server — dataset; every answer cites the site.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hostingbystack/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hostingbystack/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://hostingbystack.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.hotelvalora/mcp",
       "name": "com.hotelvalora/mcp",
       "ecosystem": "mcp-registry",
@@ -218983,6 +220831,72 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.hotelvalora/mcp\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://www.hotelvalora.com/ai",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hovercode/mcp",
+      "name": "com.hovercode/mcp",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Create and manage QR codes, short links, landing pages, and forms in your Hovercode workspace.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hovercode/mcp",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hovercode/mcp\" --adapter claude --local",
+      "repoUrl": "https://github.com/Hovercode-Ltd/hovercode-mcp",
+      "homepageUrl": "https://hovercode.com/integrations/mcp/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.howgooditcanget/clarity-os",
+      "name": "com.howgooditcanget/clarity-os",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "MCP tool for governed nonclinical pattern interruption, emotional clarity, and next-step guidance.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.howgooditcanget/clarity-os",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.howgooditcanget/clarity-os\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hreflangly/site",
+      "name": "com.hreflangly/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Hreflangly: the site's own MCP server — dataset; every answer cites the site.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hreflangly/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hreflangly/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://hreflangly.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -219058,6 +220972,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.htmlradar/share",
+      "name": "com.htmlradar/share",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Publish HTML as a tracked link and see who opened it and which sections they read.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.htmlradar/share",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.htmlradar/share\" --adapter claude --local",
+      "repoUrl": "https://github.com/htmlradar/htmlradar",
+      "homepageUrl": "https://htmlradar.com/mcp",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.3.1"
+    },
+    {
       "id": "mcp-registry:com.httpstatus/mcp-server",
       "name": "com.httpstatus/mcp-server",
       "ecosystem": "mcp-registry",
@@ -219080,6 +221016,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:com.huddlevo/site",
+      "name": "com.huddlevo/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Huddlevo: the site's own MCP server — dataset; every answer cites the site.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.huddlevo/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.huddlevo/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://huddlevo.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.humaux/memory",
       "name": "com.humaux/memory",
       "ecosystem": "mcp-registry",
@@ -219100,6 +221058,50 @@
         "mcp"
       ],
       "version": "0.3.0"
+    },
+    {
+      "id": "mcp-registry:com.hvacsoftwarepicker/site",
+      "name": "com.hvacsoftwarepicker/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HVAC Software Picker: the site's own MCP server — compare, enquiry (enquiry = a human handoff,...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hvacsoftwarepicker/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hvacsoftwarepicker/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://hvacsoftwarepicker.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.hydrantly/site",
+      "name": "com.hydrantly/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Hydrantly: the site's own MCP server — dataset; every answer cites the site.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.hydrantly/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.hydrantly/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://hydrantly.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.iberiapath/dnv-spain",
@@ -219146,6 +221148,28 @@
       "version": "2.0.0"
     },
     {
+      "id": "mcp-registry:com.immigrationadviserfinder/site",
+      "name": "com.immigrationadviserfinder/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Immigration Adviser Finder: the site's own MCP server — dataset, enquiry, entities (enquiry = a...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.immigrationadviserfinder/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.immigrationadviserfinder/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://immigrationadviserfinder.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.imperioutils/fisco-it",
       "name": "com.imperioutils/fisco-it",
       "ecosystem": "mcp-registry",
@@ -219181,6 +221205,50 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.inboxpolicy/send-decision\" --adapter claude --local",
       "repoUrl": "https://github.com/sorcerai/inboxpolicy",
       "homepageUrl": "https://inboxpolicy.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.incorporatewhere/site",
+      "name": "com.incorporatewhere/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Incorporate Where: the site's own MCP server — checker, enquiry (enquiry = a human handoff, not...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.incorporatewhere/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.incorporatewhere/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://incorporatewhere.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.inductvo/site",
+      "name": "com.inductvo/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Inductvo: the site's own MCP server — dataset; every answer cites the site.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.inductvo/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.inductvo/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://inductvo.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -219234,6 +221302,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.injectionmoldingcostchecker/site",
+      "name": "com.injectionmoldingcostchecker/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Injection Molding Cost Checker: the site's own MCP server — dataset, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.injectionmoldingcostchecker/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.injectionmoldingcostchecker/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://injectionmoldingcostchecker.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.insidercable/feeds",
+      "name": "com.insidercable/feeds",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Congress trades, BTC ETF flows, SEC Form 4 insiders — every record says when we first saw it",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.insidercable/feeds",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.insidercable/feeds\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://insidercable.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.2.0"
+    },
+    {
       "id": "mcp-registry:com.insidergraph/insidergraph",
       "name": "com.insidergraph/insidergraph",
       "ecosystem": "mcp-registry",
@@ -219278,6 +221390,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.insurancebyprofession/site",
+      "name": "com.insurancebyprofession/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Insurance by Profession: the site's own MCP server — dataset, enquiry (enquiry = a human...",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.insurancebyprofession/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.insurancebyprofession/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://insurancebyprofession.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.intakez/site",
+      "name": "com.intakez/site",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Intakez: the site's own MCP server — dataset; every answer cites the site.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.intakez/site",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.intakez/site\" --adapter claude --local",
+      "repoUrl": "https://github.com/joeetdev/venture-estate",
+      "homepageUrl": "https://intakez.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.interzoid/mcp-server",
       "name": "com.interzoid/mcp-server",
       "ecosystem": "mcp-registry",
@@ -219312,6 +221468,28 @@
       "source": "mcp-registry:com.invoicebadger/invoice-badger",
       "installCommand": "npx agentwheel install \"mcp-registry:com.invoicebadger/invoice-badger\" --adapter claude --local",
       "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.invompt/invompt",
+      "name": "com.invompt/invompt",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Turn AI-host work into invoices you review before send via hosted MCP.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.invompt/invompt",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.invompt/invompt\" --adapter claude --local",
+      "repoUrl": "https://github.com/Invompt/invompt-mcp",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -237406,6 +239584,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:com.igods/gvt",
+      "name": "iGods GEO Visibility Tool (GVT)",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "GEO visibility tests, score trends, sitemap discovery, and domain monitoring for AI agents.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.igods/gvt",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.igods/gvt\" --adapter claude --local",
+      "repoUrl": "https://github.com/CameronKnowlton/gvt-mcp",
+      "homepageUrl": "https://geo.igods.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.2.0"
+    },
+    {
       "id": "mcp-registry:fit.ilook/face-analysis",
       "name": "iLook Face Analysis",
       "ecosystem": "mcp-registry",
@@ -237639,6 +239839,50 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.ifthenpay/payments\" --adapter claude --local",
       "repoUrl": "https://github.com/ifthenpay/mcp-payments",
       "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.ikeytz/maps",
+      "name": "ikeytz Einsatzgebiet-Karten",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read/Link MCP for maps.ikeytz.com. Public read-only. No forms. ai-train=no.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.ikeytz/maps",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.ikeytz/maps\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://maps.ikeytz.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:com.ikeytz/website",
+      "name": "ikeytz – Schlüsseldienst Ludwigsburg",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Read/Link MCP tools for Schlüsseldienst Ludwigsburg ikeytz. Public read-only. No forms. ai-train=no.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:com.ikeytz/website",
+      "installCommand": "npx agentwheel install \"mcp-registry:com.ikeytz/website\" --adapter claude --local",
+      "repoUrl": null,
+      "homepageUrl": "https://www.ikeytz.com",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -294040,7 +296284,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "security"
       ],
       "source": "clawhub:@transmitt0r/openclaw-plugin-onepassword",
       "installCommand": "npx agentwheel install \"clawhub:@transmitt0r/openclaw-plugin-onepassword\" --adapter openclaw --local --only-source --execute-plugins",
@@ -294505,8 +296749,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools",
-        "security",
+        "infrastructure",
         "Read Only",
         "Diagnostics",
         "Grafana Clone Dashboard",
@@ -295457,7 +297700,6 @@
         "code-plugin",
         "community",
         "channels",
-        "context",
         "Daoyu",
         "Chat",
         "3d",
@@ -296618,8 +298860,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "web",
-        "runtime",
+        "sales-marketing",
         "AIsa",
         "Twitter"
       ],
@@ -299808,9 +302049,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "channels",
         "voice",
-        "gateway",
         "Telegram",
         "Text-to-Speech",
         "Chat",
@@ -300066,7 +302305,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "web",
+        "other",
         "Redirect",
         "Stub"
       ],
@@ -304158,7 +306397,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "channels"
       ],
       "source": "clawhub:@huo15/wechat-service",
       "installCommand": "npx agentwheel install \"clawhub:@huo15/wechat-service\" --adapter openclaw --local --only-source --execute-plugins",
@@ -305685,7 +307924,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "channels",
+        "memory",
         "Cortex",
         "Portable Context",
         "Discord",
@@ -307655,7 +309894,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools",
+        "other",
         "Orbit",
         "Echo Message"
       ],
@@ -308401,7 +310640,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "channels",
+        "media",
         "Discord",
         "Telegram",
         "WhatsApp",
@@ -308918,7 +311157,6 @@
         "clawhub",
         "code-plugin",
         "community",
-        "models",
         "voice",
         "Fish Audio",
         "Text-to-Speech"
@@ -309202,8 +311440,6 @@
         "code-plugin",
         "community",
         "memory",
-        "context",
-        "tools",
         "Ai Memory",
         "Associative Memory",
         "Llm Tools",
@@ -311158,7 +313394,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools",
+        "documents-files",
         "Html To PDF",
         "Pdfapihub",
         "URL To PDF",
@@ -311494,7 +313730,6 @@
         "clawhub",
         "code-plugin",
         "community",
-        "context",
         "memory",
         "Character Memory",
         "Cloud Sync",
@@ -312959,7 +315194,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "memory"
       ],
       "source": "clawhub:openclaw-plugin-kv-embed-store",
       "installCommand": "npx agentwheel install \"clawhub:openclaw-plugin-kv-embed-store\" --adapter openclaw --local --only-source --execute-plugins",
@@ -315024,7 +317259,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools",
+        "security",
         "MCP",
         "Monitoring"
       ],
@@ -316042,7 +318277,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "models",
+        "research",
         "MCP",
         "Maltego",
         "Graph",
@@ -316431,7 +318666,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools",
+        "integrations",
         "MCP"
       ],
       "source": "clawhub:maverick-mcporter",
@@ -320668,7 +322903,6 @@
         "code-plugin",
         "community",
         "channels",
-        "models",
         "Odoo Chatter",
         "Xml Rpc",
         "Model Routing"
@@ -322616,9 +324850,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "models",
         "media",
-        "tools",
         "Byteplus",
         "Image Generation",
         "Video Generation",
@@ -325295,9 +327527,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "media",
-        "web",
-        "runtime",
+        "research",
         "YouTube",
         "AIsa"
       ],
@@ -325356,7 +327586,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "web",
+        "research",
         "News",
         "Opera",
         "Trending",
@@ -325707,7 +327937,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "web",
+        "research",
         "Toolkit"
       ],
       "source": "clawhub:@panews/agent-plugin",
@@ -326138,7 +328368,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools",
+        "documents-files",
         "PDF To Word",
         "PDF Convert",
         "PDF To Docx",
@@ -326341,7 +328571,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools",
+        "data-analytics",
         "Qianyi",
         "Qclaw"
       ],
@@ -327041,8 +329271,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "runtime",
-        "context",
+        "security",
         "Authorization"
       ],
       "source": "clawhub:@plainid/openclaw-authorizer",
@@ -327180,9 +329409,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools",
         "media",
-        "voice",
         "Audio",
         "Ai Generation",
         "Dlazy Run",
@@ -328729,7 +330956,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "runtime",
+        "other",
         "Placeholder",
         "Qclaw"
       ],
@@ -329428,8 +331655,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "memory",
-        "models"
+        "memory"
       ],
       "source": "clawhub:@reflexioai/reflexio",
       "installCommand": "npx agentwheel install \"clawhub:@reflexioai/reflexio\" --adapter openclaw --local --only-source --execute-plugins",
@@ -329515,9 +331741,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools",
-        "runtime",
-        "web",
+        "research",
         "Fact Checking",
         "Media Literacy",
         "Misinformation",
@@ -331760,8 +333984,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "web",
-        "tools"
+        "web"
       ],
       "source": "clawhub:@serpapi/openclaw-plugin",
       "installCommand": "npx agentwheel install \"clawhub:@serpapi/openclaw-plugin\" --adapter openclaw --local --only-source --execute-plugins",
@@ -333741,8 +335964,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "runtime",
-        "gateway"
+        "finance-payments"
       ],
       "source": "clawhub:stablepay-agentpay-dev",
       "installCommand": "npx agentwheel install \"clawhub:stablepay-agentpay-dev\" --adapter openclaw --local --only-source --execute-plugins",
@@ -334518,8 +336740,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "runtime",
-        "web",
+        "finance-payments",
         "Stock",
         "AIsa",
         "Market",
@@ -339112,8 +341333,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "channels",
-        "runtime",
+        "media",
         "Telegram",
         "Hook"
       ],
@@ -339881,9 +342101,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "security",
-        "gateway",
-        "runtime",
+        "documents-files",
         "Webdav",
         "Compliance"
       ],
@@ -340178,7 +342396,6 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools",
         "security",
         "Windows Update Reason"
       ],
@@ -340264,8 +342481,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "security",
-        "gateway",
+        "inbox-collaboration",
         "Access Control"
       ],
       "source": "clawhub:@gauravprasadgp/openclaw-share-workspace",
@@ -342502,7 +344718,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "web",
+        "research",
         "Web Scraping",
         "Amazon",
         "Browseract",
@@ -346353,7 +348569,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools"
+        "infrastructure"
       ],
       "source": "clawhub:zhihu-aiops-openclaw-plugin",
       "installCommand": "npx agentwheel install \"clawhub:zhihu-aiops-openclaw-plugin\" --adapter openclaw --local --only-source --execute-plugins",
@@ -346717,7 +348933,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other",
+        "documents-files",
         "aidenote",
         "recording-notes",
         "remote-agent",
@@ -346894,7 +349110,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:muratcankoylan/Agent-Skills-for-Context-Engineering\"",
       "repoUrl": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
       "homepageUrl": null,
-      "stars": 18011,
+      "stars": 18013,
       "lastPush": "2026-09-11T00:03:45Z",
       "archived": false,
       "provides": null,
@@ -346933,7 +349149,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:vercel-labs/agent-skills\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": null,
-      "stars": 31405,
+      "stars": 31416,
       "lastPush": "2026-08-28T13:36:31Z",
       "archived": false,
       "provides": null,
@@ -347029,7 +349245,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:softaworks/agent-toolkit\"",
       "repoUrl": "https://github.com/softaworks/agent-toolkit",
       "homepageUrl": null,
-      "stars": 2488,
+      "stars": 2491,
       "lastPush": "2026-03-05T16:46:24Z",
       "archived": false,
       "provides": null,
@@ -347048,7 +349264,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:wshobson/agents\"",
       "repoUrl": "https://github.com/wshobson/agents",
       "homepageUrl": null,
-      "stars": 39836,
+      "stars": 39847,
       "lastPush": "2026-09-21T01:09:57Z",
       "archived": false,
       "provides": null,
@@ -347068,7 +349284,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:stripe/ai\"",
       "repoUrl": "https://github.com/stripe/ai",
       "homepageUrl": null,
-      "stars": 1830,
+      "stars": 1829,
       "lastPush": "2026-09-21T00:53:30Z",
       "archived": false,
       "provides": null,
@@ -347087,8 +349303,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:sickn33/antigravity-awesome-skills\"",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "homepageUrl": null,
-      "stars": 46651,
-      "lastPush": "2026-09-20T21:07:45Z",
+      "stars": 46684,
+      "lastPush": "2026-09-21T06:58:24Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -347106,7 +349322,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:ComposioHQ/awesome-claude-skills\"",
       "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 75403,
+      "stars": 75422,
       "lastPush": "2026-09-18T07:16:11Z",
       "archived": false,
       "provides": null,
@@ -347125,7 +349341,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:travisvn/awesome-claude-skills\"",
       "repoUrl": "https://github.com/travisvn/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 15120,
+      "stars": 15123,
       "lastPush": "2026-04-28T19:30:24Z",
       "archived": false,
       "provides": null,
@@ -347144,7 +349360,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jimliu/baoyu-skills\"",
       "repoUrl": "https://github.com/jimliu/baoyu-skills",
       "homepageUrl": null,
-      "stars": 26039,
+      "stars": 26054,
       "lastPush": "2026-09-10T15:13:43Z",
       "archived": false,
       "provides": null,
@@ -347239,8 +349455,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:langgenius/dify\"",
       "repoUrl": "https://github.com/langgenius/dify",
       "homepageUrl": null,
-      "stars": 156637,
-      "lastPush": "2026-09-21T01:01:21Z",
+      "stars": 156707,
+      "lastPush": "2026-09-21T10:42:25Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -347258,8 +349474,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:NousResearch/hermes-agent\"",
       "repoUrl": "https://github.com/NousResearch/hermes-agent",
       "homepageUrl": null,
-      "stars": 247483,
-      "lastPush": "2026-09-21T01:12:16Z",
+      "stars": 247619,
+      "lastPush": "2026-09-21T10:42:55Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -347277,7 +349493,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:coreyhaines31/marketingskills\"",
       "repoUrl": "https://github.com/coreyhaines31/marketingskills",
       "homepageUrl": null,
-      "stars": 51002,
+      "stars": 51044,
       "lastPush": "2026-09-05T04:48:10Z",
       "archived": false,
       "provides": null,
@@ -347297,7 +349513,7 @@
       "repoUrl": "https://github.com/onmax/nuxt-skills",
       "homepageUrl": null,
       "stars": 711,
-      "lastPush": "2026-09-18T12:26:05Z",
+      "lastPush": "2026-09-21T07:30:07Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -347315,7 +349531,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:kepano/obsidian-skills\"",
       "repoUrl": "https://github.com/kepano/obsidian-skills",
       "homepageUrl": null,
-      "stars": 48656,
+      "stars": 48681,
       "lastPush": "2026-09-15T14:43:57Z",
       "archived": false,
       "provides": null,
@@ -347335,7 +349551,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:anthropics/skills\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": null,
-      "stars": 177325,
+      "stars": 177400,
       "lastPush": "2026-09-10T19:44:11Z",
       "archived": false,
       "provides": null,
@@ -347355,7 +349571,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:expo/skills\"",
       "repoUrl": "https://github.com/expo/skills",
       "homepageUrl": null,
-      "stars": 2590,
+      "stars": 2591,
       "lastPush": "2026-09-17T18:45:57Z",
       "archived": false,
       "provides": null,
@@ -347375,7 +349591,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:remotion-dev/skills\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": null,
-      "stars": 4669,
+      "stars": 4673,
       "lastPush": "2026-09-17T14:46:09Z",
       "archived": false,
       "provides": null,
@@ -347394,8 +349610,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:trailofbits/skills\"",
       "repoUrl": "https://github.com/trailofbits/skills",
       "homepageUrl": null,
-      "stars": 7180,
-      "lastPush": "2026-09-16T22:05:12Z",
+      "stars": 7191,
+      "lastPush": "2026-09-21T08:47:59Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -347413,7 +349629,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:better-auth/skills\"",
       "repoUrl": "https://github.com/better-auth/skills",
       "homepageUrl": null,
-      "stars": 219,
+      "stars": 220,
       "lastPush": "2026-09-01T00:22:31Z",
       "archived": false,
       "provides": null,
@@ -347472,7 +349688,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:obra/superpowers\"",
       "repoUrl": "https://github.com/obra/superpowers",
       "homepageUrl": null,
-      "stars": 289281,
+      "stars": 289501,
       "lastPush": "2026-09-20T17:43:04Z",
       "archived": false,
       "provides": null,
@@ -347510,7 +349726,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:cloudai-x/threejs-skills\"",
       "repoUrl": "https://github.com/cloudai-x/threejs-skills",
       "homepageUrl": null,
-      "stars": 3348,
+      "stars": 3350,
       "lastPush": "2026-07-09T20:45:53Z",
       "archived": false,
       "provides": null,
@@ -347529,7 +349745,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:hyf0/vue-skills\"",
       "repoUrl": "https://github.com/hyf0/vue-skills",
       "homepageUrl": null,
-      "stars": 2865,
+      "stars": 2867,
       "lastPush": "2026-05-30T21:32:00Z",
       "archived": false,
       "provides": null,
@@ -347549,8 +349765,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-browser/agent-browser\"",
       "repoUrl": "https://github.com/vercel-labs/agent-browser",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-browser/agent-browser",
-      "stars": 42942,
-      "lastPush": "2026-09-18T22:18:42Z",
+      "stars": 42976,
+      "lastPush": "2026-09-21T01:41:16Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -347570,7 +349786,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/skills/find-skills\"",
       "repoUrl": "https://github.com/vercel-labs/skills",
       "homepageUrl": "https://skills.sh/vercel-labs/skills/find-skills",
-      "stars": 32099,
+      "stars": 32145,
       "lastPush": "2026-09-18T21:17:25Z",
       "archived": false,
       "provides": null,
@@ -347591,7 +349807,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/frontend-design\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/frontend-design",
-      "stars": 177325,
+      "stars": 177400,
       "lastPush": "2026-09-10T19:44:11Z",
       "archived": false,
       "provides": null,
@@ -347612,7 +349828,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/mattpocock/skills/grill-me\"",
       "repoUrl": "https://github.com/mattpocock/skills",
       "homepageUrl": "https://skills.sh/mattpocock/skills/grill-me",
-      "stars": 266464,
+      "stars": 266789,
       "lastPush": "2026-09-18T10:12:48Z",
       "archived": false,
       "provides": null,
@@ -347633,7 +349849,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/remotion-dev/skills/remotion-best-practices\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": "https://skills.sh/remotion-dev/skills/remotion-best-practices",
-      "stars": 4669,
+      "stars": 4673,
       "lastPush": "2026-09-17T14:46:09Z",
       "archived": false,
       "provides": null,
@@ -347654,7 +349870,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/skill-creator\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/skill-creator",
-      "stars": 177325,
+      "stars": 177400,
       "lastPush": "2026-09-10T19:44:11Z",
       "archived": false,
       "provides": null,
@@ -347675,7 +349891,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/vercel-react-best-practices\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices",
-      "stars": 31405,
+      "stars": 31416,
       "lastPush": "2026-08-28T13:36:31Z",
       "archived": false,
       "provides": null,
@@ -347696,7 +349912,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/web-design-guidelines\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/web-design-guidelines",
-      "stars": 31405,
+      "stars": 31416,
       "lastPush": "2026-08-28T13:36:31Z",
       "archived": false,
       "provides": null,
