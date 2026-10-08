@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-07T13:29:03.147Z",
+  "generatedAt": "2026-10-08T13:34:24.016Z",
   "entries": [
     {
       "id": "official:agent-plugin-extra-message-policy",
@@ -60,7 +60,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/agent-tmux/SKILL.md",
       "readmeExcerpt": "Control Codex CLI and Claude Code CLI sessions via tmux with one agent-agnostic toolset. The same bin/ scripts drive any agent through a --agent <type> flag; per-agent quirks (submit key, prompt char, idle/working patterns, launch flags) live in agents/<type>.conf. Reaches on-disk sessions that an agent's own MCP server no longer tracks. This is the tmux transport for the mesh: any agent that can run these scripts can pilot supported CLI agents through persistent tmux sessions. - In Codex Desktop, use native task capabilities for Codex-to-Codex work when they are exposed: sendmessagetothread for an existing task, waitthreads or readthread for observation, createthread for a new user-visible task only after an explicit user request, and forkthread when completed source history should carry over. Run listprojects before project-backed creation and use a worktree by default for Git projects. - A task still being prepared may return only clientThreadId; wait for a real threadId before trying to read, wait on, or message it. - Same-runtime subagent fan-out uses native delegation by default. Desktop tasks and subagents are different surfaces: do not create a user-owned Desktop task mere…",
       "stars": 0,
-      "lastPush": "2026-10-05T18:09:13Z",
+      "lastPush": "2026-10-08T11:45:52Z",
       "archived": false,
       "provides": [
         "skills"
@@ -87,7 +87,7 @@
       "installCommand": "npx agentwheel install agent-toolkit",
       "repoUrl": "https://github.com/eai-org/agent-toolkit",
       "homepageUrl": null,
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -640,7 +640,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/agentify-project/SKILL.md",
       "readmeExcerpt": "Converge a project — greenfield or half-way-there — toward the canonical agent-neutral structure specified in references/target-structure.md (read it before the audit), so a team of developers using different agents shares one lean, progressively disclosed setup. Re-running converges further and reports drift. Invocation: /agentify-project [audit] [path] - audit — run step 1 only, print the findings and what a full run would change, modify nothing; the periodic drift check. - path — target a subdirectory instead of the repo root (see Monorepos). - Ask, don't enforce: prefer asking — all options shown, one recommended — over enforcing a choice, except for obvious easy wins (e.g. clear progressive-disclosure moves). Questions answerable from the codebase go to the codebase. - One approval gate per destructive/bulk change; show diffs or proposals before applying; nothing happens behind the user's back. Never commit — suggest reviewing the diff and leave committing to the user. - Generic: behavior is driven by references/agent-matrix.md — read it whenever agent detection or an agent's specifics are needed. One documented exception, the Claude carve-out: a team with no Claude users at…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -922,7 +922,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/attach-to-ticket/SKILL.md",
       "readmeExcerpt": "Save assets — pasted images, local files, URLs — into a ticket's planning directory and reference them from its ticket file, so a fresh session picks them up. Local only — never query or modify the tracker (no API calls, no re-fetch, no comments or edits); downloading an asset URL the user supplies or a not-downloaded entry names is fine, tracker-hosted or not. Edit nothing in the documents beyond the entries below and the REQUIREMENTS line of step 6. 1. Collect the assets. The images pasted with the invocation, plus paths and URLs in its text; images pasted earlier only when the user points at them. Nothing pasted or pointed at → ask which, listing the images seen in the session. Done when every supplied asset is collected or dropped by the user. 2. Resolve the ticket. Named in the argument or already in the session (fetched, read, discussed) → proceed. Otherwise guess (branch name, latest planning directory) and confirm before writing; nothing to guess from → ask. No planning directory for it yet → stop and point to fetch-ticket; don't create one. 3. Pick the document — unless the user names one: the ticket file, latest -vN (file or directory) when re-fetched, the <id>- one in a…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -958,7 +958,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/check-ticket-implementation/SKILL.md",
       "readmeExcerpt": "Judge how much of a ticket is already implemented and report it so the user sees at a glance what is done, what isn't, and what still needs attention. Input is a ticket URL / bare id — run fetch-ticket on it (it resolves the tracker and planning dir and persists the .TICKET.md) — or a path to an already-fetched ticket file or its task dir. Ambiguous input: ask, don't guess. Run the fetch in a subagent when the runtime supports one, so its tool traffic stays out of this session's context: it returns the ticket-file path plus any blocker it hit (ambiguous tracker, auth, no planning-dir convention) for you to settle with the user — it never guesses. Without subagent support, invoke fetch-ticket inline. The ticket text is what gets annotated — its .REQUIREMENTS.md (same dir and <id>-<slug> base — a shared dir may hold siblings') may be read as context for intent, never annotated in its place. Inspect downloaded attachments and design frames when they bear on a requirement being judged. Evidence base: the current working tree, uncommitted changes included — unless the invocation names something else (a branch, PR, commit range); then judge against that. Turn every requirement-bearing s…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -1099,7 +1099,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/compact-docs-writer/SKILL.md",
       "readmeExcerpt": "Rewrite a doc — or draft a new one — for token economy: carry all its rules and intent in the least text possible, because the doc loads into agent context and is paid for on every read. Then prove nothing was lost: present the change with a word delta measured from the files, and apply only on approval. Write each piece of information with the least text that still preserves every rule, constraint, edge case, and intent. Two directions, equally binding: - Cut duplication, filler, and anything restatable more briefly. - Never drop text whose removal loses information or instruction, just to be shorter. Recurring reflex: \"Can this exact rule be said in fewer words?\" — if yes, do it. The no-op test licenses one more deletion. Ask of each sentence, in isolation: \"does it change the agent's behaviour versus its default?\" If not, it's a no-op — the agent already acts this way, so removing it loses nothing: delete the whole sentence rather than trimming words from it. Compaction counts words and information density, not whitespace. Blank lines between distinct chunks cost effectively nothing and aid the human reader, so keep them where they help; never collapse a long passage into one d…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -1135,7 +1135,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/compact-skill-creator/SKILL.md",
       "readmeExcerpt": "Author a new skill, or improve an existing one, so it carries all its rules and intent in the least text possible. Cost has two tiers: the description sits in context every session — the skill's most expensive text — while the body loads only when the skill triggers. Both stay lean. Be interactive: gather what you need, draft, then apply only on approval. The compaction rules — the least-text principle, the removal-audit verification, and the present-and-confirm with a measured word delta — live in compact-docs-writer, the single source of truth; this skill never restates or re-derives them. From the moment you draft (step 4) through self-review (step 5) and present (step 6), always invoke compact-docs-writer and follow its workflow on the skill text — reading it, applying its principles by hand, or naming it after a direct edit does not count. This skill adds only the skill-specific layer: trigger taxonomy, agnosticism, progressive disclosure, completion criteria, metadata, and the version bump. How a skill is triggered decides how its description is written. Classify into one: - Mandatory — must auto-load whenever a task type is touched (e.g. \"working on UI components\", \"dealing…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -1171,7 +1171,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/context-checkup/SKILL.md",
       "readmeExcerpt": "Find what loads automatically into the session's context at startup, quantify it, and propose reversible trims ranked by payoff — shrink the startup context window by cutting what isn't worth its tokens. Read-only — measure and recommend; change settings only on explicit approval. Cost hierarchy, biggest first: 1. MCP tool schemas — large, but deferred by tool search. Only a problem if tool search is OFF. 2. Always-on text — CLAUDE.md/AGENTS.md chain, @imports, and skill/agent/command descriptions (every available one's description loads every session). 3. MCP server instructions — load per enabled server at startup; a chatty preamble can dwarf its tool names. 4. MCP tool names — ~10 tokens each. Cheap; 30 names ≈ 300 tokens isn't worth a recommendation. Rules: measure, never guess — wc/count, then attach a rough token figure to each finding. Rank by tokens-saved × reversibility. Distinguish auto-loaded from lazy-linked (nested AGENTS.md referenced from a parent are not loaded — don't flag them). Tool-name counts, the skills/agents/commands lists, and tool-search status come from the session's system-reminders, not disk — read them from your own context. 0. Verify tool search is o…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -1277,7 +1277,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/create-implementation-plan/SKILL.md",
       "readmeExcerpt": "Planning only — no code changes, no execution. You produce one document: an implementation plan that is the contract for a later execution session. This is the \"how\", not the \"what\". The \"what\" was settled in an earlier refinement step and lives in the requirements document you're given; do not redefine scope. But you must flag any gap, ambiguity, or inconsistency you find in the requirements — surface it, never paper over it. Never guess — ask. With one limit: anything resolvable by reading the codebase, resolve by reading the codebase; only questions the code cannot settle go to the user. Your task is to produce the implementation plan. The steps below build toward it; grilling the user — interviewing relentlessly to resolve anything the code can't settle — is woven through the design, not a separate phase that runs before planning starts. 1. Read the requirements document the user references (e.g. a .REQUIREMENTS.md). If the path is ambiguous, ask. 2. Verify against the actual codebase. Open the files the requirements cite and confirm the prior-art references still hold; note anything that has shifted since the requirements were written. The requirements may also carry verified…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -1313,7 +1313,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/create-manual-test-instructions/SKILL.md",
       "readmeExcerpt": "Read the input ticket or requirements document (and, where needed for accurate navigation, the code it cites). Write the manual-test file in the same directory, naming it by replacing .REQUIREMENTS or .TICKET with .MANUAL-TEST (e.g. FOO.REQUIREMENTS.md → FOO.MANUAL-TEST.md); if the input follows neither convention, append .MANUAL-TEST before .md. If there is no file (pasted text), follow the project's/user's convention for where plans live (default: .agents/plans/), derive a kebab-case <slug> from the content, and write <slug>/<slug>.MANUAL-TEST.md there. Running forked, you can't ask mid-run: flag any guessed location or slug in the final message for the user to verify. The file must be followable by someone unfamiliar with the ticket — short but complete. Four parts: 1. What changed — 1–2 sentences: the feature and the user-visible difference. 2. How to get there — concrete navigation to the affected area (entry point, page/screen name, any prerequisite state). 3. Before vs after — how the area behaved before, how it should behave now. 4. What to verify — checklist of behaviors to confirm, including edge cases (empty values, multiple items, boundaries) where relevant. Before wri…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -1748,7 +1748,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/execute-plan-tasks/SKILL.md",
       "readmeExcerpt": "One task per run — implement it, verify it, tick it, stop. The review between tasks is the point; never carry on into the next. Invocation: /execute-plan-tasks <plan-path> [task-id] Read the plan whole — summary, conventions and overrides, the steps the task cites, acceptance criteria — then its ## Tasks section. Ambiguous or missing plan path → ask. Several task sections → ask which one this run works from. No task section → stop and point at /split-plan-tasks. task-id given → that task; none → the first unticked one in order. A range or a whole group → run its first task only, saying the rest need their own runs; a task already ticked → say so and ask whether to redo it. Its dependencies — earlier tasks in its group, plus every task in each group its Depends on line names — must be ticked; name any unticked dependency and ask before proceeding. Done when the chosen task, its steps, its acceptance criteria and its dependency state are stated. - Scope is the task's steps, nothing else: no work belonging to a later task, no drive-by refactors. Work the plan calls for that no task covers → report it, don't absorb it. - The plan's conventions and overrides bind every task, this one i…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -1784,7 +1784,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/explain-in-simple-language/SKILL.md",
       "readmeExcerpt": "Comprehension is the only goal: the reader understands on the first read. Defines only the wording of what you say to the user or write in a document a human reads; what to say (evidence, scope, structure) stays with whatever asked for the text. Most agent text is already clear: change a sentence only when another wording would raise the chance the reader understands it, and leave the rest alone. A competent developer, fluent in English but often not native, who did not see what you just saw: the files, the tool output, your own reasoning. Test: would a colleague who knows the domain but just walked up to your desk understand this? - Name things concretely. Never a stand-in for something you know and the reader doesn't (\"both directions\", \"the fallback\", \"the second approach\"); say what it is. Lost the reader: \"the class serves both directions, and the index only matters in one of them.\" Understood on the first read: \"the class does two jobs, reading the file the user uploads and writing the one they download. The index only matters for the reading job.\" Longer, and better. - Words. Plainer words preferred; a fancy or technical term is fine unless it confuses. Keep a term the user…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -1820,7 +1820,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/fetch-pr-review/SKILL.md",
       "readmeExcerpt": "Fetch only — capture the review feedback left on a pull request; never fix code, reply, or judge the comments. Output is a self-contained .PR-REVIEW.md a fresh session can pick up and act on (e.g. via /refine-pr-review). Identify the platform from the PR URL (host shape) and fetch through the matching MCP server or CLI — e.g. GitHub MCP / gh for GitHub PRs, Azure DevOps MCP for ADO pull requests. Use whichever equivalent tools are connected; tool name prefixes vary by config. If the input is ambiguous, or no matching MCP/CLI is available, ask the user / stop — don't guess. Every uncertainty is confirmed with the user before proceeding: a thread's resolved status, the planning directory, the slug, anything ambiguous in between. A plausible guess is a question, not an answer. 1. Resolve the input. Accept a full PR URL; extract repo/project and PR id. If unrecognizable, ask. 2. Fetch the PR metadata — title, description, source/target branch, state, author, linked ticket/work item — and all feedback: - inline review threads (file, line, code context, full reply chain); - top-level review verdicts (approve / request changes / …) with their summary text; - general conversation comments…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -1856,7 +1856,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/fetch-ticket/SKILL.md",
       "readmeExcerpt": "Fetch only — no analysis, requirements, or planning. Output is a self-contained .TICKET.md. Identify the tracker from the input (URL host, or id shape) and fetch through the matching MCP server — e.g. Azure DevOps MCP for ADO work items, Atlassian MCP for Jira issues, GitHub MCP / gh for GitHub issues. Use whichever equivalent tools are connected; tool name prefixes vary by config. Resolve once any handle the MCP needs (e.g. Atlassian cloudId, ADO project) and reuse it. If the input is ambiguous, ask the user — don't guess. If no matching MCP is connected: a public ticket may be scraped from its URL as a fallback (you may still suggest installing the matching MCP when it would do the job better); a private one can't — the URL returns a login page, not the ticket — so stop and tell the user to install and authenticate the matching MCP server, then re-run. 1. Resolve the input. Accept a full ticket URL or a bare id/key; extract the identifier. If the tracker uses a key prefix (e.g. XX-1234), keep it; otherwise use the bare number. If the input is unrecognizable, ask. 2. Fetch the ticket. Get the work item/issue with its full field set, comments inline, and related links/relations ex…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -1892,7 +1892,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/fresh-eyes-review/SKILL.md",
       "readmeExcerpt": "A context that produced a change reads its intent, not its text, so same-context review misses what a fresh reader would catch. The fix is procedural: a reviewer whose context holds only the artifacts. 1. Resolve the inputs. The changeset: whatever the invocation names — a branch, a commit, a diff range, a draft vs its original. Given none, infer it from the session — usually the work just finished, committed or not; no VCS required. With no session context to draw on, fall back to the current git diff; when that too yields nothing, ask the user what to review. Pin the changeset as concretely as the environment allows — a diff or commit range where one exists, otherwise the touched files, with their prior state when reconstructable. Alongside it, a short statement of what the change is supposed to achieve, when one exists (the task as stated, a PR or ticket description); when this session authored the change, never include the session's own reasoning, plan, or messages — leaked rationale recreates the blindness the fresh context exists to remove. Strip what the change deliberately leaves for later, whatever its source: naming it walls off the omissions lens below. Done when change…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -1928,7 +1928,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/grill-me/SKILL.md",
       "readmeExcerpt": "Interview the user relentlessly about every aspect of their plan, design, or idea until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one by one. - One question at a time, each with your recommended answer, worded via explain-in-simple-language when available. - If a question can be answered by exploring the codebase, explore instead of asking.",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -1964,7 +1964,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/handover/SKILL.md",
       "readmeExcerpt": "Package a finished change so its reviewers never reconstruct intent from the diff. Write for a reviewer holding the diff and nothing else — no planning docs, no session, no knowledge that either exists. The input is any partial reference — ticket id, slug, a planning artifact's path — or nothing, meaning the session's task; in a fresh session, infer it from branch name and recent commits. Resolve it to the task's planning home: its <id>-<slug>/ directory in the project's planning directory, or its flat <id>-<slug>. files in a shared family directory. One clear match → proceed, stating the home and artifacts found. Inferred, or several candidates (-vN, …) → confirm first. An explicit reference matching nothing local → stop and ask; never guess. Read these, skipping what doesn't exist: 1. Task artifacts — every <id>-<slug>.md in the planning home: ticket, requirements, plan, decisions log, prior review and handover rounds, whatever else matches. 2. Related tickets — one hop only: parent (climbing higher only past thin containers), direct predecessors/successors, explicit relations, family-directory siblings; never expand their own relations. Local .TICKET.mds first; fetch from the t…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -2000,7 +2000,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/harden-artifact/SKILL.md",
       "readmeExcerpt": "Make a .REQUIREMENTS.md or .PLAN.md — the artifact — safe to hand to the next phase: every deviation from its ticket deliberate, explained and correct; every claim true; nothing blocking the session that picks it up. A fresh-context reviewer hunts, the session challenges each finding, and only what survives changes the artifact — which must never end worse than it started. A session that wrote the artifact cannot judge findings on it: say so and propose a fresh session before continuing. - Artifact — the file the invocation names; ambiguous or neither kind → ask. A plan — the artifact or one of the same base — with a ticked task is already being built, past where hardening belongs → say so and ask before going on. - Ticket — the document the artifact was refined from, found by file name: the artifact's suffix replaced by .TICKET (FOO.PLAN.md → FOO.TICKET.md), or, when the stem names another source, that file (FOO.PR-REVIEW.REQUIREMENTS.md → FOO.PR-REVIEW.md). A source with decisions recorded beside it (a PR review's .ANSWERS.md) is read with them: only what they accept is the ticket — the rest is out of scope, never a deviation, never recorded in the artifact. Ambiguous → ask; no…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -2036,7 +2036,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/maintainer-review/SKILL.md",
       "readmeExcerpt": "You are the merge gate, not the author's assistant: the question is whether this ships, and the contributor will argue back. Review in this session, not a subagent. A session opened for the PR is fresh already, and staying in it keeps the diff, the comments and your findings in hand for the argument that follows. Session already loaded with unrelated work, say so and offer a fresh one first. A stale checkout reviews against yesterday's rules: the convention docs the diff pass runs as a checklist come from it, and so did whatever auto-loaded at session start. Before the gather: git fetch. Fetch failed, say so and ask rather than compare against a stale ref. Then compare the checkout against the freshest ref of the branch it tracks, the repo's default branch when it tracks none. Behind it, say so and offer to fast-forward; the update is a write, so it waits for a go-ahead, and a dirty or diverged tree is reported, never resolved for the user. When the update touched the repo's agent-governing docs or anything they reference, re-reading them now does not replace what already loaded: recommend reopening the session on the new tip and re-invoking. The checkout's position never decides…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -2072,7 +2072,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/memory-doctor/SKILL.md",
       "readmeExcerpt": "Agent-memory is an unseen side-channel into every session's context window: facts accumulate there, often by accident, that the user never reviews and cannot govern. This skill drains it. Technically nothing should live in project memory — durable guidance belongs in homes the user controls (project docs, project skills/rules, user-level skills/rules), and the rest is garbage. Block by block, move each entry to its proper home or archive it, until memory trends toward empty and the user — not the memory store — decides what reaches the context window. The skill guesses and recommends; the user decides. Every verdict, scope, form, and target is a proposal the user confirms or flips. When unsure, ask. Nothing is moved, deleted, or written without explicit per-item approval. For every block the user gets the whole fixed menu — relocate/merge, archive (delete), keep, or a custom action they type — never just the recommended verdict, never a pruned subset. Find the memory store for the current project. Its location is agent-specific — other agents store it elsewhere, or not at all. Claude Code example: slugify the project's absolute working-directory path by replacing each / with - and…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -2110,7 +2110,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/mesh-discord-routing/README.md",
       "readmeExcerpt": "Mesh Discord Routing is a small, portable skill that lets agents of any runtime communicate with each other through Discord using simple, explicit routing rules. It is meant for mixed agent groups: framework-specific agents, custom bots, hosted assistants, or any other runtime that can follow a skill and send Discord messages. The shared rule is: - each agent decides who should receive its own reply - agents use semantic recipient labels, not raw Discord mention strings - a small hydrator script turns those labels into the cc-mesh: trigger and Discord mentions - an optional session helper can keep turn state for multi-turn workflows - the human-readable message stays separate from routing metadata This keeps the routing policy simple enough for language models to follow while keeping mention formatting deterministic and runtime-independent. The skill gives agents a common protocol for mesh-mode Discord conversations: 1. If a message contains cc-mesh:, treat it as a routed mesh message. 2. Decide who should receive the reply. 3. Default to notifying the sender when answering directly. 4. Add other recipients only when they should be involved. 5. Use no recipients only when no bot s…",
       "stars": 0,
-      "lastPush": "2026-10-05T18:09:13Z",
+      "lastPush": "2026-10-08T11:45:52Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2394,7 +2394,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-mesh",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-10-05T18:09:13Z",
+      "lastPush": "2026-10-08T11:45:52Z",
       "archived": false,
       "provides": [
         "instructions",
@@ -2631,7 +2631,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/prepare-prompt/SKILL.md",
       "readmeExcerpt": "Write for a session holding only this text — no chat history, no memory of what was meant — and make it as short as that reader allows: nothing it needs is cut for brevity, nothing else stays. The reader is a fresh interactive session the user pastes it into; a subagent brief only when the invocation asks for one, under the same rules. The user's goal, in a line, plus this session. Draft at once; ask only what neither settles — typically whether the next session may change things or only report — one question at a time, with a recommended answer. A suggested order, every part optional: a part is never filled to exist, and two lines are a complete prompt when two lines cover the case. 1. Situation — what exists that the next session builds on, and what is open or was missed, each with its identifier (ticket URL, branch, commit, PR, task ids). 2. Task and deliverable — what to do, and in what form to report or produce it (a chat report with a given structure, a file, a code change). 3. Latitude and boundaries — what it may decide alone, when deviating is fine, what it must not touch (read-only, no git or tracker writes, files to ignore). 4. Facts it cannot derive — paths, the planni…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -2667,7 +2667,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/refine-pr-review/SKILL.md",
       "readmeExcerpt": "The Refine phase for review feedback: turn a .PR-REVIEW.md (from /fetch-pr-review; ask if the path is ambiguous) into user-settled per-comment verdicts, drafted replies, and a REQUIREMENTS file covering the accepted code changes. Triage and replies are settled here; the plan and execute phases see only code changes. - address: the change enters the requirements in full; the reply stays a canned one-liner (\"fixed\", \"good catch, thanks\"). - partial: part of the change is accepted into the requirements, and the reply explains what was done and what was kept and why. - push back: no code change; the reply carries the reason. Never refer to a comment by index or position, anywhere — questions, batch lists, hand-off text. Quote its opening words instead, truncated to the shortest unique prefix — the comment \"the null check here misses …\". Always verbatim, never translated or corrected, so the quote can be searched on the page. Only the ANSWERS table's own row numbers stay, for in-file cross-references. Read the code behind each comment first: verify its premise against the current codebase, never judging from the quoted hunk alone. Then form a recommendation — verdict, reasoning, and (f…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -2703,7 +2703,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/refine-ticket/SKILL.md",
       "readmeExcerpt": "The Refine phase of Refine → Plan → Act: turn a raw ticket — or an idea to brainstorm — into a validated requirements document a fresh session can plan from. Analysis only — it defines what must be true when the work is done, never how to build it, and never touches code. An idea is a ticket that doesn't exist yet: treat the user's words as the ticket text, and grill to shape the idea itself — goal, in vs out of scope — before closing the branches that block implementation. You cannot define the \"what\" in a vacuum. Every requirement must be checked against the actual code, config, and design — a ticket may be stale, ambiguous, contradicted by the codebase, or depend on upstream work that isn't implemented yet (e.g. a prerequisite ticket still open). Reading the code here is for validating requirements, not for designing the solution. - Anything determinable by reading the code, resolve by reading the code — never ask the user about it. - Anything not determinable from ticket + code, ask — never fill the gap with a plausible assumption. - Local environment state (config files, DB contents, env vars) describes only the machine it's on — never assume it matches the environment where…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -2739,7 +2739,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/review-code-assistant/SKILL.md",
       "readmeExcerpt": "Assist a human's local code-review pass: read the diff, understand the intent, surface the real issues. You suggest candidate comments; the human decides what to post. Single-pass and lightweight. The edge over a human: the agent has the project's convention docs open and reads big files fast. Output is local text only. Accept input flexibly; a PR link is optional: 1. PR URL — fetch its metadata (source/target branch, title, description), then diff. 2. One branch (\"review branch xxxx\") — diff it against the auto-detected target. 3. Two branches (\"review xxxx against yyyy\") — explicit source and target. 4. Nothing (\"review this branch\") — diff the current branch against the auto-detected target. (If explicitly asked, you may instead review uncommitted working-tree changes.) Diff base: always a three-dot merge-base diff, git diff <target-ref>...<source-ref>, so it matches exactly what the platform shows as the PR with no noise from commits that landed on target after the fork. Fall back to two-dot only when there is no common ancestor. No checkout is needed to produce the diff. Branch freshness: always git fetch first — never git pull: the diff needs no checkout or working-tree upda…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -2775,7 +2775,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/review-ticket/SKILL.md",
       "readmeExcerpt": "A pre-pickup triage glance: read a ticket — or a set of tickets forming one feature — usually before anyone has started it, and decide whether it can be picked up or something must be clarified first. The output briefs the developer on the feature and lists the questions worth asking whoever owns the requirements. - Local ticket document(s): a single .TICKET.md, several, a ticket-set directory, or a .TICKET.md whose ## Ticket set section lists siblings. - One or more ticket URLs or bare ids/keys: delegate — even for a single one — to a subagent that invokes fetch-ticket, so the tickets land on disk without the fetch bloating this session's context, then review the local files. If the input is ambiguous or unrecognized, ask rather than guess. Set mode applies to multiple tickets, a set directory, or a .TICKET.md listing a ## Ticket set. For a lone member file whose intended scope isn't obvious from the request, ask whether to review the whole set or just that ticket. Read the input ticket file(s), visually inspecting the downloaded images and design frames — they are part of the spec and often where the gaps hide. Widen only on demand. When the input already tells the feature clear…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -2846,7 +2846,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/run-nx-checks/SKILL.md",
       "readmeExcerpt": "Run format, lint, test, build. Fix unambiguous failures. Report anything judgment-laden. $ARGUMENTS — optional, space-separated: [cpuCount] [projectName] [--remote-cache]. Number token → cpuCount. Non-number, non-flag token → projectName. --remote-cache flag → opt back into the remote cache by dropping the remote-cache-off prefix. Default cpuCount = cores - 4 (min 1); count cores with getconf NPROCESSORSONLN (nproc is GNU-only). Default project scope = affected. Default remote-cache state = off (see Steps). Run nx commands from wherever nx.json lives in this repo (commonly the root; in some repos a subdirectory). Keep the Nx daemon warm so the project graph is reused across targets: nx affected diffs against the local default branch, which is often stale or missing. Resolve the remote-tracking ref once and write it literally into every affected, format:write and show projects --affected command below as --base=$base (each call is a fresh shell, see Steps): - Omit --base when the ref is missing (Nx falls back to defaultBase) or NXBASE is set (Nx reads it itself; the fetch still runs). - Never pass --head. With both flags Nx diffs two commits and ignores uncommitted and untracked fi…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -2882,7 +2882,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/self-improve/SKILL.md",
       "readmeExcerpt": "Suggest durable improvements to the skill or governing doc that should have steered the agent, so the next session gets it right without being told again — and apply them only after the user approves. The skill proposes; the user stays in control of every change. Three ways in: - Manual — the user invokes /self-improve to deliberately improve a skill or doc. - Self-triggered — the agent notices it was corrected on something a skill/doc governs (or should). Don't silently correct and move on, but don't derail the task either: note the lesson, finish what the user asked for, and offer to persist it at the next natural breakpoint. - Driven by another skill — a caller hands over content that is already durable guidance plus an already-chosen target (scope, form, and path — possibly a new file). It resolved both with the user, so skip steps 1-2 and run only draft + apply. \"Skill/doc\" means any standing instruction: a SKILL.md, AGENTS.md/CLAUDE.md, a coding-standards or convention doc, a rules file — anything that guides future agents. - Confirm before applying. The skill's job is to suggest, never to change text on its own. Never edit a skill or doc without the user's explicit go-ahead…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -2918,7 +2918,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/self-review/SKILL.md",
       "readmeExcerpt": "Make a changeset merge-ready before submission — no regressions, sound code, the project's conventions respected — and prove it was scrutinized: a fresh-context reviewer hunts for what would block the merge, the author answers every finding, and a compact report — scannable by a maintainer in seconds — records the outcome. The report is the review record only; the change's what/why belongs to the PR description (e.g. via /handover), never here. Only for a changeset you authored. The fresh-context reviewer exists to escape authoring blindness, so someone else's PR has nothing to escape and belongs to maintainer-review. 1. Resolve source and target. No input → current branch against the auto-detected target: the default branch of the upstream remote when one exists (fork workflow), else of origin — via git ls-remote --symref <remote> HEAD, never the often-absent local refs/remotes/<remote>/HEAD; that failing (e.g. offline), the sole existing candidate among main, master, develop/development (preferring upstream's remote-tracking ref, then origin's, then the local branch) — still ambiguous or none → ask. Explicit branches in the invocation win; a detached HEAD → ask which branch is u…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -3024,7 +3024,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/split-plan-tasks/SKILL.md",
       "readmeExcerpt": "Append a task breakdown to a plan so the work lands in small increments — one task, then a review, a correction pass, a commit — instead of one sweep. Authoring only: executing the tasks is a later, separate session. Invocation: /split-plan-tasks <plan-path> Ambiguous or missing path → ask. A plan with numbered steps and an acceptance-criteria checklist splits best; any plan markdown works — reference tasks to headings when steps aren't numbered, and drop the AC line when there is no such checklist. A plan already carrying a task section → stop and ask which the user wants: replace it, add a second one beside it, or carry the ticked tasks forward and reformulate only the remaining work. Done when the plan is read and, where a section already existed, the user has chosen. - Task — the smallest chunk that leaves the project building and its tests passing, so it can be reviewed and committed on its own. Steps that only make sense together are one task, never two — building alone isn't the test: a step that only re-runs a generator (API clients, specs, snapshots) lands with the change it regenerates. - Group — one PR: independently mergeable, delivering something coherent. Order the g…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -3138,7 +3138,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/use-conversational-language/SKILL.md",
       "readmeExcerpt": "Defines only the voice, how to word text a human should read as if a person typed it, never the content: each caller keeps its own rules for what to say (evidence bars, scope, structure). Apply the baseline always, plus the section matching the situation. Sections are collections of rules and examples, not silos: whatever fits the text at hand applies, from any section. Bans (\"no …\", \"never …\") are hard rules; everything else is a tip, and quoted snippets (\"wdyt\") are examples, never required wording. Concise, plain language that reads like natural conversation. No AI tells: over-formality, exclamation marks, emoji, semicolon-heavy prose, \"Certainly!\"-style openers, bullet lists where a sentence would do. Stop at the last point. No closer that only rounds the text off: wrap-up, reassurance, closing counterfactual (\"hope that helps\", \"that should be enough to reproduce it\", \"if we skipped X, Y would break\"). Never use dashes (em or en). Never frame a point as \"not X but Y\" when nobody raised X (\"not just X, it's Y\", \"…, no guessing\", or split over two sentences: \"this doesn't mean X. It means Y\"): the negative half only adds weight, so state the point directly; a contrast whose hal…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -3174,7 +3174,7 @@
       "readmeTitle": "Skill guide",
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/verify-understanding/SKILL.md",
       "readmeExcerpt": "One goal, nothing more, nothing less: verify the engineer is ready to move to the implementation phase. Exercise their understanding of a feature before they work on it — the pipeline's other artifacts serve fresh agent sessions; this step serves the human. Active recall: the user produces the feature in their own words, you only steer and fix. Re-runnable: right after the ticket review, or days later just before implementation — every run starts fresh from the review file, no state kept between runs. A .TICKET-REVIEW.md. Read it and the ticket files and parent it links. A reference that exists only as a tracker URL (no local file) may be fetched read-only at conversation time. A conversation, not a test — the last sync between a dev and their PO before development starts. Word your probes and corrections via explain-in-simple-language when available. 1. Ask the user to explain the feature in their own words: who uses it, what they see and do, why the feature exists, and what each ticket contributes. 2. Let them produce the narrative. Probe one weak spot at a time; correct and complete only from the review file and the referenced materials — flag what those don't settle, never imp…",
-      "stars": 55,
+      "stars": 56,
       "lastPush": "2026-10-05T11:45:04Z",
       "archived": false,
       "provides": [
@@ -335854,6 +335854,32 @@
       "version": "0.9.0"
     },
     {
+      "id": "clawhub:@crawlora-org/adidas",
+      "name": "Adidas by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Adidas data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/adidas",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/adidas\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/adidas",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:openclaw-advisor-plugin",
       "name": "Advisor",
       "ecosystem": "clawhub",
@@ -338065,7 +338091,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "tools",
+        "sales-marketing",
         "b2b",
         "leads",
         "outreach",
@@ -338758,6 +338784,32 @@
       "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/apple\" --adapter openclaw --local --only-source --execute-plugins",
       "repoUrl": null,
       "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/apple",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "clawhub:@crawlora-org/appstore",
+      "name": "Appstore by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Appstore data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "research"
+      ],
+      "source": "clawhub:@crawlora-org/appstore",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/appstore\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/appstore",
       "homepageLinkLabel": "ClawHub",
       "stars": null,
       "lastPush": null,
@@ -339740,6 +339792,32 @@
         "plugins"
       ],
       "version": "2026.9.3"
+    },
+    {
+      "id": "clawhub:@crawlora-org/bbb",
+      "name": "Bbb by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Bbb data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "research"
+      ],
+      "source": "clawhub:@crawlora-org/bbb",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/bbb\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/bbb",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:@openfindbearings/openclaw-bearing-plugin",
@@ -341553,6 +341631,32 @@
       "version": "1.0.1"
     },
     {
+      "id": "clawhub:@crawlora-org/capterra",
+      "name": "Capterra by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Capterra data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "research"
+      ],
+      "source": "clawhub:@crawlora-org/capterra",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/capterra\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/capterra",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:@carbonvoice/openclaw-extension",
       "name": "Carbonvoice Openclaw Extension 2026.5.14.Tgz",
       "ecosystem": "clawhub",
@@ -341578,6 +341682,32 @@
         "plugins"
       ],
       "version": "2026.5.14"
+    },
+    {
+      "id": "clawhub:@crawlora-org/carsdotcom",
+      "name": "Carsdotcom by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Carsdotcom data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/carsdotcom",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/carsdotcom\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/carsdotcom",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:openclaw-cartesia",
@@ -341897,6 +342027,32 @@
         "plugins"
       ],
       "version": "1.0.1"
+    },
+    {
+      "id": "clawhub:@crawlora-org/chewy",
+      "name": "Chewy by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Chewy data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/chewy",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/chewy\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/chewy",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:@aisa/openclaw-aisa-model-provider",
@@ -345927,6 +346083,32 @@
       "version": "1.0.0"
     },
     {
+      "id": "clawhub:@crawlora-org/costco",
+      "name": "Costco by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Costco data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "integrations"
+      ],
+      "source": "clawhub:@crawlora-org/costco",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/costco\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/costco",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:@opencoven/coven",
       "name": "Coven ACP Runtime",
       "ecosystem": "clawhub",
@@ -348092,6 +348274,32 @@
       "version": "2.0.6"
     },
     {
+      "id": "clawhub:@crawlora-org/duckduckgo",
+      "name": "Duckduckgo by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Duckduckgo data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/duckduckgo",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/duckduckgo\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/duckduckgo",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:dynamic-session-context",
       "name": "Dynamic Session Context",
       "ecosystem": "clawhub",
@@ -349040,6 +349248,32 @@
         "plugins"
       ],
       "version": "0.1.1"
+    },
+    {
+      "id": "clawhub:@crawlora-org/facebook",
+      "name": "Facebook by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Facebook data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/facebook",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/facebook\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/facebook",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:fai-memes-plugin",
@@ -350782,7 +351016,7 @@
         "clawhub",
         "code-plugin",
         "community",
-        "other"
+        "context"
       ],
       "source": "clawhub:clara-genius-brain",
       "installCommand": "npx agentwheel install \"clawhub:clara-genius-brain\" --adapter openclaw --local --only-source --execute-plugins",
@@ -352845,6 +353079,32 @@
       "version": "0.1.0"
     },
     {
+      "id": "clawhub:@crawlora-org/hotels",
+      "name": "Hotels by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Hotels data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/hotels",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/hotels\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/hotels",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:http-shell-exec",
       "name": "Http Shell Exec",
       "ecosystem": "clawhub",
@@ -353319,6 +353579,32 @@
       "version": "0.1.10"
     },
     {
+      "id": "clawhub:@crawlora-org/ikea",
+      "name": "Ikea by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Ikea data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "integrations"
+      ],
+      "source": "clawhub:@crawlora-org/ikea",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/ikea\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/ikea",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:png-to-pdf",
       "name": "Image to PDF",
       "ecosystem": "clawhub",
@@ -353583,6 +353869,32 @@
         "plugins"
       ],
       "version": "1.0.1"
+    },
+    {
+      "id": "clawhub:@crawlora-org/instagram",
+      "name": "Instagram by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Instagram data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "research"
+      ],
+      "source": "clawhub:@crawlora-org/instagram",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/instagram\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/instagram",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:hirey-compatible",
@@ -356169,6 +356481,32 @@
       "version": "0.3.0"
     },
     {
+      "id": "clawhub:@crawlora-org/leboncoin",
+      "name": "Leboncoin by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Leboncoin data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/leboncoin",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/leboncoin\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/leboncoin",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:@alexbloch-ia/legal-data",
       "name": "Legal Data Plugin for OpenClaw",
       "ecosystem": "clawhub",
@@ -356288,6 +356626,32 @@
         "plugins"
       ],
       "version": "0.4.12"
+    },
+    {
+      "id": "clawhub:@crawlora-org/letterboxd",
+      "name": "Letterboxd by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Letterboxd data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "integrations"
+      ],
+      "source": "clawhub:@crawlora-org/letterboxd",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/letterboxd\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/letterboxd",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:@crawlora-org/lever",
@@ -356592,6 +356956,32 @@
         "plugins"
       ],
       "version": "2.0.6"
+    },
+    {
+      "id": "clawhub:@crawlora-org/linkedin",
+      "name": "Linkedin by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Linkedin data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/linkedin",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/linkedin\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/linkedin",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:@sergiopesch/linux-desktop",
@@ -357781,6 +358171,32 @@
       "version": "1.0.0"
     },
     {
+      "id": "clawhub:@crawlora-org/manga",
+      "name": "Manga by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Manga data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "research"
+      ],
+      "source": "clawhub:@crawlora-org/manga",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/manga\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/manga",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:manifest-model-router",
       "name": "Manifest Model Router",
       "ecosystem": "clawhub",
@@ -358163,6 +358579,32 @@
         "plugins"
       ],
       "version": "0.7.2"
+    },
+    {
+      "id": "clawhub:@crawlora-org/mcdonalds",
+      "name": "Mcdonalds by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Mcdonalds data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/mcdonalds",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/mcdonalds\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/mcdonalds",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:@jpeetz/openclaw-memex",
@@ -369167,6 +369609,32 @@
       "version": "0.1.0"
     },
     {
+      "id": "clawhub:@crawlora-org/pandamart",
+      "name": "Pandamart by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Pandamart data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "integrations"
+      ],
+      "source": "clawhub:@crawlora-org/pandamart",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/pandamart\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/pandamart",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:paper-search",
       "name": "Paper Search",
       "ecosystem": "clawhub",
@@ -369988,6 +370456,32 @@
       "version": "2.13.1"
     },
     {
+      "id": "clawhub:@crawlora-org/playstation",
+      "name": "Playstation by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Playstation data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/playstation",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/playstation\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/playstation",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:plivo-openclaw-sms-channel",
       "name": "Plivo SMS",
       "ecosystem": "clawhub",
@@ -370559,6 +371053,32 @@
         "plugins"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "clawhub:@crawlora-org/popeyes",
+      "name": "Popeyes by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Popeyes data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "sales-marketing"
+      ],
+      "source": "clawhub:@crawlora-org/popeyes",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/popeyes\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/popeyes",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:@lowwattlabs/portkeep",
@@ -372304,6 +372824,32 @@
       "version": "0.2.0"
     },
     {
+      "id": "clawhub:@crawlora-org/raisingcanes",
+      "name": "Raisingcanes by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Raisingcanes data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/raisingcanes",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/raisingcanes\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/raisingcanes",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:raspberry-pi-maker",
       "name": "Raspberry Pi Maker",
       "ecosystem": "clawhub",
@@ -373011,6 +373557,32 @@
         "plugins"
       ],
       "version": "1.0.49"
+    },
+    {
+      "id": "clawhub:@crawlora-org/rightmove",
+      "name": "Rightmove by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Rightmove data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "research"
+      ],
+      "source": "clawhub:@crawlora-org/rightmove",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/rightmove\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/rightmove",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:riley-x402-distribution",
@@ -375154,6 +375726,32 @@
       "version": "1.0.0"
     },
     {
+      "id": "clawhub:@crawlora-org/sephora",
+      "name": "Sephora by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Sephora data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "integrations"
+      ],
+      "source": "clawhub:@crawlora-org/sephora",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/sephora\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/sephora",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:@getsequence/sequence",
       "name": "Sequence",
       "ecosystem": "clawhub",
@@ -375502,6 +376100,32 @@
       "version": "2026.8.13"
     },
     {
+      "id": "clawhub:@crawlora-org/shein",
+      "name": "Shein by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Shein data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/shein",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/shein\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/shein",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:@aaronbatchelder/shellmail",
       "name": "ShellMail - Email Built for AI Agents",
       "ecosystem": "clawhub",
@@ -375605,6 +376229,32 @@
       "installCommand": "npx agentwheel install \"clawhub:@ichiorca/openclaw-shopify-commerce\" --adapter openclaw --local --only-source --execute-plugins",
       "repoUrl": null,
       "homepageUrl": "https://clawhub.ai/ichiorca/plugins/openclaw-shopify-commerce",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "clawhub:@crawlora-org/shopify",
+      "name": "Shopify by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Shopify data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "sales-marketing"
+      ],
+      "source": "clawhub:@crawlora-org/shopify",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/shopify\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/shopify",
       "homepageLinkLabel": "ClawHub",
       "stars": null,
       "lastPush": null,
@@ -376214,6 +376864,32 @@
         "plugins"
       ],
       "version": "2026.6.21"
+    },
+    {
+      "id": "clawhub:@crawlora-org/skims",
+      "name": "Skims by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Skims data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/skims",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/skims\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/skims",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:@openclaw/slack",
@@ -377044,6 +377720,32 @@
         "plugins"
       ],
       "version": "0.2.2"
+    },
+    {
+      "id": "clawhub:@crawlora-org/sparkfun",
+      "name": "Sparkfun by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Sparkfun data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/sparkfun",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/sparkfun\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/sparkfun",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:openclaw-speaches",
@@ -377946,6 +378648,32 @@
       "version": "2.0.0"
     },
     {
+      "id": "clawhub:@crawlora-org/stevemadden",
+      "name": "Stevemadden by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Stevemadden data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/stevemadden",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/stevemadden\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/stevemadden",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:@stigmergy/openclaw-scheduler",
       "name": "Stigmergy Scheduler",
       "ecosystem": "clawhub",
@@ -378333,6 +379061,32 @@
       "version": "1.0.3"
     },
     {
+      "id": "clawhub:@crawlora-org/strava",
+      "name": "Strava by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Strava data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "integrations"
+      ],
+      "source": "clawhub:@crawlora-org/strava",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/strava\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/strava",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:@openclaw/stripe",
       "name": "Stripe",
       "ecosystem": "clawhub",
@@ -378405,6 +379159,32 @@
       "installCommand": "npx agentwheel install \"clawhub:marxbiotech-subscription-auth\" --adapter openclaw --local --only-source --execute-plugins",
       "repoUrl": null,
       "homepageUrl": "https://clawhub.ai/aehrt55/plugins/marxbiotech-subscription-auth",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "clawhub:@crawlora-org/subway",
+      "name": "Subway by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Subway data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/subway",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/subway\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/subway",
       "homepageLinkLabel": "ClawHub",
       "stars": null,
       "lastPush": null,
@@ -378926,6 +379706,32 @@
         "plugins"
       ],
       "version": "0.1.1"
+    },
+    {
+      "id": "clawhub:@crawlora-org/target",
+      "name": "Target by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Target data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "integrations"
+      ],
+      "source": "clawhub:@crawlora-org/target",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/target\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/target",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:task-complete-notify",
@@ -380579,6 +381385,32 @@
       "version": "0.3.10"
     },
     {
+      "id": "clawhub:@crawlora-org/ticketmaster",
+      "name": "Ticketmaster by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Ticketmaster data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/ticketmaster",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/ticketmaster\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/ticketmaster",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:@solvely/tidebroker",
       "name": "Tidebroker",
       "ecosystem": "clawhub",
@@ -380969,6 +381801,32 @@
       "installCommand": "npx agentwheel install \"clawhub:@globalcaos/tinker-round-table\" --adapter openclaw --local --only-source --execute-plugins",
       "repoUrl": null,
       "homepageUrl": "https://clawhub.ai/globalcaos/plugins/tinker-round-table",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "clawhub:@globalcaos/tinker-task-panel",
+      "name": "Tinker Task Panel",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "FORK-ONLY: exec-mode Today tab — live task board + axes + est-presets + calendar cache. Split from tinkerclaw-control-panel. Replaces Todoist.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "productivity"
+      ],
+      "source": "clawhub:@globalcaos/tinker-task-panel",
+      "installCommand": "npx agentwheel install \"clawhub:@globalcaos/tinker-task-panel\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/globalcaos/plugins/tinker-task-panel",
       "homepageLinkLabel": "ClawHub",
       "stars": null,
       "lastPush": null,
@@ -381879,6 +382737,32 @@
       "version": "0.1.0"
     },
     {
+      "id": "clawhub:@crawlora-org/tripadvisor",
+      "name": "Tripadvisor by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Tripadvisor data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "research"
+      ],
+      "source": "clawhub:@crawlora-org/tripadvisor",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/tripadvisor\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/tripadvisor",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:@trovis/openclaw-plugin",
       "name": "Trovis Agent Management",
       "ecosystem": "clawhub",
@@ -381993,6 +382877,32 @@
         "plugins"
       ],
       "version": "0.1.1"
+    },
+    {
+      "id": "clawhub:@crawlora-org/trustmrr",
+      "name": "Trustmrr by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Trustmrr data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "research"
+      ],
+      "source": "clawhub:@crawlora-org/trustmrr",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/trustmrr\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/trustmrr",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:@crawlora-org/trustpilot",
@@ -382275,6 +383185,32 @@
         "plugins"
       ],
       "version": "2026.9.3"
+    },
+    {
+      "id": "clawhub:@crawlora-org/twitch",
+      "name": "Twitch by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Twitch data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/twitch",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/twitch\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/twitch",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:twitter-plugin",
@@ -382970,6 +383906,32 @@
       "version": "1.0.1"
     },
     {
+      "id": "clawhub:@crawlora-org/upwork",
+      "name": "Upwork by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Upwork data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "sales-marketing"
+      ],
+      "source": "clawhub:@crawlora-org/upwork",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/upwork\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/upwork",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:us-stock-analyst-plugin",
       "name": "Us Stock Analyst",
       "ecosystem": "clawhub",
@@ -383533,6 +384495,32 @@
       "version": "0.1.0"
     },
     {
+      "id": "clawhub:@vancine/openclaw-provider",
+      "name": "Vancine",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Third-party OpenClaw provider plugin for Vancine Chat Completions. Reads model inventory from the public /api/pi/catalog and intersects it with /v1/models. Not affiliated with OpenClaw.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "models"
+      ],
+      "source": "clawhub:@vancine/openclaw-provider",
+      "installCommand": "npx agentwheel install \"clawhub:@vancine/openclaw-provider\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/vancine/plugins/openclaw-provider",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "clawhub:@vauxr/openclaw",
       "name": "Vauxr",
       "ecosystem": "clawhub",
@@ -384006,6 +384994,32 @@
       "version": "1.0.1"
     },
     {
+      "id": "clawhub:@crawlora-org/vinted",
+      "name": "Vinted by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Vinted data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/vinted",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/vinted\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/vinted",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:openclaw-plugin-virtual-context",
       "name": "Virtual Context",
       "ecosystem": "clawhub",
@@ -384316,6 +385330,32 @@
         "plugins"
       ],
       "version": "0.2.11"
+    },
+    {
+      "id": "clawhub:@crawlora-org/walgreens",
+      "name": "Walgreens by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Walgreens data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/walgreens",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/walgreens\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/walgreens",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:@waltzofwhispers/flight-assistant-plugin",
@@ -385092,6 +386132,32 @@
       "version": "1.0.1"
     },
     {
+      "id": "clawhub:@crawlora-org/wingstop",
+      "name": "Wingstop by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Wingstop data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "integrations"
+      ],
+      "source": "clawhub:@crawlora-org/wingstop",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/wingstop\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/wingstop",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "clawhub:@openclaw/wolfram",
       "name": "Wolfram",
       "ecosystem": "clawhub",
@@ -385116,6 +386182,32 @@
         "plugins"
       ],
       "version": "1.0.1"
+    },
+    {
+      "id": "clawhub:@crawlora-org/wolt",
+      "name": "Wolt by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Wolt data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/wolt",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/wolt\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/wolt",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:@ichiorca/openclaw-woocommerce-commerce",
@@ -386576,6 +387668,32 @@
         "plugins"
       ],
       "version": "2.5.10"
+    },
+    {
+      "id": "clawhub:@crawlora-org/zappos",
+      "name": "Zappos by Crawlora",
+      "ecosystem": "clawhub",
+      "type": "plugin",
+      "description": "Public Zappos data through Crawlora.",
+      "tags": [
+        "openclaw",
+        "clawhub",
+        "code-plugin",
+        "community",
+        "web"
+      ],
+      "source": "clawhub:@crawlora-org/zappos",
+      "installCommand": "npx agentwheel install \"clawhub:@crawlora-org/zappos\" --adapter openclaw --local --only-source --execute-plugins",
+      "repoUrl": null,
+      "homepageUrl": "https://clawhub.ai/crawlora-org/plugins/zappos",
+      "homepageLinkLabel": "ClawHub",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "plugins"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "clawhub:@zenmux/openclaw-zenmux-provider",
@@ -392554,7 +393672,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:muratcankoylan/Agent-Skills-for-Context-Engineering\"",
       "repoUrl": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
       "homepageUrl": null,
-      "stars": 18086,
+      "stars": 18092,
       "lastPush": "2026-10-01T05:58:33Z",
       "archived": false,
       "provides": null,
@@ -392573,7 +393691,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:kadajett/agent-nestjs-skills\"",
       "repoUrl": "https://github.com/kadajett/agent-nestjs-skills",
       "homepageUrl": null,
-      "stars": 287,
+      "stars": 288,
       "lastPush": "2026-07-23T02:35:52Z",
       "archived": false,
       "provides": null,
@@ -392593,7 +393711,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:vercel-labs/agent-skills\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": null,
-      "stars": 32031,
+      "stars": 32076,
       "lastPush": "2026-08-28T13:36:31Z",
       "archived": false,
       "provides": null,
@@ -392613,7 +393731,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:supabase/agent-skills\"",
       "repoUrl": "https://github.com/supabase/agent-skills",
       "homepageUrl": null,
-      "stars": 2706,
+      "stars": 2708,
       "lastPush": "2026-10-02T12:34:51Z",
       "archived": false,
       "provides": null,
@@ -392632,8 +393750,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:callstackincubator/agent-skills\"",
       "repoUrl": "https://github.com/callstackincubator/agent-skills",
       "homepageUrl": null,
-      "stars": 1664,
-      "lastPush": "2026-10-06T11:58:28Z",
+      "stars": 1665,
+      "lastPush": "2026-10-08T10:55:13Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -392689,7 +393807,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:softaworks/agent-toolkit\"",
       "repoUrl": "https://github.com/softaworks/agent-toolkit",
       "homepageUrl": null,
-      "stars": 2535,
+      "stars": 2539,
       "lastPush": "2026-03-05T16:46:24Z",
       "archived": false,
       "provides": null,
@@ -392708,7 +393826,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:wshobson/agents\"",
       "repoUrl": "https://github.com/wshobson/agents",
       "homepageUrl": null,
-      "stars": 40267,
+      "stars": 40298,
       "lastPush": "2026-10-05T01:07:11Z",
       "archived": false,
       "provides": null,
@@ -392728,8 +393846,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:stripe/ai\"",
       "repoUrl": "https://github.com/stripe/ai",
       "homepageUrl": null,
-      "stars": 1861,
-      "lastPush": "2026-10-07T05:14:29Z",
+      "stars": 1864,
+      "lastPush": "2026-10-08T00:54:10Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -392747,8 +393865,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:sickn33/antigravity-awesome-skills\"",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "homepageUrl": null,
-      "stars": 47316,
-      "lastPush": "2026-10-06T15:21:24Z",
+      "stars": 47354,
+      "lastPush": "2026-10-08T13:33:37Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -392766,7 +393884,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:ComposioHQ/awesome-claude-skills\"",
       "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 76645,
+      "stars": 76699,
       "lastPush": "2026-09-18T07:16:11Z",
       "archived": false,
       "provides": null,
@@ -392785,7 +393903,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:travisvn/awesome-claude-skills\"",
       "repoUrl": "https://github.com/travisvn/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 15300,
+      "stars": 15314,
       "lastPush": "2026-04-28T19:30:24Z",
       "archived": false,
       "provides": null,
@@ -392804,7 +393922,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jimliu/baoyu-skills\"",
       "repoUrl": "https://github.com/jimliu/baoyu-skills",
       "homepageUrl": null,
-      "stars": 26390,
+      "stars": 26427,
       "lastPush": "2026-09-10T15:13:43Z",
       "archived": false,
       "provides": null,
@@ -392823,7 +393941,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jezweb/claude-skills\"",
       "repoUrl": "https://github.com/jezweb/claude-skills",
       "homepageUrl": null,
-      "stars": 1050,
+      "stars": 1051,
       "lastPush": "2026-10-05T16:49:46Z",
       "archived": false,
       "provides": null,
@@ -392842,7 +393960,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:mhattingpete/claude-skills-marketplace\"",
       "repoUrl": "https://github.com/mhattingpete/claude-skills-marketplace",
       "homepageUrl": null,
-      "stars": 680,
+      "stars": 679,
       "lastPush": "2026-07-25T06:09:24Z",
       "archived": false,
       "provides": null,
@@ -392861,7 +393979,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:waynesutton/convexskills\"",
       "repoUrl": "https://github.com/waynesutton/convexskills",
       "homepageUrl": null,
-      "stars": 404,
+      "stars": 405,
       "lastPush": "2026-09-28T05:54:06Z",
       "archived": false,
       "provides": null,
@@ -392880,7 +393998,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:giuseppe-trisciuoglio/developer-kit\"",
       "repoUrl": "https://github.com/giuseppe-trisciuoglio/developer-kit",
       "homepageUrl": null,
-      "stars": 355,
+      "stars": 356,
       "lastPush": "2026-09-10T11:05:54Z",
       "archived": false,
       "provides": null,
@@ -392899,8 +394017,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:langgenius/dify\"",
       "repoUrl": "https://github.com/langgenius/dify",
       "homepageUrl": null,
-      "stars": 158005,
-      "lastPush": "2026-10-07T10:36:11Z",
+      "stars": 158100,
+      "lastPush": "2026-10-08T13:29:33Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -392918,8 +394036,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:NousResearch/hermes-agent\"",
       "repoUrl": "https://github.com/NousResearch/hermes-agent",
       "homepageUrl": null,
-      "stars": 251824,
-      "lastPush": "2026-10-07T13:27:59Z",
+      "stars": 252136,
+      "lastPush": "2026-10-08T13:23:02Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -392937,8 +394055,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:coreyhaines31/marketingskills\"",
       "repoUrl": "https://github.com/coreyhaines31/marketingskills",
       "homepageUrl": null,
-      "stars": 53540,
-      "lastPush": "2026-10-07T00:22:24Z",
+      "stars": 53685,
+      "lastPush": "2026-10-08T00:15:39Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -392956,7 +394074,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:onmax/nuxt-skills\"",
       "repoUrl": "https://github.com/onmax/nuxt-skills",
       "homepageUrl": null,
-      "stars": 717,
+      "stars": 719,
       "lastPush": "2026-10-06T08:09:18Z",
       "archived": false,
       "provides": null,
@@ -392975,7 +394093,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:kepano/obsidian-skills\"",
       "repoUrl": "https://github.com/kepano/obsidian-skills",
       "homepageUrl": null,
-      "stars": 49236,
+      "stars": 49276,
       "lastPush": "2026-09-15T14:43:57Z",
       "archived": false,
       "provides": null,
@@ -392995,7 +394113,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:anthropics/skills\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": null,
-      "stars": 180006,
+      "stars": 180135,
       "lastPush": "2026-10-05T13:46:45Z",
       "archived": false,
       "provides": null,
@@ -393015,7 +394133,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:expo/skills\"",
       "repoUrl": "https://github.com/expo/skills",
       "homepageUrl": null,
-      "stars": 2664,
+      "stars": 2681,
       "lastPush": "2026-10-07T12:47:44Z",
       "archived": false,
       "provides": null,
@@ -393035,7 +394153,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:remotion-dev/skills\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": null,
-      "stars": 4873,
+      "stars": 4898,
       "lastPush": "2026-10-07T09:40:10Z",
       "archived": false,
       "provides": null,
@@ -393054,8 +394172,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:trailofbits/skills\"",
       "repoUrl": "https://github.com/trailofbits/skills",
       "homepageUrl": null,
-      "stars": 7408,
-      "lastPush": "2026-10-02T10:05:35Z",
+      "stars": 7427,
+      "lastPush": "2026-10-07T16:35:30Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -393073,7 +394191,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:better-auth/skills\"",
       "repoUrl": "https://github.com/better-auth/skills",
       "homepageUrl": null,
-      "stars": 222,
+      "stars": 221,
       "lastPush": "2026-09-01T00:22:31Z",
       "archived": false,
       "provides": null,
@@ -393111,7 +394229,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:dimillian/skills\"",
       "repoUrl": "https://github.com/dimillian/skills",
       "homepageUrl": null,
-      "stars": 3984,
+      "stars": 3987,
       "lastPush": "2026-03-29T15:28:02Z",
       "archived": false,
       "provides": null,
@@ -393132,8 +394250,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:obra/superpowers\"",
       "repoUrl": "https://github.com/obra/superpowers",
       "homepageUrl": null,
-      "stars": 296220,
-      "lastPush": "2026-10-06T23:57:53Z",
+      "stars": 296616,
+      "lastPush": "2026-10-08T04:15:27Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -393151,7 +394269,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:emalorenzo/three-agent-skills\"",
       "repoUrl": "https://github.com/emalorenzo/three-agent-skills",
       "homepageUrl": null,
-      "stars": 56,
+      "stars": 58,
       "lastPush": "2026-01-28T15:56:21Z",
       "archived": false,
       "provides": null,
@@ -393170,7 +394288,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:cloudai-x/threejs-skills\"",
       "repoUrl": "https://github.com/cloudai-x/threejs-skills",
       "homepageUrl": null,
-      "stars": 3480,
+      "stars": 3491,
       "lastPush": "2026-07-09T20:45:53Z",
       "archived": false,
       "provides": null,
@@ -393209,8 +394327,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-browser/agent-browser\"",
       "repoUrl": "https://github.com/vercel-labs/agent-browser",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-browser/agent-browser",
-      "stars": 43599,
-      "lastPush": "2026-10-06T16:28:38Z",
+      "stars": 43666,
+      "lastPush": "2026-10-08T05:10:23Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -393230,8 +394348,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/skills/find-skills\"",
       "repoUrl": "https://github.com/vercel-labs/skills",
       "homepageUrl": "https://skills.sh/vercel-labs/skills/find-skills",
-      "stars": 33321,
-      "lastPush": "2026-10-07T06:43:48Z",
+      "stars": 33414,
+      "lastPush": "2026-10-07T22:40:51Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -393251,7 +394369,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/frontend-design\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/frontend-design",
-      "stars": 180006,
+      "stars": 180135,
       "lastPush": "2026-10-05T13:46:45Z",
       "archived": false,
       "provides": null,
@@ -393272,8 +394390,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/mattpocock/skills/grill-me\"",
       "repoUrl": "https://github.com/mattpocock/skills",
       "homepageUrl": "https://skills.sh/mattpocock/skills/grill-me",
-      "stars": 278940,
-      "lastPush": "2026-10-07T10:23:10Z",
+      "stars": 280666,
+      "lastPush": "2026-10-08T08:49:07Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -393293,7 +394411,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/remotion-dev/skills/remotion-best-practices\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": "https://skills.sh/remotion-dev/skills/remotion-best-practices",
-      "stars": 4873,
+      "stars": 4898,
       "lastPush": "2026-10-07T09:40:10Z",
       "archived": false,
       "provides": null,
@@ -393314,7 +394432,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/skill-creator\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/skill-creator",
-      "stars": 180006,
+      "stars": 180135,
       "lastPush": "2026-10-05T13:46:45Z",
       "archived": false,
       "provides": null,
@@ -393335,7 +394453,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/vercel-react-best-practices\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices",
-      "stars": 32031,
+      "stars": 32076,
       "lastPush": "2026-08-28T13:36:31Z",
       "archived": false,
       "provides": null,
@@ -393356,7 +394474,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/web-design-guidelines\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/web-design-guidelines",
-      "stars": 32031,
+      "stars": 32076,
       "lastPush": "2026-08-28T13:36:31Z",
       "archived": false,
       "provides": null,
