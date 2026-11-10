@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T16:11:14.427Z",
+  "generatedAt": "2026-11-10T14:56:10.162Z",
   "entries": [
     {
       "id": "official:agent-plugin-extra-message-policy",
@@ -60,7 +60,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/agent-tmux/SKILL.md",
       "readmeExcerpt": "Control Codex CLI and Claude Code CLI sessions via tmux with one agent-agnostic toolset. The same bin/ scripts drive any agent through a --agent <type> flag; per-agent quirks (submit key, prompt char, idle/working patterns, launch flags) live in agents/<type>.conf. Reaches on-disk sessions that an agent's own MCP server no longer tracks. This is the tmux transport for the mesh: any agent that can run these scripts can pilot supported CLI agents through persistent tmux sessions. Sessions using this integration belong to Agent Mesh. Publish a short current-work self-description when the work changes by adding one machine-readable assistant line: [[mesh-summary: Reviewing the cache invalidation fix; tests pending.]] Use at most 240 characters, no secrets, transcript quotations, host paths or private identifiers. The existing incremental watcher and sweep collect this explicit line with its native timestamp; repeated unchanged observations do not refresh it. Never maintain a session list or infer archive state from silence. For an immediate explicit update use mesh-graph.mjs catalog update --session <agent:uuid> --summary \"...\". - In Codex Desktop, use native task capabilities for Cod…",
       "stars": 0,
-      "lastPush": "2026-11-09T13:58:41Z",
+      "lastPush": "2026-11-10T14:30:38Z",
       "archived": false,
       "provides": [
         "skills"
@@ -88,7 +88,7 @@
       "repoUrl": "https://github.com/eai-org/agent-toolkit",
       "homepageUrl": null,
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "rules",
@@ -662,7 +662,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/agentify-project/SKILL.md",
       "readmeExcerpt": "Converge a project — greenfield or half-way-there — toward the canonical agent-neutral structure specified in references/target-structure.md (read it before the audit), so a team of developers using different agents shares one lean, progressively disclosed setup. Re-running converges further and reports drift. Invocation: /agentify-project [audit] [path] - audit — run step 1 only, print the findings and what a full run would change, modify nothing; the periodic drift check. - path — target a subdirectory instead of the repo root (see Monorepos). - Ask, don't enforce: prefer asking — all options shown, one recommended — over enforcing a choice, except for obvious easy wins (e.g. clear progressive-disclosure moves). Questions answerable from the codebase go to the codebase. - One approval gate per destructive/bulk change; show diffs or proposals before applying; nothing happens behind the user's back. Never commit — suggest reviewing the diff and leave committing to the user. - Generic: behavior is driven by references/agent-matrix.md — read it whenever agent detection or an agent's specifics are needed. One documented exception, the Claude carve-out: a team with no Claude users at…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -944,7 +944,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/attach-to-ticket/SKILL.md",
       "readmeExcerpt": "Save assets — pasted images, local files, URLs — into a ticket's planning directory and reference them from its ticket file, so a fresh session picks them up. Local only — never query or modify the tracker (no API calls, no re-fetch, no comments or edits); downloading an asset URL the user supplies or a not-downloaded entry names is fine, tracker-hosted or not. Edit nothing in the documents beyond the entries below and the REQUIREMENTS line of step 6. 1. Collect the assets. The images pasted with the invocation, plus paths and URLs in its text; images pasted earlier only when the user points at them. Nothing pasted or pointed at → ask which, listing the images seen in the session. Done when every supplied asset is collected or dropped by the user. 2. Resolve the ticket. Named in the argument or already in the session (fetched, read, discussed) → proceed. Otherwise guess (branch name, latest planning directory) and confirm before writing; nothing to guess from → ask. No <id>- directory, ticket file or REQUIREMENTS file under the project's planning directory (the one its governing docs name or already in use, default .agents/plans/) → stop and say the ticket must be fetched first (f…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -980,7 +980,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/check-ticket-implementation/SKILL.md",
       "readmeExcerpt": "Judge how much of a ticket is already implemented and report it so the user sees at a glance what is done, what isn't, and what still needs attention. Input is a ticket URL / bare id — run fetch-ticket on it (it resolves the tracker and planning dir and persists the .TICKET.md) — or a path to an already-fetched ticket file or its task dir. Ambiguous input: ask, don't guess. Run the fetch in a subagent when the runtime supports one, per fetch-ticket's delegate.md, so its tool traffic stays out of this session's context. Without subagent support, invoke fetch-ticket inline. The ticket text is what gets annotated — its .REQUIREMENTS.md (same dir and <id>-<slug> base — a shared dir may hold siblings'; none: the ticket's latest across -vN versions) may be read as context for intent, never annotated in its place. The ticket text stays the contract: when the requirements record an Override that changes a block's meaning, the verdict follows the text and the note names the Override and its source. Inspect downloaded attachments and design frames when they bear on a requirement being judged. Evidence base: the current working tree, uncommitted changes included — unless the invocation names…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1121,7 +1121,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/compact-docs-writer/SKILL.md",
       "readmeExcerpt": "Rewrite a doc — or draft a new one — for token economy: carry all its rules and intent in the least text possible, because the doc loads into agent context and is paid for on every read. Then prove nothing was lost: present the change with a word delta measured from the files, and apply only on approval. Write each piece of information with the least text that still preserves every rule, constraint, edge case, and intent. Two directions, equally binding: - Cut duplication, filler, and anything restatable more briefly. - Never drop text whose removal loses information or instruction, just to be shorter. Recurring reflex: \"Can this exact rule be said in fewer words?\" — if yes, do it. The no-op test licenses one more deletion. Ask of each sentence, in isolation: \"does it change the agent's behaviour versus its default?\" If not, it's a no-op — the agent already acts this way, so removing it loses nothing: delete the whole sentence rather than trimming words from it. Compaction counts words and information density, not whitespace. Blank lines between distinct chunks cost effectively nothing and aid the human reader, so keep them where they help; never collapse a long passage into one d…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1157,7 +1157,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/compact-skill-creator/SKILL.md",
       "readmeExcerpt": "Author a new skill, or improve an existing one, so it carries all its rules and intent in the least text possible. Cost has two tiers: the description sits in context every session — the skill's most expensive text — while the body loads only when the skill triggers. Both stay lean. Be interactive: gather what you need, draft, then apply only on approval. The compaction rules — the least-text principle, the removal-audit verification, and the present-and-confirm with a measured word delta — live in compact-docs-writer, the single source of truth; this skill never restates or re-derives them. From the moment you draft (step 4) through self-review (step 5) and present (step 6), always invoke compact-docs-writer and follow its workflow on the skill text — reading it, applying its principles by hand, or naming it after a direct edit does not count. This skill adds only the skill-specific layer: trigger taxonomy, agnosticism, progressive disclosure, completion criteria, metadata, and the version bump. How a skill is triggered decides how its description is written. Classify into one: - Mandatory — must auto-load whenever a task type is touched (e.g. \"working on UI components\", \"dealing…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1193,7 +1193,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/context-checkup/SKILL.md",
       "readmeExcerpt": "Find what loads automatically into the session's context at startup, quantify it, and propose reversible trims ranked by payoff — shrink the startup context window by cutting what isn't worth its tokens. Read-only — measure and recommend; change settings only on explicit approval. Cost hierarchy, biggest first: 1. MCP tool schemas — large, but deferred by tool search. Only a problem if tool search is OFF. 2. Always-on text — every always-on instruction file (entry-file chain, @imports, unscoped rules files) and skill/agent/command descriptions: every available one's description loads every session, except skills flagged non-model-invocable (their description never loads; a manual-only skill costs nothing until invoked). 3. MCP server instructions — load per enabled server at startup; a chatty preamble can dwarf its tool names. 4. MCP tool names — ~10 tokens each. Cheap; 30 names ≈ 300 tokens isn't worth a recommendation. Rules: measure, never guess — wc/count each source, convert with tokens ≈ words × 1.3 for prose and characters / 4 otherwise, and state that rule once in the table header. When the agent has a built-in context breakdown command, ask the user to paste its output an…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1299,7 +1299,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/create-implementation-plan/SKILL.md",
       "readmeExcerpt": "Planning only — no code changes, no execution. You produce one document: an implementation plan that is the contract for a later execution session. This is the \"how\", not the \"what\". The \"what\" was settled in an earlier refinement step and lives in the requirements document you're given; do not redefine scope. But you must flag any gap, ambiguity, or inconsistency you find in the requirements — surface it, never paper over it. Never guess — ask. With one limit: anything resolvable by reading the codebase, resolve by reading the codebase; only questions the code cannot settle go to the user. Your task is to produce the implementation plan. The steps below build toward it; grilling the user — interviewing relentlessly to resolve anything the code can't settle — is woven through the design, not a separate phase that runs before planning starts. 1. Read the requirements document the user references (e.g. a .REQUIREMENTS.md). If the path is ambiguous, ask. Its Open questions are forks to grill in step 3, each with its tentative answer as the recommendation; none stays open in the plan. Its Overrides carry over into part 2's Overrides. 2. Verify against the actual codebase. Open the fil…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1335,7 +1335,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/create-manual-test-instructions/SKILL.md",
       "readmeExcerpt": "- Ticket or requirements document (file or pasted text) — the only source: the checks follow it, and no code change is looked up. - Code change — a branch, PR URL, commit range, pasted diff or patch file, or nothing (the current branch). A commit range is diffed between its own ends. A branch or PR: git fetch the remotes, then diff from the merge base <base> with the target — a PR's base from its metadata, else the default branch of the upstream remote when one exists, else of origin, via git ls-remote --symref <remote> HEAD; that failing, the sole existing candidate among main, master, develop/development, preferring upstream's remote-tracking ref, then origin's, then the local branch. git diff <base> <source> for a tip; a checked-out source is reviewed as its working tree: git diff <base> plus the untracked files (git ls-files --others --exclude-standard), read whole. Read the commit subjects and the PR title and description too. Then resolve the task's planning home — its <id>-<slug>/ directory (no ticket → no id) or flat <id>-<slug>. files in the project's planning directory, id and slug from the branch name or PR — and read the ticket and requirements there when present for t…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1781,7 +1781,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/execute-plan-tasks/SKILL.md",
       "readmeExcerpt": "One task per run — implement it, verify it, tick it, stop. The review between tasks is the point; never carry on into the next. Invocation: /execute-plan-tasks <plan-path> [task-id] Read the plan whole — summary, conventions and overrides, the steps the task cites, acceptance criteria — then its ## Tasks section, and the decisions log beside it when it exists (<id>-<slug>.DECISIONS.md, <id>-<slug> being the plan filename without .PLAN.md): a logged deviation outranks the plan text it deviates from. Ambiguous or missing plan path → ask. Several task sections → ask which one this run works from. No task section → stop and point at /split-plan-tasks. task-id given → that task; none → the first unticked one in order. A range or a whole group → run its first task only, saying the rest need their own runs; a task already ticked → say so and ask whether to redo it. Its dependencies — earlier tasks in its group, plus every task in each group its Depends on line names — must be ticked; name any unticked dependency and ask before proceeding. Done when the chosen task, its steps, its acceptance criteria, its dependency state and any logged deviation that touches it are stated. - Scope is the…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1817,7 +1817,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/explain-in-simple-language/SKILL.md",
       "readmeExcerpt": "Comprehension is the only goal of the wording: the reader understands on the first read. Defines only the wording of what you say to the user or write in a document a human reads: what to say (the evidence, the parts the caller requires) stays with whatever asked for the text; this skill decides how sentences and paragraphs are built and what you add on your own initiative. Most agent text is already clear: change a sentence only when another wording would raise the chance the reader understands it, and leave the rest alone. A competent developer, fluent in English but often not native, who did not see what you just saw: the files, the tool output, your own reasoning. When whatever asked for the text names other readers (a tester, a product owner), write for the least technical of them: a code name comes with the plain name of what you saw it do. Test: would a colleague who knows the domain but just walked up to your desk understand this? - Name things concretely. Never a stand-in for something you know and the reader doesn't (\"both directions\", \"the fallback\", \"the second approach\"); say what it is. Lost the reader: \"the class serves both directions, and the index only matters in…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1853,7 +1853,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/extract-pr-review-rules/SKILL.md",
       "readmeExcerpt": "Mine the conventions a repository's reviewers enforce in their inline PR review comments into the project's own governing docs — each rule in the topic doc it belongs to, so it loads only with its subject, never as one always-read rules file. Re-runnable: each run resumes from the last checkpoint, fetching only newer comments. Invocation: /extract-pr-review-rules <repo-url> Identify the forge from the repo URL and work through whatever MCP or CLI is connected for it (GitHub → gh). Unrecognized URL, or nothing connected → ask. The URL is only the comment source; the rules land in the current project's docs, and the run's state in a checkpoint file in its planning directory — the one its governing docs name or already in use, else .agents/plans/, created when missing — default .agents/plans/pr-review-checkpoint.md. Absent → first run, no checkpoint, whole history in scope. Already there → read it: built from the same repo, its checkpoint makes this a refresh; built from another repo, ask — another file path, or replace it with a first run. Done when forge tooling, checkpoint path, and checkpoint (a timestamp, or none) are settled. Page the repo's inline review-comment feed across al…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1889,7 +1889,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/fetch-pr-review/SKILL.md",
       "readmeExcerpt": "Fetch only — capture the review feedback left on a pull request; never fix code, reply, or judge the comments. Output is a self-contained .PR-REVIEW.md a fresh session can pick up and act on (e.g. via /refine-pr-review). Someone else's PR to review is not this skill's job: use review-code-assistant or maintainer-review when available. Identify the platform from the PR URL (host shape) and fetch through the matching MCP server or CLI — e.g. GitHub MCP / gh for GitHub PRs, Azure DevOps MCP for ADO pull requests. Use whichever equivalent tools are connected; tool name prefixes vary by config. Fetch each stream through its last page, thread replies included: metadata, review verdicts, inline threads with their resolution and outdated flags (usually a thread-level API, not the flat comment list), conversation comments. If the input is ambiguous, or no matching MCP/CLI is available, ask the user / stop — don't guess. Every uncertainty is confirmed with the user before proceeding: a thread's resolved status, the planning directory, the slug, anything ambiguous in between. A plausible guess is a question, not an answer. 1. Resolve the input. Accept a full PR URL; extract repo/project and…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1925,7 +1925,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/fetch-ticket/SKILL.md",
       "readmeExcerpt": "Fetch only — no analysis, requirements, or planning. Output is a self-contained .TICKET.md. Identify the tracker from the input (URL host, or id shape) and fetch through the matching MCP server — e.g. Azure DevOps MCP for ADO work items, Atlassian MCP for Jira issues, GitHub MCP / gh for GitHub issues. Use whichever equivalent tools are connected; tool name prefixes vary by config. Resolve once any handle the MCP needs (e.g. Atlassian cloudId, ADO project) and reuse it. A bare id that fits several trackers: the one the project's governing docs name, else the Source host all ticket files in the planning directory share, else the only connected tracker MCP; still open → ask, naming your pick. If no matching MCP is connected: a public ticket may be scraped from its URL as a fallback (you may still suggest installing the matching MCP when it would do the job better); a private one can't — the URL returns a login page, not the ticket — so stop and tell the user to install and authenticate the matching MCP server, then re-run. 1. Resolve the input. Accept a full ticket URL or a bare id/key; extract the identifier. If the tracker uses a key prefix (e.g. XX-1234), keep it; otherwise use t…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1961,7 +1961,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/fresh-eyes-review/SKILL.md",
       "readmeExcerpt": "A context that produced a change reads its intent, not its text, so same-context review misses what a fresh reader would catch. The fix is procedural: a reviewer whose context holds only the artifacts. 1. Resolve the inputs. The changeset: whatever the invocation names — a branch, a commit, a diff range, a draft vs its original. Given none, infer it from the session — usually the work just finished, committed or not; no VCS required. With no session context to draw on, fall back to git: the working tree against HEAD (git diff HEAD plus untracked files) and the branch against its merge base with the fetched default branch of its tracking remote (git ls-remote --symref <remote> HEAD). One non-empty → take it; both → offer both in step 2's proposal; neither, or no target found → ask what to review. Pin the changeset as concretely as the environment allows — a diff or commit range where one exists, otherwise the touched files, with their prior state when reconstructable. Alongside it, a short statement of what the change is supposed to achieve, when one exists (the task as stated, a PR or ticket description); when this session authored the change, never include the session's own reaso…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -1997,7 +1997,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/grill-me/SKILL.md",
       "readmeExcerpt": "Interview the user relentlessly about every aspect of their plan, design, or idea until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one by one. - One question at a time, each with your recommended answer, worded so that \"yes\" accepts it, via explain-in-simple-language when available. - Facts are yours to find (codebase, docs, tool output): look them up, never ask. Decisions are the user's: put each one to them and wait. Done when no branch is open and nothing is silently assumed. Then print the settled decisions as a short list (decision, chosen answer, one-line why) the user can paste into the plan, ticket or doc, and stop: act on it only after the user confirms.",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2033,7 +2033,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/handover/SKILL.md",
       "readmeExcerpt": "Package a finished change so its reviewers never reconstruct intent from the diff. Write for a reviewer holding the diff and nothing else — no planning docs, no session, no knowledge that either exists. The input is any partial reference — ticket id, slug, a planning artifact's path — or nothing, meaning the session's task; in a fresh session, infer it from branch name and recent commits. Resolve it to the task's planning home: its <id>-<slug>/ directory (no ticket → no id) in the project's planning directory, or its flat <id>-<slug>. files in a shared family directory. One clear match → proceed, stating the home and artifacts found. Inferred, or several candidates (-vN, …) → confirm first. An explicit reference matching nothing local → stop and ask; never guess. Read these, skipping what doesn't exist: 1. Task artifacts — every <id>-<slug>.md in the planning home: ticket, requirements, plan, decisions log, prior review and handover rounds, whatever else matches. 2. Related tickets — one hop only: parent (climbing higher only past thin containers — a parent that is only a title and a child list), direct predecessors/successors, explicit relations, family-directory siblings; never…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2069,7 +2069,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/harden-artifact/SKILL.md",
       "readmeExcerpt": "Make a .REQUIREMENTS.md or .PLAN.md — the artifact — safe to hand to the next phase: every deviation from its ticket deliberate, explained and correct; every claim true; nothing blocking the session that picks it up. A fresh-context reviewer hunts, the session challenges each finding, and only what survives changes the artifact — which must never end worse than it started. A session that wrote the artifact cannot judge findings on it: say so and propose a fresh session before continuing. - Artifact — the file the invocation names; ambiguous or neither kind → ask. A plan — the artifact or one of the same base — with a ticked task is already being built, past where hardening belongs → say so and ask before going on. - Ticket — the document the artifact was refined from, found by file name: the artifact's suffix replaced by .TICKET (FOO.PLAN.md → FOO.TICKET.md), or, when the stem names another source, that file (FOO.PR-REVIEW.REQUIREMENTS.md → FOO.PR-REVIEW.md). A .TICKET.md is taken at its latest version: with <base> the artifact's base stripped of any trailing -vN, the highest -vN among flat <base>-vN.TICKET.md in the artifact's directory and the .TICKET.md inside the highest <base…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2105,7 +2105,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/maintainer-review/SKILL.md",
       "readmeExcerpt": "You are the merge gate, not the author's assistant: the question is whether this ships, and the contributor will argue back. Your own PR belongs to self-review. Review in this session, not a subagent. A session opened for the PR is fresh already, and staying in it keeps the diff, the comments and your findings in hand for the argument that follows. Session already loaded with unrelated work, say so and offer a fresh one first. Before the first text addressed to the user, the report included, actually invoke explain-in-simple-language and follow it — reciting its rules from memory does not count. Not installed: plain words, one idea per sentence, and nothing named only by a stand-in the reader hasn't seen. A stale checkout reviews against yesterday's rules: the convention docs the diff pass runs as a checklist come from it, and so did whatever auto-loaded at session start. Before the gather: git fetch. Fetch failed, say so and ask rather than compare against a stale ref. Then compare the checkout against the freshest ref of the branch it tracks, the repo's default branch when it tracks none. Behind it, say so and offer to fast-forward; the update is a write, so it waits for a go-ah…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2141,7 +2141,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/memory-doctor/SKILL.md",
       "readmeExcerpt": "Agent-memory is an unseen side-channel into every session's context window: facts accumulate there, often by accident, that the user never reviews and cannot govern. This skill drains it. Technically nothing should live in project memory — durable guidance belongs in homes the user controls (project docs, project skills/rules, user-level skills/rules), and the rest is garbage. Block by block, move each entry to its proper home or archive it, until memory trends toward empty and the user — not the memory store — decides what reaches the context window. The skill guesses and recommends; the user decides. Every verdict, scope, form, and target is a proposal the user confirms or flips. When unsure, ask. Nothing is moved, deleted, or written without explicit per-item approval. For every block the user gets the whole fixed menu — relocate/merge, archive (recoverable), keep, or a custom action they type — never just the recommended verdict, never a pruned subset. Find the memory store for the current project. Its location is agent-specific — other agents store it elsewhere, or not at all. Claude Code example: the store sits under ${CLAUDECONFIGDIR:-~/.claude}/projects/, the <root> below.…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2178,7 +2178,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/mesh-discord-routing/README.md",
       "readmeExcerpt": "Mesh Discord Routing is a small, portable skill that lets agents of any runtime communicate with each other through Discord using simple, explicit routing rules. It is meant for mixed agent groups: framework-specific agents, custom bots, hosted assistants, or any other runtime that can follow a skill and send Discord messages. The shared rule is: - each agent decides who should receive its own reply - agents use semantic recipient labels, not raw Discord mention strings - a small hydrator script turns those labels into the cc-mesh: trigger and Discord mentions - an optional session helper can keep turn state for multi-turn workflows - the human-readable message stays separate from routing metadata This keeps the routing policy simple enough for language models to follow while keeping mention formatting deterministic and runtime-independent. The skill gives agents a common protocol for mesh-mode Discord conversations: 1. If a message contains cc-mesh:, treat it as a routed mesh message. 2. Decide who should receive the reply. 3. Default to notifying the sender when answering directly. 4. Add other recipients only when they should be involved. 5. Use no recipients only when no bot s…",
       "stars": 0,
-      "lastPush": "2026-11-09T13:58:41Z",
+      "lastPush": "2026-11-10T14:30:38Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2478,7 +2478,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-mesh",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-11-09T13:58:41Z",
+      "lastPush": "2026-11-10T14:30:38Z",
       "archived": false,
       "provides": [
         "hooks",
@@ -2718,7 +2718,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/prepare-prompt/SKILL.md",
       "readmeExcerpt": "Write for a session holding only this text — no chat history, no memory of what was meant — and make it as short as that reader allows: nothing it needs is cut for brevity, nothing else stays. The reader is a fresh interactive session the user pastes it into; a subagent brief only when the invocation asks for one, under the same rules. The user's goal, in a line, plus this session. Draft at once; ask only what neither settles, one question at a time, with a recommended answer. A suggested order, every part optional: a part is never filled to exist, and two lines are a complete prompt when two lines cover the case. 1. Situation — what exists that the next session builds on, and what is open or was missed, each with its identifier (ticket URL, branch, commit, PR, task ids). 2. Task and deliverable — what to do, in what form to report or produce it (a chat report with a given structure, a file, a code change) and, when the work continues, the check that says it is done (a command, a criterion, a file to exist). 3. Latitude and boundaries — what it may decide alone, when deviating is fine, what it must not touch (read-only, no git or tracker writes, files to ignore). 4. Facts it canno…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2754,7 +2754,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/refine-pr-review/SKILL.md",
       "readmeExcerpt": "The Refine phase for review feedback: turn a .PR-REVIEW.md (from /fetch-pr-review; ask if the path is ambiguous) into user-settled per-comment verdicts, drafted replies, and a REQUIREMENTS file covering the accepted code changes. Triage and replies are settled here; the plan and execute phases see only code changes. A PR URL instead: when the harness has subagents and fetch-pr-review is available (../fetch-pr-review/SKILL.md beside this skill), a subagent fetches it first per its delegate.md and the file it returns is the input. Not available → say so and ask for the fetched file; available but no subagents → hand off /fetch-pr-review <url> to a fresh session and stop. A trailing head=<sha> token (fetch-pr-review's refresh hand-off) is the head a refresh just confirmed: Phase 1's moved-head check uses it in place of the file's Head line. Its own .PR-REVIEW.REQUIREMENTS.md instead, once a blocking answer is in: run Phase 1's checkout and remote-head check first — a checkout differing from the ANSWERS Head, or a dirty tree, is reported and the user decides, never a branch switch; a moved PR head is reported with the re-fetch offer and the user decides whether to finish this round fi…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2790,7 +2790,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/refine-ticket/SKILL.md",
       "readmeExcerpt": "The Refine phase of Refine → Plan → Act: turn a raw ticket — or an idea to brainstorm — into a validated requirements document a fresh session can plan from. Analysis only — it defines what must be true when the work is done, never how to build it, and never touches code. An idea is a ticket that doesn't exist yet: treat the user's words as the ticket text, and grill to shape the idea itself — goal, in vs out of scope — before closing the branches that block implementation. A .TICKET.md path, a ticket URL or bare id, or an idea in words. When the harness has subagents and fetch-ticket is available (../fetch-ticket/SKILL.md beside this skill), a URL or id is fetched first by a subagent per fetch-ticket's delegate.md — one ticket per run; several → point at a fetch session instead, which handles sets. A non-empty warn list stops for one question: supply the files now (/attach-to-ticket when available; answered by running it → resume with the supplied files once it reports) or refine without them. The fetched file is then the local ticket file. No subagents, or fetch-ticket not available → read the ticket from its tracker and refine with no local ticket file. An existing .REQUIREMENT…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2826,7 +2826,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/review-code-assistant/SKILL.md",
       "readmeExcerpt": "Assist a human's local code-review pass: read the diff, understand the intent, surface the real issues. You suggest candidate comments; the human decides what to post. Single-pass and lightweight. The edge over a human: the agent has the project's convention docs open and reads big files fast. Accept input flexibly; a PR link is optional: 1. PR URL — fetch its metadata (source/target branch, title, description), then diff. 2. One branch (\"review branch xxxx\") — diff it against the auto-detected target. 3. Two branches (\"review xxxx against yyyy\") — explicit source and target. 4. Nothing (\"review this branch\") — diff the current branch against the auto-detected target. A detached HEAD → ask which branch is under review; an empty diff → probably a wrong target (typical: a fork's default branch already holding the commits), say so and ask. (If explicitly asked, you may instead review uncommitted working-tree changes.) Diff base: always a three-dot merge-base diff, git diff <target-ref>...<source-ref>, so it matches exactly what the platform shows as the PR with no noise from commits that landed on target after the fork. No common ancestor: usually a shallow clone or a wrong target. D…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2862,7 +2862,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/review-ticket/SKILL.md",
       "readmeExcerpt": "A pre-pickup triage glance: read a ticket — or a set of tickets forming one feature — usually before anyone has started it, and decide whether it can be picked up or something must be clarified first. The output briefs the developer on the feature and lists the questions worth asking whoever owns the requirements. - Local ticket document(s): a single .TICKET.md, several, a ticket-set directory, or a .TICKET.md whose ## Ticket set section lists siblings. - One or more ticket URLs or bare ids/keys: delegate — even for a single one — to a subagent running fetch-ticket per its delegate.md, so the tickets land on disk without the fetch bloating this session's context, then review the local files. No subagents in the harness → run fetch-ticket inline. Missing attachments (a non-empty warn list, or a ticket file marking one not downloaded) stop for one question: supply the files now (/attach-to-ticket when available) or review without them. An /attach-to-ticket run in answer resumes the review with the files it saved; each attachment still missing is named as unchecked material. If the input is ambiguous or unrecognized, ask rather than guess. Set mode applies to multiple tickets, a set…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2933,7 +2933,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/run-nx-checks/SKILL.md",
       "readmeExcerpt": "Run format, lint, typecheck, test, build. Fix unambiguous failures. Report anything judgment-laden and every file you changed. $ARGUMENTS — optional, space-separated: [cpuCount] [projectName] [--remote-cache]. Number token → cpuCount. Non-number, non-flag token → projectName. --remote-cache flag → opt back into the remote cache by dropping the remote-cache-off prefix. Default cpuCount = cores - 4 (min 1); count cores with node -p 'os.cpus().length'. Default project scope = affected. Default remote-cache state = off (see Steps). $base, $cpuCount, $projectName and $snap in the commands below are placeholders: substitute their values (a fresh shell per Bash tool call holds none of them). Run nx commands from wherever nx.json lives in this repo (commonly the root; in some repos a subdirectory). Keep the Nx daemon warm so the project graph is reused across targets: Snapshot the dirty files, so the final report can name every file the run changes (hash-object without -w writes nothing); substitute the printed path for $snap there: nx affected and format:write diff against the local default branch, which is often stale or missing. $projectName replaces only the affected commands, so reso…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2969,7 +2969,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/self-improve/SKILL.md",
       "readmeExcerpt": "Suggest durable improvements to the skill, doc or check that should have steered the agent, so the next session gets it right without being told again — and apply them only after the user approves. The skill proposes; the user stays in control of every change. Three ways in: - Manual — the user invokes /self-improve to deliberately improve a skill or doc. - Self-triggered — the agent notices it was corrected on something a skill, doc or check governs (or should). Don't silently correct and move on, but don't derail the task either: note the lesson, finish what the user asked for, and offer to persist it at the next natural breakpoint. - Driven by another skill — a caller (or its launch command, pasted by the user) hands over lessons already phrased as durable guidance, sometimes with all or part of a target it settled with the user (scope, form, path — possibly a new file or a merge into an existing one). Skip step 1; skip step 2 for a lesson whose target the caller settled fully, run it for the rest keeping what the caller settled — its Mechanical lesson bullet and new-doc indexing requirement always apply. Several lessons at once → first propose their placement as one table, eac…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -3005,7 +3005,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/self-review/SKILL.md",
       "readmeExcerpt": "Make a changeset merge-ready before submission — no regressions, sound code, the project's conventions respected — and prove it was scrutinized: a fresh-context reviewer hunts for what would block the merge, the author answers every finding, and a compact report — scannable by a maintainer in seconds — records the outcome. The report is the review record only; the change's what/why belongs to the PR description (e.g. via /handover), never here. Only for a changeset you authored. The fresh-context reviewer exists to escape authoring blindness, so someone else's PR has nothing to escape and belongs to maintainer-review. 1. Resolve source and target. No input → current branch against the auto-detected target: the default branch of the upstream remote when one exists (fork workflow), else of origin — via git ls-remote --symref <remote> HEAD, never the often-absent local refs/remotes/<remote>/HEAD; that failing (e.g. offline), the sole existing candidate among main, master, develop/development (preferring upstream's remote-tracking ref, then origin's, then the local branch) — still ambiguous or none → ask. Explicit branches in the invocation win; a detached HEAD → ask which branch is u…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -3146,7 +3146,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/split-plan-tasks/SKILL.md",
       "readmeExcerpt": "Append a task breakdown to a plan so the work lands in small increments — one task, then a review, a correction pass, a commit — instead of one sweep. Authoring only: executing the tasks is a later, separate session. Invocation: /split-plan-tasks <plan-path> Ambiguous or missing path → ask. A plan with numbered steps and an acceptance-criteria checklist splits best; any plan markdown works — reference tasks to headings when steps aren't numbered, and drop the AC line when there is no such checklist. A plan already carrying a task section → stop and ask which the user wants: replace it, add a second one beside it, or carry the ticked tasks forward and reformulate only the remaining work. Done when the plan is read and, where a section already existed, the user has chosen. - Task — the smallest chunk that leaves the project building and its tests passing, so it can be reviewed and committed on its own. Steps that only make sense together are one task, never two — building alone isn't the test: a step that only re-runs a generator (API clients, specs, snapshots) lands with the change it regenerates, and a step whose test must fail before the fix is written lands with that fix. - Grou…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -3260,7 +3260,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/use-conversational-language/SKILL.md",
       "readmeExcerpt": "Defines the voice, how to word text a human should read as if a person typed it, plus the shape each genre below takes; where a caller's own rules on what to say (evidence bars, scope, structure) conflict with a genre rule, the caller's win. Apply the baseline always, plus the section matching the situation. Sections are collections of rules and examples, not silos: whatever fits the text at hand applies, from any section. Bans (\"no …\", \"never …\") are hard rules; everything else is a tip, and quoted snippets (\"wdyt\") are examples, never required wording. Concise, plain language that reads like natural conversation, with no AI tells. Hard rules: - No over-formality, exclamation marks, emoji, semicolon-heavy prose, \"Certainly!\"-style openers, or bullet lists where a sentence would do. - Stop at the last point. No closer that only rounds the text off: wrap-up, reassurance, closing counterfactual (\"hope that helps\", \"that should be enough to reproduce it\", \"if we skipped X, Y would break\"); a last line that carries the ask, the verdict, or the why an ask needs (\"wdyt?\", \"so all good, nothing to fix\") stays. - Never use dashes (em or en). - Never frame a point as \"not X but Y\" when nob…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -3296,7 +3296,7 @@
       "readmeUrl": "https://github.com/eai-org/agent-toolkit/blob/main/skills/verify-understanding/SKILL.md",
       "readmeExcerpt": "One goal, nothing more, nothing less: verify the engineer is ready to move to the implementation phase. Exercise their understanding of a feature before they work on it — the pipeline's other artifacts serve fresh agent sessions; this step serves the human. Active recall: the user produces the feature in their own words, you only steer and fix. Re-runnable: right after the ticket review, or days later just before implementation — every run starts fresh from the review file, no state kept between runs. A .TICKET-REVIEW.md. Read it and the ticket files and parent it links. A reference that exists only as a tracker URL (no local file) may be read from the tracker at conversation time. A ticket with a newer -vN fetch beside the one the review read has likely overtaken it: say so, read the newest ticket files, and treat the review's open questions as possibly answered there. Then look for a .TICKET-REVIEW.md under the newest ticket file's base, flat beside it or inside its -vN/ directory: one that exists and is not the input → say so and run the conversation from it, the given review at most context; none → the overtaken handling stands. The .REQUIREMENTS.md of the newest ticket file's…",
       "stars": 85,
-      "lastPush": "2026-11-08T20:31:03Z",
+      "lastPush": "2026-11-10T11:27:07Z",
       "archived": false,
       "provides": [
         "skills"
@@ -167372,7 +167372,7 @@
       "provides": [
         "mcp"
       ],
-      "version": "0.1.0"
+      "version": "0.1.1"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/oeis",
@@ -167661,6 +167661,50 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/ofgem",
+      "name": "Ofgem",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Ofgem energy data: the UK energy regulator's published statistics on the domestic price cap and…",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/ofgem",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/ofgem\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-ofgem",
+      "homepageUrl": "https://pipeworx.io/packs/ofgem",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/ofr-funding",
+      "name": "Ofr Funding",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "OFR Short-Term Funding Monitor API — data.financialresearch.gov/v1, keyless,",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/ofr-funding",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/ofr-funding\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-ofr-funding",
+      "homepageUrl": "https://pipeworx.io/packs/ofr-funding",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:com.ohfax/ohfax",
       "name": "Oh Fax",
       "ecosystem": "mcp-registry",
@@ -167674,6 +167718,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.ohfax/ohfax\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://ohfax.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/oh-medical-exclusions",
+      "name": "Oh Medical Exclusions",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Ohio Department of Medicaid (ODM) Provider Exclusion & Suspension List screening — fleet #3278…",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/oh-medical-exclusions",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/oh-medical-exclusions\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-oh-medical-exclusions",
+      "homepageUrl": "https://pipeworx.io/packs/oh-medical-exclusions",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -167727,6 +167793,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/ohio-code",
+      "name": "Ohio Code",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Ohio Revised Code — state statutes by citation.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/ohio-code",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/ohio-code\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-ohio-code",
+      "homepageUrl": "https://pipeworx.io/packs/ohio-code",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.ohvii/ohvii",
       "name": "Ohvii",
       "ecosystem": "mcp-registry",
@@ -167771,6 +167859,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/oig-corporate-integrity",
+      "name": "Oig Corporate Integrity",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HHS-OIG Corporate Integrity Agreements — does this healthcare company have",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/oig-corporate-integrity",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/oig-corporate-integrity\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-oig-corporate-integrity",
+      "homepageUrl": "https://pipeworx.io/packs/oig-corporate-integrity",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/oig-self-disclosure-settlements",
+      "name": "Oig Self Disclosure Settlements",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HHS-OIG Self-Disclosure Protocol settlements — fleet #3274.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/oig-self-disclosure-settlements",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/oig-self-disclosure-settlements\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-oig-self-disclosure-settlements",
+      "homepageUrl": "https://pipeworx.io/packs/oig-self-disclosure-settlements",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:com.okareo/okareo",
       "name": "Okareo",
       "ecosystem": "mcp-registry",
@@ -167791,6 +167923,28 @@
         "mcp"
       ],
       "version": "public-0.0.33.2"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/oklahoma-code",
+      "name": "Oklahoma Code",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Oklahoma Statutes — state statutes by citation, full-text topic search,",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/oklahoma-code",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/oklahoma-code\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-oklahoma-code",
+      "homepageUrl": "https://pipeworx.io/packs/oklahoma-code",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:com.oklahomaautoquotes/insurance",
@@ -168664,6 +168818,50 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/onedrive\" --adapter claude --local",
       "repoUrl": "https://github.com/pipeworx-io/mcp-onedrive",
       "homepageUrl": "https://pipeworx.io/packs/onedrive",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/oneinfo-storage",
+      "name": "Oneinfo Storage",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Italian regulated disclosures direct from 1INFO — keyless, same-day-fresh.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/oneinfo-storage",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/oneinfo-storage\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-oneinfo-storage",
+      "homepageUrl": "https://pipeworx.io/packs/oneinfo-storage",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/onet",
+      "name": "Onet",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "O*NET MCP — wraps the O*NET Web Services (US DOL) occupation taxonomy",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/onet",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/onet\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-onet",
+      "homepageUrl": "https://pipeworx.io/packs/onet",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -170499,6 +170697,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/openei-urdb",
+      "name": "Openei Urdb",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "OpenEI Utility Rate Database (URDB) MCP",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/openei-urdb",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/openei-urdb\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-openei-urdb",
+      "homepageUrl": "https://pipeworx.io/packs/openei-urdb",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/openf1",
       "name": "Openf1",
       "ecosystem": "mcp-registry",
@@ -170609,6 +170829,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/openfoodtox",
+      "name": "Openfoodtox",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "EFSA OpenFoodTox — the reference values EFSA has derived for chemical",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/openfoodtox",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/openfoodtox\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-openfoodtox",
+      "homepageUrl": "https://pipeworx.io/packs/openfoodtox",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/openholidays",
       "name": "Openholidays",
       "ecosystem": "mcp-registry",
@@ -170710,6 +170952,50 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/openparliament-ca\" --adapter claude --local",
       "repoUrl": "https://github.com/pipeworx-io/mcp-openparliament-ca",
       "homepageUrl": "https://pipeworx.io/packs/openparliament-ca",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/openpowerlifting",
+      "name": "Openpowerlifting",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "openpowerlifting -- powerlifting competition results from the OpenPowerlifting project's…",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/openpowerlifting",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/openpowerlifting\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-openpowerlifting",
+      "homepageUrl": "https://pipeworx.io/packs/openpowerlifting",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/openremedies",
+      "name": "Openremedies",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "OpenRemedies is a lookup of sourced treatment records for a condition: approved medicines by…",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/openremedies",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/openremedies\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-openremedies",
+      "homepageUrl": "https://pipeworx.io/packs/openremedies",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -170952,6 +171238,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/opentreeoflife\" --adapter claude --local",
       "repoUrl": "https://github.com/pipeworx-io/mcp-opentreeoflife",
       "homepageUrl": "https://pipeworx.io/packs/opentreeoflife",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/opentripmap",
+      "name": "Opentripmap",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "OpenTripMap MCP — wraps the OpenTripMap Places API (dev.opentripmap.org)",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/opentripmap",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/opentripmap\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-opentripmap",
+      "homepageUrl": "https://pipeworx.io/packs/opentripmap",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -171810,6 +172118,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/orcid\" --adapter claude --local",
       "repoUrl": "https://github.com/pipeworx-io/mcp-orcid",
       "homepageUrl": "https://pipeworx.io/packs/orcid",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/oregon-code",
+      "name": "Oregon Code",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Oregon Revised Statutes — state statutes by citation.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/oregon-code",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/oregon-code\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-oregon-code",
+      "homepageUrl": "https://pipeworx.io/packs/oregon-code",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -172873,6 +173203,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/overture-places",
+      "name": "Overture Places",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Overture Maps places — business and point-of-interest locations (name,",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/overture-places",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/overture-places\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-overture-places",
+      "homepageUrl": "https://pipeworx.io/packs/overture-places",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/owasp",
@@ -174195,6 +174547,28 @@
       "version": "1.1.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/pa-medical-exclusions",
+      "name": "Pa Medical Exclusions",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Pennsylvania Department of Human Services (DHS) Medicheck Precluded Providers List screening…",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/pa-medical-exclusions",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/pa-medical-exclusions\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-pa-medical-exclusions",
+      "homepageUrl": "https://pipeworx.io/packs/pa-medical-exclusions",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:es.cesaryague/paki-curator",
       "name": "PaKi Curator",
       "ecosystem": "mcp-registry",
@@ -174281,6 +174655,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/pacer",
+      "name": "Pacer",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "PACER Case Locator (PCL) MCP — live US federal court case & party search on the",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/pacer",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/pacer\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-pacer",
+      "homepageUrl": "https://pipeworx.io/packs/pacer",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.umagestaointeligente/packvalue-tools",
@@ -174494,6 +174890,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.equinoxaifinance-rgb/pactwire\" --adapter claude --local",
       "repoUrl": "https://github.com/equinoxaifinance-rgb/pactwire",
       "homepageUrl": "https://pactwire.neoaethel.workers.dev",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/paddle",
+      "name": "Paddle",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "MCP server for paddle",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/paddle",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/paddle\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-paddle",
+      "homepageUrl": "https://pipeworx.io/packs/paddle",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -174853,6 +175271,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/pagespeed-insights",
+      "name": "Pagespeed Insights",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Google PageSpeed Insights — runs Lighthouse against any public URL and returns the performance…",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/pagespeed-insights",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/pagespeed-insights\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-pagespeed-insights",
+      "homepageUrl": "https://pipeworx.io/packs/pagespeed-insights",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:dev.pagelens/pagewatch",
@@ -176219,6 +176659,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/partiful",
+      "name": "Partiful",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Partiful MCP — public event listings from Partiful's explore pages.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/partiful",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/partiful\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-partiful",
+      "homepageUrl": "https://pipeworx.io/packs/partiful",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:xyz.rubenayla.partle/marketplace",
       "name": "Partle Marketplace",
       "ecosystem": "mcp-registry",
@@ -176681,6 +177143,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/patent-maintenance-fees",
+      "name": "Patent Maintenance Fees",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "USPTO Patent Maintenance Fee Events — complements the `patents` pack (fleet #3258), which has…",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/patent-maintenance-fees",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/patent-maintenance-fees\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-patent-maintenance-fees",
+      "homepageUrl": "https://pipeworx.io/packs/patent-maintenance-fees",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.Patent-PreCheck/patent-precheck",
       "name": "Patent PreCheck",
       "ecosystem": "mcp-registry",
@@ -177119,6 +177603,50 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/pbgc",
+      "name": "Pbgc",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "PBGC MCP — pension plan terminations and premium filings.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/pbgc",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/pbgc\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-pbgc",
+      "homepageUrl": "https://pipeworx.io/packs/pbgc",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/pcaob",
+      "name": "Pcaob",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "PCAOB — Form AP auditor<->issuer engagements + firm inspection reports.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/pcaob",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/pcaob\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-pcaob",
+      "homepageUrl": "https://pipeworx.io/packs/pcaob",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/pdbe",
@@ -177627,6 +178155,28 @@
       "version": "3.1.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/pennsylvania-code",
+      "name": "Pennsylvania Code",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Pennsylvania Consolidated Statutes — state statutes by citation.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/pennsylvania-code",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/pennsylvania-code\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-pennsylvania-code",
+      "homepageUrl": "https://pipeworx.io/packs/pennsylvania-code",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/pa-dmv",
       "name": "Pennsylvania DMV (PennDOT)",
       "ecosystem": "mcp-registry",
@@ -178001,6 +178551,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/peppol",
+      "name": "Peppol",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Peppol participant lookup (SML + SMP + Peppol Directory).",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/peppol",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/peppol\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-peppol",
+      "homepageUrl": "https://pipeworx.io/packs/peppol",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:com.peppolstatus/api",
       "name": "PeppolStatus",
       "ecosystem": "mcp-registry",
@@ -178199,6 +178771,28 @@
       "version": "1.0.1"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/perilpulse",
+      "name": "Perilpulse",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "PerilPulse MCP — per-property multi-peril risk scores (perilpulse.com)",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/perilpulse",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/perilpulse\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-perilpulse",
+      "homepageUrl": "https://pipeworx.io/packs/perilpulse",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.entradox/perimeter-watch-scanner",
       "name": "Perimeter Watch",
       "ecosystem": "mcp-registry",
@@ -178329,6 +178923,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/perm",
+      "name": "Perm",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "PERM MCP — US green-card labor certification data from DOL PERM (Program Electronic Review…",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/perm",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/perm\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-perm",
+      "homepageUrl": "https://pipeworx.io/packs/perm",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/permid",
@@ -178749,6 +179365,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/peru-sunat-ruc",
+      "name": "Peru Sunat Ruc",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "peru-sunat-ruc -- Peru's SUNAT taxpayer register (Padron reducido del RUC). Fleet #2929.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/peru-sunat-ruc",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/peru-sunat-ruc\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-peru-sunat-ruc",
+      "homepageUrl": "https://pipeworx.io/packs/peru-sunat-ruc",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:com.pestpin/pestpin",
       "name": "PestPin",
       "ecosystem": "mcp-registry",
@@ -179011,6 +179649,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/phillips",
+      "name": "Phillips",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Phillips MCP — realized auction prices from phillips.com.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/phillips",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/phillips\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-phillips",
+      "homepageUrl": "https://pipeworx.io/packs/phillips",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/phishtank",
@@ -180443,6 +181103,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/pitchprotocol",
+      "name": "Pitchprotocol",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Pitch Protocol — agent-native venture-capital infrastructure (pitchprotocol.vc).",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/pitchprotocol",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/pitchprotocol\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-pitchprotocol",
+      "homepageUrl": "https://pipeworx.io/packs/pitchprotocol",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:com.pithflow/pithflow",
       "name": "Pithflow",
       "ecosystem": "mcp-registry",
@@ -180641,6 +181323,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/pjm",
+      "name": "Pjm",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Real-time electricity market data from PJM Interconnection, the largest US grid operator (13…",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/pjm",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/pjm\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-pjm",
+      "homepageUrl": "https://pipeworx.io/packs/pjm",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/pkg-go-dev",
       "name": "Pkg Go Dev",
       "ecosystem": "mcp-registry",
@@ -180698,6 +181402,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:top.placepack/placepack\" --adapter claude --local",
       "repoUrl": "https://github.com/martintoz/placepack",
       "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/plaid",
+      "name": "Plaid",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Plaid MCP — wraps Plaid Sandbox API (sandbox.plaid.com)",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/plaid",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/plaid\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-plaid",
+      "homepageUrl": "https://pipeworx.io/packs/plaid",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -180903,6 +181629,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/planetary-computer",
+      "name": "Planetary Computer",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Earth-observation imagery catalogue from Microsoft's Planetary Computer — search its open…",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/planetary-computer",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/planetary-computer\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-planetary-computer",
+      "homepageUrl": "https://pipeworx.io/packs/planetary-computer",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:com.monopoly-gold.planner/mcp",
@@ -181138,6 +181886,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.mcp-dir/plaud-mcp\" --adapter claude --local",
       "repoUrl": "https://github.com/mcp-dir/plaud-mcp",
       "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/plausible",
+      "name": "Plausible",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "MCP server for plausible",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/plausible",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/plausible\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-plausible",
+      "homepageUrl": "https://pipeworx.io/packs/plausible",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -181609,6 +182379,28 @@
       "version": "0.4.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/pod-researcher",
+      "name": "Pod Researcher",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "pod-researcher — podcast prospecting for guest booking and sponsorship.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/pod-researcher",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/pod-researcher\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-pod-researcher",
+      "homepageUrl": "https://pipeworx.io/packs/pod-researcher",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.blutrich/podlearn",
       "name": "PodLearn",
       "ecosystem": "mcp-registry",
@@ -181710,6 +182502,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/podatki-si\" --adapter claude --local",
       "repoUrl": "https://github.com/pipeworx-io/mcp-podatki-si",
       "homepageUrl": "https://pipeworx.io/packs/podatki-si",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/podcast-parser",
+      "name": "Podcast Parser",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "podcast-parser (CanonCannon) — what gets repeated across 162 tracked podcasts.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/podcast-parser",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/podcast-parser\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-podcast-parser",
+      "homepageUrl": "https://pipeworx.io/packs/podcast-parser",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -182049,6 +182863,50 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/poland-tenders",
+      "name": "Poland Tenders",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Poland public procurement MCP — official e-Zamówienia notice feed (keyless).",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/poland-tenders",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/poland-tenders\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-poland-tenders",
+      "homepageUrl": "https://pipeworx.io/packs/poland-tenders",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/police-shootings",
+      "name": "Police Shootings",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Police Shootings MCP — The Washington Post, Fatal Force database",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/police-shootings",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/police-shootings\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-police-shootings",
+      "homepageUrl": "https://pipeworx.io/packs/police-shootings",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:com.policylayer/policylayer",
       "name": "PolicyLayer",
       "ecosystem": "mcp-registry",
@@ -182179,6 +183037,28 @@
         "mcp"
       ],
       "version": "0.2.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/politician-trades",
+      "name": "Politician Trades",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Politician Trades MCP — US congressional + executive stock trading",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/politician-trades",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/politician-trades\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-politician-trades",
+      "homepageUrl": "https://pipeworx.io/packs/politician-trades",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/politics-feeds",
@@ -182414,6 +183294,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/polymarket\" --adapter claude --local",
       "repoUrl": "https://github.com/pipeworx-io/mcp-polymarket",
       "homepageUrl": "https://pipeworx.io/packs/polymarket",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/polymarket-us",
+      "name": "Polymarket Us",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Polymarket US MCP — market data for Polymarket US (polymarket.us), the",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/polymarket-us",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/polymarket-us\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-polymarket-us",
+      "homepageUrl": "https://pipeworx.io/packs/polymarket-us",
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -183149,6 +184051,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/portugal-tenders",
+      "name": "Portugal Tenders",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Portugal public procurement MCP -- IMPIC (Instituto dos Mercados Públicos, do Imobiliário e da…",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/portugal-tenders",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/portugal-tenders\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-portugal-tenders",
+      "homepageUrl": "https://pipeworx.io/packs/portugal-tenders",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.parvizrahayan/portvan",
       "name": "Portvan",
       "ecosystem": "mcp-registry",
@@ -183169,6 +184093,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/poshmark-comps",
+      "name": "Poshmark Comps",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Poshmark Comps — sold-price search on the public Poshmark marketplace",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/poshmark-comps",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/poshmark-comps\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-poshmark-comps",
+      "homepageUrl": "https://pipeworx.io/packs/poshmark-comps",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.jackfriks/post-bridge",
@@ -183433,6 +184379,28 @@
         "mcp"
       ],
       "version": "0.1.2"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/posthog",
+      "name": "Posthog",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "PostHog MCP — wraps PostHog Analytics API (app.posthog.com/api)",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/posthog",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/posthog\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-posthog",
+      "homepageUrl": "https://pipeworx.io/packs/posthog",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:com.usepostify/postify",
@@ -187989,6 +188957,28 @@
       "version": "2.0.1"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/prnewswire",
+      "name": "Prnewswire",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "PR Newswire MCP — press releases from PR Newswire's all-releases feed.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/prnewswire",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/prnewswire\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-prnewswire",
+      "homepageUrl": "https://pipeworx.io/packs/prnewswire",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:com.proflightsearch/airport-delays",
       "name": "Pro Flight Search Airport Delays",
       "ecosystem": "mcp-registry",
@@ -189881,6 +190871,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/prospeo",
+      "name": "Prospeo",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Prospeo MCP — wraps the Prospeo 'Enrich Person' API (prospeo.io)",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/prospeo",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/prospeo\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-prospeo",
+      "homepageUrl": "https://pipeworx.io/packs/prospeo",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.ShubhamTuts/prosyo",
       "name": "Prosyo MCP Server",
       "ecosystem": "mcp-registry",
@@ -190321,6 +191333,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/prozorro-sale",
+      "name": "Prozorro Sale",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Prozorro.Sale MCP — Ukraine's state and municipal asset sales and leases (keyless).",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/prozorro-sale",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/prozorro-sale\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-prozorro-sale",
+      "homepageUrl": "https://pipeworx.io/packs/prozorro-sale",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:io.github.varvararatta/prozorro_tender_monitor_mcp",
       "name": "Prozorro Tender Monitor Mcp",
       "ecosystem": "mcp-registry",
@@ -190341,6 +191375,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/prweb",
+      "name": "Prweb",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "PRWeb MCP — press releases from PRWeb's all-releases feed.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/prweb",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/prweb\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-prweb",
+      "homepageUrl": "https://pipeworx.io/packs/prweb",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.KilianPA/pryx",
@@ -190937,6 +191993,50 @@
       "version": "1.1.1"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/pubtator",
+      "name": "Pubtator",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "PubTator 3 MCP — biomedical entity search, literature search with entity",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/pubtator",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/pubtator\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-pubtator",
+      "homepageUrl": "https://pipeworx.io/packs/pubtator",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/puerto-rico-code",
+      "name": "Puerto Rico Code",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Puerto Rico statutes — 'leyes' (acts) of the Puerto Rico Legislature,",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/puerto-rico-code",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/puerto-rico-code\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-puerto-rico-code",
+      "homepageUrl": "https://pipeworx.io/packs/puerto-rico-code",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:app.pulltrader/seller-economics",
       "name": "Pulltrader Seller Economics",
       "ecosystem": "mcp-registry",
@@ -191001,6 +192101,28 @@
         "mcp"
       ],
       "version": "0.1.2"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/pulse-verity",
+      "name": "Pulse Verity",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Pulse Verity — crypto index prices that come with a PROOF.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/pulse-verity",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/pulse-verity\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-pulse-verity",
+      "homepageUrl": "https://pipeworx.io/packs/pulse-verity",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:dev.workers.notdown-app.pulse/monitor",
@@ -194149,6 +195271,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.pipeworx-io/radar",
+      "name": "Radar",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Radar MCP — wraps the Radar Geocoding / Search API (radar.com)",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/radar",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/radar\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-radar",
+      "homepageUrl": "https://pipeworx.io/packs/radar",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
+    },
+    {
       "id": "mcp-registry:ai.radiusos.www/crm",
       "name": "RadiusOS CRM",
       "ecosystem": "mcp-registry",
@@ -194521,6 +195665,28 @@
         "mcp"
       ],
       "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.pipeworx-io/random-tables",
+      "name": "Random Tables",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "random-tables — Pipeworx original composable random tables for tabletop and narrative play…",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.pipeworx-io/random-tables",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.pipeworx-io/random-tables\" --adapter claude --local",
+      "repoUrl": "https://github.com/pipeworx-io/mcp-random-tables",
+      "homepageUrl": "https://pipeworx.io/packs/random-tables",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "0.1.0"
     },
     {
       "id": "mcp-registry:io.github.alexvesely18-dot/ranger",
@@ -464155,7 +465321,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:muratcankoylan/Agent-Skills-for-Context-Engineering\"",
       "repoUrl": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
       "homepageUrl": null,
-      "stars": 18327,
+      "stars": 18328,
       "lastPush": "2026-10-12T02:06:40Z",
       "archived": false,
       "provides": null,
@@ -464194,7 +465360,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:vercel-labs/agent-skills\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": null,
-      "stars": 33765,
+      "stars": 33830,
       "lastPush": "2026-10-28T19:17:28Z",
       "archived": false,
       "provides": null,
@@ -464214,8 +465380,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:supabase/agent-skills\"",
       "repoUrl": "https://github.com/supabase/agent-skills",
       "homepageUrl": null,
-      "stars": 3037,
-      "lastPush": "2026-11-07T21:49:27Z",
+      "stars": 3040,
+      "lastPush": "2026-11-10T13:22:13Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -464233,7 +465399,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:callstackincubator/agent-skills\"",
       "repoUrl": "https://github.com/callstackincubator/agent-skills",
       "homepageUrl": null,
-      "stars": 1703,
+      "stars": 1704,
       "lastPush": "2026-10-08T19:06:40Z",
       "archived": false,
       "provides": null,
@@ -464290,7 +465456,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:softaworks/agent-toolkit\"",
       "repoUrl": "https://github.com/softaworks/agent-toolkit",
       "homepageUrl": null,
-      "stars": 2657,
+      "stars": 2661,
       "lastPush": "2026-03-05T16:46:24Z",
       "archived": false,
       "provides": null,
@@ -464309,7 +465475,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:wshobson/agents\"",
       "repoUrl": "https://github.com/wshobson/agents",
       "homepageUrl": null,
-      "stars": 42353,
+      "stars": 42388,
       "lastPush": "2026-11-09T01:08:33Z",
       "archived": false,
       "provides": null,
@@ -464329,8 +465495,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:stripe/ai\"",
       "repoUrl": "https://github.com/stripe/ai",
       "homepageUrl": null,
-      "stars": 2051,
-      "lastPush": "2026-11-09T00:33:31Z",
+      "stars": 2053,
+      "lastPush": "2026-11-10T00:29:03Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -464348,8 +465514,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:sickn33/antigravity-awesome-skills\"",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "homepageUrl": null,
-      "stars": 49404,
-      "lastPush": "2026-11-09T15:34:37Z",
+      "stars": 49467,
+      "lastPush": "2026-11-10T09:23:39Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -464367,7 +465533,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:ComposioHQ/awesome-claude-skills\"",
       "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 79116,
+      "stars": 79189,
       "lastPush": "2026-09-18T07:16:11Z",
       "archived": false,
       "provides": null,
@@ -464386,7 +465552,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:travisvn/awesome-claude-skills\"",
       "repoUrl": "https://github.com/travisvn/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 15749,
+      "stars": 15762,
       "lastPush": "2026-04-28T19:30:24Z",
       "archived": false,
       "provides": null,
@@ -464405,7 +465571,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jimliu/baoyu-skills\"",
       "repoUrl": "https://github.com/jimliu/baoyu-skills",
       "homepageUrl": null,
-      "stars": 27420,
+      "stars": 27449,
       "lastPush": "2026-11-06T17:20:33Z",
       "archived": false,
       "provides": null,
@@ -464424,7 +465590,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jezweb/claude-skills\"",
       "repoUrl": "https://github.com/jezweb/claude-skills",
       "homepageUrl": null,
-      "stars": 1104,
+      "stars": 1107,
       "lastPush": "2026-10-09T11:36:46Z",
       "archived": false,
       "provides": null,
@@ -464443,7 +465609,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:mhattingpete/claude-skills-marketplace\"",
       "repoUrl": "https://github.com/mhattingpete/claude-skills-marketplace",
       "homepageUrl": null,
-      "stars": 692,
+      "stars": 694,
       "lastPush": "2026-07-25T06:09:24Z",
       "archived": false,
       "provides": null,
@@ -464462,7 +465628,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:waynesutton/convexskills\"",
       "repoUrl": "https://github.com/waynesutton/convexskills",
       "homepageUrl": null,
-      "stars": 403,
+      "stars": 404,
       "lastPush": "2026-11-09T10:42:03Z",
       "archived": false,
       "provides": null,
@@ -464481,7 +465647,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:giuseppe-trisciuoglio/developer-kit\"",
       "repoUrl": "https://github.com/giuseppe-trisciuoglio/developer-kit",
       "homepageUrl": null,
-      "stars": 367,
+      "stars": 370,
       "lastPush": "2026-09-10T11:05:54Z",
       "archived": false,
       "provides": null,
@@ -464500,8 +465666,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:langgenius/dify\"",
       "repoUrl": "https://github.com/langgenius/dify",
       "homepageUrl": null,
-      "stars": 160762,
-      "lastPush": "2026-11-09T15:14:08Z",
+      "stars": 160841,
+      "lastPush": "2026-11-10T14:53:29Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -464519,8 +465685,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:NousResearch/hermes-agent\"",
       "repoUrl": "https://github.com/NousResearch/hermes-agent",
       "homepageUrl": null,
-      "stars": 261989,
-      "lastPush": "2026-11-09T16:09:38Z",
+      "stars": 262306,
+      "lastPush": "2026-11-10T14:55:28Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -464538,8 +465704,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:coreyhaines31/marketingskills\"",
       "repoUrl": "https://github.com/coreyhaines31/marketingskills",
       "homepageUrl": null,
-      "stars": 59363,
-      "lastPush": "2026-11-06T17:53:06Z",
+      "stars": 59540,
+      "lastPush": "2026-11-10T06:12:20Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -464558,7 +465724,7 @@
       "repoUrl": "https://github.com/onmax/nuxt-skills",
       "homepageUrl": null,
       "stars": 723,
-      "lastPush": "2026-11-09T14:03:24Z",
+      "lastPush": "2026-11-10T09:42:47Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -464576,7 +465742,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:kepano/obsidian-skills\"",
       "repoUrl": "https://github.com/kepano/obsidian-skills",
       "homepageUrl": null,
-      "stars": 51267,
+      "stars": 51505,
       "lastPush": "2026-09-15T14:43:57Z",
       "archived": false,
       "provides": null,
@@ -464596,7 +465762,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:anthropics/skills\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": null,
-      "stars": 190474,
+      "stars": 191906,
       "lastPush": "2026-11-06T22:32:32Z",
       "archived": false,
       "provides": null,
@@ -464616,7 +465782,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:expo/skills\"",
       "repoUrl": "https://github.com/expo/skills",
       "homepageUrl": null,
-      "stars": 4100,
+      "stars": 4106,
       "lastPush": "2026-11-06T20:15:01Z",
       "archived": false,
       "provides": null,
@@ -464636,7 +465802,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:remotion-dev/skills\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": null,
-      "stars": 6676,
+      "stars": 6778,
       "lastPush": "2026-11-09T09:11:07Z",
       "archived": false,
       "provides": null,
@@ -464655,7 +465821,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:trailofbits/skills\"",
       "repoUrl": "https://github.com/trailofbits/skills",
       "homepageUrl": null,
-      "stars": 8085,
+      "stars": 8108,
       "lastPush": "2026-11-06T15:20:09Z",
       "archived": false,
       "provides": null,
@@ -464674,7 +465840,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:better-auth/skills\"",
       "repoUrl": "https://github.com/better-auth/skills",
       "homepageUrl": null,
-      "stars": 228,
+      "stars": 229,
       "lastPush": "2026-10-19T08:39:22Z",
       "archived": false,
       "provides": null,
@@ -464733,7 +465899,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:obra/superpowers\"",
       "repoUrl": "https://github.com/obra/superpowers",
       "homepageUrl": null,
-      "stars": 314946,
+      "stars": 315487,
       "lastPush": "2026-11-03T23:24:58Z",
       "archived": false,
       "provides": null,
@@ -464771,7 +465937,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:cloudai-x/threejs-skills\"",
       "repoUrl": "https://github.com/cloudai-x/threejs-skills",
       "homepageUrl": null,
-      "stars": 4094,
+      "stars": 4116,
       "lastPush": "2026-10-19T05:17:24Z",
       "archived": false,
       "provides": null,
@@ -464790,7 +465956,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:hyf0/vue-skills\"",
       "repoUrl": "https://github.com/hyf0/vue-skills",
       "homepageUrl": null,
-      "stars": 3304,
+      "stars": 3317,
       "lastPush": "2026-10-23T14:53:15Z",
       "archived": false,
       "provides": null,
@@ -464810,8 +465976,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-browser/agent-browser\"",
       "repoUrl": "https://github.com/vercel-labs/agent-browser",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-browser/agent-browser",
-      "stars": 48248,
-      "lastPush": "2026-11-09T14:24:19Z",
+      "stars": 48974,
+      "lastPush": "2026-11-10T14:38:04Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -464831,8 +465997,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/skills/find-skills\"",
       "repoUrl": "https://github.com/vercel-labs/skills",
       "homepageUrl": "https://skills.sh/vercel-labs/skills/find-skills",
-      "stars": 38704,
-      "lastPush": "2026-11-06T02:37:48Z",
+      "stars": 38835,
+      "lastPush": "2026-11-10T13:44:05Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -464852,7 +466018,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/frontend-design\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/frontend-design",
-      "stars": 190473,
+      "stars": 191908,
       "lastPush": "2026-11-06T22:32:32Z",
       "archived": false,
       "provides": null,
@@ -464873,7 +466039,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/mattpocock/skills/grill-me\"",
       "repoUrl": "https://github.com/mattpocock/skills",
       "homepageUrl": "https://skills.sh/mattpocock/skills/grill-me",
-      "stars": 319374,
+      "stars": 320478,
       "lastPush": "2026-11-09T14:03:07Z",
       "archived": false,
       "provides": null,
@@ -464894,7 +466060,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/remotion-dev/skills/remotion-best-practices\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": "https://skills.sh/remotion-dev/skills/remotion-best-practices",
-      "stars": 6676,
+      "stars": 6778,
       "lastPush": "2026-11-09T09:11:07Z",
       "archived": false,
       "provides": null,
@@ -464915,7 +466081,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/skill-creator\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/skill-creator",
-      "stars": 190473,
+      "stars": 191908,
       "lastPush": "2026-11-06T22:32:32Z",
       "archived": false,
       "provides": null,
@@ -464936,7 +466102,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/vercel-react-best-practices\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices",
-      "stars": 33765,
+      "stars": 33830,
       "lastPush": "2026-10-28T19:17:28Z",
       "archived": false,
       "provides": null,
@@ -464957,7 +466123,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/web-design-guidelines\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/web-design-guidelines",
-      "stars": 33765,
+      "stars": 33830,
       "lastPush": "2026-10-28T19:17:28Z",
       "archived": false,
       "provides": null,
