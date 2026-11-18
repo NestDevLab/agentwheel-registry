@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T16:02:42.851Z",
+  "generatedAt": "2026-11-18T15:42:38.300Z",
   "entries": [
     {
       "id": "official:agent-plugin-extra-message-policy",
@@ -60,7 +60,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/agent-tmux/SKILL.md",
       "readmeExcerpt": "Control Codex CLI and Claude Code CLI sessions via tmux with one agent-agnostic toolset. The same bin/ scripts drive any agent through a --agent <type> flag; per-agent quirks (submit key, prompt char, idle/working patterns, launch flags) live in agents/<type>.conf. Reaches on-disk sessions that an agent's own MCP server no longer tracks. This is the tmux transport for the mesh: any agent that can run these scripts can pilot supported CLI agents through persistent tmux sessions. Sessions using this integration belong to Agent Mesh. Publish a short current-work self-description when the work changes by adding one machine-readable assistant line: [[mesh-summary: Reviewing the cache invalidation fix; tests pending.]] Use at most 240 characters, no secrets, transcript quotations, host paths or private identifiers. The existing incremental watcher and sweep collect this explicit line with its native timestamp; repeated unchanged observations do not refresh it. Never maintain a session list or infer archive state from silence. For an immediate explicit update use mesh-graph.mjs catalog update --session <agent:uuid> --summary \"...\". - In Codex Desktop, use native task capabilities for Cod…",
       "stars": 0,
-      "lastPush": "2026-11-17T11:28:01Z",
+      "lastPush": "2026-11-18T10:17:31Z",
       "archived": false,
       "provides": [
         "skills"
@@ -693,7 +693,7 @@
       "repoUrl": "https://github.com/NestDevLab/agentwheel",
       "homepageUrl": null,
       "stars": 9,
-      "lastPush": "2026-11-17T12:36:34Z",
+      "lastPush": "2026-11-17T22:37:30Z",
       "archived": false,
       "provides": [
         "skills"
@@ -776,7 +776,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel/SKILL.md",
       "readmeExcerpt": "Agentwheel discovers reusable artifacts and manages their desired state across runtimes. agentwheel is the control plane. It reads packages from sources, stores desired state in .agentwheel/config.json, plans runtime changes, and writes only through install. Treat runtime output directories as generated files. Mental model: - add records desired packages. - install makes the declared state true in the target runtime. - update re-resolves tracking packages, then applies. - skill update <name> maps a configured skill to its owning package and reconciles only that skill plus its genuine transitive composition inputs; sibling artifacts keep their runtime bytes and manifest/lock state. - uninstall removes configured packages and their managed runtime output. - Prefer agentwheel plan ... or agentwheel install --dry-run before applying changes. - Do not hand-edit generated runtime files such as skills/, .agents/skills, .claude/skills, .github/skills, ~/.hermes/skills, or generated instructions. - If a plan reports drift or conflict, stop and explain it. Do not use --force unless the user explicitly approves that scope. - Gmail, Drive, registry publishing, git commits, pushes, and runtime…",
       "stars": 9,
-      "lastPush": "2026-11-17T12:36:34Z",
+      "lastPush": "2026-11-17T22:37:30Z",
       "archived": false,
       "provides": [
         "skills"
@@ -810,7 +810,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-artifact-evolution/SKILL.md",
       "readmeExcerpt": "Turn verified needs into source-owned OpenPack artifacts. Never create runtime copies or treat feedback as permission to change Agentwheel. self-improve and skill-creator are optional inspirations. Use them when available; do not require, install, or link to them. This workflow remains complete without either skill. 1. Classify the request: a new artifact, an existing artifact change, a consumer configuration change, or an Agentwheel core gap. Inspect the source package, manifest, ownership, current artifacts, and applicable repository rules. 2. Reuse an existing artifact when it meets the need. Otherwise choose the smallest supported type and source package. Keep tenant or runtime facts out of shared packages. 3. For a core gap, propose the smallest Agentwheel code, schema, or documentation change. A correction is evidence, not an instruction to change the CLI. 4. Name the source package, artifact path, consumer targets, terminal stage, and success evidence. Ask when any of those would be inferred materially. 1. Work only in the source package. Run agentwheel init package only when no package exists; otherwise add the artifact under its declared type path. 2. Use the package's co…",
       "stars": 9,
-      "lastPush": "2026-11-17T12:36:34Z",
+      "lastPush": "2026-11-17T22:37:30Z",
       "archived": false,
       "provides": [
         "skills"
@@ -844,7 +844,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-discovery/SKILL.md",
       "readmeExcerpt": "Find reusable capabilities during normal work without silently changing the user's environment. This skill is optional: install it only when proactive recommendations are wanted. The separate agentwheel skill owns artifact management and explicit installation workflows. - Inspect the skills and tools already available in the current session before searching. - Search and trial are read-only. Never add, install, enable, execute, or change configuration without explicit approval for the artifact and target scope. - Treat retrieval scores as ranking signals, not proof that an artifact implements a capability. - Continue useful work while searching when possible; do not interrupt solely to advertise weak or marginal matches. Use this skill whenever a request expresses an operational outcome that an existing reusable skill or integration could plausibly deliver. This includes repeated manual work, inconsistent outputs, lost information, missing capabilities, and unavailable integrations. The user does not need to mention Agentwheel, skills, discovery, search, a catalogue, or a capability gap. Search before generic brainstorming, planning, manual workflow advice, or an unsolicited custo…",
       "stars": 9,
-      "lastPush": "2026-11-17T12:36:34Z",
+      "lastPush": "2026-11-17T22:37:30Z",
       "archived": false,
       "provides": [
         "skills"
@@ -878,7 +878,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agentwheel/blob/main/skills/agentwheel-smoke/SKILL.md",
       "readmeExcerpt": "Use this skill to answer: \"What harness am I running in, where was this skill installed, and what does Agentwheel think about this target?\" The default workflow is read-only. Do not run agentwheel install, agentwheel update, agentwheel uninstall, agentwheel remember, agentwheel eject, or any file-writing fix while using this skill unless the user separately approves that mutation scope. From the user's current workspace, run the bundled smoke script: Use JSON output only when another tool or script needs to consume the result: When the user names an Agentwheel target, pass only read-only status target flags: Summarize the script output in four parts: - Overall: PASS, WARN, or FAIL. - Harness: detected adapter, installation type, runtime root, and skill path. - Agentwheel: CLI availability, version, config locations, packages, agents, profiles, and status result. - Recommended next command: prefer agentwheel status, agentwheel plan, or agentwheel install --dry-run. Treat these as important signals: - PASS: skill path maps to a documented Agentwheel harness target and agentwheel status reports no pending work. - WARN: the skill is running from package source, status is missing, conf…",
       "stars": 9,
-      "lastPush": "2026-11-17T12:36:34Z",
+      "lastPush": "2026-11-17T22:37:30Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2194,7 +2194,7 @@
       "readmeUrl": "https://github.com/NestDevLab/agent-mesh/blob/main/skills/mesh-discord-routing/README.md",
       "readmeExcerpt": "Mesh Discord Routing is a small, portable skill that lets agents of any runtime communicate with each other through Discord using simple, explicit routing rules. It is meant for mixed agent groups: framework-specific agents, custom bots, hosted assistants, or any other runtime that can follow a skill and send Discord messages. The shared rule is: - each agent decides who should receive its own reply - agents use semantic recipient labels, not raw Discord mention strings - a small hydrator script turns those labels into the cc-mesh: trigger and Discord mentions - an optional session helper can keep turn state for multi-turn workflows - the human-readable message stays separate from routing metadata This keeps the routing policy simple enough for language models to follow while keeping mention formatting deterministic and runtime-independent. The skill gives agents a common protocol for mesh-mode Discord conversations: 1. If a message contains cc-mesh:, treat it as a routed mesh message. 2. Decide who should receive the reply. 3. Default to notifying the sender when answering directly. 4. Add other recipients only when they should be involved. 5. Use no recipients only when no bot s…",
       "stars": 0,
-      "lastPush": "2026-11-17T11:28:01Z",
+      "lastPush": "2026-11-18T10:17:31Z",
       "archived": false,
       "provides": [
         "skills"
@@ -2505,7 +2505,7 @@
       "repoUrl": "https://github.com/NestDevLab/agent-mesh",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-11-17T11:28:01Z",
+      "lastPush": "2026-11-18T10:17:31Z",
       "archived": false,
       "provides": [
         "hooks",
@@ -3235,12 +3235,12 @@
       "repoUrl": "https://github.com/NestDevLab/syncwheel",
       "homepageUrl": null,
       "stars": 0,
-      "lastPush": "2026-11-17T15:45:43Z",
+      "lastPush": "2026-11-18T08:23:42Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.47.26",
+      "version": "0.47.29",
       "artifactMetadata": [
         {
           "selector": "skills/syncwheel",
@@ -3286,12 +3286,12 @@
       "readmeUrl": "https://github.com/NestDevLab/syncwheel/blob/main/skills/syncwheel/SKILL.md",
       "readmeExcerpt": "Syncwheel makes Git maintenance deterministic and safe when many agents touch the same repositories. Branch ownership, PR stacks, and the integration branch are described in a manifest; Syncwheel reconciles Git to match it. Follow the documented recovery procedure for managed state. Follow these four operating rules before changing a managed repository. 1. Never author in the primary checkout. It stays on manifest.integration.branch as the shared test projection. Open a governed lane instead: As of 0.42.4, where the guard hooks are installed, this is enforced: a manual commit on the primary, or an unauthorized move of the integration ref there, is refused, and every product-changing Syncwheel command refuses while the primary has unrelated tracked changes. Bounded metadata operations preserve those edits (see below). Arm the guard once per clone: Opt out only with a reasoned, ledgered, clone-local disable: Export SYNCWHEELLANEOWNER=<agent-name> for the session. It owns your lanes and is the actor of your stack lifecycle ledger events, so refusals caused by your unpublished stack name you as its owner. An expired lease never removes a lane: only worktree release <lane> or gc --appl…",
       "stars": 0,
-      "lastPush": "2026-11-17T15:45:43Z",
+      "lastPush": "2026-11-18T08:23:42Z",
       "archived": false,
       "provides": [
         "skills"
       ],
-      "version": "0.47.26"
+      "version": "0.47.29"
     },
     {
       "id": "official:agent-toolkit:skills/use-conversational-language",
@@ -3414,8 +3414,8 @@
       "installCommand": "npx agentwheel install \"github:NestDevLab/agent-memory-fabric\"",
       "repoUrl": "https://github.com/NestDevLab/agent-memory-fabric",
       "homepageUrl": null,
-      "stars": null,
-      "lastPush": null,
+      "stars": 0,
+      "lastPush": "2026-11-13T11:44:31Z",
       "archived": false,
       "provides": [
         "skills"
@@ -3459,8 +3459,8 @@
       "installCommand": "npx agentwheel install \"github:NestDevLab/obsidian-second-brain\"",
       "repoUrl": "https://github.com/NestDevLab/obsidian-second-brain",
       "homepageUrl": null,
-      "stars": null,
-      "lastPush": null,
+      "stars": 3,
+      "lastPush": "2026-11-11T16:04:29Z",
       "archived": false,
       "provides": [
         "instructions",
@@ -31917,6 +31917,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/fy-au",
+      "name": "Australia FY band",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Australia FY band",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fy-au",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fy-au\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:app.wishpool/australia-logistics-mcp",
       "name": "Australia Logistics (buy Aramex + more labels + tracking via Shippo)",
       "ecosystem": "mcp-registry",
@@ -48241,6 +48263,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/cssesc-ok",
+      "name": "CSS escape sequence count, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CSS escape sequence count, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cssesc-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cssesc-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.sadri-dridi/color-hex-ok",
       "name": "CSS hex color shape",
       "ecosystem": "mcp-registry",
@@ -48252,6 +48296,50 @@
       ],
       "source": "mcp-registry:io.github.sadri-dridi/color-hex-ok",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/color-hex-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/css-ok",
+      "name": "CSS rule count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CSS rule count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/css-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/css-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/css-rule-count",
+      "name": "CSS rule count, stylesheet discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CSS rule count, stylesheet discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/css-rule-count",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/css-rule-count\" --adapter claude --local",
       "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
       "homepageUrl": null,
       "stars": null,
@@ -48283,6 +48371,138 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/csv-ok",
+      "name": "CSV column count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CSV column count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/csv-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/csv-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/csv-rows-ok",
+      "name": "CSV data-row count, cells discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CSV data-row count, cells discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/csv-rows-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/csv-rows-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/csv-cols-ok",
+      "name": "CSV header column count, rows discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CSV header column count, rows discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/csv-cols-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/csv-cols-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/csv-header-ok",
+      "name": "CSV header count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CSV header count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/csv-header-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/csv-header-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/csv-esc",
+      "name": "CSV quoted-field count, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CSV quoted-field count, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/csv-esc",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/csv-esc\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/csv-row-count",
+      "name": "CSV row count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CSV row count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/csv-row-count",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/csv-row-count\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.CTRLabs/ctrl-mcp",
@@ -48342,6 +48562,138 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.GIT-access-ntwx/cubby-house\" --adapter claude --local",
       "repoUrl": "https://github.com/ml-ntwx/dome-site",
       "homepageUrl": "https://dome.ml-nightworx.io",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/cue-ok",
+      "name": "CUE definition count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CUE definition count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cue-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cue-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/cuid-ok",
+      "name": "CUID prefix-c shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CUID prefix-c shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cuid-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cuid-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/cuid-shape",
+      "name": "CUID shape check",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CUID shape check",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cuid-shape",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cuid-shape\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/cuid-ts",
+      "name": "CUID timestamp chunk, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CUID timestamp chunk, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cuid-ts",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cuid-ts\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/cuid2-shape",
+      "name": "CUID2 charset, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CUID2 charset, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cuid2-shape",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cuid2-shape\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/cuid2-ok",
+      "name": "CUID2 length band, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CUID2 length band, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cuid2-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cuid2-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -51554,6 +51906,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.kindrat86/carshake\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://carshake.online",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/ct-g",
+      "name": "Carats to grams, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Carats to grams, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/ct-g",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/ct-g\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -64455,6 +64829,28 @@
       "version": "1.0.7"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/download-ok",
+      "name": "Content-Disposition filename charset, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Content-Disposition filename charset, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/download-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/download-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.sadri-dridi/content-loc",
       "name": "Content-Location URL shape, value discarded",
       "ecosystem": "mcp-registry",
@@ -69471,6 +69867,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/cubit-m",
+      "name": "Cubits to meters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Cubits to meters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cubit-m",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cubit-m\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:sh.croma/cue",
       "name": "Cue",
       "ecosystem": "mcp-registry",
@@ -69506,6 +69924,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.jakzaizzat/cukaimax-tax-authority\" --adapter claude --local",
       "repoUrl": "https://github.com/jakzaizzat/cukaimax-agent",
       "homepageUrl": "https://www.cukaimax.com/tax-authority",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dash-ml",
+      "name": "Culinary dashes to milliliters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Culinary dashes to milliliters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dash-ml",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dash-ml\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -69691,6 +70131,204 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-aed",
+      "name": "Currency AED",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency AED.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-aed",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-aed\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-aud",
+      "name": "Currency AUD",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency AUD.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-aud",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-aud\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-brl",
+      "name": "Currency BRL",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency BRL.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-brl",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-brl\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-cad",
+      "name": "Currency CAD",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency CAD.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-cad",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-cad\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-chf",
+      "name": "Currency CHF",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency CHF.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-chf",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-chf\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-clp",
+      "name": "Currency CLP",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency CLP.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-clp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-clp\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-cny",
+      "name": "Currency CNY",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency CNY.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-cny",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-cny\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-cop",
+      "name": "Currency COP",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency COP.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-cop",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-cop\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-czk",
+      "name": "Currency CZK",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency CZK.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-czk",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-czk\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.varvararatta/currency_converter_mcp",
       "name": "Currency Converter Mcp",
       "ecosystem": "mcp-registry",
@@ -69703,6 +70341,380 @@
       "source": "mcp-registry:io.github.varvararatta/currency_converter_mcp",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.varvararatta/currency_converter_mcp\" --adapter claude --local",
       "repoUrl": "https://github.com/varvararatta/botfactory-mcp",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-dkk",
+      "name": "Currency DKK",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency DKK.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-dkk",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-dkk\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-egp",
+      "name": "Currency EGP",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency EGP.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-egp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-egp\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-eur",
+      "name": "Currency EUR",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency EUR.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-eur",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-eur\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-gbp",
+      "name": "Currency GBP",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency GBP.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-gbp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-gbp\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-hkd",
+      "name": "Currency HKD",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency HKD.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-hkd",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-hkd\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-huf",
+      "name": "Currency HUF",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency HUF.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-huf",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-huf\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-idr",
+      "name": "Currency IDR",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency IDR.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-idr",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-idr\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-ils",
+      "name": "Currency ILS",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency ILS.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-ils",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-ils\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-inr",
+      "name": "Currency INR",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency INR.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-inr",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-inr\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-jpy",
+      "name": "Currency JPY",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency JPY.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-jpy",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-jpy\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-krw",
+      "name": "Currency KRW",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency KRW.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-krw",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-krw\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-mxn",
+      "name": "Currency MXN",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency MXN.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-mxn",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-mxn\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-myr",
+      "name": "Currency MYR",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency MYR.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-myr",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-myr\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-nok",
+      "name": "Currency NOK",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency NOK.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-nok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-nok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-nzd",
+      "name": "Currency NZD",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency NZD.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-nzd",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-nzd\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-php",
+      "name": "Currency PHP",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency PHP.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-php",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-php\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-rub",
+      "name": "Currency RUB",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency RUB.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-rub",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-rub\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -69726,6 +70738,204 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.invokera/currency-rates\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://invokera.com/mcp/currency-rates",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-sar",
+      "name": "Currency SAR",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency SAR.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-sar",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-sar\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-sek",
+      "name": "Currency SEK",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency SEK.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-sek",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-sek\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-sgd",
+      "name": "Currency SGD",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency SGD.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-sgd",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-sgd\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-thb",
+      "name": "Currency THB",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency THB.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-thb",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-thb\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-try",
+      "name": "Currency TRY",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency TRY.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-try",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-try\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-twd",
+      "name": "Currency TWD",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency TWD.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-twd",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-twd\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-usd",
+      "name": "Currency USD",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency USD.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-usd",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-usd\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-vnd",
+      "name": "Currency VND",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency VND.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-vnd",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-vnd\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fx-zar",
+      "name": "Currency ZAR",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ISO 4217 currency ZAR.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fx-zar",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fx-zar\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -70385,6 +71595,28 @@
       "source": "mcp-registry:com.cyclingcoachai/cycling-coach-ai",
       "installCommand": "npx agentwheel install \"mcp-registry:com.cyclingcoachai/cycling-coach-ai\" --adapter claude --local",
       "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/cyclonedx-ok",
+      "name": "CycloneDX component count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "CycloneDX component count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cyclonedx-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cyclonedx-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -71141,6 +72373,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/der-ok",
+      "name": "DER sequence tag check, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "DER sequence tag check, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/der-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/der-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.DHEBP/dero-mcp-server",
@@ -72991,6 +74245,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/dex-ok",
+      "name": "DEX magic shape, bytes discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "DEX magic shape, bytes discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dex-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dex-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.mcp-dir/dfe-mcp",
       "name": "DF-e",
       "ecosystem": "mcp-registry",
@@ -73033,6 +74309,28 @@
         "mcp"
       ],
       "version": "0.10.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/did-ok",
+      "name": "DID method shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "DID method shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/did-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/did-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.coastmancoastman/diem-agent-workers",
@@ -73136,6 +74434,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:dev.workers.rjhsignaltech.ai/dkim-selector-check\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://ai.rjhsignaltech.workers.dev/dkim",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dkim-ok",
+      "name": "DKIM-Signature tag count, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "DKIM-Signature tag count, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dkim-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dkim-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -73255,6 +74575,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/dnt-ok",
+      "name": "DNT 0/1 token, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "DNT 0/1 token, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dnt-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dnt-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.olyport/eia",
       "name": "DOE Energy Information",
       "ecosystem": "mcp-registry",
@@ -73268,6 +74610,72 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.olyport/eia\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://olyport.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/doi-ok",
+      "name": "DOI 10. prefix shape, id discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "DOI 10. prefix shape, id discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/doi-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/doi-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/doi-ok2",
+      "name": "DOI 10. prefix shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "DOI 10. prefix shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/doi-ok2",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/doi-ok2\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/doi-shape",
+      "name": "DOI Shape",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Check a DOI shape.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/doi-shape",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/doi-shape\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -73519,6 +74927,28 @@
       "version": "1.8.1"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/dtd-ok",
+      "name": "DTD ELEMENT count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "DTD ELEMENT count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dtd-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dtd-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.cesteral/dv360-mcp",
       "name": "DV360 MCP Server",
       "ecosystem": "mcp-registry",
@@ -73531,6 +74961,28 @@
       "source": "mcp-registry:io.github.cesteral/dv360-mcp",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.cesteral/dv360-mcp\" --adapter claude --local",
       "repoUrl": "https://github.com/cesteral/mcp-open-advertising",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dxf-ok",
+      "name": "DXF SECTION count, file discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "DXF SECTION count, file discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dxf-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dxf-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -77611,6 +79063,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/doy-ok",
+      "name": "Day-of-year 1-366 band",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Day-of-year 1-366 band",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/doy-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/doy-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.dayonelead/dayonelead",
       "name": "DayOneLead",
       "ecosystem": "mcp-registry",
@@ -78951,6 +80425,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/deg-rad",
+      "name": "Degrees to radians, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Degrees to radians, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/deg-rad",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/deg-rad\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/delaware-code",
@@ -80603,6 +82099,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/dhall-ok",
+      "name": "Dhall let-binding count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Dhall let-binding count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dhall-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dhall-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:ai.diagramzu/mcp",
       "name": "DiagramZu",
       "ecosystem": "mcp-registry",
@@ -80865,6 +82383,28 @@
         "mcp"
       ],
       "version": "5.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/didot-mm",
+      "name": "Didot points to millimeters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Didot points to millimeters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/didot-mm",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/didot-mm\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.mcp-dir/dietbox-mcp",
@@ -81681,6 +83221,72 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/discord-webhook-shape",
+      "name": "Discord Webhook Shape",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Check a Discord webhook URL shape. Secret discarded.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/discord-webhook-shape",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/discord-webhook-shape\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/discord-id-ok",
+      "name": "Discord snowflake id shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Discord snowflake id shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/discord-id-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/discord-id-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/discord-worker",
+      "name": "Discord snowflake worker bits, id discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Discord snowflake worker bits, id discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/discord-worker",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/discord-worker\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.discordservers/search",
       "name": "DiscordServers",
       "ecosystem": "mcp-registry",
@@ -81701,6 +83307,28 @@
         "mcp"
       ],
       "version": "1.2.2"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/discordian-ok",
+      "name": "Discordian season 1-5 band",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Discordian season 1-5 band",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/discordian-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/discordian-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.ranovam/discourse-forum-scraper",
@@ -82295,6 +83923,50 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/docker-image-shape",
+      "name": "Docker Image Shape",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Check a Docker image name shape. Name discarded.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/docker-image-shape",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/docker-image-shape\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dockerfile-ok",
+      "name": "Dockerfile instruction count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Dockerfile instruction count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dockerfile-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dockerfile-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/dockerhub",
@@ -83023,6 +84695,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/domain-labels",
+      "name": "Domain label split",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Domain label split",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/domain-labels",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/domain-labels\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.nach-dakwale/domaincheckr",
       "name": "DomainCheckr",
       "ecosystem": "mcp-registry",
@@ -83417,6 +85111,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dotfile-ok",
+      "name": "Dotfile name charset, name discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Dotfile name charset, name discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dotfile-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dotfile-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.robdomain/doti-mcp",
@@ -85267,6 +86983,72 @@
       "version": "1.5.78"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/ean13-ok",
+      "name": "EAN-13 digit shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "EAN-13 digit shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/ean13-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/ean13-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/ean-shape",
+      "name": "EAN/UPC digit shape",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "EAN/UPC digit shape",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/ean-shape",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/ean-shape\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/ebcdic-ok",
+      "name": "EBCDIC digit zone, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "EBCDIC digit zone, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/ebcdic-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/ebcdic-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.phreakocious/ebcdic",
       "name": "EBCDIC to ASCII",
       "ecosystem": "mcp-registry",
@@ -85280,6 +87062,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.phreakocious/ebcdic\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://phreakocious.net/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/ebnf-ok",
+      "name": "EBNF production count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "EBNF production count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/ebnf-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/ebnf-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -86015,6 +87819,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/edn-ok",
+      "name": "EDN collection count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "EDN collection count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/edn-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/edn-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.paibyun9/ega-v9-mcp",
       "name": "EGA V9 MCP",
       "ecosystem": "mcp-registry",
@@ -86057,6 +87883,28 @@
         "mcp"
       ],
       "version": "0.4.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/elf-ok",
+      "name": "ELF magic e_type band, bytes discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ELF magic e_type band, bytes discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/elf-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/elf-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.elshwork/agent-network",
@@ -86455,6 +88303,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/eslintrc-ok",
+      "name": "ESLint rules key count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ESLint rules key count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/eslintrc-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/eslintrc-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.etfiq/etfiq",
       "name": "ETFIQ",
       "ecosystem": "mcp-registry",
@@ -86475,6 +88345,72 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/etag-shape",
+      "name": "ETag shape",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ETag shape",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/etag-shape",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/etag-shape\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/etag-ok",
+      "name": "ETag shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ETag shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/etag-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/etag-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/etag-token",
+      "name": "ETag shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "ETag shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/etag-token",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/etag-token\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.opendata-forge/eu-spain-public-data",
@@ -86541,6 +88477,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dst-eu2",
+      "name": "EU DST in-force band",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "EU DST in-force band",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dst-eu2",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dst-eu2\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.pcp183/eori-check",
@@ -86785,6 +88743,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/euckr-ok",
+      "name": "EUC-KR lead-byte band, bytes discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "EUC-KR lead-byte band, bytes discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/euckr-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/euckr-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/eur-lex",
       "name": "EUR-Lex",
       "ecosystem": "mcp-registry",
@@ -86974,6 +88954,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.getbotlens/eaglesandangelsltd\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://eaglesandangelsltd.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/early-data",
+      "name": "Early-Data 1 token, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Early-Data 1 token, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/early-data",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/early-data\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -88325,6 +90327,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/editorconfig-ok",
+      "name": "EditorConfig section count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "EditorConfig section count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/editorconfig-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/editorconfig-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.Wxt-ai/content-review-mode-workbench",
       "name": "Editorial Review Queue",
       "ecosystem": "mcp-registry",
@@ -88653,6 +90677,50 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/eircode-ok",
+      "name": "Eircode shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Eircode shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/eircode-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/eircode-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/eircode-shape",
+      "name": "Eircode shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Eircode shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/eircode-shape",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/eircode-shape\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.edjacarmona-cmd/ekopump-mcp",
@@ -89469,6 +91537,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/email-host",
+      "name": "Email hostname only, address discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Email hostname only, address discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/email-host",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/email-host\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/email-shape",
+      "name": "Email shape, address discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Email shape, address discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/email-shape",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/email-shape\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.setip/emailmcp",
       "name": "EmailMCP",
       "ecosystem": "mcp-registry",
@@ -89834,6 +91946,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.a2awire/benchmark-access-request-review-2026-09-10-81479355\" --adapter claude --local",
       "repoUrl": "https://github.com/ee324/a2awire",
       "homepageUrl": "https://a2awire.com/benchmarks/access-request-review-2026-09-10-81479355",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/em-mm",
+      "name": "Ems at 12pt to millimeters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Ems at 12pt to millimeters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/em-mm",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/em-mm\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -90611,6 +92745,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/en-mm",
+      "name": "Ens at 12pt to millimeters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Ens at 12pt to millimeters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/en-mm",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/en-mm\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/ensembl",
@@ -92043,6 +94199,28 @@
       "version": "1.0.1"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/ethiopic-ok",
+      "name": "Ethiopic year band",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Ethiopic year band",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/ethiopic-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/ethiopic-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/etsy",
       "name": "Etsy",
       "ecosystem": "mcp-registry",
@@ -93275,6 +95453,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/expect-ok",
+      "name": "Expect 100-continue shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Expect 100-continue shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/expect-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/expect-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/expect-ct",
+      "name": "Expect-CT max-age band, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Expect-CT max-age band, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/expect-ct",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/expect-ct\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.assaf/expense",
       "name": "Expense",
       "ecosystem": "mcp-registry",
@@ -93361,6 +95583,28 @@
         "mcp"
       ],
       "version": "0.2.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/expires-ok",
+      "name": "Expires HTTP-date shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Expires HTTP-date shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/expires-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/expires-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.exploit-intel/eip-mcp",
@@ -93779,6 +96023,28 @@
         "mcp"
       ],
       "version": "1.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fbx-ok",
+      "name": "FBX header magic, file discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FBX header magic, file discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fbx-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fbx-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.olyport/fcc-broadband",
@@ -94309,6 +96575,28 @@
       "version": "0.1.1"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/flac-magic",
+      "name": "FLAC magic-byte check, file discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FLAC magic-byte check, file discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/flac-magic",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/flac-magic\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:tech.flocore/flocore",
       "name": "FLOCORE Governed MCP",
       "ecosystem": "mcp-registry",
@@ -94419,6 +96707,116 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/fnv1-ok",
+      "name": "FNV-1 hex, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FNV-1 hex, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fnv1-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fnv1-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fnv128-ok",
+      "name": "FNV-1a 128 hex length, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FNV-1a 128 hex length, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fnv128-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fnv128-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fnv64-len",
+      "name": "FNV-1a 64 hex length, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FNV-1a 64 hex length, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fnv64-len",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fnv64-len\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fnv1a64-ok",
+      "name": "FNV-1a 64-bit hex, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FNV-1a 64-bit hex, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fnv1a64-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fnv1a64-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fnv1a-ok",
+      "name": "FNV-1a hex, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FNV-1a hex, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fnv1a-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fnv1a-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.astarsupply-hub/gpsr-compliance-valuation",
       "name": "FORGE compliance and business decision tools",
       "ecosystem": "mcp-registry",
@@ -94461,6 +96859,28 @@
         "mcp"
       ],
       "version": "3.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fqdn-ok",
+      "name": "FQDN shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FQDN shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fqdn-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fqdn-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.mathursrus/fraim",
@@ -95277,6 +97697,72 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/f-to-c",
+      "name": "Fahrenheit to Celsius",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Fahrenheit to Celsius",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/f-to-c",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/f-to-c\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/f-c",
+      "name": "Fahrenheit to Celsius, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Fahrenheit to Celsius, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/f-c",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/f-c\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/f-k",
+      "name": "Fahrenheit to kelvin, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Fahrenheit to kelvin, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/f-k",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/f-k\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.GoodTurnStudio/fairfare",
       "name": "Fair Fare",
       "ecosystem": "mcp-registry",
@@ -95849,6 +98335,72 @@
       "version": "1.9.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/farm-len",
+      "name": "FarmHash hex length, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FarmHash hex length, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/farm-len",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/farm-len\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/farm128",
+      "name": "FarmHash128 hex length, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FarmHash128 hex length, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/farm128",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/farm128\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/farm64",
+      "name": "FarmHash64 hex length, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FarmHash64 hex length, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/farm64",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/farm64\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.farmneural/mcp",
       "name": "FarmNeural Public API",
       "ecosystem": "mcp-registry",
@@ -96103,6 +98655,50 @@
       "source": "mcp-registry:io.github.agencyenterprise/fathom-mcp-server",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.agencyenterprise/fathom-mcp-server\" --adapter claude --local",
       "repoUrl": "https://github.com/agencyenterprise/fathom-mcp-server",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fathom-to-m",
+      "name": "Fathoms to meters",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Fathoms to meters",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fathom-to-m",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fathom-to-m\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fathom-m",
+      "name": "Fathoms to meters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Fathoms to meters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fathom-m",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fathom-m\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -96595,6 +99191,50 @@
         "mcp"
       ],
       "version": "7.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/feather-ok",
+      "name": "Feather magic-byte check, file discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Feather magic-byte check, file discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/feather-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/feather-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/feature-pol",
+      "name": "Feature-Policy feature count, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Feature-Policy feature count, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/feature-pol",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/feature-pol\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/fed-comms",
@@ -97191,6 +99831,72 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/fps-ms",
+      "name": "Feet per second to m/s, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Feet per second to m/s, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fps-ms",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fps-ms\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/ft-to-m",
+      "name": "Feet to meters",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Feet to meters",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/ft-to-m",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/ft-to-m\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fps-kmh",
+      "name": "Feet/s to km/h, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Feet/s to km/h, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fps-kmh",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fps-kmh\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.project-feldspar/scan",
       "name": "Feldspar free repository security scan",
       "ecosystem": "mcp-registry",
@@ -97233,6 +99939,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fm-m",
+      "name": "Femtometres to meters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Femtometres to meters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fm-m",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fm-m\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.fensory/fensory",
@@ -97423,6 +100151,28 @@
       "source": "mcp-registry:io.github.everyai-com/festival-finder",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.everyai-com/festival-finder\" --adapter claude --local",
       "repoUrl": "https://github.com/everyai-com/sahadeva",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fetch-status",
+      "name": "Fetch Status",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HEAD a public URL and return status only.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fetch-status",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fetch-status\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -97961,6 +100711,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/figma-url-shape",
+      "name": "Figma URL Shape",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Parse a Figma file URL. Path discarded.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/figma-url-shape",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/figma-url-shape\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/figshare",
       "name": "Figshare",
       "ecosystem": "mcp-registry",
@@ -98017,6 +100789,28 @@
       "source": "mcp-registry:cloud.fikst/crm",
       "installCommand": "npx agentwheel install \"mcp-registry:cloud.fikst/crm\" --adapter claude --local",
       "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/file-path-ok",
+      "name": "File Path Check",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Check whether a path looks safe. No disk access.",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/file-path-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/file-path-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -99831,6 +102625,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/firkin-l",
+      "name": "Firkins to liters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Firkins to liters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/firkin-l",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/firkin-l\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.firmfax/prop-firm-data",
       "name": "FirmFax prop firm data",
       "ecosystem": "mcp-registry",
@@ -100667,6 +103483,28 @@
       "version": "1.14.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/flatbuf-ok",
+      "name": "FlatBuffers vtable shape, bytes discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "FlatBuffers vtable shape, bytes discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/flatbuf-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/flatbuf-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:cash.flat/flatcash",
       "name": "FlatCash — Native Currency for AI Agents",
       "ecosystem": "mcp-registry",
@@ -100775,6 +103613,28 @@
         "mcp"
       ],
       "version": "1.2.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fletcher-len",
+      "name": "Fletcher-32 hex length, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Fletcher-32 hex length, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fletcher-len",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fletcher-len\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.flexim/mcp",
@@ -102823,6 +105683,72 @@
       "version": "1.1.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/forwarded-by",
+      "name": "Forwarded by= hop count, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Forwarded by= hop count, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/forwarded-by",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/forwarded-by\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/forwarded-n",
+      "name": "Forwarded for= hop count, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Forwarded for= hop count, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/forwarded-n",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/forwarded-n\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/forwarded-ok",
+      "name": "Forwarded pair count, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Forwarded pair count, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/forwarded-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/forwarded-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:app.fotify/mcp",
       "name": "Fotify",
       "ecosystem": "mcp-registry",
@@ -104735,6 +107661,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/furlong-m",
+      "name": "Furlongs to meters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Furlongs to meters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/furlong-m",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/furlong-m\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.fursatdev-tech/fursat",
@@ -108079,6 +111027,28 @@
         "mcp"
       ],
       "version": "1.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/de-plz",
+      "name": "German PLZ digit shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "German PLZ digit shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/de-plz",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/de-plz\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:app.wishpool/germany-logistics-mcp",
@@ -112943,6 +115913,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/decade-n",
+      "name": "Gregorian decade band",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Gregorian decade band",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/decade-n",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/decade-n\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/greynoise",
       "name": "Greynoise",
       "ecosystem": "mcp-registry",
@@ -113843,6 +116835,28 @@
         "mcp"
       ],
       "version": "2.0.1"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/ext-mime-ok",
+      "name": "Guess MIME from a file extension, name discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Guess MIME from a file extension, name discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/ext-mime-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/ext-mime-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.DLJRealty/guesty",
@@ -115023,6 +118037,28 @@
       "source": "mcp-registry:io.github.RobotFleet-HQ/http-402-ai-tollbooth",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.RobotFleet-HQ/http-402-ai-tollbooth\" --adapter claude --local",
       "repoUrl": "https://github.com/RobotFleet-HQ/http-402-ai-tollbooth-public",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/date-http",
+      "name": "HTTP-date IMF-fixdate shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "HTTP-date IMF-fixdate shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/date-http",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/date-http\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -122469,6 +125505,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/cwt-kg",
+      "name": "Hundredweight to kilograms, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Hundredweight to kilograms, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cwt-kg",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cwt-kg\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.TheCompanyAtlas/hungary-company",
       "name": "Hungary Company Registry",
       "ecosystem": "mcp-registry",
@@ -124227,6 +127285,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fr-insee",
+      "name": "INSEE commune code shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "INSEE commune code shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fr-insee",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fr-insee\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:org.io-aerospace/mcp-server",
@@ -131282,6 +134362,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:ai.immopix/mcp\" --adapter claude --local",
       "repoUrl": "https://github.com/Immopix/mcp",
       "homepageUrl": "https://immopix.ai/en/docs/mcp/",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/cup-imp",
+      "name": "Imperial cups to milliliters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Imperial cups to milliliters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cup-imp",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cup-imp\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -163893,6 +166995,28 @@
         "mcp"
       ],
       "version": "1.0.7"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/drop-ml",
+      "name": "Metric drops to milliliters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Metric drops to milliliters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/drop-ml",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/drop-ml\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:com.metricduck/financial-analysis",
@@ -205453,6 +208577,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/egg-ok",
+      "name": "Python egg-info key count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Python egg-info key count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/egg-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/egg-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.pipiwaitrailmaui/trail-status",
       "name": "Pīpīwai Trail status",
       "ecosystem": "mcp-registry",
@@ -208113,6 +211259,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/feed-link-n",
+      "name": "RSS/Atom link rel count, markup discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "RSS/Atom link rel count, markup discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/feed-link-n",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/feed-link-n\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.aleksUIX/rtblint",
@@ -225530,6 +228698,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:net.nexlab/sacred-texts\" --adapter claude --local",
       "repoUrl": null,
       "homepageUrl": "https://mcp.nexlab.net/s/sacred-texts",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/filename-ok",
+      "name": "Safe filename charset, name discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Safe filename charset, name discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/filename-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/filename-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -249519,6 +252709,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/focus-order-ok",
+      "name": "Tabindex integer band, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Tabindex integer band, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/focus-order-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/focus-order-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.tablejourney/food-travel",
       "name": "TableJourney food travel",
       "ecosystem": "mcp-registry",
@@ -266261,6 +269473,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/cup-to-ml",
+      "name": "US cups to milliliters",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "US cups to milliliters",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cup-to-ml",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cup-to-ml\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/cup-ml",
+      "name": "US cups to milliliters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "US cups to milliliters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/cup-ml",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cup-ml\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.joelp22-maker/referencesource-rules",
       "name": "US federal rules taking effect",
       "ecosystem": "mcp-registry",
@@ -266274,6 +269530,50 @@
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.joelp22-maker/referencesource-rules\" --adapter claude --local",
       "repoUrl": "https://github.com/joelp22-maker/referencesource-mcp",
       "homepageUrl": "https://referencesource.org/federal-rules-taking-effect",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dram-ml",
+      "name": "US fluid drams to milliliters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "US fluid drams to milliliters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dram-ml",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dram-ml\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/floz-ml",
+      "name": "US fluid ounces to milliliters, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "US fluid ounces to milliliters, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/floz-ml",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/floz-ml\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -266448,6 +269748,94 @@
       ],
       "source": "mcp-registry:io.github.sadri-dridi/cron-utc-hint",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/cron-utc-hint\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/doy-utc",
+      "name": "UTC day of year",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "UTC day of year",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/doy-utc",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/doy-utc\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/day-of-year",
+      "name": "UTC day of year 1-366",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "UTC day of year 1-366",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/day-of-year",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/day-of-year\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/decade",
+      "name": "UTC decade start year",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "UTC decade start year",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/decade",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/decade\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fiscal-q",
+      "name": "UTC fiscal quarter 1-4",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "UTC fiscal quarter 1-4",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fiscal-q",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fiscal-q\" --adapter claude --local",
       "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
       "homepageUrl": null,
       "stars": null,
@@ -268107,6 +271495,50 @@
         "mcp"
       ],
       "version": "0.1"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/epoch-ms",
+      "name": "Unix epoch milliseconds",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Unix epoch milliseconds",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/epoch-ms",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/epoch-ms\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/epoch-week",
+      "name": "Unix week number from seconds",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Unix week number from seconds",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/epoch-week",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/epoch-week\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:ai.unlimitless/unl",
@@ -279065,6 +282497,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/dst-hint",
+      "name": "Whether a zone name looks like DST-aware",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Whether a zone name looks like DST-aware",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dst-hint",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dst-hint\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.sadri-dridi/business-hours-utc",
       "name": "Whether current UTC hour is 09-17",
       "ecosystem": "mcp-registry",
@@ -279076,6 +282530,182 @@
       ],
       "source": "mcp-registry:io.github.sadri-dridi/business-hours-utc",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/business-hours-utc\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dst-au",
+      "name": "Whether current UTC month is AU DST-heavy",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Whether current UTC month is AU DST-heavy",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dst-au",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dst-au\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dst-cl",
+      "name": "Whether current UTC month is Chile DST-heavy",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Whether current UTC month is Chile DST-heavy",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dst-cl",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dst-cl\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dst-hint-utc",
+      "name": "Whether current UTC month is DST-heavy in the US",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Whether current UTC month is DST-heavy in the US",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dst-hint-utc",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dst-hint-utc\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dst-us-hint",
+      "name": "Whether current UTC month is DST-heavy in the US",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Whether current UTC month is DST-heavy in the US",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dst-us-hint",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dst-us-hint\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dst-eu",
+      "name": "Whether current UTC month is EU DST-heavy",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Whether current UTC month is EU DST-heavy",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dst-eu",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dst-eu\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dst-nz",
+      "name": "Whether current UTC month is NZ DST-heavy",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Whether current UTC month is NZ DST-heavy",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dst-nz",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dst-nz\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dst-us2",
+      "name": "Whether current UTC month is US DST-heavy",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Whether current UTC month is US DST-heavy",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dst-us2",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dst-us2\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/emoji-ok",
+      "name": "Whether text contains an emoji, text discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "Whether text contains an emoji, text discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/emoji-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/emoji-ok\" --adapter claude --local",
       "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
       "homepageUrl": null,
       "stars": null,
@@ -282025,6 +285655,28 @@
       "source": "mcp-registry:io.github.0xbeny/xdc-ai",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.0xbeny/xdc-ai\" --adapter claude --local",
       "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/desktop-ok",
+      "name": "XDG desktop entry keys, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "XDG desktop entry keys, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/desktop-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/desktop-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -337233,6 +340885,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/dbw-w",
+      "name": "dBW to watts, number discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "dBW to watts, number discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dbw-w",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dbw-w\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.CacheCarti/dmoera-creator",
       "name": "dMoERA Creator",
       "ecosystem": "mcp-registry",
@@ -337341,6 +341015,50 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/data-uri-ok",
+      "name": "data: URI media-type only, payload discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "data: URI media-type only, payload discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/data-uri-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/data-uri-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/data-url",
+      "name": "data: URL media-type shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "data: URL media-type shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/data-url",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/data-url\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:dev.datagokr/datagokr",
@@ -340577,6 +344295,160 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/did-ethr",
+      "name": "did:ethr address shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "did:ethr address shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/did-ethr",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/did-ethr\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/did-ion",
+      "name": "did:ion suffix shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "did:ion suffix shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/did-ion",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/did-ion\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/did-jwk",
+      "name": "did:jwk thumbprint shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "did:jwk thumbprint shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/did-jwk",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/did-jwk\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/did-key",
+      "name": "did:key multibase shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "did:key multibase shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/did-key",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/did-key\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/did-pkh",
+      "name": "did:pkh CAIP-10 shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "did:pkh CAIP-10 shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/did-pkh",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/did-pkh\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/did-web",
+      "name": "did:web host shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "did:web host shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/did-web",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/did-web\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/did-webvh",
+      "name": "did:webvh SCID shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "did:webvh SCID shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/did-webvh",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/did-webvh\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.diggercamp/music-similarity",
       "name": "diggercamp",
       "ecosystem": "mcp-registry",
@@ -340590,6 +344462,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:com.diggercamp/music-similarity\" --adapter claude --local",
       "repoUrl": "https://github.com/tommasosavorana/diggercamp",
       "homepageUrl": "https://diggercamp.com",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/digit-n",
+      "name": "digit run count, text discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "digit run count, text discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/digit-n",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/digit-n\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -340687,6 +344581,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/envrc-ok",
+      "name": "direnv export count, body discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "direnv export count, body discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/envrc-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/envrc-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:discount.cryptoexchange/referral-codes",
       "name": "discount.cryptoexchange/referral-codes",
       "ecosystem": "mcp-registry",
@@ -340751,6 +344667,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/djb2-ok",
+      "name": "djb2 hex, input discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "djb2 hex, input discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/djb2-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/djb2-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:dk.humanified/consistency-gate",
@@ -340951,6 +344889,94 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/docs-anchor-ok",
+      "name": "docs heading-anchor charset, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "docs heading-anchor charset, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/docs-anchor-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/docs-anchor-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/docs-anchor2",
+      "name": "docs heading-anchor charset, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "docs heading-anchor charset, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/docs-anchor2",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/docs-anchor2\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/docs-slug-ok",
+      "name": "docs page slug charset, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "docs page slug charset, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/docs-slug-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/docs-slug-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/docs-path-ok",
+      "name": "docs path segment count, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "docs path segment count, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/docs-path-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/docs-path-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:com.docs2mcp/docs2mcp",
       "name": "docs2mcp",
       "ecosystem": "mcp-registry",
@@ -341015,6 +345041,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/doi-uri",
+      "name": "doi: URI suffix shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "doi: URI suffix shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/doi-uri",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/doi-uri\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:live.alpic.doing-v2-d5286fe8/doing",
@@ -341117,6 +345165,94 @@
       "source": "mcp-registry:io.github.jobimdev/dopamine-shop",
       "installCommand": "npx agentwheel install \"mcp-registry:io.github.jobimdev/dopamine-shop\" --adapter claude --local",
       "repoUrl": null,
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dot-n",
+      "name": "dot.case segment count, text discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "dot.case segment count, text discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dot-n",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dot-n\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dot-ok",
+      "name": "dot.case segment count, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "dot.case segment count, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dot-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dot-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dotenv-keys",
+      "name": "dotenv key count, values discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "dotenv key count, values discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dotenv-keys",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dotenv-keys\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/dotenv-ok",
+      "name": "dotenv key count, values discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "dotenv key count, values discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/dotenv-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/dotenv-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
       "homepageUrl": null,
       "stars": null,
       "lastPush": null,
@@ -341875,6 +346011,50 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/emailish-ok",
+      "name": "email-ish local@host shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "email-ish local@host shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/emailish-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/emailish-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/emailish-n",
+      "name": "email-ish token count, text discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "email-ish token count, text discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/emailish-n",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/emailish-n\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:email.palisade/palisade",
       "name": "email.palisade/palisade",
       "ecosystem": "mcp-registry",
@@ -342049,6 +346229,28 @@
         "mcp"
       ],
       "version": "0.24.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/emoji-n",
+      "name": "emoji code-point count, text discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "emoji code-point count, text discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/emoji-n",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/emoji-n\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/emojihub",
@@ -342909,6 +347111,72 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/file-ext-ok",
+      "name": "filename extension charset, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "filename extension charset, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/file-ext-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/file-ext-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/file-stem-ok",
+      "name": "filename stem charset, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "filename stem charset, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/file-stem-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/file-stem-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/file-mime-ok",
+      "name": "filename to MIME charset, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "filename to MIME charset, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/file-mime-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/file-mime-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:finance.double.agent4/knowledge-base",
       "name": "finance.double.agent4/knowledge-base",
       "ecosystem": "mcp-registry",
@@ -343701,6 +347969,28 @@
       "version": "0.1.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/friendly-id",
+      "name": "friendly-id hyphen groups, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "friendly-id hyphen groups, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/friendly-id",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/friendly-id\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/fruityvice",
       "name": "fruityvice",
       "ecosystem": "mcp-registry",
@@ -343721,6 +348011,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/fstab-ok",
+      "name": "fstab field-count band, line discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "fstab field-count band, line discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/fstab-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/fstab-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.pipeworx-io/fbiwanted",
@@ -344095,6 +348407,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/flake-ok",
+      "name": "generic flake id digit band, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "generic flake id digit band, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/flake-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/flake-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:is.gently/knowledge-graph",
@@ -346361,6 +350695,28 @@
         "mcp"
       ],
       "version": "0.1.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/doi-url",
+      "name": "https://doi.org/ URL shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "https://doi.org/ URL shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/doi-url",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/doi-url\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
     },
     {
       "id": "mcp-registry:io.github.jucasoliveira/huebr",
@@ -399273,6 +403629,28 @@
       "version": "1.0.0"
     },
     {
+      "id": "mcp-registry:io.github.sadri-dridi/file-dot-ok",
+      "name": "multi-dot extension count, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "multi-dot extension count, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/file-dot-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/file-dot-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "id": "mcp-registry:io.github.pipeworx-io/musicbrainz",
       "name": "musicurainz",
       "ecosystem": "mcp-registry",
@@ -405710,6 +410088,28 @@
       "installCommand": "npx agentwheel install \"mcp-registry:sh.opencapital/mcp\" --adapter claude --local",
       "repoUrl": "https://github.com/markets-ai/opencapital-mcp",
       "homepageUrl": "https://opencapital.sh",
+      "stars": null,
+      "lastPush": null,
+      "archived": false,
+      "provides": [
+        "mcp"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "id": "mcp-registry:io.github.sadri-dridi/digest-sha256-ok",
+      "name": "sha256 digest shape, value discarded",
+      "ecosystem": "mcp-registry",
+      "type": "mcp",
+      "description": "sha256 digest shape, value discarded",
+      "tags": [
+        "mcp",
+        "registry"
+      ],
+      "source": "mcp-registry:io.github.sadri-dridi/digest-sha256-ok",
+      "installCommand": "npx agentwheel install \"mcp-registry:io.github.sadri-dridi/digest-sha256-ok\" --adapter claude --local",
+      "repoUrl": "https://github.com/sadri-dridi/named-mcp-utilities",
+      "homepageUrl": null,
       "stars": null,
       "lastPush": null,
       "archived": false,
@@ -490565,7 +494965,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:muratcankoylan/Agent-Skills-for-Context-Engineering\"",
       "repoUrl": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
       "homepageUrl": null,
-      "stars": 18370,
+      "stars": 18376,
       "lastPush": "2026-10-12T02:06:40Z",
       "archived": false,
       "provides": null,
@@ -490604,7 +495004,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:vercel-labs/agent-skills\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": null,
-      "stars": 34296,
+      "stars": 34467,
       "lastPush": "2026-11-12T14:09:10Z",
       "archived": false,
       "provides": null,
@@ -490624,7 +495024,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:supabase/agent-skills\"",
       "repoUrl": "https://github.com/supabase/agent-skills",
       "homepageUrl": null,
-      "stars": 3099,
+      "stars": 3102,
       "lastPush": "2026-11-12T15:32:31Z",
       "archived": false,
       "provides": null,
@@ -490700,7 +495100,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:softaworks/agent-toolkit\"",
       "repoUrl": "https://github.com/softaworks/agent-toolkit",
       "homepageUrl": null,
-      "stars": 2694,
+      "stars": 2700,
       "lastPush": "2026-03-05T16:46:24Z",
       "archived": false,
       "provides": null,
@@ -490719,8 +495119,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:wshobson/agents\"",
       "repoUrl": "https://github.com/wshobson/agents",
       "homepageUrl": null,
-      "stars": 42617,
-      "lastPush": "2026-11-16T01:08:59Z",
+      "stars": 42653,
+      "lastPush": "2026-11-18T13:13:28Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -490740,7 +495140,7 @@
       "repoUrl": "https://github.com/stripe/ai",
       "homepageUrl": null,
       "stars": 2072,
-      "lastPush": "2026-11-17T00:30:44Z",
+      "lastPush": "2026-11-18T10:55:41Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -490758,8 +495158,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:sickn33/antigravity-awesome-skills\"",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "homepageUrl": null,
-      "stars": 49877,
-      "lastPush": "2026-11-17T14:29:13Z",
+      "stars": 49938,
+      "lastPush": "2026-11-17T21:22:13Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -490777,7 +495177,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:ComposioHQ/awesome-claude-skills\"",
       "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 79708,
+      "stars": 79792,
       "lastPush": "2026-09-18T07:16:11Z",
       "archived": false,
       "provides": null,
@@ -490796,7 +495196,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:travisvn/awesome-claude-skills\"",
       "repoUrl": "https://github.com/travisvn/awesome-claude-skills",
       "homepageUrl": null,
-      "stars": 15854,
+      "stars": 15858,
       "lastPush": "2026-04-28T19:30:24Z",
       "archived": false,
       "provides": null,
@@ -490815,7 +495215,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:jimliu/baoyu-skills\"",
       "repoUrl": "https://github.com/jimliu/baoyu-skills",
       "homepageUrl": null,
-      "stars": 27637,
+      "stars": 27677,
       "lastPush": "2026-11-06T17:20:33Z",
       "archived": false,
       "provides": null,
@@ -490910,8 +495310,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:langgenius/dify\"",
       "repoUrl": "https://github.com/langgenius/dify",
       "homepageUrl": null,
-      "stars": 161361,
-      "lastPush": "2026-11-17T15:57:30Z",
+      "stars": 161430,
+      "lastPush": "2026-11-18T15:38:52Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -490929,8 +495329,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:NousResearch/hermes-agent\"",
       "repoUrl": "https://github.com/NousResearch/hermes-agent",
       "homepageUrl": null,
-      "stars": 264131,
-      "lastPush": "2026-11-17T15:56:50Z",
+      "stars": 264434,
+      "lastPush": "2026-11-18T14:52:59Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -490948,8 +495348,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:coreyhaines31/marketingskills\"",
       "repoUrl": "https://github.com/coreyhaines31/marketingskills",
       "homepageUrl": null,
-      "stars": 60969,
-      "lastPush": "2026-11-11T17:49:23Z",
+      "stars": 61177,
+      "lastPush": "2026-11-18T01:16:17Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -490967,8 +495367,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:onmax/nuxt-skills\"",
       "repoUrl": "https://github.com/onmax/nuxt-skills",
       "homepageUrl": null,
-      "stars": 727,
-      "lastPush": "2026-11-15T10:07:03Z",
+      "stars": 728,
+      "lastPush": "2026-11-18T10:59:27Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -490986,8 +495386,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:kepano/obsidian-skills\"",
       "repoUrl": "https://github.com/kepano/obsidian-skills",
       "homepageUrl": null,
-      "stars": 53039,
-      "lastPush": "2026-11-16T20:55:45Z",
+      "stars": 53151,
+      "lastPush": "2026-11-17T22:37:17Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -491006,7 +495406,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:anthropics/skills\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": null,
-      "stars": 196528,
+      "stars": 197060,
       "lastPush": "2026-11-16T14:22:50Z",
       "archived": false,
       "provides": null,
@@ -491026,8 +495426,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:expo/skills\"",
       "repoUrl": "https://github.com/expo/skills",
       "homepageUrl": null,
-      "stars": 4179,
-      "lastPush": "2026-11-17T15:35:33Z",
+      "stars": 4185,
+      "lastPush": "2026-11-18T14:30:19Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -491046,8 +495446,8 @@
       "installCommand": "npx agentwheel install \"skillkit:github:remotion-dev/skills\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": null,
-      "stars": 7415,
-      "lastPush": "2026-11-16T08:11:09Z",
+      "stars": 7481,
+      "lastPush": "2026-11-18T10:18:33Z",
       "archived": false,
       "provides": null,
       "version": null
@@ -491065,7 +495465,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:trailofbits/skills\"",
       "repoUrl": "https://github.com/trailofbits/skills",
       "homepageUrl": null,
-      "stars": 8247,
+      "stars": 8273,
       "lastPush": "2026-11-12T17:48:51Z",
       "archived": false,
       "provides": null,
@@ -491122,7 +495522,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:dimillian/skills\"",
       "repoUrl": "https://github.com/dimillian/skills",
       "homepageUrl": null,
-      "stars": 4028,
+      "stars": 4029,
       "lastPush": "2026-03-29T15:28:02Z",
       "archived": false,
       "provides": null,
@@ -491143,7 +495543,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:obra/superpowers\"",
       "repoUrl": "https://github.com/obra/superpowers",
       "homepageUrl": null,
-      "stars": 319084,
+      "stars": 319810,
       "lastPush": "2026-11-03T23:24:58Z",
       "archived": false,
       "provides": null,
@@ -491181,7 +495581,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:cloudai-x/threejs-skills\"",
       "repoUrl": "https://github.com/cloudai-x/threejs-skills",
       "homepageUrl": null,
-      "stars": 4245,
+      "stars": 4265,
       "lastPush": "2026-10-19T05:17:24Z",
       "archived": false,
       "provides": null,
@@ -491200,7 +495600,7 @@
       "installCommand": "npx agentwheel install \"skillkit:github:hyf0/vue-skills\"",
       "repoUrl": "https://github.com/hyf0/vue-skills",
       "homepageUrl": null,
-      "stars": 3353,
+      "stars": 3356,
       "lastPush": "2026-10-23T14:53:15Z",
       "archived": false,
       "provides": null,
@@ -491220,8 +495620,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-browser/agent-browser\"",
       "repoUrl": "https://github.com/vercel-labs/agent-browser",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-browser/agent-browser",
-      "stars": 52272,
-      "lastPush": "2026-11-17T02:41:48Z",
+      "stars": 52575,
+      "lastPush": "2026-11-18T15:23:31Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -491241,7 +495641,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/skills/find-skills\"",
       "repoUrl": "https://github.com/vercel-labs/skills",
       "homepageUrl": "https://skills.sh/vercel-labs/skills/find-skills",
-      "stars": 39787,
+      "stars": 39937,
       "lastPush": "2026-11-17T00:58:04Z",
       "archived": false,
       "provides": null,
@@ -491262,7 +495662,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/frontend-design\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/frontend-design",
-      "stars": 196528,
+      "stars": 197061,
       "lastPush": "2026-11-16T14:22:50Z",
       "archived": false,
       "provides": null,
@@ -491283,8 +495683,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/mattpocock/skills/grill-me\"",
       "repoUrl": "https://github.com/mattpocock/skills",
       "homepageUrl": "https://skills.sh/mattpocock/skills/grill-me",
-      "stars": 326522,
-      "lastPush": "2026-11-17T11:53:34Z",
+      "stars": 327262,
+      "lastPush": "2026-11-18T09:51:01Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -491304,8 +495704,8 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/remotion-dev/skills/remotion-best-practices\"",
       "repoUrl": "https://github.com/remotion-dev/skills",
       "homepageUrl": "https://skills.sh/remotion-dev/skills/remotion-best-practices",
-      "stars": 7415,
-      "lastPush": "2026-11-16T08:11:09Z",
+      "stars": 7481,
+      "lastPush": "2026-11-18T10:18:33Z",
       "archived": false,
       "provides": null,
       "version": null,
@@ -491325,7 +495725,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/anthropics/skills/skill-creator\"",
       "repoUrl": "https://github.com/anthropics/skills",
       "homepageUrl": "https://skills.sh/anthropics/skills/skill-creator",
-      "stars": 196528,
+      "stars": 197061,
       "lastPush": "2026-11-16T14:22:50Z",
       "archived": false,
       "provides": null,
@@ -491346,7 +495746,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/vercel-react-best-practices\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices",
-      "stars": 34297,
+      "stars": 34467,
       "lastPush": "2026-11-12T14:09:10Z",
       "archived": false,
       "provides": null,
@@ -491367,7 +495767,7 @@
       "installCommand": "npx agentwheel install \"vercel:skills.sh/vercel-labs/agent-skills/web-design-guidelines\"",
       "repoUrl": "https://github.com/vercel-labs/agent-skills",
       "homepageUrl": "https://skills.sh/vercel-labs/agent-skills/web-design-guidelines",
-      "stars": 34297,
+      "stars": 34467,
       "lastPush": "2026-11-12T14:09:10Z",
       "archived": false,
       "provides": null,
